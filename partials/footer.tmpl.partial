@@ -1,0 +1,3 @@
+<div id="footer-container">
+    {{{_appFooter}}} {{^_appFooter}} {{>partials/infrafoot}}
+</div>
