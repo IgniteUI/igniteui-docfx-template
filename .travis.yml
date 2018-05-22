@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- 8.9.4
+install: true
+script: true
+
+before_deploy:
+# update package versions
+- npm version "${TRAVIS_TAG}" --no-git-tag-version --save
+
+deploy:
+  provider: npm
+  email: igniteui@infragistics.com
+  api_key:
+    secure: Qur8YspLS2nHQmTl972IZW0r7uj2IkeG5TmNyhSGbqLvTM1uDxmiuKFWL8AvMGccDVcyvNGb28jSLyJzvobiwPyMiLwtkip5zCcihqwxaLPyB/TuKIQMrwun8mgMsYeCESIcNNzez5OFX29EIbH7HYgsU4pg2x/p6PH1OcpAyJPunBgHSyEhZ51XAFwgNoPNiCe/ImuiSYYXabCWLm+rUYfk21HnP+pWyPxK9lJoyH/hSg2HLenClFNQSwzSN94VF5E8O+7zwJjJM54033wtnjbkelRiz5B/l8jEerSDDz2ifj+tY61uZNc1jK76q97UF1A0AVRB2Ip4AKjuTT32yE+UbDIHpR8IMWaOlWIe6jplW+oYUXxo11QBVu45eNs54wWN2tyPs0aaAFasbUXFwS92U/65BWtOXS+eMlW+RPqXnG4UapAAS3S7yKDT6ifNMfW9SMdNw9X+hWL5mkQAygKL35tLBEMj7QyQqdHW8FG/AhRIlmHv0F1qUXYww7LjXx3kzM78loKYA1LC0G0KRlmKW6GP8lDSUPQg7Uwfcg+1I/NVL80cR5wuinlM/koTlIUi/Xp6VO+xNlVeVlGrBqgQMt/uAZh2gXqCJO7W1TyESmf1KvQQxFzVmsao7a2vE9DVP8HPYrHVojzfZf7WOD/ir7hdaDXOts1CX1m+zKg=
+  on:
+    tags: true
+    repo: IgniteUI/igniteui-docfx-template

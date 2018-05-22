@@ -1,0 +1,19 @@
+{
+  "name": "igniteui-docfx-template",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgniteUI/igniteui-docfx-template.git"
+  },
+  "keywords": [
+    "igniteui-angular",
+    "angular",
+    "docfx"
+  ],
+  "author": "Infragistics",
+  "bugs": {
+    "url": "https://github.com/IgniteUI/igniteui-docfx-template/issues"
+  },
+  "homepage": "https://github.com/IgniteUI/igniteui-docfx-template#readme"
+}
