@@ -59,3 +59,11 @@ typings/
 
 # next.js build output
 .next
+
+# post processors
+/post-processors/.vs/
+/post-processors/packages/
+/post-processors/PostProcessors/bin/
+/post-processors/PostProcessors/obj/
+/plugins/*
+!/plugins/PostProcessors.dll
