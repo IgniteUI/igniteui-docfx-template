@@ -3,9 +3,4 @@
 
 var onSampleIframeContentLoaded = function (iframe) {
     iframe.parentElement.classList.remove("loading");
-    // need to hide the iframe body scrollbars - locally this will throw an error:
-    // Uncaught DOMException: Failed to read the 'contentDocument' property from 'HTMLIFrameElement':
-    // Blocked a frame with origin "http://localhost:3000" from accessing a cross-origin frame.
-    // but is working on staging and on production
-    $(iframe).contents().find("body").css("overflow", "hidden");
 }
