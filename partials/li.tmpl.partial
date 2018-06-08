@@ -4,7 +4,14 @@ full license information.}}
 <ul class="nav level{{level}}">
     {{#items}} 
     {{#header}}
-        <li class="sidenav__header">{{name}}</li>
+        {{#topicHref}}
+        <li>
+            <a class="sidenav__header" href="{{topicHref}}" title="{{name}}">{{name}}</a>
+        </li>
+        {{/topicHref}}
+        {{^topicHref}}
+            <li class="sidenav__header">{{name}}</li>
+        {{/topicHref}}
     {{/header}} 
     {{#cta}}
         <li class="nav__cta">

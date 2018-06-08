@@ -323,7 +323,7 @@ sub {
     padding: 16px !important;
     position: relative;
     font-size: 16px !important;
-    color: #731963;
+    color: #731963 !important;
     font-weight: 400 !important; }
   .sidenav__header::after {
     position: absolute;
