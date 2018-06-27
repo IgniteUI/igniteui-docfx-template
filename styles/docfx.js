@@ -994,6 +994,9 @@ function updateUrl(target) {
 $(document).ready(function () {
   var contentOffset = $("#_content").offset().top;
   let pageLanguage = $(document.body).data("lang");
+  if (!pageLanguage) {
+    pageLanguage = "en";
+  }
 
   $(".anchorjs-link").on("click", function (e) {
     var hashLocation = $(this).attr("href");
@@ -1016,7 +1019,7 @@ $(document).ready(function () {
   });
 
   $("[data-localize]").localize("resources", {
-    pathPrefix: "../../",
+    pathPrefix: "..",
     language: pageLanguage
   });
 });
