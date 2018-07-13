@@ -14,9 +14,16 @@ full license information.}}
         {{/topicHref}}
     {{/header}} 
     {{#cta}}
+        {{^ctaSecondary}}
         <li class="nav__cta">
             <a href="{{topicHref}}" title="{{name}}">{{name}}</a>
         </li>
+        {{/ctaSecondary}}
+        {{#ctaSecondary}}
+        <li class="nav__cta nav__cta--secondary">
+            <a href="{{topicHref}}" title="{{name}}">{{name}}</a>
+        </li>
+        {{/ctaSecondary}}
     {{/cta}}
     {{^header}} 
     {{^cta}}        
