@@ -26,7 +26,9 @@
 
 .expand-stub {
   position: absolute;
-  left: -10px;
+  top: 8px;
+  left: 8px;
+  color: $byzantium;
 }
 
 .toc .nav > li > a.sidetoc-expand {
@@ -66,7 +68,7 @@
 .toc .nav > li.in > .expand-stub::before,
 .toc .nav > li.in.active > .expand-stub::before,
 .toc .nav > li.filtered > .expand-stub::before {
-  content: "-";
+  content: "\2013";
 }
 
 .toc .nav > li > .expand-stub::before,
@@ -159,7 +161,7 @@
 .toc .nav > li.in > .expand-stub::before,
 .toc .nav > li.in.active > .expand-stub::before,
 .toc .nav > li.filtered > .expand-stub::before {
-  content: "-";
+  content: "\2013";
 }
 
 .toc .nav > li > .expand-stub::before,
@@ -228,7 +230,7 @@
   margin-right: -15px;
 
   &__header {
-    padding: 16px !important;
+    padding: 16px 24px !important;
     position: relative;
     font-size: 16px !important;
     color: $byzantium !important;
@@ -255,7 +257,7 @@
       a {
         color: #585858;
         font-weight: normal;
-        padding: 8px 16px;
+        padding: 8px 24px;
       }
     }
 
