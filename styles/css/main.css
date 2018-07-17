@@ -646,7 +646,7 @@ table a {
 .navbar .nav.navbar-nav {
   width: 100%;
   padding: 16px;
-  font-size: 14px;
+  font-size: 0.75rem;
   font-weight: 400; }
   .navbar .nav.navbar-nav li > a {
     -webkit-transition: all 0.25s ease-in-out;
@@ -658,12 +658,23 @@ table a {
     color: #fff;
     background-color: #0099ff;
     text-transform: uppercase;
-    font-weight: 500;
-    padding: 8px 24px;
+    font-weight: bold;
+    margin-left: 10px;
+    padding: 0.5em 1.5em;
     border: 1px solid #0099ff; }
     .navbar .nav.navbar-nav li.nav__cta > a:hover {
       color: #0099ff;
       background-color: transparent; }
+    @media screen and (max-width: 767px) {
+      .navbar .nav.navbar-nav li.nav__cta > a {
+        margin-left: 0;
+        margin-top: 10px; } }
+  .navbar .nav.navbar-nav li.nav__cta.nav__cta--secondary > a {
+    background-color: transparent;
+    color: #0099ff; }
+    .navbar .nav.navbar-nav li.nav__cta.nav__cta--secondary > a:hover {
+      color: #fff;
+      background-color: #0099ff; }
   @media only screen and (min-width: 768px) {
     .navbar .nav.navbar-nav {
       display: -webkit-box;
@@ -674,6 +685,27 @@ table a {
               align-items: center;
       padding: 0;
       width: auto; } }
+
+[data-theme="indigo-design"] .navbar .nav.navbar-nav li.nav__cta > a {
+  background-color: #00AE88;
+  border: 1px solid #00AE88;
+  border-radius: 2rem;
+  color: #fff; }
+  [data-theme="indigo-design"] .navbar .nav.navbar-nav li.nav__cta > a:hover {
+    color: #00AE88;
+    background-color: transparent; }
+  @media screen and (max-width: 767px) {
+    [data-theme="indigo-design"] .navbar .nav.navbar-nav li.nav__cta > a {
+      margin-left: 0;
+      margin-top: 10px; } }
+
+[data-theme="indigo-design"] .navbar .nav.navbar-nav li.nav__cta.nav__cta--secondary > a {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff; }
+  [data-theme="indigo-design"] .navbar .nav.navbar-nav li.nav__cta.nav__cta--secondary > a:hover {
+    color: #3f51b5;
+    background-color: #fff; }
 
 .navbar-toggle {
   margin: 10px 10px 4px 10px;
