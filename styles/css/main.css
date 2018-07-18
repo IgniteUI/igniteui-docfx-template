@@ -155,8 +155,9 @@ sub {
 
 .expand-stub {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 0;
+  left: 0;
+  padding: 8px;
   color: #731963; }
 
 .toc .nav > li > a.sidetoc-expand {
@@ -342,8 +343,10 @@ sub {
   margin: 0; }
   .toc .nav li a {
     color: #585858;
-    font-weight: normal;
-    padding: 8px 24px; }
+    font-weight: normal; }
+  .toc .nav li a:not(.sidenav__header) {
+    padding: 8px 24px 8px 0;
+    margin-left: 24px; }
 
 .toc .nav li.active {
   background-color: #f1f1f1; }

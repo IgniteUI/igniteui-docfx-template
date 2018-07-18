@@ -26,8 +26,9 @@
 
 .expand-stub {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 0;
+  left: 0;
+  padding: 8px;
   color: $byzantium;
 }
 
@@ -256,8 +257,11 @@
       margin: 0;
       a {
         color: #585858;
-        font-weight: normal;
-        padding: 8px 24px;
+        font-weight: normal;        
+      }
+      a:not(.sidenav__header) {
+        padding: 8px 24px 8px 0;
+        margin-left: 24px;
       }
     }
 
