@@ -12,7 +12,7 @@
 
     function initNavigation() {
          var navBaseUrl = $('body').data('nav-base-url');
-         var navUrl = navBaseUrl + '/navigation-ignite';
+         var navUrl = navBaseUrl + '/navigation';
 
          var request = $.ajax({
              url: navUrl,
