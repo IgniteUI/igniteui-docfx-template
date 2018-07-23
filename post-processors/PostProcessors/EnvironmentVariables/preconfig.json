@@ -1,34 +1,40 @@
 ﻿{
-    "environment": "development",
+	"environment": "development",
 
-    "fileExtensionsToProcess": ["html"],
+	"fileExtensionsToProcess": [ "html" ],
 
-    "variables": {
-        "en": {
-            "development": {
-                "demosBaseUrl": "http://localhost:4200"
-            },
-            "staging": {
-                "demosBaseUrl": "https://staging.infragistics.local/angular-demos"
-            },
-            "production": {
-                "demosBaseUrl": "https://www.infragistics.com/angular-demos"
-            }
-        },
-        "jp": {
-            "development": {
-                "demosBaseUrl": "http://localhost:4200"
-            },
-            "staging": {
-                "demosBaseUrl": "https://jp.staging.infragistics.local/angular-demos"
-            },
-            "production": {
-                "demosBaseUrl": "https://jp.infragistics.com/angular-demos"
-            }
-        }
-    },
+	"variables": {
+		"en": {
+			"development": {
+				"demosBaseUrl": "http://localhost:4200",
+				"infragisticsBaseUrl": "https://staging.infragistics.local"
+			},
+			"staging": {
+				"demosBaseUrl": "https://staging.infragistics.local/angular-demos",
+				"infragisticsBaseUrl": "https://staging.infragistics.local"
+			},
+			"production": {
+				"demosBaseUrl": "https://www.infragistics.com/angular-demos",
+				"infragisticsBaseUrl": "https://www.infragistics.com"
+			}
+		},
+		"jp": {
+			"development": {
+				"demosBaseUrl": "http://localhost:4200",
+				"infragisticsBaseUrl": "https://jp.staging.infragistics.local"
+			},
+			"staging": {
+				"demosBaseUrl": "https://jp.staging.infragistics.local/angular-demos",
+				"infragisticsBaseUrl": "https://jp.staging.infragistics.local"
+			},
+			"production": {
+				"demosBaseUrl": "https://jp.infragistics.com/angular-demos",
+				"infragisticsBaseUrl": "https://jp.infragistics.com"
+			}
+		}
+	},
 
-    "deleteConfigAfterProcessing": true,
+	"deleteConfigAfterProcessing": true,
 
-    "_configFileName": "set-environment-variables.config"
+	"_configFileName": "set-environment-variables.config"
 }
