@@ -547,14 +547,12 @@ $(function () {
       $("#toc a.active")
         .parents("li")
         .each(function (i, e) {
-          $(e)
-            .addClass(active)
-            .addClass(expanded);
-          $(e)
-            .children("a")
-            .addClass(active);
+          $(e).addClass(expanded);
           top += $(e).position().top;
         });
+      
+      $("#toc a.active").closest("li").addClass("active");
+
       $(".sidetoc").scrollTop(top - 50);
 
       if ($("footer").is(":visible")) {
