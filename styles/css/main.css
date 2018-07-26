@@ -207,16 +207,8 @@ sub {
 .toc ul {
   font-size: 12px; }
 
-.toc .level1 > li {
-  font-weight: bold;
-  margin-top: 10px;
-  position: relative;
-  font-size: 16px; }
-
-.toc .level2 {
-  font-weight: normal;
-  margin: 5px 0 0 15px;
-  font-size: 14px; }
+.toc ul li {
+  font-weight: bold; }
 
 .toc-toggle {
   display: none;
@@ -235,68 +227,6 @@ sub {
 
 .sidetoc-heading {
   font-weight: 500; }
-
-.toc .nav > li > a.sidetoc-expand {
-  position: absolute;
-  top: 0;
-  left: 0; }
-
-.toc .nav > li > a {
-  color: #585858;
-  display: block;
-  position: relative;
-  padding: 0; }
-
-.toc .nav > li > a:hover,
-.toc .nav > li > a:focus {
-  color: #000000;
-  background: none;
-  text-decoration: inherit; }
-
-.toc .nav > li.active > a {
-  color: #337ab7; }
-
-.toc .nav > li.active > a:hover,
-.toc .nav > li.active > a:focus {
-  color: #23527c; }
-
-.toc .nav > li > .expand-stub {
-  cursor: pointer; }
-
-.toc .nav > li.active > .expand-stub::before,
-.toc .nav > li.in > .expand-stub::before,
-.toc .nav > li.in.active > .expand-stub::before,
-.toc .nav > li.filtered > .expand-stub::before {
-  content: "\2013"; }
-
-.toc .nav > li > .expand-stub::before,
-.toc .nav > li.active > .expand-stub::before {
-  content: "+"; }
-
-.toc .nav > li.filtered > ul,
-.toc .nav > li.in > ul {
-  display: block; }
-
-.toc .nav > li > ul {
-  display: none; }
-
-.toc ul {
-  font-size: 12px; }
-
-.toc .level1 > li {
-  font-weight: bold;
-  margin-top: 10px;
-  position: relative;
-  font-size: 16px; }
-
-.toc .level2 {
-  font-weight: normal;
-  margin: 5px 0 0 15px;
-  font-size: 14px; }
-
-.toc-toggle {
-  display: none;
-  margin: 0 15px 0 15px; }
 
 .toc-filter {
   border-radius: 5px;
@@ -358,10 +288,10 @@ sub {
     bottom: 0;
     left: 0;
     background-color: #731963; }
-  .toc .nav li.active a {
+  .toc .nav li.active > a {
     color: #000;
     font-weight: 500; }
-  .toc .nav li.active a:hover {
+  .toc .nav li.active > a:hover {
     color: #585858; }
 
 .toc .nav li.new .new__badge {
@@ -392,38 +322,16 @@ sub {
       -ms-user-select: none;
           user-select: none; }
 
-.toc .nav .nav.level2 {
+.toc .nav .nav {
   margin: 0;
   padding: 0 16px; }
-  .toc .nav .nav.level2 li a {
+  .toc .nav .nav li a {
     font-weight: 400;
     color: #666; }
-  .toc .nav .nav.level2 li a:hover {
+  .toc .nav .nav li a:hover {
     color: #4d4d4d; }
-  .toc .nav .nav.level2 li.new .new__badge {
+  .toc .nav .nav li.new .new__badge {
     right: -16px; }
-  .toc .nav .nav.level2 > li::before {
-    position: absolute;
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: transparent;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%); }
-    @media only screen and (min-width: 992px) {
-      .toc .nav .nav.level2 > li::before {
-        background: rgba(0, 0, 0, 0.12); } }
-  @media only screen and (min-width: 992px) {
-    .toc .nav .nav.level2 > li:hover::before {
-      background: rgba(0, 0, 0, 0.42); } }
-  .toc .nav .nav.level2 > li.active a {
-    font-weight: 500;
-    color: #000; }
-  @media only screen and (min-width: 992px) {
-    .toc .nav .nav.level2 > li.active::before {
-      background: rgba(0, 0, 0, 0.7); } }
 
 @media only screen and (min-width: 992px) {
   .toc::after {
