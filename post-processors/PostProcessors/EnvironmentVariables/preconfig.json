@@ -7,29 +7,35 @@
 		"en": {
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
-				"infragisticsBaseUrl": "https://staging.infragistics.local"
+				"infragisticsBaseUrl": "https://staging.infragistics.local",
+				"GTMContainerId": "GTM-WLXLBZD"
 			},
 			"staging": {
 				"demosBaseUrl": "https://staging.infragistics.local/angular-demos",
-				"infragisticsBaseUrl": "https://staging.infragistics.local"
+				"infragisticsBaseUrl": "https://staging.infragistics.local",
+				"GTMContainerId": "GTM-NCKNPN"
 			},
 			"production": {
 				"demosBaseUrl": "https://www.infragistics.com/angular-demos",
-				"infragisticsBaseUrl": "https://www.infragistics.com"
+				"infragisticsBaseUrl": "https://www.infragistics.com",
+				"GTMContainerId": "GTM-T65CF7"
 			}
 		},
 		"jp": {
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
-				"infragisticsBaseUrl": "https://jp.staging.infragistics.local"
+				"infragisticsBaseUrl": "https://jp.staging.infragistics.local",
+				"GTMContainerId": "GTM-NNHVMC7"
 			},
 			"staging": {
 				"demosBaseUrl": "https://jp.staging.infragistics.local/angular-demos",
-				"infragisticsBaseUrl": "https://jp.staging.infragistics.local"
+				"infragisticsBaseUrl": "https://jp.staging.infragistics.local",
+				"GTMContainerId": "GTM-WLWSDK"
 			},
 			"production": {
 				"demosBaseUrl": "https://jp.infragistics.com/angular-demos",
-				"infragisticsBaseUrl": "https://jp.infragistics.com"
+				"infragisticsBaseUrl": "https://jp.infragistics.com",
+				"GTMContainerId": "GTM-KVNSWJ"
 			}
 		}
 	},
