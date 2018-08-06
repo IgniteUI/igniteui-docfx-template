@@ -7,9 +7,11 @@ full license information.}} {{!include(/^styles/.*/)}} {{!include(/^fonts/.*/)}}
 {{>partials/head}}
 
 <body data-spy="scroll" data-target="#affix" data-nav-base-url="{environment:infragisticsBaseUrl}" data-lang="{{_language}}" data-theme="{{_productThemeName}}">
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T65CF7" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id={environment:GTMContainerId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
+	<!-- End Google Tag Manager (noscript) -->
     <header>
         {{^_disableNavbar}} {{>partials/navbar}} {{/_disableNavbar}} {{^_disableBreadcrumb}} {{!>partials/breadcrumb}} {{/_disableBreadcrumb}}
     </header>
