@@ -96,7 +96,6 @@
 
 .toc-toggle {
   display: none;
-  margin: 0 15px 0 15px;
 }
 
 .sidetoc-expand > .caret {
@@ -230,6 +229,13 @@
           }
         }
       }
+
+      &.level2 {
+        .in.active a{
+          color: #000 !important;
+          font-weight: 500 !important;
+        }
+      }
     }
   }
 
@@ -259,14 +265,16 @@
 
 .toc-toggle {
   justify-content: center;
-  padding: 16px 0;
-  font-size: 16px;
+  padding: 14px 0;
+  font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
-  color: #585858;
+  color: #282828;
+  background: #eff1f2;
+  border-bottom: 1px solid #dedede;
   &:focus,
   &:hover {
-    color: $byzantium;
+    color: $igblue;
   }
 }
 
@@ -283,6 +291,7 @@
   #toc {
     height: auto !important;
   }
+
   .toc-toggle {
     display: flex;
   }
@@ -294,6 +303,9 @@
   .sidenav {
     padding: 0;
     margin: 24px 0 !important;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+  }
+
+  .sidenav-container {
+    border-right: none;
   }
 }
