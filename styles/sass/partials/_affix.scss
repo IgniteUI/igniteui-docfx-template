@@ -46,7 +46,7 @@
     font-weight: bold;
     &:hover {
         background: none;
-        color: $byzantium;
+        color: $igblue;
         &::before {
             background-color: rgba(0, 0, 0, .38);
         }
@@ -59,15 +59,13 @@
         top: 6px;
         bottom: 6px;
         left: 0;
-        background-color: $byzantium;
+        background-color: $igblue;
     }
 }
 
 .affix ul>li.active:hover>a {
     color: #585858;
-    &::before {
-        background-color: $byzantium;
-    }
+    
 }
 
 .affix>ul>li.active:last-child {

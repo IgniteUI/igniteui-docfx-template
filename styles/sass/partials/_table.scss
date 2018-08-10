@@ -11,10 +11,9 @@ table a {
 }
 
 .table-responsive {
-    background: #ffffff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 2px;
-    border: none;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-bottom: none;
 
     .table {
         margin: 0;

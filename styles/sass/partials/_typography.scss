@@ -55,25 +55,17 @@ h2,
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     font-weight: 300;
-    color: $byzantium;
+    color: $black;
 }
 
 h3,
 .h3 {
-    font-size: 1.625rem;
+    font-size: 2rem;
     line-height: 3rem;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     margin-bottom: 0rem;
     font-weight: 300;
     position: relative;
-    &::after {
-        position: absolute;
-        content: '';
-        width: 24px;
-        height: 2px;
-        left: 0;
-        background-color: $byzantium;
-    }
 }
 
 h4,
@@ -105,6 +97,9 @@ blockquote {
         font-weight: 400;
         color: #333;
     }
+}
+p {
+    line-height: 2rem;
 }
 
 ul ul,
