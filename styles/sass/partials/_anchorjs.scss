@@ -1,10 +1,10 @@
 .anchorjs-link {
     position: absolute;
-    color: transparentize($byzantium, 0.4);
+    color: transparentize($igblue, 0.6);
     font-family: 'Material Icons';
     padding-top: 0.1em;
     &:hover {
-        color: $byzantium;
+        color: $igblue;
     }
     &::after {
         content: 'link';

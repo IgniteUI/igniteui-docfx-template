@@ -3,7 +3,7 @@
 /**
  * This method will be called at the start of exports.transform in toc.html.js
  */
-exports.preTransform = function(model) {
+exports.preTransform = function (model) {
     model._disableSideFilter = true;
     return model;
 };
@@ -11,6 +11,6 @@ exports.preTransform = function(model) {
 /**
  * This method will be called at the end of exports.transform in toc.html.js
  */
-exports.postTransform = function(model) {
+exports.postTransform = function (model) {
     return model;
 };

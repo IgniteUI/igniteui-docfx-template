@@ -550,7 +550,7 @@ $(function () {
           $(e).addClass(expanded);
           top += $(e).position().top;
         });
-      
+
       $("#toc a.active").closest("li").addClass("active");
 
       $(".sidetoc").scrollTop(top - 50);
@@ -1018,10 +1018,10 @@ $(document).ready(function () {
 
   var resourcesBaseUrl = "";
   try {
-	  var docfxjsSrc = $("script[src$='styles/docfx.js']")[0].src;
-	  resourcesBaseUrl = docfxjsSrc.replace("styles/docfx.js", "resources");
-  } catch(err) {
-	  console.log("Cannot load resources: " + err.message);
+    var docfxjsSrc = $("script[src$='styles/docfx.js']")[0].src;
+    resourcesBaseUrl = docfxjsSrc.replace("styles/docfx.js", "resources");
+  } catch (err) {
+    console.log("Cannot load resources: " + err.message);
   }
 
   $("[data-localize]").localize("resources", {

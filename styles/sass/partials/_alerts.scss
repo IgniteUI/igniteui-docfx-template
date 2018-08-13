@@ -5,7 +5,7 @@ $icon-container-width: 72px;
     position: relative;
     background-color: #fff;
     border: none;
-    box-shadow: $alert-shadow;
+    border: 1px solid $info-color;
     border-radius: 0;
     padding: 16px;
     margin: 48px 0;
@@ -26,12 +26,20 @@ $icon-container-width: 72px;
         z-index: 1;
     }
 
+    &-warning {
+        border-color: $warning-color;
+    }
+
+    &-danger {
+        border-color: $error-color;
+    }
+
     &-info h5 {
         color: $info-color;
     }
 
     &-warning h5 {
-        color: $warning-color;
+        color: $warning-color; 
     }
 
     &-danger h5 {
