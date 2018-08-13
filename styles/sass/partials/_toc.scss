@@ -30,6 +30,7 @@
   left: 0;
   padding: 6px 16px;
   color: $igblue;
+  font-weight: 500;
 }
 
 .toc .nav > li > a.sidetoc-expand {
@@ -90,9 +91,9 @@
   font-size: 12px;
 }
 
-.toc ul li {
-  font-weight: bold;
-}
+// .toc ul li {
+//   font-weight: bold;
+// }
 
 .toc-toggle {
   display: none;
@@ -231,7 +232,7 @@
       }
 
       &.level2 {
-        .in.active a{
+        .in.active a.active {
           color: #000 !important;
           font-weight: 500 !important;
         }
