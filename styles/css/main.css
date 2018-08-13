@@ -153,7 +153,8 @@ sub {
   top: 0;
   left: 0;
   padding: 6px 16px;
-  color: #0099ff; }
+  color: #0099ff;
+  font-weight: 500; }
 
 .toc .nav > li > a.sidetoc-expand {
   position: absolute;
@@ -201,9 +202,6 @@ sub {
 
 .toc ul {
   font-size: 12px; }
-
-.toc ul li {
-  font-weight: bold; }
 
 .toc-toggle {
   display: none; }
@@ -318,7 +316,7 @@ sub {
     color: #0099ff; }
   .toc .nav .nav li.new .new__badge {
     right: -11px; }
-  .toc .nav .nav.level2 .in.active a {
+  .toc .nav .nav.level2 .in.active a.active {
     color: #000 !important;
     font-weight: 500 !important; }
 
@@ -463,7 +461,7 @@ sub {
 
 .affix ul ul > li.active:hover a,
 .affix ul ul > li.active a {
-  color: #731963;
+  color: #0099ff;
   font-weight: 400; }
 
 .affix ul ul > li:hover a::before,
