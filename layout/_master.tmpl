@@ -27,13 +27,12 @@ full license information.}} {{!include(/^styles/.*/)}} {{!include(/^fonts/.*/)}}
 
             <div class="article-container col-lg-8 col-md-9 col-sm-12">
                 <article class="content wrap" id="_content" data-uid="{{uid}}">
-                    <div>
-                        <select class="themeChanger">
-                            <option value="default-theme">Default</option>
-                            <option value="light-theme">Light</option>
-                            <option value="dark-theme">Dark</option>
-                        </select>
-                    </div>
+                    {{#_isLangEn}}
+                        {{>partials/themeselect}}
+                    {{/_isLangEn}}
+                    {{^_isLangEn}}
+                        {{>partials/themeselect.ja}}
+                    {{/_isLangEn}}
                     {{!body}}
                 </article>
             </div>

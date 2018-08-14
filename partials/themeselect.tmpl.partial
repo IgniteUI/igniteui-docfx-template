@@ -1,0 +1,7 @@
+<div>
+    <select class="themeChanger">
+        <option value="default-theme">Default</option>
+        <option value="light-theme">Light</option>
+        <option value="dark-theme">Dark</option>
+    </select>
+</div>
