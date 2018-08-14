@@ -1,7 +1,7 @@
-<div>
+﻿<div>
     <select class="themeChanger">
-        <option value="default-theme">JP Default</option>
-        <option value="light-theme">JP Light</option>
-        <option value="dark-theme">JP Dark</option>
+        <option value="default-theme">デフォルト</option>
+        <option value="light-theme">ライト</option>
+        <option value="dark-theme">ダーク</option>
     </select>
 </div>
