@@ -6,7 +6,7 @@ full license information.}} {{!include(/^styles/.*/)}} {{!include(/^fonts/.*/)}}
 <html>
 {{>partials/head}}
 
-<body data-spy="scroll" data-target="#affix" data-nav-base-url="{environment:infragisticsBaseUrl}" data-lang="{{_language}}" data-theme="{{_productThemeName}}">
+<body data-spy="scroll" data-target="#affix" data-nav-base-url="{environment:infragisticsBaseUrl}" data-demos-base-url="{environment:demosBaseUrl}" data-lang="{{_language}}" data-theme="{{_productThemeName}}">
 	<!-- Google Tag Manager (noscript) -->
 	<noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id={environment:GTMContainerId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -27,6 +27,13 @@ full license information.}} {{!include(/^styles/.*/)}} {{!include(/^fonts/.*/)}}
 
             <div class="article-container col-lg-8 col-md-9 col-sm-12">
                 <article class="content wrap" id="_content" data-uid="{{uid}}">
+                    <div>
+                        <select class="themeChanger">
+                            <option value="default-theme">Default</option>
+                            <option value="light-theme">Light</option>
+                            <option value="dark-theme">Dark</option>
+                        </select>
+                    </div>
                     {{!body}}
                 </article>
             </div>

@@ -990,11 +990,29 @@ function updateUrl(target) {
 }
 
 $(document).ready(function () {
+  let theme = window.localStorage.getItem("theme");
+  if (theme) {
+    $(".themeChanger").val(theme);
+  }
+  var homePathName = "/components/grids_and_lists.html";
+  if (window.location.pathname === homePathName) {
+    $(".themeChanger").parent().toggle();
+  }
+
   var contentOffset = $("#_content").offset().top;
   let pageLanguage = $(document.body).data("lang");
   if (!pageLanguage) {
     pageLanguage = "en";
   }
+
+  $(".themeChanger").on("change", function(e) {
+    theme = this.value;
+    var targetOrigin = document.body.getAttribute("data-demos-base-url");
+    var iframeWindow = document.querySelector("iframe").contentWindow;
+    var data = {theme: theme, origin: window.origin};
+    window.localStorage.setItem('theme', theme);
+    iframeWindow.postMessage(data, targetOrigin);
+})
 
   $(".anchorjs-link").on("click", function (e) {
     var hashLocation = $(this).attr("href");
