@@ -34,6 +34,7 @@
 
             getDemosSharedFile();
             getSamplesFiles();
+            stackblitzButtons.removeAttr("disabled");
         }
     }
 
