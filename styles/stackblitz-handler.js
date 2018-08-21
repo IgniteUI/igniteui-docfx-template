@@ -32,9 +32,25 @@
                 $button.on("click", onStackblitzButtonClicked);
             });
 
-            getDemosSharedFile();
-            getSamplesFiles();
-            stackblitzButtons.removeAttr("disabled");
+            var sharedFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + sharedFileName;
+            var requests = [$.get(sharedFileUrl)];
+            
+            $.each(samplesFilesUrls, function(index, url) {
+                var ajax = $.get(url);
+                requests.push(ajax);
+            });
+
+            $.when.apply($, requests).done(function(){
+                
+                replaceRelativeAssetsUrls(arguments[0][0].files);
+                sharedFileContent = arguments[0];
+                
+                for(var i = 1; i < arguments.length; i++) {
+                    replaceRelativeAssetsUrls(arguments[i][0].sampleFiles);
+                    sampleFilesContentByUrl[url] = arguments[i][0];
+                }
+                stackblitzButtons.removeAttr("disabled");
+            });
         }
     }
 
@@ -170,5 +186,5 @@
 
     $(document).ready(function() {
         init();
-    });    
+    });
 }());
