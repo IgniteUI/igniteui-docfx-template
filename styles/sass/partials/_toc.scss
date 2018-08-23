@@ -288,6 +288,23 @@
   z-index: 1;
 }
 
+.toc-filter {
+  margin: 0;
+
+  #toc_filter_input {
+    font-size: 13px;
+    padding-left: 24px;
+  }
+
+  .filter-icon {
+    color: $igblue;
+    font-size: 14px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+}
+
 @media only screen and (max-width: 991px) {
   #toc {
     height: auto !important;

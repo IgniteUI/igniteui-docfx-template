@@ -582,20 +582,30 @@ $(function () {
             .removeClass(hide);
           return;
         }
-
+        
         // Get leaf nodes
         $("#toc li>a")
           .filter(function (i, e) {
-            return $(e).siblings().length === 0;
+            return $(e).siblings().not('.new__badge').length === 0;
           })
           .each(function (i, anchor) {
             var text = $(anchor).attr("title");
             var parent = $(anchor).parent();
             var parentNodes = parent.parents("ul>li");
+            var latest = parentNodes.length > 0 ? parentNodes[parentNodes.length - 1] : parent;
+            var header = $(latest).prevAll("li[data-is-header='true']").first();
+            parentNodes.push(header);
             for (var i = 0; i < parentNodes.length; i++) {
-              var parentText = $(parentNodes[i])
-                .children("a")
-                .attr("title");
+              var parentText;
+              var parentNode = $(parentNodes[i]);
+              if (parentNode.data("is-header")) {
+                parentText = parentNode.text();
+              } else {
+                parentText = $(parentNodes[i])
+                  .children("a")
+                  .attr("title");
+              }
+
               if (parentText) text = parentText + "." + text;
             }
             if (filterNavItem(text, val)) {
@@ -606,12 +616,14 @@ $(function () {
               parent.removeClass(show);
             }
           });
+
         $("#toc li>a")
           .filter(function (i, e) {
-            return $(e).siblings().length > 0;
+            return $(e).siblings().not('.new__badge').length > 0;
           })
           .each(function (i, anchor) {
             var parent = $(anchor).parent();
+
             if (parent.find("li.show").length > 0) {
               parent.addClass(show);
               parent.addClass(filtered);
@@ -628,7 +640,65 @@ $(function () {
           if (name.toLowerCase().indexOf(text.toLowerCase()) > -1) return true;
           return false;
         }
+
+        toggleSidenavHeaders();
       });
+    }
+
+    function toggleSidenavHeaders() {
+      var isHeaderDataAttrName = "is-header";
+      var firstLevelListItems = $("#toc>ul>li");
+      var headers = [];
+      var header = null;
+      var children = [];
+      for (var i = 0; i < firstLevelListItems.length; i++) {
+        var listItem = $(firstLevelListItems[i]);
+        var isHeader = listItem.data(isHeaderDataAttrName) === true;
+        if (isHeader) {
+          if (header) {
+            headers.push( {
+              header: header,
+              children: children
+            });
+
+            header = null;
+            children = [];
+          }
+          
+          header = listItem;
+        } else if (header) {
+          children.push(listItem);
+        }
+      }
+
+      if (header) {
+        headers.push({
+          header: header,
+          children: children
+        });
+      }
+
+      toggleHeadersHideClass(headers);      
+    }
+
+    function toggleHeadersHideClass(headers) {
+      for (var i = 0; i < headers.length; i++) {
+        if (hasVisibleChild(headers[i].children)) {
+          headers[i].header.removeClass("hide");
+        } else {
+          headers[i].header.addClass("hide");
+        }
+      }
+    }
+
+    function hasVisibleChild(children) {
+      for (var i = 0; i < children.length; i++) {
+        if (!children[i].hasClass("hide")) {
+          return true;
+        }
+      }
+
+      return false;
     }
 
     function loadToc() {
