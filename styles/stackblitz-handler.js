@@ -32,26 +32,30 @@
                 $button.on("click", onStackblitzButtonClicked);
             });
 
-            var sharedFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + sharedFileName;
-            var requests = [$.get(sharedFileUrl)];
-            
-            $.each(samplesFilesUrls, function(index, url) {
-                var ajax = $.get(url);
-                requests.push(ajax);
-            });
-
-            $.when.apply($, requests).done(function(){
-                
-                replaceRelativeAssetsUrls(arguments[0][0].files);
-                sharedFileContent = arguments[0];
-                
-                for(var i = 1; i < arguments.length; i++) {
-                    replaceRelativeAssetsUrls(arguments[i][0].sampleFiles);
-                    sampleFilesContentByUrl[url] = arguments[i][0];
-                }
-                stackblitzButtons.removeAttr("disabled");
-            });
+            getFiles();
         }
+    }
+
+    var getFiles = function() {
+        var sharedFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + sharedFileName;
+        var requests = [$.get(sharedFileUrl)];
+        var stackblitzButtons = $("." + buttonClass);
+        $.each(samplesFilesUrls, function(index, url) {
+            var ajax = $.get(url);
+            requests.push(ajax);
+        });
+
+        $.when.apply($, requests).done(function() {
+            
+            replaceRelativeAssetsUrls(arguments[0][0].files);
+            sharedFileContent = arguments[0];
+            
+            for(var i = 1; i < arguments.length; i++) {
+                replaceRelativeAssetsUrls(arguments[i][0].sampleFiles);
+                sampleFilesContentByUrl[url] = arguments[i][0];
+            }
+            stackblitzButtons.removeAttr("disabled");
+        });
     }
 
     var getDemoFilesFolderUrlPath = function() {
@@ -60,23 +64,6 @@
         }
 
         return demoFilesFolderUrlPath;
-    }
-
-    var getDemosSharedFile = function () {        
-        var sharedFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + sharedFileName;
-        $.get(sharedFileUrl).done(function (data, requestType, httpResponse) {
-            replaceRelativeAssetsUrls(data.files);
-            sharedFileContent = data;
-        });
-    }
-
-    var getSamplesFiles = function () {
-        $.each(samplesFilesUrls, function(index, url) {
-            $.get(url).done(function (data, requestType, httpResponse) {
-                replaceRelativeAssetsUrls(data.sampleFiles);
-                sampleFilesContentByUrl[url] = data;
-            });
-        });
     }
 
     var getSampleUrlByStackBlitzButton = function ($button) {
