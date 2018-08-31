@@ -1121,7 +1121,7 @@ function handleThemeSelection(theme, item) {
     newItem.setAttribute("data-theme", selectedItem.getAttribute("data-theme"));
     newItem.lastElementChild.textContent = selectedItem.lastElementChild.textContent;
   
-    selectedItem.setAttribute("data-theme", newItem.getAttribute("data-theme"));
+    selectedItem.setAttribute("data-theme", theme);
     selectedItem.lastElementChild.textContent = labelToSwap;	
   }
 }
