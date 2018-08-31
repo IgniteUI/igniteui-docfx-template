@@ -210,12 +210,28 @@ svg:hover path {
     background-image: linear-gradient(to right bottom, #EDE580 50%, black 50%);
 }
 
+.light-theme2 {
+    background-image: linear-gradient(to right bottom,yellow 50%, blue 50%);
+}
+
+.dark-theme2 {
+    background-image: linear-gradient(to right bottom, black 50%, #EDE580 50%);
+}
+
 .soundwave {
     background-image: linear-gradient(to right bottom, pink 50%, lightblue 50%);
 }
 
 .bumblebee {
     background-image: linear-gradient(to right bottom, #D35269 50%, lightblue 50%);
+}
+
+.soundwave2 {
+    background-image: linear-gradient(to right bottom, lightblue 50%,  pink 50%);
+}
+
+.bumblebee2 {
+    background-image: linear-gradient(to right bottom, lightblue 50%, #D35269 50%);
 }
 
 .more-themes{

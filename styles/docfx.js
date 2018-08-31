@@ -1119,9 +1119,11 @@ function handleThemeSelection(theme, item) {
     var labelToSwap = newItem.lastElementChild.textContent;
   
     newItem.setAttribute("data-theme", selectedItem.getAttribute("data-theme"));
+    newItem.firstElementChild.className = "theme-button " + selectedItem.getAttribute("data-theme");
     newItem.lastElementChild.textContent = selectedItem.lastElementChild.textContent;
   
     selectedItem.setAttribute("data-theme", theme);
+    selectedItem.firstElementChild.className = "theme-button " + theme;
     selectedItem.lastElementChild.textContent = labelToSwap;	
   }
 }

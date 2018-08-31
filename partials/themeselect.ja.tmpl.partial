@@ -26,11 +26,11 @@
     <div class="toggle" tabindex="-1" onblur="closeContainer()">
         <div class="themes-items-container">
             <div class="theme-item" data-theme="light-theme2">
-                <span class="theme-button light-theme"></span>
+                <span class="theme-button light-theme2"></span>
                 <span class="theme-label">Angular Light 2</span>
             </div>
             <div class="theme-item" data-theme="dark-theme2">
-                <span class="theme-button dark-theme"></span>
+                <span class="theme-button dark-theme2"></span>
                 <span class="theme-label">Angular Dark 2</span>
             </div>
             <div class="theme-item" data-theme="bumblebee">
@@ -42,11 +42,11 @@
                 <span class="theme-label">Soundwave</span>
             </div>
             <div class="theme-item" data-theme="bumblebee2">
-                <span class="theme-button dark-theme"></span>
+                <span class="theme-button bumblebee2"></span>
                 <span class="theme-label">Bumblebee2</span>
             </div>
             <div class="theme-item" data-theme="soundwave2">
-                <span class="theme-button light-theme"></span>
+                <span class="theme-button soundwave2"></span>
                 <span class="theme-label">Soundwave2</span>
             </div>
         </div>
