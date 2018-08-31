@@ -7,7 +7,9 @@ $(function () {
   var show = "show";
   var hide = "hide";
   var util = new utility();
+  var theme = window.localStorage.getItem("theme");
 
+  handleThemeSelection(theme);
   highlight();
   enableSearch();
 
@@ -1059,14 +1061,75 @@ function updateUrl(target) {
   history.pushState({}, "", window.location.href.split("#")[0] + target);
 }
 
-$(document).ready(function () {
-  let theme = window.localStorage.getItem("theme");
-  if (theme) {
-    $(".themeChanger").val(theme);
+function openContainer() {
+  if ($(".toggle").is(":hidden")) {
+    $(".toggle").slideToggle(200, function() {
+      this.style.display = "block";
+      this.focus();
+    });
   }
+}
+
+function closeContainer() {
+  if ($(".toggle").is(":visible")) {
+    $(".toggle").slideToggle(200);
+  }
+}
+
+function handleThemeSelection(theme, item) {
+  if (theme) {
+    var homePathName = "/components/grids_and_lists.html";
+    if (window.location.pathname !== homePathName) {
+      postMessage(theme);
+    }
+    var visibleItems = $(".theme-item:lt(2)");
+    var visibleThemes = [];
+    var themeItem = item ? item : $(".theme-item").filter("[data-theme=" + theme + "]")[0];
+
+    $.each(visibleItems, function(i, el) {
+      visibleThemes.push(el.getAttribute("data-theme"));
+    })
+    
+    if (visibleThemes.indexOf(theme) !== -1) {
+      selectTheme(themeItem);
+    } else {
+      swapItems(themeItem);
+      closeContainer();
+    }
+  }
+
+  function postMessage(theme) {
+    var targetOrigin = document.body.getAttribute("data-demos-base-url");
+    var iframeWindow = document.querySelector("iframe").contentWindow;
+    var data = {theme: theme, origin: window.origin};
+    window.localStorage.setItem('theme', theme);
+    iframeWindow.postMessage(data, targetOrigin);
+  }
+  
+  function selectTheme(el) {
+    var oldSelection = document.getElementsByClassName("selected");
+    if (oldSelection.length > 0) {
+      oldSelection[0].classList.remove("selected");
+    }
+    el.classList.add("selected");
+  }
+  
+  function swapItems(newItem) {
+    var selectedItem = document.getElementsByClassName("selected")[0];
+    var labelToSwap = newItem.lastElementChild.textContent;
+  
+    newItem.setAttribute("data-theme", selectedItem.getAttribute("data-theme"));
+    newItem.lastElementChild.textContent = selectedItem.lastElementChild.textContent;
+  
+    selectedItem.setAttribute("data-theme", newItem.getAttribute("data-theme"));
+    selectedItem.lastElementChild.textContent = labelToSwap;	
+  }
+}
+
+$(document).ready(function () {
   var homePathName = "/components/grids_and_lists.html";
   if (window.location.pathname === homePathName) {
-    $(".themeChanger").parent().toggle();
+    $(".themes-container").css("display", "none");
   }
 
   var contentOffset = $("#_content").offset().top;
@@ -1075,14 +1138,13 @@ $(document).ready(function () {
     pageLanguage = "en";
   }
 
-  $(".themeChanger").on("change", function(e) {
-    theme = this.value;
-    var targetOrigin = document.body.getAttribute("data-demos-base-url");
-    var iframeWindow = document.querySelector("iframe").contentWindow;
-    var data = {theme: theme, origin: window.origin};
-    window.localStorage.setItem('theme', theme);
-    iframeWindow.postMessage(data, targetOrigin);
-})
+  $(".theme-item").on("click", function(e) {
+    if(e.currentTarget.lastElementChild.tagName === "svg") {
+      return;
+    }
+    theme = this.getAttribute("data-theme");
+    handleThemeSelection(theme, this);
+  })
 
   $(".anchorjs-link").on("click", function (e) {
     var hashLocation = $(this).attr("href");

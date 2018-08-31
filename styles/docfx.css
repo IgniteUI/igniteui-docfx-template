@@ -147,6 +147,101 @@ svg:hover path {
     max-height: 200px;
 }
 
+.themes-main-container {
+    position: relative;
+    float: right;
+}
+
+.themes-container {
+    display: flex
+}
+
+.theme-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
+    padding: 3px 5px;
+}
+
+.toggle .theme-item {
+    margin-right: 0;
+}
+
+.theme-item:hover .theme-label,
+.theme-item:focus .theme-label
+ {
+    color:#0099ff; 
+}
+
+.themes-container .theme-item:last-of-type {
+    margin-right: 0;
+}
+
+.theme-label {
+    font-size: 0.8rem;
+    white-space: nowrap;
+    margin-left: 8px;
+}
+
+.themes-items-container {
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 15px;
+    grid-row-gap: 6px;
+    grid-column-gap: 12px;
+}
+
+.selected {
+    font-weight: bold;
+}
+
+.theme-button {
+    min-width: 34px;
+    height: 16px;
+}
+
+.light-theme {
+    background-image: linear-gradient(to right bottom, blue 50%, yellow 50%);
+}
+
+.dark-theme {
+    background-image: linear-gradient(to right bottom, #EDE580 50%, lightgreen 50%);
+}
+
+.soundwave {
+    background-image: linear-gradient(to right bottom, pink 50%, lightblue 50%);
+}
+
+.bumblebee {
+    background-image: linear-gradient(to right bottom, #D35269 50%, lightblue 50%);
+}
+
+.more-themes{
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    fill:#333;
+}
+
+.more-themes:hover {
+    fill:#0099ff;
+}
+
+.toggle {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 4px 6px 13px 4px #aaaa;
+    overflow: auto;
+    right: 0;
+    z-index: 1;
+    width: fit-content;
+    outline: none;
+    top: calc(100% + 10px);
+}
+
 @media (min-width: 992px) {
     #main {
         display: table;
