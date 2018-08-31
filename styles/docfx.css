@@ -207,7 +207,7 @@ svg:hover path {
 }
 
 .dark-theme {
-    background-image: linear-gradient(to right bottom, #EDE580 50%, lightgreen 50%);
+    background-image: linear-gradient(to right bottom, #EDE580 50%, black 50%);
 }
 
 .soundwave {
