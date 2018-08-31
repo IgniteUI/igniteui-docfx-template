@@ -1,4 +1,3 @@
-
 <div class="themes-main-container">
     <div class="themes-container">
         <div class="theme-item selected" data-theme="light-theme">
@@ -23,32 +22,31 @@
         </div>
     </div>
 
-    <div class="toggle" tabindex="-1" onblur="closeContainer()">
-        <div class="themes-items-container">
-            <div class="theme-item" data-theme="light-theme2">
-                <span class="theme-button light-theme"></span>
-                <span class="theme-label">Angular Light 2</span>
-            </div>
-            <div class="theme-item" data-theme="dark-theme2">
-                <span class="theme-button dark-theme"></span>
-                <span class="theme-label">Angular Dark 2</span>
-            </div>
-            <div class="theme-item" data-theme="bumblebee">
-                <span class="theme-button dark-theme"></span>
-                <span class="theme-label">Bumblebee</span>
-            </div>
-            <div class="theme-item" data-theme="soundwave">
-                <span class="theme-button dark-theme"></span>
-                <span class="theme-label">Soundwave</span>
-            </div>
-            <div class="theme-item" data-theme="bumblebee2">
-                <span class="theme-button dark-theme"></span>
-                <span class="theme-label">Bumblebee2</span>
-            </div>
-            <div class="theme-item" data-theme="soundwave2">
-                <span class="theme-button dark-theme"></span>
-                <span class="theme-label">Soundwave2</span>
-            </div>
+<div class="toggle" tabindex="-1" onblur="closeContainer()">
+    <div class="themes-items-container">
+        <div class="theme-item" data-theme="light-theme2">
+            <span class="theme-button light-theme"></span>
+            <span class="theme-label">Angular Light 2</span>
+        </div>
+        <div class="theme-item" data-theme="dark-theme2">
+            <span class="theme-button dark-theme"></span>
+            <span class="theme-label">Angular Dark 2</span>
+        </div>
+        <div class="theme-item" data-theme="bumblebee">
+            <span class="theme-button dark-theme"></span>
+            <span class="theme-label">Bumblebee</span>
+        </div>
+        <div class="theme-item" data-theme="soundwave">
+            <span class="theme-button dark-theme"></span>
+            <span class="theme-label">Soundwave</span>
+        </div>
+        <div class="theme-item" data-theme="bumblebee2">
+            <span class="theme-button dark-theme"></span>
+            <span class="theme-label">Bumblebee2</span>
+        </div>
+        <div class="theme-item" data-theme="soundwave2">
+            <span class="theme-button dark-theme"></span>
+            <span class="theme-label">Soundwave2</span>
         </div>
     </div>
 </div>
