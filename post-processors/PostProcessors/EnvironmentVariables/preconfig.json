@@ -45,8 +45,8 @@
 			"production": {
 				"demosBaseUrl": "https://jp.infragistics.com/angular-demos",
 				"infragisticsBaseUrl": "https://jp.infragistics.com",
-				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript",
+				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass",
 				"GTMContainerId": "GTM-KVNSWJ"
 			}
 		}
