@@ -5,7 +5,7 @@
 			<div class="globalnav__search-container globalnav__wrapper">
 				<div class="search search__container search--support" data-cse-resultsurl="/search">
 					<!-- <input id="q" class="search__input" type="text" name="q" value="" placeholder="Search Infragistics.com" /> -->
-					<input id="q" class="search__input" type="text" name="q" value="" placeholder="Search Infragistics.com">
+					<input id="q" class="search__input" type="text" name="q" value="" placeholder="검색 Infragistics.com">
 						<button type="submit" value="search">
 							<svg enable-background="new 0 0 512 512" id="search" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M497.913,497.913c-18.782,18.782-49.225,18.782-68.008,0l-84.862-84.863c-34.889,22.382-76.13,35.717-120.659,35.717  C100.469,448.767,0,348.312,0,224.383S100.469,0,224.384,0c123.931,0,224.384,100.452,224.384,224.383  c0,44.514-13.352,85.771-35.718,120.676l84.863,84.863C516.695,448.704,516.695,479.131,497.913,497.913z M224.384,64.109  c-88.511,0-160.274,71.747-160.274,160.273c0,88.526,71.764,160.274,160.274,160.274c88.525,0,160.273-71.748,160.273-160.274  C384.657,135.856,312.909,64.109,224.384,64.109z"></path></svg>
 						</button>
@@ -21,10 +21,10 @@
 						<ul class="navigation navigation--xs navigation--hpad-0">
 							<li class="navigation__text deemphasize" style="width: auto;">North American Sales: 1-800-231-8588</li>
 							<li>
-								<a title="Contact Us" data-id="9668" href="/about-us/contact-us">Global Contacts</a>
+								<a data-id="9668" href="https://www.infragistics.com/about-us/contact-us">글로벌 연락처</a>
 							</li>
 							<li class="navigation__account">
-								<a class="signInLink" href="https://www.infragistics.com/login.aspx?ReturnUrl=%2fmy-account%2fkeys-and-downloads">My Account</a>
+								<a class="signInLink" href="https://kr.infragistics.com/login.aspx?ReturnUrl=%2fmy-account%2fkeys-and-downloads">My Account</a>
 							</li>
 						</ul>
 					</nav>
@@ -40,7 +40,7 @@
 				<!-- Mobile Menu Toggle -->
 				<div class="globalnav__mobile-menu">
 					<a class="globalnav__menu-toggle" href="#">
-						<span>Menu</span>
+						<span>메뉴</span>
 					</a>
 				</div>
 				<!-- Global Search Toggle -->
@@ -56,56 +56,44 @@
 							<div class="globalnav__callout-text">North American Sales: 1-800-321-8588</div>
 						</li>
 						<li class="navigation__mobile-link">
-							<a class="navigation__sub-menu" href="#">My Account</a>
+							<a class="navigation__sub-menu" href="#">내 계정</a>
 							<ul class="sub-menu clearfix">
 								<li>
-									<a class="signInLink" href="https://www.infragistics.com/login.aspx?ReturnUrl=%2fmy-account%2fkeys-and-downloads">Sign In/Register</a>
+									<a class="signInLink" href="https://kr.infragistics.com/login.aspx?ReturnUrl=%2fmy-account%2fkeys-and-downloads">Sign In/Register</a>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a class="navigation__sub-menu" title="For Developers" href="/products/ultimate">Developers</a>
+							<a class="navigation__sub-menu" href="https://www.infragistics.com/products/ultimate">디자인&amp;개발</a>
 							<ul class="navigation_sub-menu-featured">
 								<li>
-									<a class="navigation__callout-link" title="Infragistics Ultimate" href="/products/ultimate">
-										<span class="navigation__callout-title">Infragistics Ultimate</span>
-										<span class="deemphasize">The complete toolkit for building high performing web, mobile, and desktop apps</span>
+									<a class="navigation__callout-link" href="https://www.infragistics.com/products/ultimate">
+										<span class="navigation__callout-title">Infragistics Ultimate 고성능 웹, 모바일 및 데스크톱 앱 구축을 위한 완벽한 툴킷</span>
 									</a>
 								</li>
 								<li>
-									<a title="IgniteUI: Angular" href="/products/ignite-ui-angular">
-										Ignite UI for Angular <span class="deemphasize">50+ Material-based UI components designed and built on Google’s Angular framework</span>
-									</a>
+									<a href="https://www.infragistics.com/products/indigo-design">Indigo.Design 비주얼 디자인, UX 프로토 타이핑, 코드 생성 및 앱 개발을 위한 통합 플랫폼</a>
 								</li>
 								<li>
-									<a title="IgniteUI: JavaScript / HTML 5" href="/products/ignite-ui">
-										Ignite UI for JavaScript<span class="deemphasize">100+ HTML5 / JavaScript jQuery components with extensions for React, Angular &amp; ASP.NET MVC</span>
-									</a>
+									<a data-id="26052" href="/products/ignite-ui-angular">Ignite UI for Angular Google의 Angular 프레임워크를 기반으로 설계되고 구축된 50종류 이상의 머티리얼 베이스의 UI 컴포넌트</a>
 								</li>
 								<li>
-									<a title="ASP.NET" href="/products/aspnet">
-										Ultimate UI for ASP.NET <span class="deemphasize">Versatile ASP.NET AJAX UI controls</span>
-									</a>
+									<a href="https://www.infragistics.com/products/ignite-ui">Ignite UI for JavaScriptReact, Angular, ASP.NET MVC용 확장 기능이 포함된 100종류 이상의 HTML5/JavaScript jQuery 컴포넌트</a>
 								</li>
 								<li>
-									<a title="Windows Forms" href="/products/windows-forms">
-										Ultimate UI for Windows Forms <span class="deemphasize">100+ fully featured, Microsoft Office-style UI controls</span>
-									</a>
+									<a href="https://www.infragistics.com/products/aspnet">Ultimate UI for ASP.NET 다목적 ASP.NET AJAX UI 컨트롤</a>
 								</li>
 								<li>
-									<a title="WPF" href="/products/wpf">
-										Ultimate UI for WPF <span class="deemphasize">UI controls &amp; productivity tools</span>
-									</a>
+									<a href="https://www.infragistics.com/products/windows-forms">Ultimate UI for Windows Forms 100종류 이상의 기능의 Microsoft Office 스타일 UI 컨트롤</a>
 								</li>
 								<li>
-									<a title="Xamarin" href="/products/xamarin">
-										Ultimate UI for Xamarin&nbsp;<span class="deemphasize">UI controls &amp; productivity tools</span>
-									</a>
+									<a data-id="25317" href="/products/wpf">Ultimate UI for WPF UI 컨트롤 및 생산성 도구</a>
 								</li>
 								<li>
-									<a title="ReportPlus Embedded SDK" href="/products/reportplus-embedded/sdk">
-										ReportPlus Embedded SDK <span class="deemphasize">Tools to embed reports and dashboards in your apps</span>
-									</a>
+									<a href="https://www.infragistics.com/products/xamarin">Ultimate UI for Xamarin UI 컨트롤 및 생산성 도구</a>
+								</li>
+								<li>
+									<a href="https://www.infragistics.com/products/reportplus-embedded/sdk">ReportPlus Embedded SDK 앱에 보고서 및 대시보드를 내장하는 도구</a>
 								</li>
 								<li>
 									<a href="/products/all" class="navigation__feature-link">
@@ -119,112 +107,89 @@
 							</ul>
 						</li>
 						<li>
-							<a class="navigation__sub-menu" title="UX" href="/products/indigo-studio">UX</a>
+							<a class="navigation__sub-menu" href="https://www.infragistics.com/products/indigo-design/desktop">UX</a>
 							<ul>
 								<li>
-									<a title="Indigo Studio" href="/products/indigo-studio">
-										Indigo Studio <span class="deemphasize">Collaborative prototyping and remote usability testing for UX &amp; usability professionals</span>
+									<a href="https://www.infragistics.com/products/indigo-design/desktop">
+										<span class="deemphasize">Indigo.Design Desktop UX 및 사용성 전문가를 위한 공동 프로토 타이핑 및 원격 사용성 테스트</span>
 									</a>
 								</li>
 								<li>
-									<a title="UX Consulting" href="/consulting">
-										UX Consulting <span class="deemphasize">Partner with our UX &amp; Development consultants to create useful, usable, high-performing applications</span>
+									<a href="https://www.infragistics.com/products/indigo-design">
+										<span class="deemphasize">Indigo.Design 비주얼 디자인, UX 프로토 타이핑, 코드 생성 및 앱 개발을 위한 통합 플랫폼</span>
 									</a>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a class="navigation__sub-menu" title="For Business Teams" href="/business-teams">Business Teams</a>
+							<a class="navigation__sub-menu" href="https://umbraco.infragistics.com/business-teams">비즈니스 팀</a>
 							<ul>
 								<li class="navigation__mobile-link">
-									<a title="For Business Teams" href="/business-teams">For Business Teams</a>
+									<a href="https://www.infragistics.com/business-teams">비즈니스 팀용</a>
 								</li>
 								<li>
-									<a title="SharePlus Enterprise" href="/products/shareplus-enterprise">
-										SharePlus Enterprise <span class="deemphasize">Mobile workspaces with business processes, collaboration, and data visualization for teams</span>
+									<a href="https://www.infragistics.com/products/shareplus-enterprise">
+										<span class="deemphasize">SharePlus Enterprise 비즈니스 프로세스, 협업 및 팀을 위한 데이터 시각화 기능을 갖춘 모바일 작업 공간</span>
 									</a>
 								</li>
 								<li>
-									<a title="ReportPlus" href="/enterprise-solutions/enterprise-mobility/reportplus">
-										ReportPlus <span class="deemphasize">Exceptional analytics on any device</span>
+									<a href="https://www.infragistics.com/enterprise-solutions/enterprise-mobility/reportplus">
+										<span class="deemphasize">ReportPlus 모든 기기에서 탁월한 분석</span>
 									</a>
 								</li>
 								<li>
-									<a title="ReportPlus Embedded" href="/products/reportplus-embedded">
-										ReportPlus Embedded <span class="deemphasize">Deliver embedded reports and dashboards in your apps</span>
+									<a href="https://www.infragistics.com/products/reportplus-embedded">
+										<span class="deemphasize">ReportPlus Embedded 앱에 내장된 보고서 및 대시보드 제공</span>
 									</a>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a class="navigation__sub-menu" title="Consulting" href="/consulting">Consulting</a>
+							<a class="navigation__sub-menu" href="https://www.infragistics.com/support">학습&amp;지원</a>
 							<ul>
-								<li class="navigation__mobile-link">
-									<a title="Consulting" href="/consulting">Consulting</a>
+								<li>
+									<a href="https://www.infragistics.com/support">도움말&amp;지원 문서</a>
 								</li>
 								<li>
-									<a title="Popular Services" href="/consulting#popular-services">Popular Services</a>
+									<a href="https://www.infragistics.com/community/blogs">블로그</a>
 								</li>
 								<li>
-									<a title="Our Process" href="/consulting/process">Our Process</a>
+									<a href="https://www.infragistics.com/community/forums">포럼</a>
 								</li>
 								<li>
-									<a title="Our Work" href="/consulting/our-work">Our Work</a>
+									<a href="https://www.infragistics.com/community/ideas">제품 아이디어</a>
 								</li>
 								<li>
-									<a title="Blog" href="/community/blogs/For-UX-Professionals/default.aspx">Blog</a>
+									<a href="https://www.infragistics.com/resources/sample-applications">참조 애플리케이션</a>
 								</li>
 								<li>
-									<a title="Contact Us" href="/consulting#contact">Contact Us</a>
+									<a href="https://www.infragistics.com/resources/case-studies">고객 사례</a>
+								</li>
+								<li>
+									<a href="https://www.infragistics.com/webinars">웹 세미나</a>
+								</li>
+								<li>
+									<a href="https://www.infragistics.com/resources/whitepapers">전자책&amp;백서</a>
+								</li>
+								<li>
+									<a href="https://www.infragistics.com/events">이벤트</a>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a class="navigation__sub-menu" title="Learn and Support" href="/support">Learn &amp; Support</a>
-							<ul>
-								<li>
-									<a title="Help and Support Documents" href="/support">Help &amp; Support Documents</a>
-								</li>
-								<li>
-									<a title="Blogs" href="/community/blogs">Blogs</a>
-								</li>
-								<li>
-									<a title="Forums" href="/community/forums">Forums</a>
-								</li>
-								<li>
-									<a title="Product Ideas" href="/community/ideas">Product Ideas</a>
-								</li>
-								<li>
-									<a title="Reference Applications" href="/resources/sample-applications">Reference Applications</a>
-								</li>
-								<li>
-									<a title="Customer Stories" href="/resources/case-studies">Customer Stories</a>
-								</li>
-								<li>
-									<a title="Webinars" href="/webinars">Webinars</a>
-								</li>
-								<li>
-									<a title="eBooks and Whitepapers" href="/resources/whitepapers">eBook &amp; Whitepapers</a>
-								</li>
-								<li>
-									<a title="Events" href="/events">Events</a>
-								</li>
-							</ul>
+							<a href="https://www.infragistics.com/free-downloads">무료 체험판</a>
 						</li>
 						<li>
-							<a title="Free Trials" href="/free-downloads">Free Trials</a>
-						</li>
-						<li>
-							<a class="navigation__sub-menu" title="Purchase and Renew" href="/how-to-buy/product-pricing">Purchase &amp; Renew</a>
+							<a class="navigation__sub-menu" href="https://www.infragistics.com/how-to-buy/product-pricing">가격 책정</a>
 							<ul>
 								<li>
-									<a title="Pricing" href="/how-to-buy/product-pricing">Product Pricing / Buy Online</a>
+									<a href="https://www.infragistics.com/how-to-buy/product-pricing">제품 가격 책정/온라인 구매</a>
 								</li>
 								<li>
-									<a title="Renew Existing License" href="/how-to-buy/renewal">Renew Existing License</a>
+									<a href="https://www.infragistics.com/how-to-buy/renewal">기존 라이선스 갱신</a>
 								</li>
 								<li>
-									<a title="Contact Us" href="/about-us/contact-us">Contact Us</a>
+									<a href="https://www.infragistics.com/about-us/contact-us">연락처</a>
 								</li>
 							</ul>
 						</li>
