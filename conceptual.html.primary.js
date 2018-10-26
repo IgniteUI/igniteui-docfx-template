@@ -15,9 +15,18 @@ exports.transform = function (model) {
     model = extension.postTransform(model);
   }
   
+  // We support English (default), Japanese and Korean. 
   model._isLangEn = true;
-  if (model._language && model._language === "ja") {
-    model._isLangEn = false;
+  model._isLangJa = false;
+  model._isLangKr = false;
+  if (model._language) {
+    if (model._language === "ja") {
+      model._isLangJa = true;
+      model._isLangEn = model._isLangKr = false;
+    } else if (model._language === "kr") {
+      model._isLangKr = true;
+      model._isLangEn = model._isLangJa = false;
+    }
   }
 
   return model;

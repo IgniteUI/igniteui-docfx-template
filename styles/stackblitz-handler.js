@@ -46,14 +46,15 @@
         });
 
         $.when.apply($, requests).done(function() {
-            
             replaceRelativeAssetsUrls(arguments[0][0].files);
-            sharedFileContent = arguments[0];
+            sharedFileContent = arguments[0][0];
             
             for(var i = 1; i < arguments.length; i++) {
                 replaceRelativeAssetsUrls(arguments[i][0].sampleFiles);
+                var url = this[i].url;
                 sampleFilesContentByUrl[url] = arguments[i][0];
             }
+
             stackblitzButtons.removeAttr("disabled");
         });
     }

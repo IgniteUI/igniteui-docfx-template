@@ -6,9 +6,13 @@ full license information.}}
         {{>partials/infranav}}
     {{/_isLangEn}}
 
-    {{^_isLangEn}}
+    {{#_isLangJa}}
         {{>partials/infranav.ja}}
-    {{/_isLangEn}}
+    {{/_isLangJa}}
+
+    {{#_isLangKr}}
+        {{>partials/infranav.kr}}
+    {{/_isLangKr}}
     <div class="container-fluid">
 
         <div class="navbar-header">
