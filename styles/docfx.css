@@ -172,7 +172,7 @@ svg:hover path {
 .theme-item:hover .theme-label,
 .theme-item:focus .theme-label
  {
-    color:#0099ff; 
+    color:#0099ff;
 }
 
 .themes-container .theme-item:last-of-type {
@@ -202,20 +202,12 @@ svg:hover path {
     height: 16px;
 }
 
-.light-theme {
-    background-image: linear-gradient(to right bottom, blue 50%, yellow 50%);
+.default-theme {
+    background-image: linear-gradient(to right bottom, #09f 50%, #e41c77 50%);
 }
 
 .dark-theme {
-    background-image: linear-gradient(to right bottom, #EDE580 50%, black 50%);
-}
-
-.light-theme2 {
-    background-image: linear-gradient(to right bottom,yellow 50%, blue 50%);
-}
-
-.dark-theme2 {
-    background-image: linear-gradient(to right bottom, black 50%, #EDE580 50%);
+    background-image: linear-gradient(to right bottom, #09f 50%, #72da67 50%);
 }
 
 .soundwave {
