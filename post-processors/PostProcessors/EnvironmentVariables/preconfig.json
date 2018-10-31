@@ -56,21 +56,21 @@
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.local",
 				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript",
 				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass",
-				"GTMContainerId": "GTM-NH6BSK9"
+				"GTMContainerId": "GTM-WLXLBZD"
 			},
 			"staging": {
 				"demosBaseUrl": "https://kr.staging.infragistics.local/angular-demos",
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.local",
 				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript",
 				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass",
-				"GTMContainerId": "GTM-TQVWRL2"
+				"GTMContainerId": "GTM-NCKNPN"
 			},
 			"production": {
 				"demosBaseUrl": "https://kr.infragistics.com/angular-demos",
 				"infragisticsBaseUrl": "https://kr.infragistics.com",
 				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript",
 				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass",
-				"GTMContainerId": "GTM-PCTMD4Q"
+				"GTMContainerId": "GTM-T65CF7"
 			}
 		}
 	},
