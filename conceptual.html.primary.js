@@ -19,13 +19,16 @@ exports.transform = function (model) {
   model._isLangEn = true;
   model._isLangJa = false;
   model._isLangKr = false;
+  model._appLang = "en";
   if (model._language) {
     if (model._language === "ja") {
       model._isLangJa = true;
       model._isLangEn = model._isLangKr = false;
+      model._appLang = "ja";
     } else if (model._language === "kr") {
       model._isLangKr = true;
       model._isLangEn = model._isLangJa = false;
+      model._appLang = "ko";
     }
   }
 
