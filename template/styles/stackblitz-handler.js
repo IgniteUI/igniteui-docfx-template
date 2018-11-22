@@ -15,6 +15,8 @@
     var isButtonClickInProgress = false;
 
     var demosBaseUrl;
+    var demosTimeStamp;
+
     var sharedFileContent;
 
 	var init = function () {
@@ -32,15 +34,24 @@
                 $button.on("click", onStackblitzButtonClicked);
             });
 
-            getFiles();
+            var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
+            // prevent caching
+            metaFileUrl += "?t=" + new Date().getTime();
+
+            $.get(metaFileUrl).done(function(response) {
+                demosTimeStamp = response.generationTimeStamp;
+                getFiles();
+            });
         }
     }
 
     var getFiles = function() {
         var sharedFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + sharedFileName;
+        sharedFileUrl = addTimeStamp(sharedFileUrl);
         var requests = [$.get(sharedFileUrl)];
         var stackblitzButtons = $("." + buttonClass);
         $.each(samplesFilesUrls, function(index, url) {
+            url = addTimeStamp(url);
             var ajax = $.get(url);
             requests.push(ajax);
         });
@@ -57,6 +68,11 @@
 
             stackblitzButtons.removeAttr("disabled");
         });
+    }
+
+    var addTimeStamp = function(url) {
+        url += "?t=" + demosTimeStamp;
+        return url;
     }
 
     var getDemoFilesFolderUrlPath = function() {
