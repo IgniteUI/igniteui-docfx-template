@@ -1,7 +1,7 @@
 (function () {
 	var buttonClass = "stackblitz-btn";
     var buttonIframeIdAttrName = "data-iframe-id";
-    var buttonDemosUrlAttrName = "data-demos-base-url";	
+    var buttonDemosUrlAttrName = "data-demos-base-url";
     var stackBlitzApiUrl = "https://run.stackblitz.com/api/angular/v1";
     var sharedFileName = "shared.json";
     var assetsFolder = "/assets/";
@@ -59,7 +59,7 @@
         $.when.apply($, requests).done(function() {
             replaceRelativeAssetsUrls(arguments[0][0].files);
             sharedFileContent = arguments[0][0];
-            
+
             for(var i = 1; i < arguments.length; i++) {
                 replaceRelativeAssetsUrls(arguments[i][0].sampleFiles);
                 var url = this[i].url;
@@ -71,7 +71,9 @@
     }
 
     var addTimeStamp = function(url) {
-        url += "?t=" + demosTimeStamp;
+        if (demosTimeStamp) {
+            url += "?t=" + demosTimeStamp;
+        }
         return url;
     }
 
@@ -89,14 +91,14 @@
         var demoFileUrl = demosBaseUrl +
             getDemoFilesFolderUrlPath().substring(0, getDemoFilesFolderUrlPath().length - 1) +
                     demoPath + ".json";
-        return demoFileUrl;
+        return addTimeStamp(demoFileUrl);
     }
 
     var onStackblitzButtonClicked = function (event) {
 		if (isButtonClickInProgress) {
 			return;
         }
-        
+
         isButtonClickInProgress = true;
         var $button = $(this);
         var sampleFileUrl = getSampleUrlByStackBlitzButton($button);
@@ -109,7 +111,7 @@
         var form = createStackblitzForm(formData);
         form.appendTo($("body"));
         form.submit();
-        form.remove();        
+        form.remove();
         isButtonClickInProgress = false;
     }
 
@@ -141,7 +143,7 @@
                 target: "_blank",
                 style: "display: none;"
         });
-        
+
         // files
         for (var i = 0; i < data.files.length; i++) {
             var fileInput = $("<input />", {
