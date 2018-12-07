@@ -51,15 +51,18 @@ var md5HashMap = {};
 
 gulp.task("bundle-and-minify", () => {
     var isDebugMode = argv.debugMode !== undefined && argv.debugMode.toLowerCase().trim() === "true";
+    var promises = [];
     bundles.forEach(bundle => {
         if (bundle.type === "JS") {
-            bundleAndMinifyJS(bundle.files, bundle.name, outputFolder, isDebugMode);
+            promises.push(bundleAndMinifyJS(bundle.files, bundle.name, outputFolder, isDebugMode));
         } else if (bundle.type === "CSS") {
-            bundleAndMinifyCSS(bundle.files, bundle.name, outputFolder, isDebugMode);
+            promises.push(bundleAndMinifyCSS(bundle.files, bundle.name, outputFolder, isDebugMode));
         }   
     });
 
-    gulp.start("generate-bundling-global-metadata");
+    return Promise.all(promises).then(function () {
+        gulp.start("generate-bundling-global-metadata");
+    });
 });
 
 gulp.task("bundle-and-minify:watch", ["bundle-and-minify", "generate-file-check-sum-map"], () => {
@@ -105,22 +108,30 @@ gulp.task("generate-bundling-global-metadata", () => {
 })
 
 function bundleAndMinifyJS(files, fileName, outputFolder, isDebugMode) {
-    return gulp.src(files, { cwd: baseFolder })
-        .pipe(concat(fileName))
-        .pipe(gulp.dest(outputFolder, { cwd: baseFolder }))
-        .pipe(isDebugMode ? util.noop() : uglify({
-            output: {
-                comments: saveLicense
-            }})
-            .on('error', util.log))
-        .pipe(gulp.dest(outputFolder, { cwd: baseFolder }));
+    return new Promise(function(resolve, reject) {
+        gulp.src(files, { cwd: baseFolder })
+            .pipe(concat(fileName))
+            .pipe(gulp.dest(outputFolder, { cwd: baseFolder }))
+            .pipe(isDebugMode ? util.noop() : uglify({
+                output: {
+                    comments: saveLicense
+                }})
+                .on('error', util.log))
+            .on('error', reject)
+            .pipe(gulp.dest(outputFolder, { cwd: baseFolder }))
+            .on('end', resolve);
+    });
 }
 
 function bundleAndMinifyCSS(files, fileName, outputFolder, isDebugMode) {
-    return gulp.src(files, { cwd: baseFolder })
-        .pipe(concat(fileName))
-        .pipe(gulp.dest(outputFolder, { cwd: baseFolder }))
-        .pipe(isDebugMode ? util.noop() : cleanCSS()
-            .on('error', util.log))
-        .pipe(gulp.dest(outputFolder, { cwd: baseFolder }));
+    return new Promise(function(resolve, reject) {
+        gulp.src(files, { cwd: baseFolder })
+            .pipe(concat(fileName))
+            .pipe(gulp.dest(outputFolder, { cwd: baseFolder }))
+            .pipe(isDebugMode ? util.noop() : cleanCSS()
+                .on('error', util.log))
+            .on('error', reject)
+            .pipe(gulp.dest(outputFolder, { cwd: baseFolder }))
+            .on('end', resolve);
+    });
 }

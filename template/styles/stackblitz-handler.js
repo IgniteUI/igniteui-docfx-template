@@ -1,6 +1,7 @@
 (function () {
 	var buttonClass = "stackblitz-btn";
     var buttonIframeIdAttrName = "data-iframe-id";
+    var buttonSampleSourceAttrName = "date-sample-src";
     var buttonDemosUrlAttrName = "data-demos-base-url";
     var stackBlitzApiUrl = "https://run.stackblitz.com/api/angular/v1";
     var sharedFileName = "shared.json";
@@ -63,6 +64,7 @@
             for(var i = 1; i < arguments.length; i++) {
                 replaceRelativeAssetsUrls(arguments[i][0].sampleFiles);
                 var url = this[i].url;
+                url = removeQueryString(url);
                 sampleFilesContentByUrl[url] = arguments[i][0];
             }
 
@@ -71,9 +73,20 @@
     }
 
     var addTimeStamp = function(url) {
-        if (demosTimeStamp) {
-            url += "?t=" + demosTimeStamp;
+        if (!demosTimeStamp) {
+            throw Error("Timestamp cannot be added.");
         }
+
+        url += "?t=" + demosTimeStamp;
+        return url;
+    }
+
+    var removeQueryString = function(url) {
+        var questionMarkIndex = url.indexOf('?');
+        if (questionMarkIndex !== -1) {
+            url = url.substring(0, questionMarkIndex);
+        }
+
         return url;
     }
 
@@ -86,12 +99,19 @@
     }
 
     var getSampleUrlByStackBlitzButton = function ($button) {
-        var iframeSrc = $("#" + $button.attr(buttonIframeIdAttrName)).attr("src");
-        var demoPath = iframeSrc.replace(demosBaseUrl, "");
+        var sampleSrc = "";
+        var buttonIframeId = $button.attr(buttonIframeIdAttrName);
+        if (buttonIframeId) {
+            sampleSrc = $("#" + buttonIframeId).attr("src");
+        } else {
+            sampleSrc = $button.attr(buttonSampleSourceAttrName);
+        }
+
+        var demoPath = sampleSrc.replace(demosBaseUrl, "");
         var demoFileUrl = demosBaseUrl +
             getDemoFilesFolderUrlPath().substring(0, getDemoFilesFolderUrlPath().length - 1) +
                     demoPath + ".json";
-        return addTimeStamp(demoFileUrl);
+        return demoFileUrl;
     }
 
     var onStackblitzButtonClicked = function (event) {
