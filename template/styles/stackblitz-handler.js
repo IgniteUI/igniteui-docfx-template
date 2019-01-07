@@ -108,6 +108,7 @@
         }
 
         var demoPath = sampleSrc.replace(demosBaseUrl, "");
+        demoPath = demoPath.substring(demoPath.lastIndexOf("/"), demoPath.length);
         var demoFileUrl = demosBaseUrl +
             getDemoFilesFolderUrlPath().substring(0, getDemoFilesFolderUrlPath().length - 1) +
                     demoPath + ".json";
