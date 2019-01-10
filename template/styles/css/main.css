@@ -558,7 +558,8 @@ table a {
   font-weight: 400; }
   .navbar .nav.navbar-nav li > a {
     -webkit-transition: all 0.25s ease-in-out;
-    transition: all 0.25s ease-in-out; }
+    transition: all 0.25s ease-in-out;
+    text-align: center; }
   .navbar .nav.navbar-nav li.active > a {
     background-color: transparent !important;
     font-weight: 500; }
@@ -593,6 +594,25 @@ table a {
               align-items: center;
       padding: 0;
       width: auto; } }
+
+@media only screen and (min-width: 768px) {
+  .navbar .navbar-flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    padding: inherit; }
+  .navbar .nav.navbar-nav.navbar-right {
+    float: none !important;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    height: 50px;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end; } }
 
 [data-theme="indigo-design"] .navbar .nav.navbar-nav li.nav__cta > a {
   background-color: #00AE88;
