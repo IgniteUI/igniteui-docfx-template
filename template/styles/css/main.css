@@ -713,10 +713,11 @@ a.disable:hover {
     -webkit-box-shadow: none;
             box-shadow: none; }
 
-.stackblitz-btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.stackblitz-btn,
+.github-btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -725,16 +726,35 @@ a.disable:hover {
   color: #fff;
   border: 0;
   text-transform: uppercase;
-  background: #0099ff;
   padding: 8px 16px;
   margin: 24px 0;
   outline-style: none;
   -webkit-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out; }
-  .stackblitz-btn:hover, .stackblitz-btn:focus {
+  .stackblitz-btn:hover, .stackblitz-btn:focus,
+  .github-btn:hover,
+  .github-btn:focus {
     color: white;
     -webkit-box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
             box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08); }
+
+.github-btn {
+  background: #ddd; }
+  .github-btn a {
+    color: #000;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .github-btn img {
+    width: 28px;
+    height: 28px;
+    margin-right: 8px; }
+
+.stackblitz-btn {
+  background: #0099ff; }
   .stackblitz-btn::before {
     content: "";
     display: inline-block;
