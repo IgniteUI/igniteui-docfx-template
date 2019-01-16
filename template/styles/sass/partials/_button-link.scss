@@ -55,8 +55,7 @@ a.disable:hover {
   }
 }
 
-.stackblitz-btn,
-.github-btn{
+.stackblitz-btn {
   display: inline-flex;
   align-items: center;
   font-size: 13px;
@@ -74,25 +73,7 @@ a.disable:hover {
     color: rgba($white, 20%);
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
   }
-}
 
-.github-btn {
-  background: #ddd;
-  a {
-    color: #000;
-    display: flex;
-    align-items: center;
-  }
-
-  img {
-    width: 28px;
-    height: 28px;
-    margin-right:8px;
-  }
-}
-
-
-.stackblitz-btn {
   background: $igblue;
   &::before {
     content: "";
@@ -114,4 +95,36 @@ a.disable:hover {
       background-image: url("../../images/stackblitz-logo-dark.svg");
     }
   }
+}
+
+
+
+.github-btn {
+
+  padding: 10px 0;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #444;
+  position: relative;
+
+  a {
+    color: #09f;
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+    width: 24px;
+    height: 24px;
+    margin:0 4px;
+  }
+}
+
+.dash-separator {
+  margin: 20px 0;
+  height: 1px;
+  width: 100%;
+  border:1px dashed #96bfca;
 }

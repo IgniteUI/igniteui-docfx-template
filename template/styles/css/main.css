@@ -713,8 +713,7 @@ a.disable:hover {
     -webkit-box-shadow: none;
             box-shadow: none; }
 
-.stackblitz-btn,
-.github-btn {
+.stackblitz-btn {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -730,31 +729,12 @@ a.disable:hover {
   margin: 24px 0;
   outline-style: none;
   -webkit-transition: all 0.25s ease-out;
-  transition: all 0.25s ease-out; }
-  .stackblitz-btn:hover, .stackblitz-btn:focus,
-  .github-btn:hover,
-  .github-btn:focus {
+  transition: all 0.25s ease-out;
+  background: #0099ff; }
+  .stackblitz-btn:hover, .stackblitz-btn:focus {
     color: white;
     -webkit-box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
             box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08); }
-
-.github-btn {
-  background: #ddd; }
-  .github-btn a {
-    color: #000;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center; }
-  .github-btn img {
-    width: 28px;
-    height: 28px;
-    margin-right: 8px; }
-
-.stackblitz-btn {
-  background: #0099ff; }
   .stackblitz-btn::before {
     content: "";
     display: inline-block;
@@ -771,6 +751,39 @@ a.disable:hover {
             box-shadow: none; }
     .stackblitz-btn[disabled]::before {
       background-image: url("../../images/stackblitz-logo-dark.svg"); }
+
+.github-btn {
+  padding: 10px 0;
+  font-size: 12px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  color: #444;
+  position: relative; }
+  .github-btn a {
+    color: #09f;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .github-btn img {
+    width: 24px;
+    height: 24px;
+    margin: 0 4px; }
+
+.dash-separator {
+  margin: 20px 0;
+  height: 1px;
+  width: 100%;
+  border: 1px dashed #96bfca; }
 
 #main {
   position: relative;
