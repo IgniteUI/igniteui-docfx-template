@@ -2,7 +2,14 @@
 
 <div class="dash-separator"></div>
 <div class="github-btn">
-    <span>View page on </span>
+    {{#_isLangEn}}
+        <span>View page on </span>
+    {{/_isLangEn}}
+
+    {{#_isLangJa}}
+        <span>View page on </span>
+    {{/_isLangJa}}
+
     <a target="_blank" href="{{_repoUrl}}{{path}}">
         <img src="{{_rel}}/styles/images/github.svg"/>
         <span>GitHub</span>
