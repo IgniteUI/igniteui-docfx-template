@@ -1001,6 +1001,9 @@ footer {
   margin: 0 auto;
   padding: 0; }
 
+.globalnav__search .search button #search {
+  display: inline-block; }
+
 @media only screen and (max-width: 768px) {
   .globalnav__search-toggle {
     right: 80px; } }
