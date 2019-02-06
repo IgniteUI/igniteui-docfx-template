@@ -1,7 +1,7 @@
 (function () {
 	var buttonClass = "stackblitz-btn";
     var buttonIframeIdAttrName = "data-iframe-id";
-    var buttonSampleSourceAttrName = "date-sample-src";
+    var buttonSampleSourceAttrName = "data-sample-src";
     var buttonDemosUrlAttrName = "data-demos-base-url";
     var stackBlitzApiUrl = "https://run.stackblitz.com/api/angular/v1";
     var sharedFileName = "shared.json";
@@ -102,7 +102,12 @@
         var sampleSrc = "";
         var buttonIframeId = $button.attr(buttonIframeIdAttrName);
         if (buttonIframeId) {
-            sampleSrc = $("#" + buttonIframeId).attr("src");
+            var iframe = $("#" + buttonIframeId);
+            if (iframe.attr("src")) {
+                sampleSrc = iframe.attr("src");
+            } else {
+                sampleSrc = iframe.attr("data-src");
+            }            
         } else {
             sampleSrc = $button.attr(buttonSampleSourceAttrName);
         }
