@@ -1,4 +1,4 @@
-<header id="header" class="globalnav" data-nav-auto-init="true">
+<header id="header" class="globalnav" data-nav-auto-init="false">
 	<section id="header-wrap" class="globalnav__container" data-default-height="175" data-sticky-height="175">
 		<!-- CSE Container -->
 		<div class="globalnav__search">
