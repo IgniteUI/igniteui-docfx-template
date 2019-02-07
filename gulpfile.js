@@ -31,7 +31,9 @@ const bundles = [
             "igviewer.renderingService.js",
             "nav-init.js",
             "stackblitz-handler.js",
-            "lazyload.js"
+            "lazyload.js",
+            "lazysizes.js",
+            "lazysizes-handler.js"
         ],
         checksumMetadataKey: "_scriptsBundleChecksum"
     },
