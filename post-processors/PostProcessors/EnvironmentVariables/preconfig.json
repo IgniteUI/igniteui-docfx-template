@@ -8,22 +8,22 @@
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
 				"infragisticsBaseUrl": "https://staging.infragistics.local",
-				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript/latest",
+				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass/latest",
 				"GTMContainerId": "GTM-WLXLBZD"
 			},
 			"staging": {
 				"demosBaseUrl": "https://staging.infragistics.local/angular-demos",
 				"infragisticsBaseUrl": "https://staging.infragistics.local",
-				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript/latest",
+				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass/latest",
 				"GTMContainerId": "GTM-NCKNPN"
 			},
 			"production": {
 				"demosBaseUrl": "https://www.infragistics.com/angular-demos",
 				"infragisticsBaseUrl": "https://www.infragistics.com",
-				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
+				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
 				"GTMContainerId": "GTM-T65CF7"
 			}
 		},
@@ -31,22 +31,22 @@
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
 				"infragisticsBaseUrl": "https://jp.staging.infragistics.local",
-				"angularApiUrl": "https://jp.staging.infragistics.local/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://jp.staging.infragistics.local/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://jp.staging.infragistics.local/products/ignite-ui-angular/docs/typescript/latest",
+				"sassApiUrl": "https://jp.staging.infragistics.local/products/ignite-ui-angular/docs/sass/latest",
 				"GTMContainerId": "GTM-NNHVMC7"
 			},
 			"staging": {
 				"demosBaseUrl": "https://jp.staging.infragistics.local/angular-demos",
 				"infragisticsBaseUrl": "https://jp.staging.infragistics.local",
-				"angularApiUrl": "https://jp.staging.infragistics.local/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://jp.staging.infragistics.local/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://jp.staging.infragistics.local/products/ignite-ui-angular/docs/typescript/latest",
+				"sassApiUrl": "https://jp.staging.infragistics.local/products/ignite-ui-angular/docs/sass/latest",
 				"GTMContainerId": "GTM-WLWSDK"
 			},
 			"production": {
 				"demosBaseUrl": "https://jp.infragistics.com/angular-demos",
 				"infragisticsBaseUrl": "https://jp.infragistics.com",
-				"angularApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
+				"sassApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
 				"GTMContainerId": "GTM-KVNSWJ"
 			}
 		},
@@ -54,22 +54,22 @@
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.local",
-				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript/latest",
+				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass/latest",
 				"GTMContainerId": "GTM-WLXLBZD"
 			},
 			"staging": {
 				"demosBaseUrl": "https://kr.staging.infragistics.local/angular-demos",
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.local",
-				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/typescript/latest",
+				"sassApiUrl": "https://staging.infragistics.local/products/ignite-ui-angular/docs/sass/latest",
 				"GTMContainerId": "GTM-NCKNPN"
 			},
 			"production": {
 				"demosBaseUrl": "https://kr.infragistics.com/angular-demos",
 				"infragisticsBaseUrl": "https://kr.infragistics.com",
-				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript",
-				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass",
+				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
+				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
 				"GTMContainerId": "GTM-T65CF7"
 			}
 		}
