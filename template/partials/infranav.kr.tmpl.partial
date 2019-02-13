@@ -72,10 +72,13 @@
 									</a>
 								</li>
 								<li>
-									<a href="https://www.infragistics.com/products/indigo-design">Indigo.Design 비주얼 디자인, UX 프로토 타이핑, 코드 생성 및 앱 개발을 위한 통합 플랫폼</a>
+									<a data-id="25317" href="/products/wpf">Ultimate UI for WPF UI 컨트롤 및 생산성 도구</a>
 								</li>
 								<li>
 									<a data-id="26052" href="/products/ignite-ui-angular">Ignite UI for Angular Google의 Angular 프레임워크를 기반으로 설계되고 구축된 50종류 이상의 머티리얼 베이스의 UI 컴포넌트</a>
+								</li>
+								<li>
+									<a href="https://www.infragistics.com/products/indigo-design">Indigo.Design 비주얼 디자인, UX 프로토 타이핑, 코드 생성 및 앱 개발을 위한 통합 플랫폼</a>
 								</li>
 								<li>
 									<a href="https://www.infragistics.com/products/ignite-ui">Ignite UI for JavaScriptReact, Angular, ASP.NET MVC용 확장 기능이 포함된 100종류 이상의 HTML5/JavaScript jQuery 컴포넌트</a>
@@ -85,9 +88,6 @@
 								</li>
 								<li>
 									<a href="https://www.infragistics.com/products/windows-forms">Ultimate UI for Windows Forms 100종류 이상의 기능의 Microsoft Office 스타일 UI 컨트롤</a>
-								</li>
-								<li>
-									<a data-id="25317" href="/products/wpf">Ultimate UI for WPF UI 컨트롤 및 생산성 도구</a>
 								</li>
 								<li>
 									<a href="https://www.infragistics.com/products/xamarin">Ultimate UI for Xamarin UI 컨트롤 및 생산성 도구</a>
@@ -122,7 +122,7 @@
 							</ul>
 						</li>
 						<li>
-							<a class="navigation__sub-menu" href="https://umbraco.infragistics.com/business-teams">비즈니스 팀</a>
+							<a class="navigation__sub-menu" href="https://www.infragistics.com/business-teams">비즈니스 팀</a>
 							<ul>
 								<li class="navigation__mobile-link">
 									<a href="https://www.infragistics.com/business-teams">비즈니스 팀용</a>

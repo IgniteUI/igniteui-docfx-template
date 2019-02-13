@@ -70,18 +70,23 @@
 									</a>
 								</li>
 								<li>
+									<a data-id="24095" title="Indigo.Design" href="/products/indigo-design">
+										Indigo.Design <span class="deemphasize">3ステップでデザインから画面コードを生成できるアプリケーションデザインプラットフォーム</span>
+								    </a>
+								</li>
+								<li>
 									<a title="Angular" data-id="23639" href="/products/ignite-ui-angular">
-										Ignite UI for Angular&nbsp;<span class="deemphasize">Angular 対応コントロール</span>
+										Ignite UI for Angular <span class="deemphasize">Angular 対応コントロール</span>
 									</a>
 								</li>
 								<li>
 									<a title="jQuery/HTML 5" data-id="12446" href="/products/ignite-ui">
-										Ignite UI for JavaScript&nbsp;<span class="deemphasize">Javascript/ HTML5、ASP.NET MVC 対応コントロール</span>
+										Ignite UI for JavaScript <span class="deemphasize">Javascript/ HTML5、ASP.NET MVC 対応コントロール</span>
 									</a>
 								</li>
 								<li>
 									<a title="Xamarin" data-id="14348" href="/products/xamarin">
-										Xamarin&nbsp;<span class="deemphasize">クロスプラットフォーム モバイル コントロール</span>
+										Xamarin <span class="deemphasize">クロスプラットフォーム モバイル コントロール</span>
 									</a>
 								</li>
 								<li>
@@ -100,27 +105,22 @@
 									</a>
 								</li>
 								<li>
-									<a title="NucliOS" data-id="12414" href="/products/ios">
-										iOS <span class="deemphasize">iOS 対応モバイル コントロール</span>
-									</a>
-								</li>
-								<li>
-									<a title="Android UI" data-id="12455" href="/products/android">
-										Android <span class="deemphasize">Android 対応モバイル コントロール</span>
-									</a>
-								</li>
-								<li>
 									<a title="全ての製品" data-id="20939" href="/products/all">全ての開発ツール製品</a>
 								</li>
 								<!--<li><a href="https://www.infragistics.com/products/universal-windows-platform" title="Universal Windows Platform">UWP <span class="deemphasize">モバイル コントロール</span></a></li>-->
 							</ul>
 						</li>
 						<li>
-							<a title="UX プロトタイピング" data-id="12465" href="/products/indigo-studio">UX</a>
+							<a title="UX プロトタイピング" data-id="12465" href="/products/indigo-design">UX</a>
 							<ul>
 								<li>
-									<a title="Indigo Studio" data-id="12465" href="/products/indigo-studio">
-										Indigo Studio <span class="deemphasize">プロトタイプの迅速な構築、コラボレーションの実現、ユーザビリティ テストの実施を可能にする UX デザイン ツール</span>
+									<a title="Indigo.Design" data-id="24095" href="/products/indigo-design">
+										Indigo.Design <span class="deemphasize">3ステップでデザインから画面コードを生成できるアプリケーションデザインプラットフォーム</span>
+									</a>
+								</li>
+								<li>
+									<a title="Indigo.Design Desktop" data-id="24143" href="/products/indigo-design/desktop">
+										Indigo.Design Desktop <span class="deemphasize">プロトタイプの迅速な構築、コラボレーションの実現、ユーザビリティ テストの実施を可能にする UX デザイン ツール</span>
 									</a>
 								</li>
 							</ul>
@@ -162,7 +162,7 @@
 									<a title="お客様導入事例" data-id="23364" href="/resources/case-studies">お客様導入事例</a>
 								</li>
 								<li>
-									<a title="ブログ" href="http://blogs.jp.infragistics.com/blogs/">Blog</a>
+									<a title="ブログ" href="https://blogs.jp.infragistics.com/blogs/">Blog</a>
 								</li>
 							</ul>
 						</li>
@@ -208,10 +208,5 @@
 		</section>
 		<!-- SECONDARY NAV -->
 
-		<div class="ui-announcement text--align-center" style="background: #731963; color: #fff; padding: 10px; font-size: 16px; display: none; font-weight: Bold; position: relative; z-index: -1;">
-			<div class="be-row be-wrap">
-				<a title="Indigo.Design" style="color: #fff; font-weight: Bold; text-decoration: underline;" data-id="24095" href="/products/indigo-design">3ステップで画面デザインに忠実なアプリケーションを構築できるIndigo.Design登場!</a>
-			</div>
-		</div>
 	</section>
 </header>
