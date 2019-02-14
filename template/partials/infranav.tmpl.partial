@@ -64,7 +64,7 @@
 							</ul>
 						</li>
 						<li>
-							<a class="navigation__sub-menu" title="For Developers" href="/products/ultimate">Developers</a>
+							<a class="navigation__sub-menu" title="For Developers" href="/products/ultimate">Design &amp; Developers</a>
 							<ul class="navigation_sub-menu-featured">
 								<li>
 									<a class="navigation__callout-link" title="Infragistics Ultimate" href="/products/ultimate">
@@ -73,13 +73,23 @@
 									</a>
 								</li>
 								<li>
+									<a title="Indigo.Design" href="/products/indigo-design">
+										Indigo.Design <span class="deemphasize">A Unified Platform for Visual Design, UX Prototyping, Code Generation, and App Development</span>
+									</a>
+								</li>
+								<li>
 									<a title="IgniteUI: Angular" href="/products/ignite-ui-angular">
 										Ignite UI for Angular <span class="deemphasize">50+ Material-based UI components designed and built on Google’s Angular framework</span>
 									</a>
 								</li>
 								<li>
+									<a title="IgniteUI: React" href="/products/ignite-ui-react">
+										Ignite UI for React <span class="deemphasize">Features our high-performance data grid and real-time high-volume data charts</span>
+									</a>
+								</li>
+								<li>
 									<a title="IgniteUI: JavaScript / HTML 5" href="/products/ignite-ui">
-										Ignite UI for JavaScript<span class="deemphasize">100+ HTML5 / JavaScript jQuery components with extensions for React, Angular &amp; ASP.NET MVC</span>
+										Ignite UI for JavaScript<span class="deemphasize">100+ HTML5 / JavaScript jQuery components with extensions for React, Angular & ASP.NET MVC</span>
 									</a>
 								</li>
 								<li>
@@ -99,12 +109,7 @@
 								</li>
 								<li>
 									<a title="Xamarin" href="/products/xamarin">
-										Ultimate UI for Xamarin&nbsp;<span class="deemphasize">UI controls &amp; productivity tools</span>
-									</a>
-								</li>
-								<li>
-									<a title="ReportPlus Embedded SDK" href="/products/reportplus-embedded/sdk">
-										ReportPlus Embedded SDK <span class="deemphasize">Tools to embed reports and dashboards in your apps</span>
+										Ultimate UI for Xamarin <span class="deemphasize">UI controls &amp; productivity tools</span>
 									</a>
 								</li>
 								<li>
@@ -119,16 +124,16 @@
 							</ul>
 						</li>
 						<li>
-							<a class="navigation__sub-menu" title="UX" href="/products/indigo-studio">UX</a>
+							<a class="navigation__sub-menu" title="UX" href="/products/indigo-design/desktop">UX</a>
 							<ul>
 								<li>
-									<a title="Indigo Studio" href="/products/indigo-studio">
-										Indigo Studio <span class="deemphasize">Collaborative prototyping and remote usability testing for UX &amp; usability professionals</span>
+									<a title="Indigo.Design Desktop" href="/products/indigo-design/desktop">
+										Indigo.Design Desktop <span class="deemphasize">Collaborative prototyping and remote usability testing for UX & usability professionals</span>
 									</a>
 								</li>
 								<li>
-									<a title="UX Consulting" href="/consulting">
-										UX Consulting <span class="deemphasize">Partner with our UX &amp; Development consultants to create useful, usable, high-performing applications</span>
+									<a title="Indigo.Design" href="/products/indigo-design">
+										Indigo.Design <span class="deemphasize">A Unified Platform for Visual Design, UX Prototyping, Code Generation, and App Development</span>
 									</a>
 								</li>
 							</ul>
@@ -153,29 +158,6 @@
 									<a title="ReportPlus Embedded" href="/products/reportplus-embedded">
 										ReportPlus Embedded <span class="deemphasize">Deliver embedded reports and dashboards in your apps</span>
 									</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a class="navigation__sub-menu" title="Consulting" href="/consulting">Consulting</a>
-							<ul>
-								<li class="navigation__mobile-link">
-									<a title="Consulting" href="/consulting">Consulting</a>
-								</li>
-								<li>
-									<a title="Popular Services" href="/consulting#popular-services">Popular Services</a>
-								</li>
-								<li>
-									<a title="Our Process" href="/consulting/process">Our Process</a>
-								</li>
-								<li>
-									<a title="Our Work" href="/consulting/our-work">Our Work</a>
-								</li>
-								<li>
-									<a title="Blog" href="/community/blogs/For-UX-Professionals/default.aspx">Blog</a>
-								</li>
-								<li>
-									<a title="Contact Us" href="/consulting#contact">Contact Us</a>
 								</li>
 							</ul>
 						</li>
@@ -215,7 +197,7 @@
 							<a title="Free Trials" href="/free-downloads">Free Trials</a>
 						</li>
 						<li>
-							<a class="navigation__sub-menu" title="Purchase and Renew" href="/how-to-buy/product-pricing">Purchase &amp; Renew</a>
+							<a class="navigation__sub-menu" title="Pricing" href="/how-to-buy/product-pricing">Pricing</a>
 							<ul>
 								<li>
 									<a title="Pricing" href="/how-to-buy/product-pricing">Product Pricing / Buy Online</a>

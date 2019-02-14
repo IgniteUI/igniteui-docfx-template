@@ -42,7 +42,7 @@
 								<a data-id="12487" href="/products/ultimate" title="Ultimate" class="menu__link">開発ツール</a>
 							</li>
 							<li>
-								<a data-id="12465" href="/products/indigo-studio" title="Indigo Studio" class="menu__link">UX デザイン</a>
+								<a data-id="24143" href="/products/indigo-design/desktop" title="Indigo Deisgn" class="menu__link">UX デザイン</a>
 							</li>
 							<li>
 								<a data-id="12494" href="/enterprise-solutions/enterprise-mobility" title="エンタープライズ モビリティ" class="menu__link">ビジネス ユーザー向け</a>
@@ -51,7 +51,7 @@
 								<a href="/products/ultimate/download" class="menu__link">無料トライアル</a>
 							</li>
 							<li>
-								<a href="/how-to-buy/devtools-pricing" class="menu__link">製品価格</a>
+								<a href="/how-to-buy/product-pricing" class="menu__link">製品価格</a>
 							</li>
 						</ul>
 					</li>
@@ -129,7 +129,7 @@
 								<a data-id="12408" href="/about-us/contact-us" title="Contact Us" class="menu__link">お問い合わせ</a>
 							</li>
 							<li>
-								<a data-id="12373" href="/about-us/career-opportunities" title="採用情報" class="menu__link">採用情報</a>
+								<a data-id="12373" href="/about-us/careers" title="採用情報" class="menu__link">採用情報</a>
 							</li>
 							<li>
 								<a data-id="12372" href="/about-us/management-team" title="Management Team" class="menu__link">マネージメント チーム</a>
