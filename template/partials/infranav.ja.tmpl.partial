@@ -31,6 +31,7 @@
 				<!-- Brand -->
 				<div class="globalnav__brand">
 					<a href="/">
+						<!--<span class="hidden--visual">Infragistics</span>-->
 						<img class="globalnav__logo" src="https://static.infragistics.com/marketing/Website/General/Infragistics-horizontal.svg" alt="">
 							<img class="globalnav__logo_abbr" src="https://static.infragistics.com/marketing/Website/General/IG-icon.svg" alt=""> </a>
 				</div>
