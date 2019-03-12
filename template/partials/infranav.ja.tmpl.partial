@@ -31,8 +31,9 @@
 				<!-- Brand -->
 				<div class="globalnav__brand">
 					<a href="/">
-						<img class="globalnav__logo" src="/media/441501/horz_logo.png" alt="Infragistics">
-							<img class="globalnav__logo_abbr" src="/media/441663/infragistics-logo-small-no-text.jpg" alt="Infragistics"> </a>
+						<!--<span class="hidden--visual">Infragistics</span>-->
+						<img class="globalnav__logo" src="https://static.infragistics.com/marketing/Website/General/Infragistics-horizontal.svg" alt="">
+							<img class="globalnav__logo_abbr" src="https://static.infragistics.com/marketing/Website/General/IG-icon.svg" alt=""> </a>
 				</div>
 				<!-- Mobile Menu Toggle -->
 				<div class="globalnav__mobile-menu">
