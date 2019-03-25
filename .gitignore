@@ -65,5 +65,5 @@ typings/
 /post-processors/packages/
 /post-processors/PostProcessors/bin/
 /post-processors/PostProcessors/obj/
-/plugins/*
-!/plugins/PostProcessors.dll
+/template/plugins/*
+!/template/plugins/PostProcessors.dll

@@ -1,4 +1,0 @@
-<div id="footer-container">
-    {{{_appFooter}}} {{^_appFooter}} {{#_isLangEn}} {{>partials/infrafoot}} {{/_isLangEn}} {{^_isLangEn}} {{>partials/infrafoot.ja}}
-    {{/_isLangEn}}
-</div>
