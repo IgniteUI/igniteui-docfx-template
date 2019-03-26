@@ -1135,7 +1135,7 @@ $(document).ready(function () {
   }
 
   var contentOffset = $("#_content").offset().top;
-  let pageLanguage = $(document.body).data("lang");
+  var pageLanguage = $(document.body).data("lang");
   if (!pageLanguage) {
     pageLanguage = "en";
   }
