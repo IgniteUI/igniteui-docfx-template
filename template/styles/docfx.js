@@ -1078,7 +1078,7 @@ function closeContainer() {
 
 function handleThemeSelection(theme, item) {
   if (theme) {
-    var homePathName = "/components/grids_and_lists.html";
+    var homePathName = "/components/general/getting_started.html";
     if (window.location.pathname !== homePathName) {
       postMessage(theme);
     }
@@ -1107,15 +1107,15 @@ function handleThemeSelection(theme, item) {
   }
   
   function selectTheme(el) {
-    var oldSelection = document.getElementsByClassName("selected");
+    var oldSelection = document.getElementsByClassName("theme-item--active");
     if (oldSelection.length > 0) {
-      oldSelection[0].classList.remove("selected");
+      oldSelection[0].classList.remove("theme-item--active");
     }
-    el.classList.add("selected");
+    el.classList.add("theme-item--active");
   }
   
   function swapItems(newItem) {
-    var selectedItem = document.getElementsByClassName("selected")[0];
+    var selectedItem = document.getElementsByClassName("theme-item--active")[0];
     var labelToSwap = newItem.lastElementChild.textContent;
   
     newItem.setAttribute("data-theme", selectedItem.getAttribute("data-theme"));
@@ -1129,7 +1129,7 @@ function handleThemeSelection(theme, item) {
 }
 
 $(document).ready(function () {
-  var homePathName = "/components/grids_and_lists.html";
+  var homePathName = "/components/general/getting_started.html";
   if (window.location.pathname === homePathName) {
     $(".themes-container").css("display", "none");
   }

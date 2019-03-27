@@ -147,115 +147,125 @@ svg:hover path {
     max-height: 200px;
 }
 
+  
+.theme-item-label {
+    margin-right:10px;
+}
+
+.theme-switch__colors {
+    position:relative;
+    width:40px;
+    height: 20px;
+}
+
+.theme-item:hover {
+    color: #333;
+}
+  
+.theme-item.theme-item--active {
+    color:#333;
+    font-weight: bold;
+}
+
+.theme-switch__color{
+    position: absolute;
+    border-radius:50%;
+}
+
+/* Colors */
+.theme-switch__color--primary{
+    width: 20px;
+    height: 20px;
+    left: 0;
+    top:0;
+    z-index:1;
+}
+
+.theme-switch__color--secondary{
+    width:17px;
+    height:17px;
+    right:10px;
+    bottom:0;
+}
+
+.dark-theme__color--primary {
+    background: #FFA439;
+}
+
+.dark-theme__color--secondary {
+    background:  #09f;
+}
+
+.default-theme__color--primary {
+    background: #09f;
+}
+
+.default-theme__color--secondary {
+    background: #e41c77;
+}
+
+.theme-switch__more {
+    height:20px;
+    display: none;
+}
+
+.theme-switch__drop-down {
+    display: none;
+    flex-wrap: wrap;
+    position:absolute;
+    white-space:nowrap;
+    right:0;
+    top: calc(100% - 6px);
+    padding:20px 20px 5px 20px;
+    background:#fff;
+    border:1px solid #ddd;
+}
+
+.theme-switch__drop-down .theme-item {
+    margin-bottom:15px;
+}
+
+.theme-switch__more {
+    cursor:pointer; 
+}
+
+.theme-switch__more:hover .theme-switch__drop-down {
+    display: flex;
+}
+
 .themes-main-container {
     position: relative;
     float: right;
 }
 
 .themes-container {
-    display: flex
+    display:inline-flex;
+    align-items:center;
+    padding: 5px;
+    position:relative;
+    height:30px;
+}
+
+.theme-item:hover {
+    color: #333;
 }
 
 .theme-item {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 16px;
     cursor: pointer;
     padding: 3px 5px;
-}
-
-.toggle .theme-item {
-    margin-right: 0;
-}
-
-.theme-item:hover .theme-label,
-.theme-item:focus .theme-label
- {
-    color:#0099ff; 
+    height:20px;
+    box-sizing: border-box;
+    margin-right: 16px;
+    font-size: 0.8rem;
+    color: #999;
 }
 
 .themes-container .theme-item:last-of-type {
     margin-right: 0;
-}
-
-.theme-label {
-    font-size: 0.8rem;
-    white-space: nowrap;
-    margin-left: 8px;
-}
-
-.themes-items-container {
-    display: inline-grid;
-    grid-template-columns: repeat(3, 1fr);
-    padding: 15px;
-    grid-row-gap: 6px;
-    grid-column-gap: 12px;
-}
-
-.selected {
-    font-weight: bold;
-}
-
-.theme-button {
-    min-width: 34px;
-    height: 16px;
-}
-
-.light-theme {
-    background-image: linear-gradient(to right bottom, blue 50%, yellow 50%);
-}
-
-.dark-theme {
-    background-image: linear-gradient(to right bottom, #EDE580 50%, black 50%);
-}
-
-.light-theme2 {
-    background-image: linear-gradient(to right bottom,yellow 50%, blue 50%);
-}
-
-.dark-theme2 {
-    background-image: linear-gradient(to right bottom, black 50%, #EDE580 50%);
-}
-
-.soundwave {
-    background-image: linear-gradient(to right bottom, pink 50%, lightblue 50%);
-}
-
-.bumblebee {
-    background-image: linear-gradient(to right bottom, #D35269 50%, lightblue 50%);
-}
-
-.soundwave2 {
-    background-image: linear-gradient(to right bottom, lightblue 50%,  pink 50%);
-}
-
-.bumblebee2 {
-    background-image: linear-gradient(to right bottom, lightblue 50%, #D35269 50%);
-}
-
-.more-themes{
-    font-weight: bold;
-    font-size: 20px;
-    cursor: pointer;
-    fill:#333;
-}
-
-.more-themes:hover {
-    fill:#0099ff;
-}
-
-.toggle {
-    display: none;
-    position: absolute;
-    background-color: white;
-    box-shadow: 4px 6px 13px 4px #aaaa;
-    overflow: auto;
-    right: 0;
-    z-index: 1;
-    width: fit-content;
-    outline: none;
-    top: calc(100% + 10px);
 }
 
 @media (min-width: 992px) {
