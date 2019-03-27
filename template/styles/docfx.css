@@ -241,11 +241,6 @@ svg:hover path {
     display: flex;
 }
 
-.themes-main-container {
-    position: relative;
-    float: right;
-}
-
 .themes-container {
     display:inline-flex;
     align-items:center;
@@ -262,12 +257,9 @@ svg:hover path {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-right: 16px;
     cursor: pointer;
-    padding: 3px 5px;
     height:20px;
     box-sizing: border-box;
-    margin-right: 16px;
     font-size: 0.8rem;
     color: #999;
 }
