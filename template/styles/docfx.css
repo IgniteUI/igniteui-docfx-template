@@ -225,6 +225,14 @@ svg:hover path {
     margin-bottom:15px;
 }
 
+.default-theme {
+    background-image: linear-gradient(to right bottom, #09f 50%, #e41c77 50%);
+}
+
+.dark-theme {
+    background-image: linear-gradient(to right bottom, #09f 50%, #72da67 50%);
+}
+
 .theme-switch__more {
     cursor:pointer; 
 }

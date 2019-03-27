@@ -584,7 +584,7 @@ $(function () {
             .removeClass(hide);
           return;
         }
-        
+
         // Get leaf nodes
         $("#toc li>a")
           .filter(function (i, e) {
@@ -666,7 +666,7 @@ $(function () {
             header = null;
             children = [];
           }
-          
+
           header = listItem;
         } else if (header) {
           children.push(listItem);
@@ -680,7 +680,7 @@ $(function () {
         });
       }
 
-      toggleHeadersHideClass(headers);      
+      toggleHeadersHideClass(headers);
     }
 
     function toggleHeadersHideClass(headers) {
@@ -1061,14 +1061,6 @@ function updateUrl(target) {
   history.pushState({}, "", window.location.href.split("#")[0] + target);
 }
 
-function openContainer() {
-  if ($(".toggle").is(":hidden")) {
-    $(".toggle").slideToggle(200, function() {
-      this.style.display = "block";
-      this.focus();
-    });
-  }
-}
 
 function closeContainer() {
   if ($(".toggle").is(":visible")) {
@@ -1089,7 +1081,7 @@ function handleThemeSelection(theme, item) {
     $.each(visibleItems, function(i, el) {
       visibleThemes.push(el.getAttribute("data-theme"));
     })
-    
+
     if (visibleThemes.indexOf(theme) !== -1) {
       selectTheme(themeItem);
     } else {
@@ -1105,7 +1097,7 @@ function handleThemeSelection(theme, item) {
     window.localStorage.setItem('theme', theme);
     iframeWindow.postMessage(data, targetOrigin);
   }
-  
+
   function selectTheme(el) {
     var oldSelection = document.getElementsByClassName("theme-item--active");
     if (oldSelection.length > 0) {
@@ -1113,18 +1105,18 @@ function handleThemeSelection(theme, item) {
     }
     el.classList.add("theme-item--active");
   }
-  
+
   function swapItems(newItem) {
     var selectedItem = document.getElementsByClassName("theme-item--active")[0];
     var labelToSwap = newItem.lastElementChild.textContent;
-  
+
     newItem.setAttribute("data-theme", selectedItem.getAttribute("data-theme"));
     newItem.firstElementChild.className = "theme-button " + selectedItem.getAttribute("data-theme");
     newItem.lastElementChild.textContent = selectedItem.lastElementChild.textContent;
-  
+
     selectedItem.setAttribute("data-theme", theme);
     selectedItem.firstElementChild.className = "theme-button " + theme;
-    selectedItem.lastElementChild.textContent = labelToSwap;	
+    selectedItem.lastElementChild.textContent = labelToSwap;
   }
 }
 
