@@ -244,10 +244,21 @@ svg:hover path {
 
 .themes-container {
     display:inline-flex;
+    flex-wrap: wrap;
     align-items:center;
     padding: 5px;
     position:relative;
-    height:30px;
+}
+
+.themes-container > div:first-child {
+    flex: 0 1 100%;
+}
+
+.themes-container > div > h5 {
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .theme-item:hover {

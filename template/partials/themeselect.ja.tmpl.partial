@@ -1,4 +1,8 @@
    <div class="themes-container">
+        <div>
+            <h5>Theming</h5>
+        </div>
+
         <div class="theme-item theme-item--active" data-theme="default-theme">
             <div class="theme-switch__colors">
                 <span class="theme-switch__color theme-switch__color--primary default-theme__color--primary"></span>
