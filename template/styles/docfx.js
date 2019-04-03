@@ -7,7 +7,9 @@ $(function () {
   var show = "show";
   var hide = "hide";
   var util = new utility();
+  var theme = window.localStorage.getItem("theme");
 
+  handleThemeSelection(theme);
   highlight();
   enableSearch();
 
@@ -582,7 +584,7 @@ $(function () {
             .removeClass(hide);
           return;
         }
-        
+
         // Get leaf nodes
         $("#toc li>a")
           .filter(function (i, e) {
@@ -664,7 +666,7 @@ $(function () {
             header = null;
             children = [];
           }
-          
+
           header = listItem;
         } else if (header) {
           children.push(listItem);
@@ -678,7 +680,7 @@ $(function () {
         });
       }
 
-      toggleHeadersHideClass(headers);      
+      toggleHeadersHideClass(headers);
     }
 
     function toggleHeadersHideClass(headers) {
@@ -1059,12 +1061,84 @@ function updateUrl(target) {
   history.pushState({}, "", window.location.href.split("#")[0] + target);
 }
 
+
+function closeContainer() {
+  if ($(".toggle").is(":visible")) {
+    $(".toggle").slideToggle(200);
+  }
+}
+
+function handleThemeSelection(theme, item) {
+  if (theme) {
+    var homePathName = "/components/general/getting_started.html";
+    if (window.location.pathname !== homePathName) {
+      postMessage(theme);
+    }
+    var visibleItems = $(".theme-item:lt(2)");
+    var visibleThemes = [];
+    var themeItem = item ? item : $(".theme-item").filter("[data-theme=" + theme + "]")[0];
+
+    $.each(visibleItems, function(i, el) {
+      visibleThemes.push(el.getAttribute("data-theme"));
+    })
+
+    if (visibleThemes.indexOf(theme) !== -1) {
+      selectTheme(themeItem);
+    } else {
+      swapItems(themeItem);
+      closeContainer();
+    }
+  }
+
+  function postMessage(theme) {
+    var targetOrigin = document.body.getAttribute("data-demos-base-url");
+    var iframeWindow = document.querySelector("iframe").contentWindow;
+    var data = {theme: theme, origin: window.origin};
+    window.localStorage.setItem('theme', theme);
+    iframeWindow.postMessage(data, targetOrigin);
+  }
+
+  function selectTheme(el) {
+    var oldSelection = document.getElementsByClassName("theme-item--active");
+    if (oldSelection.length > 0) {
+      oldSelection[0].classList.remove("theme-item--active");
+    }
+    el.classList.add("theme-item--active");
+  }
+
+  function swapItems(newItem) {
+    var selectedItem = document.getElementsByClassName("theme-item--active")[0];
+    var labelToSwap = newItem.lastElementChild.textContent;
+
+    newItem.setAttribute("data-theme", selectedItem.getAttribute("data-theme"));
+    newItem.firstElementChild.className = "theme-button " + selectedItem.getAttribute("data-theme");
+    newItem.lastElementChild.textContent = selectedItem.lastElementChild.textContent;
+
+    selectedItem.setAttribute("data-theme", theme);
+    selectedItem.firstElementChild.className = "theme-button " + theme;
+    selectedItem.lastElementChild.textContent = labelToSwap;
+  }
+}
+
 $(document).ready(function () {
+  var homePathName = "/components/general/getting_started.html";
+  if (window.location.pathname === homePathName) {
+    $(".themes-container").css("display", "none");
+  }
+
   var contentOffset = $("#_content").offset().top;
   var pageLanguage = $(document.body).data("lang");
   if (!pageLanguage) {
     pageLanguage = "en";
   }
+
+  $(".theme-item").on("click", function(e) {
+    if(e.currentTarget.lastElementChild.tagName === "svg") {
+      return;
+    }
+    theme = this.getAttribute("data-theme");
+    handleThemeSelection(theme, this);
+  })
 
   $(".anchorjs-link").on("click", function (e) {
     var hashLocation = $(this).attr("href");
@@ -1086,7 +1160,14 @@ $(document).ready(function () {
     return false;
   });
 
-  var resourcesBaseUrl = $("body").attr("data-docfx-rel") + "resources";
+  var resourcesBaseUrl = "";
+  try {
+    var docfxjsSrc = $("script[src$='styles/docfx.js']")[0].src;
+    resourcesBaseUrl = docfxjsSrc.replace("styles/docfx.js", "resources");
+  } catch (err) {
+    console.log("Cannot load resources: " + err.message);
+  }
+
   $("[data-localize]").localize("resources", {
     pathPrefix: resourcesBaseUrl,
     language: pageLanguage

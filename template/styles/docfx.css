@@ -147,6 +147,139 @@ svg:hover path {
     max-height: 200px;
 }
 
+  
+.theme-item-label {
+    margin-right:10px;
+}
+
+.theme-switch__colors {
+    position:relative;
+    width:40px;
+    height: 20px;
+    margin-right: -4px;
+}
+
+.theme-item:hover {
+    color: #333;
+}
+  
+.theme-item.theme-item--active {
+    color:#333;
+    font-weight: bold;
+}
+
+.theme-switch__color{
+    position: absolute;
+    border-radius:50%;
+}
+
+/* Colors */
+.theme-switch__color--primary{
+    width: 20px;
+    height: 20px;
+    left: 0;
+    top:0;
+    z-index:1;
+}
+
+.theme-switch__color--secondary{
+    width:17px;
+    height:17px;
+    right:10px;
+    bottom:0;
+}
+
+.dark-theme__color--primary {
+    background: #09f;;
+}
+
+.dark-theme__color--secondary {
+    background:  #72da67;
+}
+
+.default-theme__color--primary {
+    background: #09f;
+}
+
+.default-theme__color--secondary {
+    background: #e41c77;
+}
+
+.theme-switch__more {
+    height:20px;
+    display: none;
+}
+
+.theme-switch__drop-down {
+    display: none;
+    flex-wrap: wrap;
+    position:absolute;
+    white-space:nowrap;
+    right:0;
+    top: calc(100% - 6px);
+    padding:20px 20px 5px 20px;
+    background:#fff;
+    border:1px solid #ddd;
+}
+
+.theme-switch__drop-down .theme-item {
+    margin-bottom:15px;
+}
+
+.default-theme {
+    background-image: linear-gradient(to right bottom, #09f 50%, #e41c77 50%);
+}
+
+.dark-theme {
+    background-image: linear-gradient(to right bottom, #09f 50%, #72da67 50%);
+}
+
+.theme-switch__more {
+    cursor:pointer; 
+}
+
+.theme-switch__more:hover .theme-switch__drop-down {
+    display: flex;
+}
+
+.themes-container {
+    display:inline-flex;
+    flex-wrap: wrap;
+    align-items:center;
+    padding: 5px;
+    position:relative;
+}
+
+.themes-container > div:first-child {
+    flex: 0 1 100%;
+}
+
+.themes-container > div > h5 {
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.theme-item:hover {
+    color: #333;
+}
+
+.theme-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    height:20px;
+    box-sizing: border-box;
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.themes-container .theme-item:last-of-type {
+    margin-right: 0;
+}
+
 @media (min-width: 992px) {
     #main {
         display: table;

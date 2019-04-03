@@ -3,6 +3,12 @@ full license information.}}
 
 <div class="hidden-sm col-md-2" role="complementary">
     <div class="sideaffix">
+        {{#_isLangEn}}
+            {{>partials/themeselect}}
+        {{/_isLangEn}}
+        {{^_isLangEn}}
+            {{>partials/themeselect.ja}}
+        {{/_isLangEn}}
         {{^_disableContribution}}
         <div class="contribution">
             <ul class="nav">
