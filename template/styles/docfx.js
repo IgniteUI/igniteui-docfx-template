@@ -1093,7 +1093,7 @@ function handleThemeSelection(theme, item) {
   function postMessage(theme) {
     var targetOrigin = document.body.getAttribute("data-demos-base-url");
     var iframeWindow = document.querySelector("iframe").contentWindow;
-    var data = {theme: theme, origin: window.origin};
+    var data = {theme: theme, origin: window.location.origin};
     window.localStorage.setItem('theme', theme);
     iframeWindow.postMessage(data, targetOrigin);
   }
@@ -1136,8 +1136,11 @@ $(document).ready(function () {
     if(e.currentTarget.lastElementChild.tagName === "svg") {
       return;
     }
-    theme = this.getAttribute("data-theme");
-    handleThemeSelection(theme, this);
+    var currentTheme = window.localStorage.getItem("theme");
+    var newTheme = this.getAttribute("data-theme");
+    if (currentTheme !== newTheme) {
+      handleThemeSelection(newTheme, this);
+    }
   })
 
   $(".anchorjs-link").on("click", function (e) {
