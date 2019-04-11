@@ -12,6 +12,7 @@
     var samplesFilesUrls = [];
     var sampleFilesContentByUrl = {};
     var isIE = navigator.userAgent.indexOf('MSIE')!==-1 || navigator.appVersion.indexOf('Trident/') > 0;
+    var isEdge = navigator.userAgent.indexOf('Edge')!==-1;
 
     var isButtonClickInProgress = false;
 
@@ -91,7 +92,7 @@
     }
 
     var getDemoFilesFolderUrlPath = function() {
-        if (isIE) {
+        if (isIE || isEdge) {
             return demoFilesCSSSupportFolderUrlPath;
         }
 
