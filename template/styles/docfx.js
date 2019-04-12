@@ -1121,9 +1121,9 @@ function handleThemeSelection(theme, item) {
 }
 
 $(document).ready(function () {
-  var homePathName = "/components/general/getting_started.html";
-  if (window.location.pathname === homePathName) {
-    $(".themes-container").css("display", "none");
+  var sampleIframes = document.querySelectorAll("iframe[src]");
+  if (sampleIframes.length !== 0) {
+    $(".themes-container").css('display','inline-flex');
   }
 
   var contentOffset = $("#_content").offset().top;
