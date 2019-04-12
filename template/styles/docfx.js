@@ -1070,6 +1070,11 @@ function closeContainer() {
 
 function handleThemeSelection(theme, item) {
   if (theme) {
+    if (isDvPage()) {
+      // reset the theme to the default one
+      theme = "default-theme";
+      window.localStorage.setItem('theme', theme);
+    }
     if (item) {
       postMessage(theme);
     }
@@ -1091,10 +1096,13 @@ function handleThemeSelection(theme, item) {
 
   function postMessage(theme) {
     var targetOrigin = document.body.getAttribute("data-demos-base-url");
-    var iframeWindow = document.querySelector("iframe").contentWindow;
+    var iframes = document.querySelectorAll("iframe");
     var data = {theme: theme, origin: window.location.origin};
     window.localStorage.setItem('theme', theme);
-    iframeWindow.postMessage(data, targetOrigin);
+    iframes.forEach( function(iframe)  {
+      var iframeWindow = iframe.contentWindow;
+      iframeWindow.postMessage(data, targetOrigin);
+    });
   }
 
   function selectTheme(el) {
@@ -1120,11 +1128,7 @@ function handleThemeSelection(theme, item) {
 }
 
   function isDvPage() {
-    var pathname = window.location.pathname;
-    return pathname.indexOf("chart") !== -1 ||
-          pathname.indexOf("excel") !== -1 ||
-          pathname.indexOf("bulletgraph") !== -1 ||
-          pathname.indexOf("gauge") !==-1;
+    return window.igViewer.common.isDvPage();
   }
 
 $(document).ready(function () {
