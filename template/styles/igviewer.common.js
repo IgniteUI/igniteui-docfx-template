@@ -255,6 +255,15 @@
             }
 
             return list;
+        },
+
+        isDvPage: function () {
+            var pageName = common.getPageNameFromLocation();
+            return pageName.indexOf("chart") !== -1 ||
+                pageName.indexOf("excel") !== -1 ||
+                pageName.indexOf("bulletgraph") !== -1 ||
+                pageName.indexOf("gauge") !==-1 ||
+                pageName.indexOf("exporter") !==-1;
         }
     };
 

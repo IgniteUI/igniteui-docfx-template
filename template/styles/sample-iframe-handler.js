@@ -3,8 +3,13 @@
 
 var onSampleIframeContentLoaded = function (iframe) {
     iframe.parentElement.classList.remove("loading");
+
     var theme = window.localStorage.getItem("theme");
     var targetOrigin = document.body.getAttribute("data-demos-base-url");
     var data = {theme: theme, origin: window.location.origin};
     iframe.contentWindow.postMessage(data, targetOrigin);
+}
+
+var onDvSampleIframeContentLoaded = function (iframe) {
+    iframe.parentElement.classList.remove("loading");
 }

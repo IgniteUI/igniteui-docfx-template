@@ -1070,8 +1070,12 @@ function closeContainer() {
 
 function handleThemeSelection(theme, item) {
   if (theme) {
-    var homePathName = "/components/general/getting_started.html";
-    if (window.location.pathname !== homePathName) {
+    if (isDvPage()) {
+      // reset the theme to the default one
+      theme = "default-theme";
+      window.localStorage.setItem('theme', theme);
+    }
+    if (item) {
       postMessage(theme);
     }
     var visibleItems = $(".theme-item:lt(2)");
@@ -1123,10 +1127,14 @@ function handleThemeSelection(theme, item) {
   }
 }
 
+  function isDvPage() {
+    return window.igViewer.common.isDvPage();
+  }
+
 $(document).ready(function () {
-  var homePathName = "/components/general/getting_started.html";
-  if (window.location.pathname === homePathName) {
-    $(".themes-container").css("display", "none");
+  var sampleIframes = document.querySelectorAll("iframe[src]");
+  if (sampleIframes.length !== 0 && !isDvPage()) {
+    $(".themes-container").css('display','inline-flex');
   }
 
   var contentOffset = $("#_content").offset().top;
