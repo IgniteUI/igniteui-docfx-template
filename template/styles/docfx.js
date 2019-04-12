@@ -1070,8 +1070,7 @@ function closeContainer() {
 
 function handleThemeSelection(theme, item) {
   if (theme) {
-    var homePathName = "/components/general/getting_started.html";
-    if (window.location.pathname !== homePathName) {
+    if (item) {
       postMessage(theme);
     }
     var visibleItems = $(".theme-item:lt(2)");
@@ -1120,9 +1119,17 @@ function handleThemeSelection(theme, item) {
   }
 }
 
+  function isDvPage() {
+    var pathname = window.location.pathname;
+    return pathname.indexOf("chart") !== -1 ||
+          pathname.indexOf("excel") !== -1 ||
+          pathname.indexOf("bulletgraph") !== -1 ||
+          pathname.indexOf("gauge") !==-1;
+  }
+
 $(document).ready(function () {
   var sampleIframes = document.querySelectorAll("iframe[src]");
-  if (sampleIframes.length !== 0) {
+  if (sampleIframes.length !== 0 && !isDvPage()) {
     $(".themes-container").css('display','inline-flex');
   }
 
