@@ -1069,13 +1069,7 @@ function closeContainer() {
 }
 
 function handleThemeSelection(theme, item) {
-  if (theme) {
-    if (isDvPage()) {
-      // reset the theme to the default one
-      theme = "default-theme";
-      window.localStorage.setItem('theme', theme);
-    }
-    if (item) {
+  if (theme && item) {
       postMessage(theme);
     }
     var visibleItems = $(".theme-item:lt(2)");
@@ -1125,7 +1119,7 @@ function handleThemeSelection(theme, item) {
     selectedItem.firstElementChild.className = "theme-button " + theme;
     selectedItem.lastElementChild.textContent = labelToSwap;
   }
-}
+
 
   function isDvPage() {
     return window.igViewer.common.isDvPage();
