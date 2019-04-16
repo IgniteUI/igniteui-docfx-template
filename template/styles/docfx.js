@@ -1132,7 +1132,7 @@ function handleThemeSelection(theme, item) {
   }
 
 $(document).ready(function () {
-  var sampleIframes = document.querySelectorAll("iframe[src]");
+  var sampleIframes = document.querySelectorAll("iframe");
   if (sampleIframes.length !== 0 && !isDvPage()) {
     $(".themes-container").css('display','inline-flex');
   }
