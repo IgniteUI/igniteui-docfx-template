@@ -1131,6 +1131,10 @@ function handleThemeSelection(theme, item) {
     return window.igViewer.common.isDvPage();
   }
 
+  function showGitHubButton() {
+    return window.location.pathname.search(RegExp("\\/\\b(\\w*grid\\w*)\\b\\/")) === -1
+  }
+
 $(document).ready(function () {
   var sampleIframes = document.querySelectorAll("iframe");
   if (sampleIframes.length !== 0 && !isDvPage()) {
@@ -1186,4 +1190,9 @@ $(document).ready(function () {
     pathPrefix: resourcesBaseUrl,
     language: pageLanguage
   });
+
+  
+  if(showGitHubButton()){
+    $(".github-btn-wrapper").attr("hidden", false);
+  }
 });
