@@ -10,6 +10,6 @@ var onSampleIframeContentLoaded = function (iframe) {
     iframe.contentWindow.postMessage(data, targetOrigin);
 }
 
-var onDvSampleIframeContentLoaded = function (iframe) {
+var onXPlatSampleIframeContentLoaded = function (iframe) {
     iframe.parentElement.classList.remove("loading");
 }
