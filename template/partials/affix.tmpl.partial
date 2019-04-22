@@ -7,9 +7,12 @@ full license information.}}
             {{#_isLangJa}}
                 {{>partials/themeselect.ja}}
             {{/_isLangJa}}
-            {{^_isLangJa}}
+            {{#_isLangEn}}
                 {{>partials/themeselect}}
-            {{/_isLangJa}}
+            {{/_isLangEn}}
+            {{#_isLangKr}}
+                {{>partials/themeselect.kr}}
+            {{/_isLangKr}}
         {{/_themeUsage}}
         {{^_disableContribution}}
         <div class="contribution">
