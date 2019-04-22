@@ -9,7 +9,11 @@ $(function () {
   var util = new utility();
   var theme = window.localStorage.getItem("theme");
 
-  handleThemeSelection(theme);
+  // Add theme buttons and select theme
+  if ($(".themes-container").length !== 0) {
+    handleThemeSelection(theme);
+  }
+
   highlight();
   enableSearch();
 
@@ -1137,8 +1141,20 @@ function handleThemeSelection(theme, item) {
 
 $(document).ready(function () {
   var sampleIframes = document.querySelectorAll("iframe");
-  if (sampleIframes.length !== 0 && !isDvPage()) {
-    $(".themes-container").css('display','inline-flex');
+  if ($(".themes-container").length !== 0 && sampleIframes.length !== 0 && !isDvPage()) {
+    $(".themes-container").css('display', 'inline-flex');  
+
+    $(".theme-item").on("click", function (e) {
+        if (e.currentTarget.lastElementChild.tagName === "svg") {
+          return;
+          
+        }
+        var currentTheme = window.localStorage.getItem("theme");
+        var newTheme = this.getAttribute("data-theme");
+        if (currentTheme !== newTheme) {
+          handleThemeSelection(newTheme, this);
+        }
+    })
   }
 
   var contentOffset = $("#_content").offset().top;
@@ -1146,17 +1162,6 @@ $(document).ready(function () {
   if (!pageLanguage) {
     pageLanguage = "en";
   }
-
-  $(".theme-item").on("click", function(e) {
-    if(e.currentTarget.lastElementChild.tagName === "svg") {
-      return;
-    }
-    var currentTheme = window.localStorage.getItem("theme");
-    var newTheme = this.getAttribute("data-theme");
-    if (currentTheme !== newTheme) {
-      handleThemeSelection(newTheme, this);
-    }
-  })
 
   $(".anchorjs-link").on("click", function (e) {
     var hashLocation = $(this).attr("href");
@@ -1191,8 +1196,8 @@ $(document).ready(function () {
     language: pageLanguage
   });
 
-  
-  if(showGitHubButton()){
+
+  if (showGitHubButton()) {
     $(".github-btn-wrapper").attr("hidden", false);
   }
 });
