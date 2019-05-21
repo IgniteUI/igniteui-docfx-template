@@ -24,7 +24,7 @@
 								<a data-id="9668" href="https://www.infragistics.com/about-us/contact-us">글로벌 연락처</a>
 							</li>
 							<li class="navigation__account">
-								<a class="signInLink" href="https://kr.infragistics.com/login.aspx?ReturnUrl=%2fmy-account%2fkeys-and-downloads">My Account</a>
+								<a class="signInLink" href="https://www.infragistics.com/login.aspx?ReturnUrl=%2Fmy-account%2Fkeys-and-downloads">My Account</a>
 							</li>
 						</ul>
 					</nav>
@@ -59,7 +59,7 @@
 							<a class="navigation__sub-menu" href="#">내 계정</a>
 							<ul class="sub-menu clearfix">
 								<li>
-									<a class="signInLink" href="https://kr.infragistics.com/login.aspx?ReturnUrl=%2fmy-account%2fkeys-and-downloads">Sign In/Register</a>
+									<a class="signInLink" href="https://www.infragistics.com/login.aspx?ReturnUrl=%2Fmy-account%2Fkeys-and-downloads">Sign In/Register</a>
 								</li>
 							</ul>
 						</li>
