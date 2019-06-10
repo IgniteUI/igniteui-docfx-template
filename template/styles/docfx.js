@@ -1197,7 +1197,7 @@ $(document).ready(function () {
   });
 
 
-  if (showGitHubButton()) {
+  if ($(".github-btn-wrapper").length && showGitHubButton()) {
     $(".github-btn-wrapper").attr("hidden", false);
   }
 });
