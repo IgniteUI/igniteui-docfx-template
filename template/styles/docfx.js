@@ -1099,11 +1099,16 @@ function handleThemeSelection(theme, item) {
   }
 
   function postMessage(theme) {
-    var targetOrigin = document.body.getAttribute("data-demos-base-url");
-    var iframes = document.querySelectorAll("iframe");
-    var data = {theme: theme, origin: window.location.origin};
+    var targetOrigin = document.body.getAttribute("data-demos-base-url"); 
+    var iframes = Array.from(document.querySelectorAll("iframe"));
+    var data = {origin: window.location.origin};
     window.localStorage.setItem('theme', theme);
     iframes.forEach( function(iframe)  {
+      if(iframe.classList.contains("no-theming")){
+        data["theme"] = "default-theme";
+      }else{
+        data["teme"] = theme;
+      }
       var iframeWindow = iframe.contentWindow;
       iframeWindow.postMessage(data, targetOrigin);
     });
