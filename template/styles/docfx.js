@@ -1103,11 +1103,13 @@ function handleThemeSelection(theme, item) {
     var iframes = Array.from(document.querySelectorAll("iframe"));
     var data = {origin: window.location.origin};
     window.localStorage.setItem('theme', theme);
-    iframes.forEach( function(iframe)  {
+    iframes.filter(function ( ifr ) {
+     return !ifr.classList.contains("lazyload")
+    }).forEach( function(iframe)  {
       if(iframe.classList.contains("no-theming")){
         data["theme"] = "default-theme";
       }else{
-        data["teme"] = theme;
+        data["theme"] = theme;
       }
       var iframeWindow = iframe.contentWindow;
       iframeWindow.postMessage(data, targetOrigin);
