@@ -264,7 +264,10 @@
                 pageName.indexOf("spreadsheet") !== -1 ||
                 pageName.indexOf("bulletgraph") !== -1 ||
                 pageName.indexOf("gauge") !==-1 ||
-                pageName.indexOf("exporter") !==-1;
+                pageName.indexOf("exporter") !==-1 ||
+                pageName.indexOf("map") !==-1||
+                pageName.indexOf("sparkline")!==-1||
+                pageName.indexOf("zoomslider") !==-1 ;
         }
     };
 
