@@ -1100,18 +1100,18 @@ function handleThemeSelection(theme, item) {
 
   function postMessage(theme) {
     var targetOrigin = document.body.getAttribute("data-demos-base-url"); 
-    var iframes = Array.from(document.querySelectorAll("iframe"));
     var data = {origin: window.location.origin};
     window.localStorage.setItem('theme', theme);
-    iframes.filter(function ( ifr ) {
-     return !ifr.classList.contains("lazyload")
-    }).forEach( function(iframe)  {
-      if(iframe.classList.contains("no-theming")){
+    $("iframe").filter(function ( index ) {
+     return !this.classList.contains("lazyload")
+    })
+    .each( function(i, e)  {
+      if(e.classList.contains("no-theming")){
         data["theme"] = "default-theme";
       }else{
         data["theme"] = theme;
       }
-      var iframeWindow = iframe.contentWindow;
+      var iframeWindow = e.contentWindow;
       iframeWindow.postMessage(data, targetOrigin);
     });
   }
