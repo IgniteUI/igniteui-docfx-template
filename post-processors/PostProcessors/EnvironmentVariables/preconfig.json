@@ -7,6 +7,7 @@
 		"en": {
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
+				"dvDemosBaseUrl": "http://localhost:4200",
 				"infragisticsBaseUrl": "https://staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
@@ -14,6 +15,7 @@
 			},
 			"staging": {
 				"demosBaseUrl": "https://staging.infragistics.com/angular-demos",
+				"dvDemosBaseUrl": "https://staging.infragistics.com/angular-demos-dv",
 				"infragisticsBaseUrl": "https://staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
@@ -21,6 +23,7 @@
 			},
 			"production": {
 				"demosBaseUrl": "https://www.infragistics.com/angular-demos",
+				"dvDemosBaseUrl": "https://www.infragistics.com/angular-demos-dv",
 				"infragisticsBaseUrl": "https://www.infragistics.com",
 				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
@@ -30,6 +33,7 @@
 		"jp": {
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
+				"dvDemosBaseUrl": "http://localhost:4200",
 				"infragisticsBaseUrl": "https://jp.staging.infragistics.com",
 				"angularApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
@@ -37,6 +41,7 @@
 			},
 			"staging": {
 				"demosBaseUrl": "https://jp.staging.infragistics.com/angular-demos",
+				"dvDemosBaseUrl": "https://jp.staging.infragistics.com/angular-demos-dv",
 				"infragisticsBaseUrl": "https://jp.staging.infragistics.com",
 				"angularApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
@@ -44,6 +49,7 @@
 			},
 			"production": {
 				"demosBaseUrl": "https://jp.infragistics.com/angular-demos",
+				"dvDemosBaseUrl": "https://jp.infragistics.com/angular-demos-dv",
 				"infragisticsBaseUrl": "https://jp.infragistics.com",
 				"angularApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
@@ -53,6 +59,7 @@
 		"kr": {
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
+				"dvDemosBaseUrl": "http://localhost:4200",
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
@@ -60,6 +67,7 @@
 			},
 			"staging": {
 				"demosBaseUrl": "https://kr.staging.infragistics.com/angular-demos",
+				"dvDemosBaseUrl": "https://kr.staging.infragistics.com/angular-demos-dv",
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
@@ -67,6 +75,7 @@
 			},
 			"production": {
 				"demosBaseUrl": "https://kr.infragistics.com/angular-demos",
+				"dvDemosBaseUrl": "https://kr.infragistics.com/angular-demos-dv",
 				"infragisticsBaseUrl": "https://kr.infragistics.com",
 				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
