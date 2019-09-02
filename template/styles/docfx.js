@@ -585,7 +585,13 @@ $(function () {
           // Clear 'filtered' class
           $("#toc li")
             .removeClass(filtered)
-            .removeClass(hide);
+            .removeClass(hide)
+            .removeClass(expanded);
+
+            $("#toc li > a.active")
+            .parents("li")
+            .addClass(expanded);
+
           return;
         }
 
@@ -633,11 +639,13 @@ $(function () {
             if (parent.find("li.show").length > 0) {
               parent.addClass(show);
               parent.addClass(filtered);
+              parent.addClass(expanded)
               parent.removeClass(hide);
             } else {
               parent.addClass(hide);
               parent.removeClass(show);
               parent.removeClass(filtered);
+              parent.removeClass(expanded);
             }
           });
 
