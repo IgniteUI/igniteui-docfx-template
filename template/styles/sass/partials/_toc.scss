@@ -69,16 +69,17 @@
 .toc .nav > li.active > .expand-stub::before,
 .toc .nav > li.in > .expand-stub::before,
 .toc .nav > li.in.active > .expand-stub::before,
-.toc .nav > li.filtered > .expand-stub::before {
+.toc .nav > li.filtered.in > .expand-stub::before {
   content: "\2013";
 }
 
+.toc .nav > li.filtered > .expand-stub::before,
 .toc .nav > li > .expand-stub::before,
 .toc .nav > li.active > .expand-stub::before {
   content: "+";
 }
 
-.toc .nav > li.filtered > ul,
+.toc .nav > li.filtered.in > ul,
 .toc .nav > li.in > ul {
   display: block;
 }
