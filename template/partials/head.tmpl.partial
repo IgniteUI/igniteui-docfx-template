@@ -29,7 +29,7 @@ full license information.}}
     <link rel="stylesheet" href="https://infragistics.com/assets/modern/css/animate-custom.css">
     <link rel="stylesheet" href="https://infragistics.com/assets/modern/css/fontello.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://infragistics.com/css/navigation.css">
+    <link rel="stylesheet" href="https://staging.infragistics.com/css/navigation.css">
     <link rel="stylesheet" href="https://infragistics.com/css/footer.css">
     <link rel="stylesheet" href="{{_rel}}styles/bundles/styles-bundle.min.css?checksum={{_stylesBundleFileName}}">
     <script type="text/javascript" src="{{_rel}}styles/sample-iframe-handler.js?t={{_timestamp}}"></script>
