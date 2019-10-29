@@ -24,7 +24,7 @@
                                 <li class="navigation__text deemphasize" style="width: auto;">インフラジスティックス・ジャパン株式会社: 050 (1745) 6258</li>
                                 <li><a data-id="12408" href="/about-us/contact-us" class="mchNoDecorate">お問い合わせ先</a></li>
                                 <li class="navigation__account">
-                                    <a class="signInLink mchNoDecorate" href="https://jp.staging.infragistics.com/my-account/keys-and-downloads">アカウント</a>
+                                    <a class="signInLink mchNoDecorate" href="https://jp.infragistics.com/my-account/keys-and-downloads">アカウント</a>
                                 </li>
                             </ul>
                         </nav>
@@ -45,7 +45,7 @@
                         <ul class="navigation navigation--navbar navigation--hpad-0 sf-menu sf-js-enabled sf-arrows">
                             <li class="navigation__mobile-link"><a class="navigation__sub-menu sf-with-ul mchNoDecorate" href="#">マイ アカウント</a>
                                 <ul class="sub-menu clearfix" style="display: none;">
-                                    <li><a class="signInLink mchNoDecorate" href="https://jp.staging.infragistics.com/my-account/keys-and-downloads">ログイン</a></li>
+                                    <li><a class="signInLink mchNoDecorate" href="https://jp.infragistics.com/my-account/keys-and-downloads">ログイン</a></li>
                                 </ul>
                             </li>
                             <li class="menu-full-width"><a class="navigation__sub-menu sf-with-ul mchNoDecorate" title="開発" href="/products/all"><span>開発</span></a>
