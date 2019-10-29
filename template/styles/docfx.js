@@ -767,7 +767,7 @@ $(function () {
     var html = util.formList(breadcrumb, "breadcrumb");
     $("#breadcrumb").html(html);
   }
-
+ 
   //Setup Affix
   function renderAffix() {
     var hierarchy = getHierarchy();
@@ -780,7 +780,7 @@ $(function () {
         .empty()
         .append(html);
       if ($("footer").is(":visible")) {
-        $(".sideaffix").css("bottom", "70px");
+        $(".sideaffix").css("bottom", "50px");
       }
       $("#affix").on("activate.bs.scrollspy", function (e) {
         if (e.target) {

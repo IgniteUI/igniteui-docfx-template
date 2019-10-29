@@ -22,11 +22,21 @@
     ul.nav>li>a:focus {
         background: none;
     }
+    ::-webkit-scrollbar {
+        width: 2px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
 }
 
 .affix {
     position: relative;
-    height: 100%;
+    height: 80%;
+    overflow: auto;
 }
 
 .affix h5 {
