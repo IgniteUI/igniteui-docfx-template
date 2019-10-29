@@ -18,7 +18,8 @@ body,
   font-size: 1rem;
   line-height: 1.5rem;
   margin: auto;
-  color: #585858; }
+  color: #585858;
+  overflow-x: hidden; }
 
 h1,
 h2,
