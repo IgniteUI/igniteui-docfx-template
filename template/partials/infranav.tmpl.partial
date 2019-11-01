@@ -1,6 +1,6 @@
 <header id="header" class="globalnav" data-nav-auto-init="false" data-mega-menu="true">
     <div class="sticky-wrapper" style="height: 77px;">
-        <div id="header-wrap" class="globalnav__container stuck no-transparent top-animate" data-default-height="175" data-sticky-height="175">
+        <div id="header-wrap" class="globalnav__container" data-default-height="175" data-sticky-height="175">
             <!-- CSE Container -->
             <div class="globalnav__search">
                 <div class="globalnav__search-container globalnav__wrapper">
@@ -21,7 +21,7 @@
                     <div class="globalnav__section clearfix">
                         <nav class="globalnav__menu-container">
                             <ul class="navigation navigation--xs navigation--hpad-0">
-                                <li class="navigation__text deemphasize" style="width: auto;">North American Sales: 1-800-231-8588</li>
+                                <li class="navigation__text deemphasize" style="width: auto;">North American Sales: 1-800-231-8588(beta)</li>
                                 <li><a title="Contact Us" data-id="9668" href="/about-us/contact-us" class="mchNoDecorate">Global Contacts</a></li>
                                 <li class="navigation__account">
                                     <a class="signInLink mchNoDecorate" href="/my-account/keys-and-downloads">My Account</a>
@@ -42,16 +42,18 @@
                     </div>
                     <!-- Menu -->
                     <nav class="globalnav__menu-container">
-                        <ul class="navigation navigation--navbar navigation--hpad-0 sf-menu sf-js-enabled sf-arrows">
+                        <ul class="navigation navigation--navbar navigation--hpad-0 sf-menu">
                             <li class="navigation__mobile-link">
                                 <div class="globalnav__callout-text">North American Sales: 1-800-321-8588</div>
                             </li>
-                            <li class="navigation__mobile-link"><a class="navigation__sub-menu mchNoDecorate sf-with-ul" href="#">My Account</a>
+                            <li class="navigation__mobile-link">
+                                <a class="navigation__sub-menu mchNoDecorate" href="#">My Account</a>
                                 <ul class="sub-menu clearfix" style="display: none;">
                                     <li><a class="signInLink mchNoDecorate" href="/my-account/keys-and-downloads">Sign In/Register</a></li>
                                 </ul>
                             </li>
-                            <li class="menu-full-width"><a class="navigation__sub-menu mchNoDecorate sf-with-ul" title="Design and Development" href="/products/ultimate"><span class="hidden-md">Design &amp; Development</span><span class="visible-md hidden-lg hidden-sm hidden-xs hidden-xxs">Design &amp; Develop</span></a>
+                            <li class="menu-full-width">
+                                <a class="navigation__sub-menu mchNoDecorate" title="Design and Development" href="/products/ultimate"><span class="hidden-md">Design &amp; Development</span><span class="visible-md hidden-lg hidden-sm hidden-xs hidden-xxs">Design &amp; Develop</span></a>
                                 <ul style="display: none; opacity: 0;">
                                     <li>
                                         <div class="mar-bottom--sm">
@@ -68,7 +70,7 @@
                                         <a class="deemphasize mchNoDecorate" href="/products/ignite-ui">Ignite UI for JavaScript</a>
                                         <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-react">Ignite UI for React</a>
                                         <a class="deemphasize mchNoDecorate" href="/products/aspnet">Ultimate UI for ASP.NET</a>
-                                        <a class="deemphasize mchNoDecorate" href="/products/indigo-design">Indigo.Design<a>
+                                        <a class="deemphasize mchNoDecorate" href="/products/indigo-design">Indigo.Design</a>
                                     </li>
                                     <li>
                                         <div class="navigation__sub-menu-header">Desktop</div>
@@ -91,20 +93,23 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a class="navigation__sub-menu mchNoDecorate sf-with-ul" title="UX" href="/products/indigo-design/desktop">UX</a>
+                            <li>
+                                <a class="navigation__sub-menu mchNoDecorate" title="UX" href="/products/indigo-design/desktop">UX</a>
                                 <ul style="display: none;">
                                     <li><a title="Indigo.Design Desktop" href="/products/indigo-design/desktop" class="mchNoDecorate">Indigo.Design Desktop <span class="deemphasize">Collaborative prototyping and remote usability testing for UX &amp; usability professionals</span></a></li>
                                     <li><a title="Indigo.Design" href="/products/indigo-design" class="mchNoDecorate">Indigo.Design <span class="deemphasize">A Unified Platform for Visual Design, UX Prototyping, Code Generation, and App Development</span></a></li>
                                 </ul>
                             </li>
-                            <li class=""><a class="navigation__sub-menu mchNoDecorate sf-with-ul" title="Business Intelligence" href="https://revealbi.io">Business Intelligence</a>
+                            <li class="">
+                                <a class="navigation__sub-menu mchNoDecorate" title="Business Intelligence" href="https://revealbi.io">Business Intelligence</a>
                                 <ul style="display: none;">
                                     <li><a title="Reveal Embedded" href="https://revealbi.io" class="mchNoDecorate">Reveal Embedded <span class="deemphasize">Accelerate your time to market with powerful, beautiful dashboards into your apps</span></a></li>
                                     <li><a title="Reveal" href="https://revealbi.io/app" class="mchNoDecorate">Reveal App <span class="deemphasize">Empower everyone in your organization to use data to make smarter business decisions</span></a></li>
                                 </ul>
                             </li>
                             <li><a title="Team Productivity" href="/products/shareplus-enterprise" class="mchNoDecorate">Team Productivity</a></li>
-                            <li><a class="navigation__sub-menu mchNoDecorate sf-with-ul" title="Learn and Support" href="/support"><span class="hidden-md">Learn &amp; Support</span><span class="visible-md hidden-lg hidden-sm hidden-xs hidden-xxs">Support</span></a>
+                            <li>
+                                <a class="navigation__sub-menu mchNoDecorate" title="Learn and Support" href="/support"><span class="hidden-md">Learn &amp; Support</span><span class="visible-md hidden-lg hidden-sm hidden-xs hidden-xxs">Support</span></a>
                                 <ul style="display: none;">
                                     <li><a title="Help and Support Documents" href="/support" class="mchNoDecorate">Help &amp; Support Documents</a></li>
                                     <li><a title="Blogs" href="/community/blogs" class="mchNoDecorate">Blogs</a></li>
@@ -118,7 +123,8 @@
                                 </ul>
                             </li>
                             <li><a title="Free Trials" href="/free-downloads" class="mchNoDecorate">Free Trials</a></li>
-                            <li><a class="navigation__sub-menu mchNoDecorate sf-with-ul" title="Pricing" href="/how-to-buy/product-pricing">Pricing</a>
+                            <li>
+                                <a class="navigation__sub-menu mchNoDecorate" title="Pricing" href="/how-to-buy/product-pricing">Pricing</a>
                                 <ul style="display: none;">
                                     <li><a title="Pricing" href="/how-to-buy/product-pricing" class="mchNoDecorate">Product Pricing / Buy Online</a></li>
                                     <li><a title="Renew Existing License" href="/how-to-buy/renewal" class="mchNoDecorate">Renew Existing License</a></li>

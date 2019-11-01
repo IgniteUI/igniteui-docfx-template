@@ -1024,7 +1024,10 @@ footer {
   .globalnav__mobile-menu {
     margin-right: 15px; }
   .globalnav__search {
-    padding: 15px; } }
+    padding: 15px; }
+  .globalnav .navigation--navbar.responsive {
+    height: calc(100vh - 60px);
+    overflow-y: auto; } }
 
 @media only screen and (min-width: 961px) {
   .globalnav__wrapper {
