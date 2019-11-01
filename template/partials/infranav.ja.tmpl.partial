@@ -1,6 +1,6 @@
 <header id="header" class="globalnav" data-nav-auto-init="false" data-mega-menu="true">
     <div class="sticky-wrapper" style="height: 77px;">
-        <div id="header-wrap" class="globalnav__container stuck no-transparent top-animate" data-default-height="175" data-sticky-height="175">
+        <div id="header-wrap" class="globalnav__container" data-default-height="175" data-sticky-height="175">
             <!-- CSE Container -->
             <div class="globalnav__search">
                 <div class="globalnav__search-container globalnav__wrapper">
@@ -42,13 +42,13 @@
                     </div>
                     <!-- Menu -->
                     <nav class="globalnav__menu-container">
-                        <ul class="navigation navigation--navbar navigation--hpad-0 sf-menu sf-js-enabled sf-arrows">
-                            <li class="navigation__mobile-link"><a class="navigation__sub-menu sf-with-ul mchNoDecorate" href="#">マイ アカウント</a>
+                        <ul class="navigation navigation--navbar navigation--hpad-0 sf-menu">
+                            <li class="navigation__mobile-link"><a class="navigation__sub-menu mchNoDecorate" href="#">マイ アカウント</a>
                                 <ul class="sub-menu clearfix" style="display: none;">
                                     <li><a class="signInLink mchNoDecorate" href="https://jp.infragistics.com/my-account/keys-and-downloads">ログイン</a></li>
                                 </ul>
                             </li>
-                            <li class="menu-full-width"><a class="navigation__sub-menu sf-with-ul mchNoDecorate" title="開発" href="/products/all"><span>開発</span></a>
+                            <li class="menu-full-width"><a class="navigation__sub-menu mchNoDecorate" title="開発" href="/products/all"><span>開発</span></a>
                                 <ul style="display: none; opacity: 0;">
                                     <li>
                                         <div class="mar-bottom--sm">
@@ -61,12 +61,16 @@
                                     </li>
                                     <li>
                                         <div class="navigation__sub-menu-header">WEB向け</div>
-                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-angular">Ignite UI for Angular</a> <a class="deemphasize mchNoDecorate" href="/products/ignite-ui">Ignite UI for JavaScript</a> <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-react">Ignite UI for React</a> <a class="deemphasize mchNoDecorate" href="/products/aspnet">Ultimate UI for ASP.NET</a> <a class="deemphasize mchNoDecorate" href="/products/indigo-design">Indigo.Design</a></li>
+                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-angular">Ignite UI for Angular</a> 
+                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui">Ignite UI for JavaScript</a> 
+                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-react">Ignite UI for React</a> 
+                                        <a class="deemphasize mchNoDecorate" href="/products/aspnet">Ultimate UI for ASP.NET</a> 
+                                        <a class="deemphasize mchNoDecorate hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a></li>
                                     <li>
                                         <div class="navigation__sub-menu-header">デスクトップ向け</div>
                                         <a href="/products/windows-forms" class="mchNoDecorate">Ultimate UI for Windows Forms</a> <a href="/products/wpf" class="mchNoDecorate">Ultimate UI for WPF</a>
                                         <div class="navigation__sub-menu-header">プロトタイピング</div>
-                                        <a href="/products/indigo-design" class="mchNoDecorate">Indigo.Design</a></li>
+                                        <a href="/products/indigo-design" class="mchNoDecorate  hidden-sm hidden-xs hidden-xxs">Indigo.Design</a></li>
                                     <li>
                                         <div class="navigation__sub-menu-header">モバイル向け</div>
                                         <a href="/products/xamarin" class="mchNoDecorate">Ultimate UI for Xamarin</a> <a href="/products/ios" class="mchNoDecorate">Ultimate UI for iOS</a> <a href="/products/android" class="mchNoDecorate">Ultimate UI for Android</a></li>
@@ -78,7 +82,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a class="navigation__sub-menu sf-with-ul mchNoDecorate" title="UX" href="/products/indigo-design">UX</a>
+                            <li><a class="navigation__sub-menu mchNoDecorate" title="UX" href="/products/indigo-design">UX</a>
                                 <ul style="display: none;">
                                     <li><a title="Indigo.Design" href="/products/indigo-design" class="mchNoDecorate">Indigo.Design <span class="deemphasize">3ステップでデザインから画面コードを生成できるアプリケーションデザインプラットフォーム</span></a></li>
                                     <li><a title="Indigo.Design Desktop" href="/products/indigo-design/desktop" class="mchNoDecorate">Indigo.Design Desktop <span class="deemphasize">プロトタイプの迅速な構築、コラボレーションの実現、ユーザビリティ テストの実施を可能にする UX デザイン ツール</span></a></li>
@@ -86,7 +90,7 @@
                             </li>
                             <li><a href="https://www.revealbi.io/jp" class="mchNoDecorate">データ可視化</a></li>
                             <li><a data-id="12491" href="/consulting" class="mchNoDecorate">サービス</a></li>
-                            <li><a class="navigation__sub-menu sf-with-ul mchNoDecorate" title="リソース" href="/support/product-help-downloads">リソース</a>
+                            <li><a class="navigation__sub-menu mchNoDecorate" title="リソース" href="/support/product-help-downloads">リソース</a>
                                 <ul style="display: none;">
                                     <li><a data-id="12501" href="/support/product-help-downloads" class="mchNoDecorate">製品ヘルプ</a></li>
                                     <li><a data-id="12865" href="/events" class="mchNoDecorate">イベント/セミナー情報</a></li>
@@ -97,7 +101,7 @@
                                 </ul>
                             </li>
                             <li><a href="/free-downloads" class="mchNoDecorate">ダウンロード</a></li>
-                            <li><a class="navigation__sub-menu sf-with-ul mchNoDecorate" data-id="12495" href="/how-to-buy">ご購入</a>
+                            <li><a class="navigation__sub-menu mchNoDecorate" data-id="12495" href="/how-to-buy">ご購入</a>
                                 <ul style="display: none;">
                                     <li><a data-id="20940" href="/how-to-buy/product-pricing" class="mchNoDecorate">製品のご購入方法</a></li>
                                     <li><a data-id="20940" href="/how-to-buy/product-pricing" class="mchNoDecorate">製品価格</a></li>

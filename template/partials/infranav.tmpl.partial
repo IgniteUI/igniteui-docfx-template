@@ -21,7 +21,7 @@
                     <div class="globalnav__section clearfix">
                         <nav class="globalnav__menu-container">
                             <ul class="navigation navigation--xs navigation--hpad-0">
-                                <li class="navigation__text deemphasize" style="width: auto;">North American Sales: 1-800-231-8588(beta)</li>
+                                <li class="navigation__text deemphasize" style="width: auto;">North American Sales: 1-800-231-8588</li>
                                 <li><a title="Contact Us" data-id="9668" href="/about-us/contact-us" class="mchNoDecorate">Global Contacts</a></li>
                                 <li class="navigation__account">
                                     <a class="signInLink mchNoDecorate" href="/my-account/keys-and-downloads">My Account</a>
@@ -70,14 +70,14 @@
                                         <a class="deemphasize mchNoDecorate" href="/products/ignite-ui">Ignite UI for JavaScript</a>
                                         <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-react">Ignite UI for React</a>
                                         <a class="deemphasize mchNoDecorate" href="/products/aspnet">Ultimate UI for ASP.NET</a>
-                                        <a class="deemphasize mchNoDecorate" href="/products/indigo-design">Indigo.Design</a>
+                                        <a class="deemphasize mchNoDecorate hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
                                     </li>
                                     <li>
                                         <div class="navigation__sub-menu-header">Desktop</div>
                                         <a href="/products/windows-forms" class="mchNoDecorate">Ultimate UI for Windows Forms</a>
                                         <a href="/products/wpf" class="mchNoDecorate">Ultimate UI for WPF</a>
                                         <div class="navigation__sub-menu-header">Prototyping</div>
-                                        <a href="/products/indigo-design" class="mchNoDecorate">Indigo.Design</a>
+                                        <a href="/products/indigo-design" class="mchNoDecorate hidden-sm hidden-xs hidden-xxs">Indigo.Design</a>
                                     </li>
                                     <li>
                                         <div class="navigation__sub-menu-header">Mobile</div>
@@ -87,9 +87,9 @@
                                     </li>
                                     <li>
                                         <div class="navigation__sub-menu-header">Automated Testing Tools</div>
-                                        <a href="/products/test-automation-micro-focus-uft" class="mchNoDecorate">Test automation for Micro Focus UFT: Windows Forms</a>
-                                        <a href="/products/test-automation-micro-focus-uft" class="mchNoDecorate">Test automation for Micro Focus UFT: WPF</a>
-                                        <a href="/products/test-automation-ibm-rft" class="mchNoDecorate">Test automation for IBM RFT: Windows Forms</a>
+                                        <a href="/products/test-automation-micro-focus-uft" class="mchNoDecorate">Test Automation for Micro Focus UFT: Windows Forms</a>
+                                        <a href="/products/test-automation-micro-focus-uft" class="mchNoDecorate">Test Automation for Micro Focus UFT: WPF</a>
+                                        <a href="/products/test-automation-ibm-rft" class="mchNoDecorate">Test Automation for IBM RFT: Windows Forms</a>
                                     </li>
                                 </ul>
                             </li>

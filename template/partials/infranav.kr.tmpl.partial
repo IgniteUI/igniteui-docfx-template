@@ -1,6 +1,6 @@
 <header id="header" class="globalnav" data-nav-auto-init="false" data-mega-menu="false">
     <div class="sticky-wrapper" style="height: 77px;">
-        <div id="header-wrap" class="globalnav__container stuck no-transparent top-animate" data-default-height="175" data-sticky-height="175">
+        <div id="header-wrap" class="globalnav__container" data-default-height="175" data-sticky-height="175">
             <!-- CSE Container -->
             <div class="globalnav__search">
                 <div class="globalnav__search-container globalnav__wrapper">
@@ -57,7 +57,6 @@
                                     <li><a href="https://www.infragistics.com/products/aspnet">Ultimate UI for ASP.NET <br />다목적 ASP.NET AJAX UI 컨트롤</a></li>
                                     <li><a href="https://www.infragistics.com/products/windows-forms">Ultimate UI for Windows Forms <br />100종류 이상의 기능의 Microsoft Office 스타일 UI 컨트롤</a></li>
                                     <li><a href="https://www.infragistics.com/products/xamarin">Ultimate UI for Xamarin <br />UI 컨트롤 및 생산성 도구</a></li>
-                                    <li><a href="https://www.infragistics.com/products/reportplus-embedded/sdk">ReportPlus Embedded SDK <br />앱에 보고서 및 대시보드를 내장하는 도구</a></li>
                                     <li>
                                       <a href="/products/all" class="navigation__feature-link mchNoDecorate"> 모든 제품
                                         <span class="navigation__feature-icon">
