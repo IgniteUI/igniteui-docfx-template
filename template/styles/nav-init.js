@@ -28,13 +28,11 @@
              $('#footer').replaceWith(copyrightFooter);
 
              window.igViewer.common.footer = $('#footer-container');
-
              igNavigation.init();
+         }).fail(function(){
+            window.igViewer.common.footer = $('#footer-container');
+            igNavigation.init();
          });
-         
-        window.igViewer.common.footer = $('#footer-container');
-
-        igNavigation.init();
     }
 
     initNavigation();

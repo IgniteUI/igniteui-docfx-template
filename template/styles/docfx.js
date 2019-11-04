@@ -458,7 +458,6 @@ $(function () {
   // Update href in navbar
   function renderNavbar() {
     var navbar = $("#navbar ul")[0];
-    $(".navigation").addClass("sf-js-enabled sf-with-ul");
     if (typeof navbar === "undefined") {
       loadNavbar();
     } else {
