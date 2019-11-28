@@ -1100,7 +1100,7 @@ function handleThemeSelection(theme, item) {
     if (visibleThemes.indexOf(theme) !== -1) {
       selectTheme(themeItem);
     } else {
-      swapItems(themeItem);
+      //swapItems(themeItem);
       closeContainer();
     }
   }

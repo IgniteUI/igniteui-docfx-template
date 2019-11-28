@@ -5,6 +5,7 @@
     top: 127px;
     position: fixed;
     font-size: 13px;
+    z-index: 2;
     &.shiftup {
         bottom: 70px;
     }
