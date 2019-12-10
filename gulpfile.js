@@ -33,7 +33,8 @@ const bundles = [
             "stackblitz-handler.js",
             "lazyload.js",
             "lazysizes.js",
-            "lazysizes-handler.js"
+            "lazysizes-handler.js",
+            "theming-widget-handler.js"
         ],
         checksumMetadataKey: "_scriptsBundleChecksum"
     },

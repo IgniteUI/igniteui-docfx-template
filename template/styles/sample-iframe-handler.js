@@ -4,9 +4,9 @@
 var onSampleIframeContentLoaded = function (iframe) {
     iframe.parentElement.classList.remove("loading");
 
-    var theme = window.localStorage.getItem("theme");
+    var themeStyle = window.localStorage.getItem("themeStyle");
     var targetOrigin = document.body.getAttribute("data-demos-base-url");
-    var data = {theme: theme, origin: window.location.origin};
+    var data = { themeStyle: themeStyle, origin: window.location.origin };
     iframe.contentWindow.postMessage(data, targetOrigin);
 }
 
