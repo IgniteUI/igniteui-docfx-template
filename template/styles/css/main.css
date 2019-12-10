@@ -411,6 +411,7 @@ sub {
       display: table-cell; } }
 
 .sideaffix {
+  z-index: 2;
   margin-top: 24px;
   max-height: 100%;
   overflow: hidden;
