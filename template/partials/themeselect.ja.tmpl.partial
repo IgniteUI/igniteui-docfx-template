@@ -1,5 +1,5 @@
    <div class="themes-container">
-        <igniteui-theming-widget></igniteui-theming-widget>
+        <igniteui-theming-widget language="ja"></igniteui-theming-widget>
 
                 <div class="theme-switch__more" onblur="closeContainer()">
             <i class="material-icons">more_horiz</i>
