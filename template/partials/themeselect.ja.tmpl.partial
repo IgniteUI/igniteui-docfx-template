@@ -1,7 +1,7 @@
    <div class="themes-container">
         <div class="theme-select-wrapper theme-wrapper-hide">
             <div>
-                <h5>Theming</h5>	
+                <h5>テーマ設定</h5>	
             </div>
             <div class="theme-item theme-item--active" data-theme="default-theme">	
                 <div class="theme-switch__colors">	
