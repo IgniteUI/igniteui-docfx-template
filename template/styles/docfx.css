@@ -250,16 +250,6 @@ svg:hover path {
     position:relative;
 }
 
-.themes-container > div:first-child {
-    flex: 0 1 100%;
-}
-
-.themes-container > div > h5 {
-    font-size: 14px;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
 
 .theme-item:hover {
     color: #333;
@@ -278,6 +268,29 @@ svg:hover path {
 
 .themes-container .theme-item:last-of-type {
     margin-right: 0;
+}
+
+.theme-select-wrapper {
+    display: none;
+    flex-wrap: wrap;
+    align-items:center;
+    padding: 5px;
+    position:relative;
+}
+
+.theme-select-wrapper > div:first-child {
+    flex: 0 1 100%;
+}
+
+.theme-select-wrapper > div > h5 {
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.theme-wrapper-hide {
+    display: none;
 }
 
 @media (min-width: 992px) {
