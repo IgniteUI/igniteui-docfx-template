@@ -7,7 +7,6 @@ $(function () {
   var show = "show";
   var hide = "hide";
   var util = new utility();
-  var theme = window.localStorage.getItem("theme");
 
   highlight();
   enableSearch();
@@ -1083,11 +1082,6 @@ function closeContainer() {
   }
 
 $(document).ready(function () {
-  var sampleIframes = document.querySelectorAll("iframe");
-  if ($(".themes-container").length !== 0 && sampleIframes.length !== 0 && !isDvPage()) {
-    $(".themes-container").css('display', 'inline-flex');
-  }
-
   var contentOffset = $("#_content").offset().top;
   var pageLanguage = $(document.body).data("lang");
   if (!pageLanguage) {
