@@ -2,8 +2,7 @@
         <div class="theme-select-wrapper theme-wrapper-hide">
             <div>
                 <h5>Theming</h5>	
-            </div>	
-
+            </div>
             <div class="theme-item theme-item--active" data-theme="default-theme">	
                 <div class="theme-switch__colors">	
                     <span class="theme-switch__color theme-switch__color--primary default-theme__color--primary"></span>	
@@ -21,7 +20,7 @@
             </div>
         </div>
         <div class="theme-widget-wrapper theme-wrapper-hide">
-            <igniteui-theming-widget></igniteui-theming-widget>
+            <igniteui-theming-widget language="ja"></igniteui-theming-widget>
         </div>
 
         <div class="theme-switch__more" onblur="closeContainer()">
