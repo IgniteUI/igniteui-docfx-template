@@ -4,9 +4,15 @@
 var onSampleIframeContentLoaded = function (iframe) {
     iframe.parentElement.classList.remove("loading");
 
-    var themeStyle = window.localStorage.getItem("themeStyle");
+    var isIE = !(window.ActiveXObject) && "ActiveXObject" in window;
+    var theme = window.localStorage.getItem(isIE ? "theme" : "themeStyle");
     var targetOrigin = document.body.getAttribute("data-demos-base-url");
-    var data = { themeStyle: themeStyle, origin: window.location.origin };
+    var data = { origin: window.location.origin };
+    if (isIE) {
+        data.theme = theme;
+    } else {
+        data.themeStyle = theme;
+    }
     iframe.contentWindow.postMessage(data, targetOrigin);
 }
 
