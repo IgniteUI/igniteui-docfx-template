@@ -11,7 +11,7 @@
 				"infragisticsBaseUrl": "https://staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
-				"angularDvApiBaseUrl": "https://staging.infragistics.com",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-WLXLBZD"
 			},
 			"staging": {
@@ -20,7 +20,7 @@
 				"infragisticsBaseUrl": "https://staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
-				"angularDvApiBaseUrl": "https://staging.infragistics.com",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-NCKNPN"
 			},
 			"production": {
@@ -29,7 +29,7 @@
 				"infragisticsBaseUrl": "https://www.infragistics.com",
 				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
-				"angularDvApiBaseUrl": "https://www.infragistics.com",
+				"dvApiBaseUrl": "https://www.infragistics.com",
 				"GTMContainerId": "GTM-T65CF7"
 			}
 		},
@@ -40,7 +40,7 @@
 				"infragisticsBaseUrl": "https://jp.staging.infragistics.com",
 				"angularApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
-				"angularDvApiBaseUrl": "https://staging.infragistics.com",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-NNHVMC7"
 			},
 			"staging": {
@@ -49,7 +49,7 @@
 				"infragisticsBaseUrl": "https://jp.staging.infragistics.com",
 				"angularApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
-				"angularDvApiBaseUrl": "https://staging.infragistics.com",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-WLWSDK"
 			},
 			"production": {
@@ -58,7 +58,7 @@
 				"infragisticsBaseUrl": "https://jp.infragistics.com",
 				"angularApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
-				"angularDvApiBaseUrl": "https://www.infragistics.com",
+				"dvApiBaseUrl": "https://www.infragistics.com",
 				"GTMContainerId": "GTM-KVNSWJ"
 			}
 		},
@@ -69,7 +69,7 @@
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
-				"angularDvApiBaseUrl": "https://staging.infragistics.com",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-WLXLBZD"
 			},
 			"staging": {
@@ -78,7 +78,7 @@
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
-				"angularDvApiBaseUrl": "https://staging.infragistics.com",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-NCKNPN"
 			},
 			"production": {
@@ -87,7 +87,7 @@
 				"infragisticsBaseUrl": "https://kr.infragistics.com",
 				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
-				"angularDvApiBaseUrl": "https://www.infragistics.com",
+				"dvApiBaseUrl": "https://www.infragistics.com",
 				"GTMContainerId": "GTM-T65CF7"
 			}
 		}
