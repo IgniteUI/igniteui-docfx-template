@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="theme-widget-wrapper theme-wrapper-hide">
-            <igniteui-theming-widget></igniteui-theming-widget>
+            <igniteui-theming-widget theme-url="{environment:themeApiUrl}"></igniteui-theming-widget>
         </div>
 
         <div class="theme-switch__more" onblur="closeContainer()">
