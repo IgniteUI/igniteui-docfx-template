@@ -6,6 +6,8 @@ var onSampleIframeContentLoaded = function (iframe) {
 
     var isIE = !(window.ActiveXObject) && "ActiveXObject" in window;
     var theme = window.sessionStorage.getItem(isIE ? "theme" : "themeStyle");
+    // clear old styles coming from theming widget
+    theme = "";
     var targetOrigin = document.body.getAttribute("data-demos-base-url");
     var data = { origin: window.location.origin };
     if (isIE) {
