@@ -3,7 +3,7 @@ document.addEventListener('lazyloaded', function(e){
     if (!window.igViewer.common.isDvPage() && !$(e.target).hasClass("no-theming")) {
         var isIE = !(window.ActiveXObject) && "ActiveXObject" in window;
         var targetOrigin = document.body.getAttribute("data-demos-base-url");
-        var theme = window.localStorage.getItem(isIE ? "theme" : "themeStyle");
+        var theme = window.sessionStorage.getItem(isIE ? "theme" : "themeStyle");
         var data = { origin: window.location.origin };
         if (isIE) {
             data.theme = theme;

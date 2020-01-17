@@ -5,7 +5,7 @@ var onSampleIframeContentLoaded = function (iframe) {
     iframe.parentElement.classList.remove("loading");
 
     var isIE = !(window.ActiveXObject) && "ActiveXObject" in window;
-    var theme = window.localStorage.getItem(isIE ? "theme" : "themeStyle");
+    var theme = window.sessionStorage.getItem(isIE ? "theme" : "themeStyle");
     var targetOrigin = document.body.getAttribute("data-demos-base-url");
     var data = { origin: window.location.origin };
     if (isIE) {
