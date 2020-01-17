@@ -9,7 +9,7 @@
         
         var isIE = !(window.ActiveXObject) && "ActiveXObject" in window;
         if (isIE) {
-            window.localStorage.setItem('theme', 'default-theme');
+            window.sessionStorage.setItem('theme', 'default-theme');
             $('.theme-select-wrapper').css('display', 'inline-flex');
             $('.theme-select-wrapper').removeClass('theme-wrapper-hide');
 
@@ -18,7 +18,7 @@
                 return;
                 
                 }
-                var currentTheme = window.localStorage.getItem("theme");
+                var currentTheme = window.sessionStorage.getItem("theme");
                 var newTheme = this.getAttribute("data-theme");
                 if (currentTheme !== newTheme) {
                 handleThemeSelection(newTheme, this);
@@ -29,7 +29,7 @@
             var themingWidget = $('igniteui-theming-widget');
             if (themingWidget) {
                 themingWidget.on('themeChange', function(event) {
-                    window.localStorage.setItem('themeStyle', event.originalEvent.detail);
+                    window.sessionStorage.setItem('themeStyle', event.originalEvent.detail);
                     sampleIframes.forEach(function (element) {
                         if (!$(element).hasClass("no-theming") && (!$(element).hasClass("lazyload") || $(element).hasClass("lazyloaded"))) {
                             var src = !!element.src ? element.src : element.dataset.src;
@@ -47,7 +47,7 @@
             if (isDvPage()) {
             // reset the theme to the default one
                 theme = "default-theme";
-                window.localStorage.setItem('theme', theme);
+                window.sessionStorage.setItem('theme', theme);
             }
             if (item) {
                 postMessage(theme);
@@ -70,7 +70,7 @@
         function postMessage(theme) {
             var targetOrigin = document.body.getAttribute("data-demos-base-url"); 
             var data = {origin: window.location.origin};
-            window.localStorage.setItem('theme', theme);
+            window.sessionStorage.setItem('theme', theme);
             $("iframe").filter(function ( index ) {
                 return !this.classList.contains("lazyload")
             }).each( function(i, e)  {
