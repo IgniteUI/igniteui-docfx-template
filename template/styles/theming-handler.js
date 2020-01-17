@@ -25,7 +25,6 @@
                 }
             })
         } else {
-            window.localStorage.setItem('themeStyle', '');
             $('.theme-widget-wrapper').removeClass('theme-wrapper-hide');
             var themingWidget = $('igniteui-theming-widget');
             if (themingWidget) {

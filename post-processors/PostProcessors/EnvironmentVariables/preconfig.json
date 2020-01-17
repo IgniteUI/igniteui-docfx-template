@@ -11,6 +11,7 @@
 				"infragisticsBaseUrl": "https://staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-WLXLBZD",
 				"themeApiUrl": "http://localhost:59296/api/taas"
 			},
@@ -20,6 +21,7 @@
 				"infragisticsBaseUrl": "https://staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-NCKNPN",
 				"themeApiUrl": "https://igniteuithemingwidget-staging.infragistics.com/api/taas"
 			},
@@ -29,6 +31,7 @@
 				"infragisticsBaseUrl": "https://www.infragistics.com",
 				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
+				"dvApiBaseUrl": "https://www.infragistics.com",
 				"GTMContainerId": "GTM-T65CF7",
 				"themeApiUrl": "https://igniteuithemingwidget-prod.infragistics.com/api/taas"
 			}
@@ -40,6 +43,7 @@
 				"infragisticsBaseUrl": "https://jp.staging.infragistics.com",
 				"angularApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-NNHVMC7",
 				"themeApiUrl": "http://localhost:59296/api/taas"
 			},
@@ -49,6 +53,7 @@
 				"infragisticsBaseUrl": "https://jp.staging.infragistics.com",
 				"angularApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-WLWSDK",
 				"themeApiUrl": "https://igniteuithemingwidget-staging.infragistics.com/api/taas"
 			},
@@ -58,6 +63,7 @@
 				"infragisticsBaseUrl": "https://jp.infragistics.com",
 				"angularApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
+				"dvApiBaseUrl": "https://www.infragistics.com",
 				"GTMContainerId": "GTM-KVNSWJ",
 				"themeApiUrl": "https://igniteuithemingwidget-prod.infragistics.com/api/taas"
 			}
@@ -69,6 +75,7 @@
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-WLXLBZD",
 				"themeApiUrl": "http://localhost:59296/api/taas"
 			},
@@ -78,6 +85,7 @@
 				"infragisticsBaseUrl": "https://kr.staging.infragistics.com",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
+				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-NCKNPN",
 				"themeApiUrl": "https://igniteuithemingwidget-staging.infragistics.com/api/taas"
 			},
@@ -87,6 +95,7 @@
 				"infragisticsBaseUrl": "https://kr.infragistics.com",
 				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
+				"dvApiBaseUrl": "https://www.infragistics.com",
 				"GTMContainerId": "GTM-T65CF7",
 				"themeApiUrl": "https://igniteuithemingwidget-prod.infragistics.com/api/taas"
 			}
