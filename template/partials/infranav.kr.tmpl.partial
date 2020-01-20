@@ -50,8 +50,8 @@
                             <li><a class="navigation__sub-menu" href="https://www.infragistics.com/products/ultimate">디자인&amp;개발</a>
                                 <ul class="navigation_sub-menu-featured">
                                     <li><a class="navigation__callout-link" href="https://www.infragistics.com/products/ultimate"><span class="navigation__callout-title">Infragistics Ultimate</span></a></li>
-                                    <li><a data-id="25317" href="https://kr.infragistics.com/products/wpf">Ultimate UI for WPF<br />UI 컨트롤 및 생산성 도구</a></li>
-                                    <li><a data-id="26052" href="https://kr.infragistics.com/products/ignite-ui-angular">Ignite UI for Angular<br />Google의 Angular 프레임워크를 기반으로 설계되고 구축된 50종류 이상의 머티리얼 베이스의 UI 컴포넌트</a></li>
+                                    <li><a data-id="25317" href="https://www.infragistics.co.kr/products/wpf">Ultimate UI for WPF<br />UI 컨트롤 및 생산성 도구</a></li>
+                                    <li><a data-id="26052" href="https://www.infragistics.co.kr/products/ignite-ui-angular">Ignite UI for Angular<br />Google의 Angular 프레임워크를 기반으로 설계되고 구축된 50종류 이상의 머티리얼 베이스의 UI 컴포넌트</a></li>
                                     <li><a href="https://www.infragistics.com/products/indigo-design">Indigo.Design<br />비주얼 디자인, UX 프로토 타이핑, 코드 생성 및 앱 개발을 위한 통합 플랫폼</a></li>
                                     <li><a href="https://www.infragistics.com/products/ignite-ui">Ignite UI for JavaScript<br />React, Angular, ASP.NET MVC용 확장 기능이 포함된 100종류 이상의HTML5/JavaScript jQuery 컴포넌트</a></li>
                                     <li><a href="https://www.infragistics.com/products/aspnet">Ultimate UI for ASP.NET <br />다목적 ASP.NET AJAX UI 컨트롤</a></li>
