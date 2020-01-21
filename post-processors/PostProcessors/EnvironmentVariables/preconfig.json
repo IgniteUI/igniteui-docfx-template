@@ -72,7 +72,7 @@
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
 				"dvDemosBaseUrl": "http://localhost:4200",
-				"infragisticsBaseUrl": "https://kr.staging.infragistics.com",
+				"infragisticsBaseUrl": "https://staging.infragistics.co.kr",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
 				"dvApiBaseUrl": "https://staging.infragistics.com",
@@ -80,9 +80,9 @@
 				"themeApiUrl": "http://localhost:59296/api/taas"
 			},
 			"staging": {
-				"demosBaseUrl": "https://kr.staging.infragistics.com/angular-demos",
-				"dvDemosBaseUrl": "https://kr.staging.infragistics.com/angular-demos-dv",
-				"infragisticsBaseUrl": "https://kr.staging.infragistics.com",
+				"demosBaseUrl": "https://staging.infragistics.co.kr/angular-demos",
+				"dvDemosBaseUrl": "https://staging.infragistics.co.kr/angular-demos-dv",
+				"infragisticsBaseUrl": "https://staging.infragistics.co.kr",
 				"angularApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
 				"dvApiBaseUrl": "https://staging.infragistics.com",
@@ -90,9 +90,9 @@
 				"themeApiUrl": "https://igniteuithemingwidget-staging.infragistics.com/api/taas"
 			},
 			"production": {
-				"demosBaseUrl": "https://kr.infragistics.com/angular-demos",
-				"dvDemosBaseUrl": "https://kr.infragistics.com/angular-demos-dv",
-				"infragisticsBaseUrl": "https://kr.infragistics.com",
+				"demosBaseUrl": "https://www.infragistics.co.kr/angular-demos",
+				"dvDemosBaseUrl": "https://www.infragistics.co.kr/angular-demos-dv",
+				"infragisticsBaseUrl": "https://www.infragistics.co.kr",
 				"angularApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
 				"dvApiBaseUrl": "https://www.infragistics.com",
