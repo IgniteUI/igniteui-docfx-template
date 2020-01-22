@@ -5,6 +5,20 @@
  */
 exports.preTransform = function (model) {
     model._disableSideFilter = false;
+
+    model._isLangEn = true;
+    model._isLangJa = false;
+    model._isLangKr = false;
+    if (model.items[0]._language) {
+      if (model.items[0]._language === "ja") {
+        model._isLangJa = true;
+        model._isLangEn = model._isLangKr = false;
+      } else if (model.items[0]._language === "kr") {
+        model._isLangKr = true;
+        model._isLangEn = model._isLangJa = false;
+      }
+    }
+
     return model;
 };
 
