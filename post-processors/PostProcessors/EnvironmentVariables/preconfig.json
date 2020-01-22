@@ -43,7 +43,7 @@
 			"development": {
 				"demosBaseUrl": "http://localhost:4200",
 				"dvDemosBaseUrl": "http://localhost:4200",
-				"lobDemosBaseUrl":"https://http://localhost:4200",
+				"lobDemosBaseUrl":"http://localhost:4200",
 				"infragisticsBaseUrl": "https://jp.staging.infragistics.com",
 				"angularApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/typescript/latest",
 				"sassApiUrl": "https://jp.staging.infragistics.com/products/ignite-ui-angular/docs/sass/latest",
