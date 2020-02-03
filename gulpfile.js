@@ -74,16 +74,15 @@ const addWatcher = (done) => {
         allFiles = allFiles.concat(bundle.files);
     });
 
-    gulp.watch(allFiles, { cwd: baseFolder }).on("change", function(file) {
+    gulp.watch(allFiles, { cwd: baseFolder }, gulp.series(bundleAndMinify)).on("change", function(file) {
         var filePath = path.join(`${__dirname}\\${baseFolder + file}`);
         var hash = md5File.sync(filePath);
         if (md5HashMap[filePath] !== hash) {
             md5HashMap[filePath] = hash;
-            return gulp.series(bundleAndMinify, (seriesDone) => {seriesDone(); done();})()
         }
-
-        done();
+ 
     });
+    done();
 }
 // gulp.task("bundle-and-minify:watch", ["bundle-and-minify", "generate-file-check-sum-map"], () => {
    
