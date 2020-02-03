@@ -13,22 +13,25 @@
   ],
   "author": "Infragistics",
   "scripts": {
-    "bundle-and-minify": "gulp bundle-and-minify",
-    "bundle-and-minify:watch": "gulp bundle-and-minify:watch",
-    "generate-bundling-global-metadata": "gulp generate-bundling-global-metadata"
+    "bundle-and-minify": "gulp bundleAndMinify",
+    "bundle-and-minify:watch": "gulp bundleAndMinifyWatch",
+    "generate-bundling-global-metadata": "gulp generateBundlingGlobalMetadata"
   },
   "bugs": {
     "url": "https://github.com/IgniteUI/igniteui-docfx-template/issues"
   },
   "homepage": "https://github.com/IgniteUI/igniteui-docfx-template#readme",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.10.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
-    "gulp-uglify": "^3.0.1",
+    "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
     "md5-file": "^4.0.0",
     "uglify-save-license": "^0.4.1",
     "yargs": "^12.0.5"
+  },
+  "dependencies": {
+    "gulp-uglify-es": "^2.0.0"
   }
 }

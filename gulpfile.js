@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const util = require("gulp-util");
 const concat = require("gulp-concat");
-const uglify = require("gulp-uglify");
+const uglify = require("gulp-uglify-es").default;
 const saveLicense = require("uglify-save-license");
 const cleanCSS = require("gulp-clean-css");
 const md5File = require('md5-file')
@@ -52,7 +52,7 @@ const bundles = [
 
 var md5HashMap = {};
 
-gulp.task("bundle-and-minify", () => {
+const bundleAndMinify = (done) => {
     var isDebugMode = argv.debugMode !== undefined && argv.debugMode.toLowerCase().trim() === "true";
     var promises = [];
     bundles.forEach(bundle => {
@@ -63,29 +63,35 @@ gulp.task("bundle-and-minify", () => {
         }   
     });
 
-    return Promise.all(promises).then(function () {
-        gulp.start("generate-bundling-global-metadata");
-    });
-});
+    return Promise.all(promises).then(generateBundlingGlobalMetadata(done));
+}
 
-gulp.task("bundle-and-minify:watch", ["bundle-and-minify", "generate-file-check-sum-map"], () => {
+// gulp.task("bundle-and-minify", );
+
+const addWatcher = (done) => {
     var allFiles = [];
     bundles.forEach(bundle => {
         allFiles = allFiles.concat(bundle.files);
     });
 
-    gulp.watch([allFiles], { cwd: baseFolder }).on('change', function(file) {
-        var hash = md5File.sync(file.path);
-        if (md5HashMap[file.path] !== hash) {
-            md5HashMap[file.path] = hash;
-            gulp.start("bundle-and-minify");
+    gulp.watch(allFiles, { cwd: baseFolder }).on("change", function(file) {
+        var filePath = path.join(`${__dirname}\\${baseFolder + file}`);
+        var hash = md5File.sync(filePath);
+        if (md5HashMap[filePath] !== hash) {
+            md5HashMap[filePath] = hash;
+            return gulp.series(bundleAndMinify, (seriesDone) => {seriesDone(); done();})()
         }
+
+        done();
     });
-});
+}
+// gulp.task("bundle-and-minify:watch", ["bundle-and-minify", "generate-file-check-sum-map"], () => {
+   
+// });
 
 // Generating hash per each file in the bundles based on its content.
 // It is used to generate a new bundle only if the content of a file is changed.
-gulp.task("generate-file-check-sum-map", () => {
+const generateFileCheckSumMap = (done) => {
     var allFiles = [];
     bundles.forEach(bundle => {
         allFiles = allFiles.concat(bundle.files);
@@ -96,9 +102,12 @@ gulp.task("generate-file-check-sum-map", () => {
         var hash = md5File.sync(filePath);
         md5HashMap[filePath] = hash;
     });
-})
+    done();
+}
 
-gulp.task("generate-bundling-global-metadata", () => {
+// gulp.task("generate-file-check-sum-map", )
+
+const generateBundlingGlobalMetadata = (done) => {
     var metadata = {};
     // for general cache invalidation purposes
     metadata["_timestamp"] = new Date().getTime();
@@ -108,7 +117,9 @@ gulp.task("generate-bundling-global-metadata", () => {
     });
 
     fs.writeFileSync(path.join(__dirname, "template", "bundling.global.json"), JSON.stringify(metadata));
-})
+
+    done();
+}
 
 function bundleAndMinifyJS(files, fileName, outputFolder, isDebugMode) {
     return new Promise(function(resolve, reject) {
@@ -138,3 +149,6 @@ function bundleAndMinifyCSS(files, fileName, outputFolder, isDebugMode) {
             .on('end', resolve);
     });
 }
+
+exports.bundleAndMinify = bundleAndMinify;
+exports.bundleAndMinifyWatch = gulp.series(bundleAndMinify, generateFileCheckSumMap, addWatcher);
