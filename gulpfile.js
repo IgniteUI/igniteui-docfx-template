@@ -66,8 +66,6 @@ const bundleAndMinify = (done) => {
     return Promise.all(promises).then(generateBundlingGlobalMetadata(done));
 }
 
-// gulp.task("bundle-and-minify", );
-
 const addWatcher = (done) => {
     var allFiles = [];
     bundles.forEach(bundle => {
@@ -84,9 +82,6 @@ const addWatcher = (done) => {
     });
     done();
 }
-// gulp.task("bundle-and-minify:watch", ["bundle-and-minify", "generate-file-check-sum-map"], () => {
-   
-// });
 
 // Generating hash per each file in the bundles based on its content.
 // It is used to generate a new bundle only if the content of a file is changed.
@@ -103,8 +98,6 @@ const generateFileCheckSumMap = (done) => {
     });
     done();
 }
-
-// gulp.task("generate-file-check-sum-map", )
 
 const generateBundlingGlobalMetadata = (done) => {
     var metadata = {};
