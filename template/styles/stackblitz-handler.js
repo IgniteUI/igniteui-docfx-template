@@ -9,71 +9,96 @@
     var demoFilesFolderUrlPath =  assetsFolder + "samples/";
     var demoFilesCSSSupportFolderUrlPath = demoFilesFolderUrlPath + "css-support/";
     var assetsRegex = new RegExp("\/?assets\/", "g");
-    var samplesFilesUrls = [];
     var sampleFilesContentByUrl = {};
     var isIE = navigator.userAgent.indexOf('MSIE')!==-1 || navigator.appVersion.indexOf('Trident/') > 0;
     var isEdge = navigator.userAgent.indexOf('Edge')!==-1;
 
     var isButtonClickInProgress = false;
 
-    var demosBaseUrl;
     var demosTimeStamp;
-
+       
     var sharedFileContent;
-
 	var init = function () {
-        var stackblitzButtons = $("." + buttonClass);
+        var stackblitzButtons = $("." + buttonClass);  
+
         if (stackblitzButtons.length > 0) {
-            demosBaseUrl = $(stackblitzButtons[0]).attr(buttonDemosUrlAttrName);
+            var demosBaseUrls = new Set();
 
-            $.each(stackblitzButtons, function(index, element) {
-                var $button = $(element);
-                var sampleFileUrl = getSampleUrlByStackBlitzButton($button);
-                if (samplesFilesUrls.indexOf(sampleFileUrl) === -1) {
-                    samplesFilesUrls.push(sampleFileUrl);
-                }
-
-                $button.on("click", onStackblitzButtonClicked);
+            $.each(stackblitzButtons, function(index, element){
+                demosBaseUrls.add($(element).attr(buttonDemosUrlAttrName))
             });
 
-            var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
-            // prevent caching
-            metaFileUrl += "?t=" + new Date().getTime();
+            var hasMultipleUrls = demosBaseUrls.size > 1;
 
-            $.get(metaFileUrl).done(function(response) {
-                demosTimeStamp = response.generationTimeStamp;
-                getFiles();
-            });
-        }
+            if (hasMultipleUrls) {
+                demosBaseUrls.forEach(function(url) {
+                    var currentDemoUrlButtons = $(stackblitzButtons).filter(function(index, element) {
+                        return $(element).attr(buttonDemosUrlAttrName) === url;
+                    });
+                    generateStackBlitz(url, currentDemoUrlButtons)
+                });
+
+            } else {
+                demosBaseUrl = $(stackblitzButtons[0]).attr(buttonDemosUrlAttrName);
+                generateStackBlitz(demosBaseUrl, stackblitzButtons)
+            }
+        } 
+    }
+    
+    var generateStackBlitz = function(demosBaseUrl, $buttons) {
+        var samplesFilesUrls = []; 
+
+        $.each($buttons, function(index, element) {
+
+            var $button = $(element);
+            var sampleFileUrl = getSampleUrlByStackBlitzButton($button, demosBaseUrl);
+
+            if (samplesFilesUrls.indexOf(sampleFileUrl) === -1) {
+                samplesFilesUrls.push(sampleFileUrl);
+            }
+
+            $button.on("click", onStackblitzButtonClicked);
+        });
+           
+        var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
+        // prevent caching 
+        metaFileUrl += "?t=" + new Date().getTime();
+ 
+        $.get(metaFileUrl).done(function(response) {
+            demosTimeStamp = response.generationTimeStamp;
+            getFiles($buttons, demosBaseUrl, samplesFilesUrls, demosTimeStamp);
+        });
     }
 
-    var getFiles = function() {
+   var getFiles = function($buttons, demosBaseUrl, samplesFilesUrls, demosTimeStamp) {
+
         var sharedFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + sharedFileName;
-        sharedFileUrl = addTimeStamp(sharedFileUrl);
+        sharedFileUrl = addTimeStamp(sharedFileUrl, demosTimeStamp);
+
         var requests = [$.get(sharedFileUrl)];
-        var stackblitzButtons = $("." + buttonClass);
+
         $.each(samplesFilesUrls, function(index, url) {
-            url = addTimeStamp(url);
+            url = addTimeStamp(url, demosTimeStamp);
             var ajax = $.get(url);
             requests.push(ajax);
         });
 
         $.when.apply($, requests).done(function() {
-            replaceRelativeAssetsUrls(arguments[0][0].files);
+            replaceRelativeAssetsUrls(arguments[0][0].files, demosBaseUrl);
             sharedFileContent = arguments[0][0];
-
+            
             for(var i = 1; i < arguments.length; i++) {
-                replaceRelativeAssetsUrls(arguments[i][0].sampleFiles);
+                replaceRelativeAssetsUrls(arguments[i][0].sampleFiles, demosBaseUrl);
                 var url = this[i].url;
                 url = removeQueryString(url);
                 sampleFilesContentByUrl[url] = arguments[i][0];
             }
 
-            stackblitzButtons.removeAttr("disabled");
+            $buttons.removeAttr("disabled");
         });
     }
 
-    var addTimeStamp = function(url) {
+    var addTimeStamp = function(url, demosTimeStamp) {
         if (!demosTimeStamp) {
             throw Error("Timestamp cannot be added.");
         }
@@ -99,7 +124,7 @@
         return demoFilesFolderUrlPath;
     }
 
-    var getSampleUrlByStackBlitzButton = function ($button) {
+    var getSampleUrlByStackBlitzButton = function ($button, demosBaseUrl) {
         var sampleSrc = "";
         var buttonIframeId = $button.attr(buttonIframeIdAttrName);
         if (buttonIframeId) {
@@ -124,11 +149,11 @@
     var onStackblitzButtonClicked = function (event) {
 		if (isButtonClickInProgress) {
 			return;
-        }
+        } 
 
         isButtonClickInProgress = true;
         var $button = $(this);
-        var sampleFileUrl = getSampleUrlByStackBlitzButton($button);
+        var sampleFileUrl = getSampleUrlByStackBlitzButton($button, $(this).attr(buttonDemosUrlAttrName));
         var sampleContent = sampleFilesContentByUrl[sampleFileUrl];
         var formData = {
             dependencies: sampleContent.sampleDependencies,
@@ -142,7 +167,7 @@
         isButtonClickInProgress = false;
     }
 
-    var replaceRelativeAssetsUrls = function (files) {
+    var replaceRelativeAssetsUrls = function (files, demosBaseUrl) {
         var assetsUrl = demosBaseUrl + assetsFolder;
         for (var i = 0; i < files.length; i++) {
             if (files[i].hasRelativeAssetsUrls) {
@@ -181,7 +206,7 @@
 
             fileInput.appendTo(form);
         }
-
+    
         // tags
         if (data.tags) {
             for (var i = 0; i < data.tags.length; i++) {
@@ -193,8 +218,8 @@
 
                 tagInput.appendTo(tagInput);
             }
-        }
-
+        } 
+  
         // description
         if (data.description) {
             var descriptionInput = $("<input />", {
