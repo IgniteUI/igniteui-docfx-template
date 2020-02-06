@@ -9,9 +9,14 @@
         
         var isIE = !(window.ActiveXObject) && "ActiveXObject" in window;
         if (isIE) {
-            window.sessionStorage.setItem('theme', 'default-theme');
             $('.theme-select-wrapper').css('display', 'inline-flex');
             $('.theme-select-wrapper').removeClass('theme-wrapper-hide');
+            var currentTheme = window.sessionStorage.getItem("theme");
+            if (currentTheme) {
+                var item = $(".theme-item").filter("[data-theme=" + currentTheme + "]")[0];
+                handleThemeSelection(currentTheme, item);
+            }
+           
 
             $(".theme-item").on("click", function (e) {
                 if (e.currentTarget.lastElementChild.tagName === "svg") {
