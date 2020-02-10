@@ -15,7 +15,7 @@
 				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-WLXLBZD",
 				"themeApiUrl": "http://localhost:59296/api/taas",
-				"themingWidgetUrl": "http://localhost/theming-widget/igniteui-theming-widget.js"
+				"themingWidgetVersion": "latest"
 			},
 			"staging": {
 				"demosBaseUrl": "https://staging.infragistics.com/angular-demos",
@@ -27,7 +27,7 @@
 				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-NCKNPN",
 				"themeApiUrl": "https://igniteuithemingwidget-staging.infragistics.com/api/taas",
-				"themingWidgetUrl": "https://cdn-na.infragistics.com/igniteui/theming-widget/latest/igniteui-theming-widget.js"
+				"themingWidgetVersion": "latest"
 			},
 			"production": {
 				"demosBaseUrl": "https://www.infragistics.com/angular-demos",
@@ -39,7 +39,7 @@
 				"dvApiBaseUrl": "https://www.infragistics.com",
 				"GTMContainerId": "GTM-T65CF7",
 				"themeApiUrl": "https://igniteuithemingwidget-prod.infragistics.com/api/taas",
-				"themingWidgetUrl": "https://cdn-na.infragistics.com/igniteui/theming-widget/latest-stable/igniteui-theming-widget.js"
+				"themingWidgetVersion": "latest-stable"
 			}
 		},
 		"jp": {
@@ -53,7 +53,7 @@
 				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-NNHVMC7",
 				"themeApiUrl": "http://localhost:59296/api/taas",
-				"themingWidgetUrl": "http://localhost/theming-widget/igniteui-theming-widget.js"
+				"themingWidgetVersion": "latest"
 			},
 			"staging": {
 				"demosBaseUrl": "https://jp.staging.infragistics.com/angular-demos",
@@ -65,7 +65,7 @@
 				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-WLWSDK",
 				"themeApiUrl": "https://igniteuithemingwidget-staging.infragistics.com/api/taas",
-				"themingWidgetUrl": "https://cdn-na.infragistics.com/igniteui/theming-widget/latest/igniteui-theming-widget.js"
+				"themingWidgetVersion": "latest"
 			},
 			"production": {
 				"demosBaseUrl": "https://jp.infragistics.com/angular-demos",
@@ -77,7 +77,7 @@
 				"dvApiBaseUrl": "https://www.infragistics.com",
 				"GTMContainerId": "GTM-KVNSWJ",
 				"themeApiUrl": "https://igniteuithemingwidget-prod.infragistics.com/api/taas",
-				"themingWidgetUrl": "https://cdn-na.infragistics.com/igniteui/theming-widget/latest-stable/igniteui-theming-widget.js"
+				"themingWidgetVersion": "latest-stable"
 			}
 		},
 		"kr": {
@@ -91,7 +91,7 @@
 				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-WLXLBZD",
 				"themeApiUrl": "http://localhost:59296/api/taas",
-				"themingWidgetUrl": "http://localhost/theming-widget/igniteui-theming-widget.js"
+				"themingWidgetVersion": "latest"
 			},
 			"staging": {
 				"demosBaseUrl": "https://staging.infragistics.co.kr/angular-demos",
@@ -103,7 +103,7 @@
 				"dvApiBaseUrl": "https://staging.infragistics.com",
 				"GTMContainerId": "GTM-NCKNPN",
 				"themeApiUrl": "https://igniteuithemingwidget-staging.infragistics.com/api/taas",
-				"themingWidgetUrl": "https://cdn-na.infragistics.com/igniteui/theming-widget/latest/igniteui-theming-widget.js"
+				"themingWidgetVersion": "latest"
 			},
 			"production": {
 				"demosBaseUrl": "https://www.infragistics.co.kr/angular-demos",
@@ -115,7 +115,7 @@
 				"dvApiBaseUrl": "https://www.infragistics.com",
 				"GTMContainerId": "GTM-T65CF7",
 				"themeApiUrl": "https://igniteuithemingwidget-prod.infragistics.com/api/taas",
-				"themingWidgetUrl": "https://cdn-na.infragistics.com/igniteui/theming-widget/latest-stable/igniteui-theming-widget.js"
+				"themingWidgetVersion": "latest-stable"
 			}
 		}
 	},
