@@ -33,7 +33,11 @@
                     sampleIframes.forEach(function (element) {
                         if (!$(element).hasClass("no-theming") && (!$(element).hasClass("lazyload") || $(element).hasClass("lazyloaded"))) {
                             var src = !!element.src ? element.src : element.dataset.src;
-                            var data = { themeStyle: event.originalEvent.detail, origin: window.location.origin };
+                            var data = {
+                                themeStyle: event.originalEvent.detail,
+                                origin: window.location.origin,
+                                themeName: widget.theme.globalTheme
+                            };
                             element.contentWindow.postMessage(data, src);
                         }
                     });
