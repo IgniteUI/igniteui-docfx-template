@@ -36,7 +36,7 @@
                             var data = {
                                 themeStyle: event.originalEvent.detail,
                                 origin: window.location.origin,
-                                themeName: themingWidget.theme.globalTheme
+                                themeName: themingWidget[0].theme.globalTheme
                             };
                             element.contentWindow.postMessage(data, src);
                         }
