@@ -33,7 +33,7 @@ full license information.}}
     <link rel="stylesheet" href="https://infragistics.com/css/footer.css">
     <link rel="stylesheet" href="{{_rel}}styles/bundles/styles-bundle.min.css?checksum={{_stylesBundleFileName}}">
     <script type="text/javascript" src="{{_rel}}styles/sample-iframe-handler.js?t={{_timestamp}}"></script>
-    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/theming-widget/latest/igniteui-theming-widget.js?t=?t={{_timestamp}}"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/theming-widget/{environment:themingWidgetVersion}/igniteui-theming-widget.js?t=?t={{_timestamp}}"></script>
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
