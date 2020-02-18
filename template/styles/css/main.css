@@ -413,7 +413,6 @@ sub {
 .sideaffix {
   margin-top: 24px;
   max-height: 100%;
-  overflow: hidden;
   top: 127px;
   position: fixed;
   font-size: 13px;
