@@ -5,6 +5,7 @@ document.addEventListener('lazyloaded', function(e){
         var targetOrigin = document.body.getAttribute("data-demos-base-url");
         var theme = window.sessionStorage.getItem(isIE ? "theme" : "themeStyle");
         var data = { origin: window.location.origin };
+        data.themeName =  $('igniteui-theming-widget').length > 0 ?  $('igniteui-theming-widget')[0].theme.globalTheme: null;
         if (isIE) {
             data.theme = theme;
         } else {
