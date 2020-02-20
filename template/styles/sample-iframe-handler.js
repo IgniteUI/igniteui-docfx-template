@@ -13,7 +13,12 @@ var onSampleIframeContentLoaded = function (iframe) {
     } else {
         data.themeStyle = theme;
     }
-    iframe.contentWindow.postMessage(data, targetOrigin);
+    var themingWidget = $('igniteui-theming-widget');
+    if (themingWidget.length > 0) {
+        data.themeName = themingWidget[0].theme.globalTheme;
+        iframe.contentWindow.postMessage(data, targetOrigin);
+    }
+
 }
 
 var onXPlatSampleIframeContentLoaded = function (iframe) {
