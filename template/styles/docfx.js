@@ -744,18 +744,20 @@ $(function () {
 
   function renderBreadcrumb() {
     var breadcrumb = [];
-    $("#navbar a.active").each(function (i, e) {
+    $("#toc li.active").each(function (i, e) {
+
+      $($(e).parents("li").get().reverse()).each(function (index, parent){
+        breadcrumb.push({
+          href: $(parent).children("a")[0].href,
+          name: $(parent).children("a")[0].title
+        });
+     });
+
       breadcrumb.push({
-        href: e.href,
-        name: e.innerHTML
+          href: $(e).children("a")[0].href,
+          name: $(e).children("a")[0].title
+        });
       });
-    });
-    $("#toc a.active").each(function (i, e) {
-      breadcrumb.push({
-        href: e.href,
-        name: e.innerHTML
-      });
-    });
 
     var html = util.formList(breadcrumb, "breadcrumb");
     $("#breadcrumb").html(html);

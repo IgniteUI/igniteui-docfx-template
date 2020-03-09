@@ -28,5 +28,5 @@ full license information.}}
         <div class="collapse navbar-collapse navbar-flex" id="navbar"></div>
 
     </div>
-
+ {{^_disableBreadcrumb}} {{>partials/breadcrumb}} {{/_disableBreadcrumb}}
 </nav>

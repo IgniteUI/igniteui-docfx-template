@@ -1,9 +1,10 @@
-.breadcrumb {
+.breadcrumb{
     margin: 0;
-    padding: 10px 0;
+    padding: 4px 0;
     background-color: inherit;
     white-space: nowrap;
-}
+    font-size: 0.8rem;
+} 
 
 .breadcrumb > li + li:before {
     content: '\00a0/';
