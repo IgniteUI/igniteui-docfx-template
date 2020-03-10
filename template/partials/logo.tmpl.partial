@@ -2,5 +2,5 @@
 full license information.}}
 
 <a class="navbar-brand" href="{{_navBarTitleHref}}">
-    <span>{{_navBarTitle}} -</span>
+    <span>{{_navBarTitle}}</span>
 </a>

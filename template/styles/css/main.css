@@ -563,6 +563,14 @@ table a {
 .navbar .navbar-nav {
   display: inline-block; }
 
+.navbar-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
 .navbar-brand {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -668,6 +676,9 @@ table a {
   margin: 10px 10px 4px 10px;
   padding: 8px;
   border-radius: 0; }
+
+#hamburger2 {
+  margin-left: 70px; }
 
 .anchorjs-link {
   position: absolute;
@@ -877,14 +888,29 @@ header .navbar {
   background-color: transparent;
   color: #ddd;
   white-space: nowrap;
-  font-size: .8rem; }
+  font-size: .8rem;
+  -ms-flex-item-align: center;
+      align-self: center; }
   .breadcrumb a {
     color: #ccc; }
     .breadcrumb a:hover, .breadcrumb a:focus {
       color: #fff; }
 
+#breadcrumb {
+  -ms-flex-item-align: center;
+      align-self: center; }
+
+.breadcrumb:before {
+  content: '\00a0- ';
+  color: #fff;
+  font-size: 1rem; }
+
 .breadcrumb > li + li:before {
   content: '\00a0/'; }
+
+@media screen and (max-width: 768px) {
+  .breadcrumb {
+    display: none; } }
 
 #autocollapse.collapsed .navbar-header {
   float: none; }
