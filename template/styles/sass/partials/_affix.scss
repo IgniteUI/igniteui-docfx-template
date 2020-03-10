@@ -1,9 +1,8 @@
 .sideaffix {
-    margin-top: 60px; 
+    margin-top: 20px; 
     max-height: 100%;
     overflow: hidden;
     top: 127px;
-    position: fixed;
     font-size: 13px;
     z-index: 2;
     &.shiftup {
@@ -34,9 +33,14 @@
     }
 }
 
+.docfx-affix {
+    position: fixed;
+    right: 0;
+    z-index: 1;
+}
+
 .affix {
-    position: relative;
-    height: 80%;
+    height: 65%;
     overflow: auto;
 }
 

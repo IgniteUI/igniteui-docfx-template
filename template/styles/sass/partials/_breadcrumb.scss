@@ -1,9 +1,20 @@
 .breadcrumb{
     margin: 0;
-    padding: 4px 0;
-    background-color: inherit;
+    padding: 4px;
+    background-color: transparent;
+    color: #ddd;
     white-space: nowrap;
-    font-size: 0.8rem;
+    font-size: .8rem;
+
+    a {
+        color: #ccc;
+
+        &:hover,
+        &:focus {
+            color: #fff;
+        }
+    }
+    
 } 
 
 .breadcrumb > li + li:before {

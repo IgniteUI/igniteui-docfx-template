@@ -22,11 +22,14 @@ full license information.}}
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            {{>partials/logo}}
         </div>
 
-        <div class="collapse navbar-collapse navbar-flex" id="navbar"></div>
-
+        <div class="docfx-nav-header">
+            <div class="logo-breadcrumb">
+            {{>partials/logo}}
+            {{^_disableBreadcrumb}} {{>partials/breadcrumb}} {{/_disableBreadcrumb}}
+            </div>
+            <div class="collapse navbar-collapse navbar-flex" id="navbar"></div>
+        </div>
     </div>
- {{^_disableBreadcrumb}} {{>partials/breadcrumb}} {{/_disableBreadcrumb}}
-</nav>
+</nav> 

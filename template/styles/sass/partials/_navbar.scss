@@ -4,6 +4,16 @@
     border: inset;
 }
 
+.docfx-nav-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo-breadcrumb {
+    display: flex;
+    align-items: center;
+}
+
 .navbar .navbar-nav {
     display: inline-block;
 }
@@ -17,10 +27,10 @@
     padding: 0;
 }
 
-.navbar-collapse {
-    margin: 0 -15px;
-    padding: 0;
-}
+// .navbar-collapse {
+//     margin: 0 -15px;
+//     padding: 0;
+// }
 
 .navbar {
     .navbar-brand > span {
@@ -89,6 +99,10 @@
             display: flex !important;
             justify-content: flex-end;
             padding: inherit;
+        }
+
+        .navbar-right{
+            margin-right: 0;
         }
 
         .nav.navbar-nav.navbar-right {

@@ -524,13 +524,10 @@ $(function () {
   }
 
   function renderSidebar() {
-    var contentHeight = $("#main").height();
-    $("#toc").height(contentHeight + 100);
     var sidetoggle = $(".sidetoggle.collapse")[0];
     $(window).resize(function () {
       $(sidetoggle).height("auto");
       $(sidetoggle).removeClass("in");
-      $("#toc").height(contentHeight + 100);
     });
     var sidetoc = $("#sidetoggle .sidetoc")[0];
     if (typeof sidetoc === "undefined") {

@@ -1,14 +1,21 @@
 #main {
     position: relative;
-    padding-top: 160px; 
+    padding-top: $main-padding; 
     width: 100%;
     min-height: 100%;
 }
 
 .body-content {
+    display: flex;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; 
     height: 100%;
+}
+ 
+@media only screen and (max-width: 991px) {
+    .body-content {
+      flex-flow: column;
+    }
 }
 
 header {

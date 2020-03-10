@@ -130,10 +130,8 @@ sub {
 
 .toc {
   background-color: #eff1f2 !important;
-  overflow-x: hidden;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content; }
+  overflow: hidden;
+  padding-bottom: 30px; }
 
 .sidetoc.shiftup {
   bottom: 70px; }
@@ -226,6 +224,7 @@ sub {
   font-weight: 500; }
 
 .toc-filter {
+  height: 36px;
   border-radius: 5px;
   background: #fff;
   color: #666666;
@@ -249,7 +248,6 @@ sub {
 
 .sidenav {
   margin-right: -15px;
-  position: fixed;
   border-right: 1px solid #dedede; }
   .sidenav__header {
     padding: 24px 0 0 16px !important;
@@ -338,13 +336,7 @@ sub {
     pointer-events: none; } }
 
 .sidenav-container {
-  display: block;
-  position: relative;
-  border-right: 1px solid #dedede; }
-  @media only screen and (min-width: 992px) {
-    .sidenav-container {
-      display: table-cell;
-      position: relative; } }
+  position: fixed; }
 
 .toc-toggle {
   -webkit-box-pack: center;
@@ -361,11 +353,11 @@ sub {
     color: #0099ff; }
 
 .sidetoc {
-  position: relative;
   margin-left: -15px;
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #fff;
+  height: calc(100vh - 160px);
   z-index: 1; }
 
 .toc-filter {
@@ -394,7 +386,8 @@ sub {
     padding: 0;
     margin: 24px 0 !important; }
   .sidenav-container {
-    border-right: none; } }
+    border-right: none;
+    position: relative; } }
 
 .article {
   margin-top: 120px;
@@ -407,20 +400,21 @@ sub {
   max-width: 100%; }
 
 .article-container {
+  position: relative;
+  left: 16.66666667%;
   height: 100%;
   padding: 24px;
   margin-bottom: 10px;
   z-index: 1; }
-  @media only screen and (min-width: 992px) {
+  @media screen and (max-width: 991px) {
     .article-container {
-      display: table-cell; } }
+      left: 0; } }
 
 .sideaffix {
-  margin-top: 60px;
+  margin-top: 20px;
   max-height: 100%;
   overflow: hidden;
   top: 127px;
-  position: fixed;
   font-size: 13px;
   z-index: 2; }
   .sideaffix.shiftup {
@@ -442,9 +436,13 @@ sub {
   .sideaffix ::-webkit-scrollbar-thumb {
     background: #888; }
 
+.docfx-affix {
+  position: fixed;
+  right: 0;
+  z-index: 1; }
+
 .affix {
-  position: relative;
-  height: 80%;
+  height: 65%;
   overflow: auto; }
 
 .affix h5 {
@@ -546,6 +544,22 @@ table a {
   border-bottom-color: #dedede;
   border: inset; }
 
+.docfx-nav-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
+.logo-breadcrumb {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
 .navbar .navbar-nav {
   display: inline-block; }
 
@@ -559,10 +573,6 @@ table a {
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   font-size: 18px;
-  padding: 0; }
-
-.navbar-collapse {
-  margin: 0 -15px;
   padding: 0; }
 
 .navbar .navbar-brand > span {
@@ -621,6 +631,8 @@ table a {
         -ms-flex-pack: end;
             justify-content: flex-end;
     padding: inherit; }
+  .navbar .navbar-right {
+    margin-right: 0; }
   .navbar .nav.navbar-nav.navbar-right {
     float: none !important;
     display: -webkit-inline-box;
@@ -804,14 +816,24 @@ a.disable:hover {
 
 #main {
   position: relative;
-  padding-top: 160px;
+  padding-top: 124px;
   width: 100%;
   min-height: 100%; }
 
 .body-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   position: relative;
   overflow: hidden;
   height: 100%; }
+
+@media only screen and (max-width: 991px) {
+  .body-content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column; } }
 
 header {
   position: fixed;
@@ -851,10 +873,15 @@ header .navbar {
 
 .breadcrumb {
   margin: 0;
-  padding: 4px 0;
-  background-color: inherit;
+  padding: 4px;
+  background-color: transparent;
+  color: #ddd;
   white-space: nowrap;
-  font-size: 0.8rem; }
+  font-size: .8rem; }
+  .breadcrumb a {
+    color: #ccc; }
+    .breadcrumb a:hover, .breadcrumb a:focus {
+      color: #fff; }
 
 .breadcrumb > li + li:before {
   content: '\00a0/'; }

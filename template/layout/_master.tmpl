@@ -20,7 +20,7 @@ full license information.}} {{!include(/^styles/.*/)}} {{!include(/^fonts/.*/)}}
     <div id="main" role="main" class="container-fluid">
         {{!#_enableSearch}} {{!--
         <div class="row"> --}} {{!>partials/searchResults}} {{!-- </div> --}} {{!/_enableSearch}}
-        <div class="row body-content">
+        <div class="row body-content docfx-content">
 
             <div class="sidenav-container col-lg-2 col-md-3">
                 {{^_disableToc}} {{>partials/toc}} {{/_disableToc}}
@@ -35,7 +35,7 @@ full license information.}} {{!include(/^styles/.*/)}} {{!include(/^fonts/.*/)}}
                  {{/_gitHubBtnLbl}}
             </div>
 
-            <div class="col-lg-2 hidden-md">
+            <div class="col-lg-2 hidden-md docfx-affix">
                 {{^_disableAffix}} {{>partials/affix}} {{/_disableAffix}}
             </div>
 
