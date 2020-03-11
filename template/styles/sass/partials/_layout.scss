@@ -1,6 +1,6 @@
 #main {
     position: relative;
-    padding-top: $main-padding; 
+    padding-top: $main-padding;
     width: 100%;
     min-height: 100%;
 }
@@ -8,13 +8,13 @@
 .body-content {
     display: flex;
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
     height: 100%;
 }
- 
+
 @media only screen and (max-width: 991px) {
     .body-content {
-      flex-flow: column;
+        flex-flow: column;
     }
 }
 
@@ -42,20 +42,19 @@ header .navbar {
     left: 0;
 }
 
-.fixed_header + .toc {
+.fixed_header+.toc {
     margin-top: 50px;
     margin-left: 0;
 }
 
-.sidenav,
-.fixed_header,
-.toc {
+.fixed_header {
     background-color: #fff;
 }
 
 .divider {
     display: block;
     height: 24px;
+
     &--half {
         height: 12px;
     }
