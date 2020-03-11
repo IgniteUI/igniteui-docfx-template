@@ -20,7 +20,7 @@ full license information.}} {{!include(/^styles/.*/)}} {{!include(/^fonts/.*/)}}
     <div id="main" role="main" class="container-fluid">
         {{!#_enableSearch}} {{!--
         <div class="row"> --}} {{!>partials/searchResults}} {{!-- </div> --}} {{!/_enableSearch}}
-        <div class="row body-content">
+        <div class="row body-content {{#_isReveal}} row-reveal {{/_isReveal}}">
 
             <div class="sidenav-container col-lg-2 col-md-3">
                 {{^_disableToc}} {{>partials/toc}} {{/_disableToc}}
