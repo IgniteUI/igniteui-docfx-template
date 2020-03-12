@@ -7,7 +7,8 @@ $(function () {
   var show = "show";
   var hide = "hide";
   var util = new utility();
-
+  var initialSidetocHeight;
+  var initialAffixHeight;
   highlight();
   enableSearch();
 
@@ -61,6 +62,32 @@ $(function () {
     $(".WARNING").addClass("alert alert-warning");
     $(".IMPORTANT, .CAUTION").addClass("alert alert-danger");
   }
+
+  function decreaseSideNavsHeight(height) {
+    $('.sidetoc').height(initialSidetocHeight - height);
+    $('#affix').height(initialAffixHeight - height);
+  }
+
+  function checkIfFooterIsVisible(){
+    var $el = $('#footer-container'),
+    scrollTop = $(this).scrollTop(),
+    scrollBot = scrollTop + $(this).height(),
+    elTop = $el.offset().top,
+    elBottom = elTop + $el.outerHeight(),
+    visibleTop = elTop < scrollTop ? scrollTop : elTop,
+    visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
+    if(visibleTop < visibleBottom) {
+      decreaseSideNavsHeight((visibleBottom - visibleTop)); 
+    } else {
+      $('.sidetoc').height(initialSidetocHeight);
+      $('#affix').height(initialAffixHeight);
+
+    }
+  }
+
+  (function () {
+    $(this).on("scroll", () => checkIfFooterIsVisible())
+  })();
 
   // Enable anchors for headings.
   (function () {
@@ -534,9 +561,12 @@ $(function () {
       loadToc();
     } else {
       registerTocEvents();
+      initialSidetocHeight = $(".sidetoc").height();
       if ($("footer").is(":visible")) {
         // $('.sidetoc').addClass('shiftup');
       }
+
+      checkIfFooterIsVisible()
 
       // Scroll to active item
       var top = 0;
@@ -775,9 +805,9 @@ $(function () {
       $("#affix")
         .empty()
         .append(html);
-      if ($("footer").is(":visible")) {
-        $(".sideaffix").css("bottom", "50px");
-      }
+      initialAffixHeight = $("#affix").height();
+
+      checkIfFooterIsVisible();
       $("#affix").on("activate.bs.scrollspy", function (e) {
         if (e.target) {
           if ($(e.target).find("li.active").length > 0) {
