@@ -225,7 +225,6 @@ sub {
 
 .toc-filter {
   height: 36px;
-  border-radius: 5px;
   background: #fff;
   color: #666666;
   padding: 5px;
@@ -247,6 +246,7 @@ sub {
   left: 5px; }
 
 .sidenav {
+  background-color: #eff1f2;
   margin-right: -15px;
   border-right: 1px solid #dedede; }
   .sidenav__header {
@@ -356,7 +356,7 @@ sub {
   margin-left: -15px;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: #eff1f2;
   height: calc(100vh - 160px);
   z-index: 1; }
 
@@ -871,9 +871,7 @@ header .navbar {
   margin-top: 50px;
   margin-left: 0; }
 
-.sidenav,
-.fixed_header,
-.toc {
+.fixed_header {
   background-color: #fff; }
 
 .divider {

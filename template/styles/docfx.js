@@ -540,8 +540,10 @@ $(function () {
 
       // Scroll to active item
       var top = 0;
-      $("#toc a.active")
+      $($("#toc a.active")
         .parents("li")
+        .get()
+        .reverse())
         .each(function (i, e) {
           $(e).addClass(expanded);
           top += $(e).position().top;
