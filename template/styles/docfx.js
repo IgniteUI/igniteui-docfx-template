@@ -89,6 +89,14 @@ $(function () {
     $(this).on("scroll", () => checkIfFooterIsVisible())
   })();
 
+  (function () {
+    $(this).on("resize", () => {
+      initialSidetocHeight =  document.body.clientHeight - 160;
+      initialAffixHeight = (65 / 100 ) * document.body.clientHeight;
+      checkIfFooterIsVisible()
+    })
+  })();
+
   // Enable anchors for headings.
   (function () {
     anchors.options = {
