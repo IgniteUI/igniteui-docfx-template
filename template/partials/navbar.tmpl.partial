@@ -3,11 +3,21 @@ full license information.}}
 
 <nav id="autocollapse" class="navbar navbar-fixed-top navbar-inverse ng-scope" role="navigation">
     {{#_isLangEn}}
-        {{>partials/infranav}}
+        {{#_isReveal}}
+            {{>partials/revealnav}}
+        {{/_isReveal}}
+        {{^_isReveal}}
+            {{>partials/infranav}}
+        {{/_isReveal}}
     {{/_isLangEn}}
 
     {{#_isLangJa}}
-        {{>partials/infranav.ja}}
+        {{#_isReveal}}
+            {{>partials/revealnav.ja}}
+        {{/_isReveal}}
+        {{^_isReveal}}
+            {{>partials/infranav.ja}}
+        {{/_isReveal}}
     {{/_isLangJa}}
 
     {{#_isLangKr}}

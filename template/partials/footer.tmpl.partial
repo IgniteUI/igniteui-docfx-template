@@ -3,11 +3,21 @@
     {{^_appFooter}}
     
     {{#_isLangEn}} 
-        {{>partials/infrafoot}} 
+        {{#_isReveal}}
+            {{>partials/revealfoot}}
+        {{/_isReveal}}
+        {{^_isReveal}}
+            {{>partials/infrafoot}}
+        {{/_isReveal}}
     {{/_isLangEn}} 
     
     {{#_isLangJa}}
-        {{>partials/infrafoot.ja}}
+        {{#_isReveal}}
+            {{>partials/revealfoot.ja}}
+        {{/_isReveal}}
+        {{^_isReveal}}
+            {{>partials/infrafoot.ja}}
+        {{/_isReveal}}
     {{/_isLangJa}}
 
     {{#_isLangKr}}
