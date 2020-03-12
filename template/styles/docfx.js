@@ -550,8 +550,11 @@ $(function () {
         });
 
       $("#toc a.active").closest("li").addClass("active");
-
-      $(".sidetoc").scrollTop(top - 50);
+      if(top <= 168) {
+        $(".sidetoc").scrollTop(0);
+      } else {
+        $(".sidetoc").scrollTop(top - 50)
+      }
 
       if ($("footer").is(":visible")) {
         // $('.sidetoc').addClass('shiftup');
