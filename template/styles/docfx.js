@@ -7,7 +7,8 @@ $(function () {
   var show = "show";
   var hide = "hide";
   var util = new utility();
-
+  var initialSidetocHeight;
+  var initialAffixHeight;
   highlight();
   enableSearch();
 
@@ -61,6 +62,40 @@ $(function () {
     $(".WARNING").addClass("alert alert-warning");
     $(".IMPORTANT, .CAUTION").addClass("alert alert-danger");
   }
+
+  function decreaseSideNavsHeight(height) {
+    $('.sidetoc').height(initialSidetocHeight - height);
+    $('#affix').height(initialAffixHeight - height);
+  }
+
+  function checkIfFooterIsVisible(){
+    var $el = $('#footer-container'),
+    scrollTop = $(this).scrollTop(),
+    scrollBot = scrollTop + $(this).height(),
+    elTop = $el.offset().top,
+    elBottom = elTop + $el.outerHeight(),
+    visibleTop = elTop < scrollTop ? scrollTop : elTop,
+    visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
+    if(visibleTop < visibleBottom) {
+      decreaseSideNavsHeight((visibleBottom - visibleTop)); 
+    } else {
+      $('.sidetoc').height(initialSidetocHeight);
+      $('#affix').height(initialAffixHeight);
+
+    }
+  }
+
+  (function () {
+    $(this).on("scroll", () => checkIfFooterIsVisible())
+  })();
+
+  (function () {
+    $(this).on("resize", () => {
+      initialSidetocHeight =  document.body.clientHeight - 160;
+      initialAffixHeight = (65 / 100 ) * document.body.clientHeight;
+      checkIfFooterIsVisible()
+    })
+  })();
 
   // Enable anchors for headings.
   (function () {
@@ -524,27 +559,29 @@ $(function () {
   }
 
   function renderSidebar() {
-    var contentHeight = $("#main").height();
-    $("#toc").height(contentHeight + 100);
     var sidetoggle = $(".sidetoggle.collapse")[0];
     $(window).resize(function () {
       $(sidetoggle).height("auto");
       $(sidetoggle).removeClass("in");
-      $("#toc").height(contentHeight + 100);
     });
     var sidetoc = $("#sidetoggle .sidetoc")[0];
     if (typeof sidetoc === "undefined") {
       loadToc();
     } else {
       registerTocEvents();
+      initialSidetocHeight = $(".sidetoc").height();
       if ($("footer").is(":visible")) {
         // $('.sidetoc').addClass('shiftup');
       }
 
+      checkIfFooterIsVisible()
+
       // Scroll to active item
       var top = 0;
-      $("#toc a.active")
+      $($("#toc a.active")
         .parents("li")
+        .get()
+        .reverse())
         .each(function (i, e) {
           $(e).addClass(expanded);
           top += $(e).position().top;
@@ -552,7 +589,9 @@ $(function () {
 
       $("#toc a.active").closest("li").addClass("active");
 
-      $(".sidetoc").scrollTop(top - 50);
+      if(top > 168) {
+        $(".sidetoc").scrollTop(top - 50)
+      } 
 
       if ($("footer").is(":visible")) {
         // $('.sidetoc').addClass('shiftup');
@@ -744,18 +783,20 @@ $(function () {
 
   function renderBreadcrumb() {
     var breadcrumb = [];
-    $("#navbar a.active").each(function (i, e) {
+    $("#toc li.active").each(function (i, e) {
+
+      $($(e).parents("li").get().reverse()).each(function (index, parent){
+        breadcrumb.push({
+          href: $(parent).children("a")[0].href,
+          name: $(parent).children("a")[0].title
+        });
+     });
+
       breadcrumb.push({
-        href: e.href,
-        name: e.innerHTML
+          href: $(e).children("a")[0].href,
+          name: $(e).children("a")[0].title
+        });
       });
-    });
-    $("#toc a.active").each(function (i, e) {
-      breadcrumb.push({
-        href: e.href,
-        name: e.innerHTML
-      });
-    });
 
     var html = util.formList(breadcrumb, "breadcrumb");
     $("#breadcrumb").html(html);
@@ -772,9 +813,9 @@ $(function () {
       $("#affix")
         .empty()
         .append(html);
-      if ($("footer").is(":visible")) {
-        $(".sideaffix").css("bottom", "50px");
-      }
+      initialAffixHeight = $("#affix").height();
+
+      checkIfFooterIsVisible();
       $("#affix").on("activate.bs.scrollspy", function (e) {
         if (e.target) {
           if ($(e.target).find("li.active").length > 0) {

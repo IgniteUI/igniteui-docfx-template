@@ -1,9 +1,26 @@
 .navbar {
     margin-bottom: 0;
+    border-bottom-color: #dedede;
+    border: inset;
+}
+
+.docfx-nav-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo-breadcrumb {
+    display: flex;
+    align-items: center;
 }
 
 .navbar .navbar-nav {
     display: inline-block;
+}
+
+.navbar-wrapper {
+    display: flex;
+    justify-content: space-between;
 }
 
 .navbar-brand {
@@ -12,11 +29,6 @@
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
     font-size: 18px;
-    padding: 0;
-}
-
-.navbar-collapse {
-    margin: 0 -15px;
     padding: 0;
 }
 
@@ -89,6 +101,10 @@
             padding: inherit;
         }
 
+        .navbar-right{
+            margin-right: 0;
+        }
+
         .nav.navbar-nav.navbar-right {
             float: none !important;
             display: inline-flex;
@@ -135,4 +151,8 @@
     margin: 10px 10px 4px 10px;
     padding: 8px;
     border-radius: 0;
+}
+
+#hamburger2 {
+    margin-left: 70px;
 }

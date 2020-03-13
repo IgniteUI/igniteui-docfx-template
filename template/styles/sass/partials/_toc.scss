@@ -1,6 +1,7 @@
 .toc {
   background-color: #eff1f2 !important;
-  overflow-x: hidden;
+  overflow: hidden;
+  padding-bottom: 30px;
 }
 
 .sidetoc.shiftup {
@@ -118,7 +119,7 @@
 }
 
 .toc-filter {
-  border-radius: 5px;
+  height: $filter-height;
   background: #fff;
   color: #666666;
   padding: 5px;
@@ -143,9 +144,10 @@
   left: 5px;
 }
 
-.sidenav {
+.sidenav { 
+  background-color: #eff1f2;
   margin-right: -15px;
-
+    border-right: 1px solid #dedede;
   &__header {
     padding: 24px 0 0 16px !important;
     position: relative;
@@ -256,13 +258,7 @@
 }
 
 .sidenav-container {
-  display: block;
-  position: relative;
-  @media only screen and (min-width: 992px) {
-    display: table-cell;
-    position: relative;
-  }
-  border-right: 1px solid #dedede;
+  position: fixed;
 }
 
 .toc-toggle {
@@ -281,11 +277,11 @@
 }
 
 .sidetoc {
-  position: relative;
   margin-left: -15px;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: #eff1f2;
+  height: calc(100vh - #{$side-nav-push});
   z-index: 1;
 }
 
@@ -326,5 +322,6 @@
 
   .sidenav-container {
     border-right: none;
+    position: relative;
   }
 }

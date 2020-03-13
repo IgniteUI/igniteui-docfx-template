@@ -14,15 +14,15 @@ full license information.}} {{!include(/^styles/.*/)}} {{!include(/^fonts/.*/)}}
     </noscript>
 	<!-- End Google Tag Manager (noscript) -->
     <header>
-        {{^_disableNavbar}} {{>partials/navbar}} {{/_disableNavbar}} {{^_disableBreadcrumb}} {{!>partials/breadcrumb}} {{/_disableBreadcrumb}}
+        {{^_disableNavbar}} {{>partials/navbar}} {{/_disableNavbar}}
     </header>
 
     <div id="main" role="main" class="container-fluid">
         {{!#_enableSearch}} {{!--
         <div class="row"> --}} {{!>partials/searchResults}} {{!-- </div> --}} {{!/_enableSearch}}
-        <div class="row body-content {{#_isReveal}} row-reveal {{/_isReveal}}">
+        <div class="row body-content docfx-content {{#_isReveal}} row-reveal {{/_isReveal}}">
 
-            <div class="sidenav-container col-lg-2 col-md-3">
+            <div class="sidenav-container col-lg-2 col-md-2">
                 {{^_disableToc}} {{>partials/toc}} {{/_disableToc}}
             </div>
 
@@ -35,7 +35,7 @@ full license information.}} {{!include(/^styles/.*/)}} {{!include(/^fonts/.*/)}}
                  {{/_gitHubBtnLbl}}
             </div>
 
-            <div class="col-lg-2 hidden-md">
+            <div class="col-lg-2 hidden-md docfx-affix">
                 {{^_disableAffix}} {{>partials/affix}} {{/_disableAffix}}
             </div>
 

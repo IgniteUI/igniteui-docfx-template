@@ -1,14 +1,21 @@
 #main {
     position: relative;
-    padding-top: 127px;
+    padding-top: $main-padding;
     width: 100%;
     min-height: 100%;
 }
 
 .body-content {
+    display: flex;
     position: relative;
     overflow: hidden;
     height: 100%;
+}
+
+@media only screen and (max-width: 991px) {
+    .body-content {
+        flex-flow: column;
+    }
 }
 
 header {
@@ -35,20 +42,19 @@ header .navbar {
     left: 0;
 }
 
-.fixed_header + .toc {
+.fixed_header+.toc {
     margin-top: 50px;
     margin-left: 0;
 }
 
-.sidenav,
-.fixed_header,
-.toc {
+.fixed_header {
     background-color: #fff;
 }
 
 .divider {
     display: block;
     height: 24px;
+
     &--half {
         height: 12px;
     }
