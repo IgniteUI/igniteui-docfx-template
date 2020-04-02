@@ -47,7 +47,12 @@ full license information.}}
             </a>
         {{/topicHref}} 
         {{^topicHref}}
-            <a>{{{name}}}</a>
+            <a>
+            {{{name}}}
+            {{#new}}
+                <span class="new__badge">NEW</span>
+            {{/new}}
+            </a>
         {{/topicHref}} 
         {{#new}}
             {{#leaf}}
