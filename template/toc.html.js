@@ -23,7 +23,14 @@ exports.transform = function (model) {
     item.topicHref = item.topicHref || null;
     item.tocHref = item.tocHref || null;
     item.name = item.name || null;
-
+    if(item.new || item.updated) {
+      item.new = true;
+      item.newType = item.updated ? 'updated' : 'new';
+      item.newTypeLabel = item.newType ? item.newType.toUpperCase() : null;
+    } else {
+      item.new = null;
+      item.newType = '';
+    }
     item.level = level;
     if (item.items && item.items.length > 0) {
       var length = item.items.length;

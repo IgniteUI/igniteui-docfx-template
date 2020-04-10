@@ -261,7 +261,15 @@ sub {
   position: relative;
   font-size: 13px;
   margin: 0; }
+  .toc .nav li .topic-name {
+    max-width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
   .toc .nav li a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     color: #585858;
     font-weight: normal; }
   .toc .nav li a:not(.sidenav__header) {
@@ -282,6 +290,14 @@ sub {
     font-weight: 500; }
   .toc .nav li.active > a:hover {
     color: #585858; }
+
+.toc .nav li.new a.new:not(.sidenav__header) {
+  padding: 6px 25px 0 0;
+  margin-left: 28px; }
+
+.toc .nav li.new a.updated:not(.sidenav__header) {
+  padding: 6px 50px 0 0;
+  margin-left: 28px; }
 
 .toc .nav li.new .new__badge {
   position: absolute;
@@ -311,6 +327,34 @@ sub {
       -ms-user-select: none;
           user-select: none; }
 
+.toc .nav li.new .updated__badge {
+  position: absolute;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 55%;
+  right: 5px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  padding: 2px 0;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 10px;
+  color: #fff;
+  background: #6a0dad;
+  width: 45px;
+  height: 13px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+
 .toc .nav .nav {
   margin: 0;
   padding: 0 16px; }
@@ -319,7 +363,7 @@ sub {
     color: #666; }
   .toc .nav .nav li a:hover {
     color: #0099ff; }
-  .toc .nav .nav li.new .new__badge {
+  .toc .nav .nav li.new .new__badge, .toc .nav .nav li.new .updated__badge {
     right: -11px; }
   .toc .nav .nav.level2 .in.active a.active {
     color: #000 !important;
