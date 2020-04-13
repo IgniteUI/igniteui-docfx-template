@@ -6,14 +6,13 @@
 }
 
 .body-content {
-    display: flex;
     position: relative;
-    overflow: hidden;
     height: 100%;
 }
 
 @media only screen and (max-width: 991px) {
     .body-content {
+        display: flex;
         flex-flow: column;
     }
 }
