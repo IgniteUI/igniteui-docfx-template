@@ -24,9 +24,14 @@ exports.transform = function (model) {
     item.tocHref = item.tocHref || null;
     item.name = item.name || null;
     if(item.new || item.updated) {
+      const labels = {
+        NEW: 'NEW',
+        UPDATED: 'UPDATED',
+        DEPRECATED: 'DEPRECATED label text example' // for the purposes of this example, if one day we decide to add a new label type 
+      }
       item.new = true;
-      item.newType = item.updated ? 'updated' : 'new';
-      item.newTypeLabel = item.newType ? item.newType.toUpperCase() : null;
+      item.labelText = item.updated ? labels.UPDATED : labels.NEW;
+      item.labelType = item.labelText ? item.labelText.toLowerCase() : null;
     } else {
       item.new = null;
       item.newType = '';

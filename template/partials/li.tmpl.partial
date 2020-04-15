@@ -37,26 +37,26 @@ full license information.}}
             <span class="expand-stub"></span>
         {{/leaf}}
         {{#topicHref}}
-            <a class="{{newType}}" href="{{topicHref}}" name="{{tocHref}}" title="{{name}}">
+            <a class="{{labelType}}" href="{{topicHref}}" name="{{tocHref}}" title="{{name}}">
                 <span class="topic-name">{{name}}</span>
                 {{#new}}
                     {{^leaf}}
-                        <span class="{{newType}}__badge">{{newTypeLabel}}</span>
+                        <span class="{{labelType}}__badge">{{labelText}}</span>
                     {{/leaf}}
                 {{/new}}
             </a>
         {{/topicHref}} 
         {{^topicHref}}
-            <a class="{{newType}}">
+            <a class="{{labelType}}">
             <span class="topic-name">{{name}}</span>
             {{#new}}
-                    <span class="{{newType}}__badge">{{newTypeLabel}}</span>
+                    <span class="{{labelType}}__badge">{{labelText}}</span>
             {{/new}}
             </a>
         {{/topicHref}} 
         {{#new}}
             {{#leaf}}
-                    <span class="{{newType}}__badge">{{newTypeLabel}}</span>
+                    <span class="{{labelType}}__badge">{{labelText}}</span>
             {{/leaf}}
         {{/new}}
         {{^leaf}}
