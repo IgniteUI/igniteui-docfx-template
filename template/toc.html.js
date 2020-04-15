@@ -1,6 +1,12 @@
 // Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.
 var extension = require('./toc.extension.js')
 
+const labels = {
+  NEW: 'NEW',
+  UPDATED: 'UPDATED',
+  DEPRECATED: 'DEPRECATED label text example' // for the purposes of this example, if one day we decide to add a new label type 
+}
+
 exports.transform = function (model) {
 
   if (extension && extension.preTransform) {
@@ -24,11 +30,7 @@ exports.transform = function (model) {
     item.tocHref = item.tocHref || null;
     item.name = item.name || null;
     if(item.new || item.updated) {
-      const labels = {
-        NEW: 'NEW',
-        UPDATED: 'UPDATED',
-        DEPRECATED: 'DEPRECATED label text example' // for the purposes of this example, if one day we decide to add a new label type 
-      }
+
       item.new = true;
       item.labelText = item.updated ? labels.UPDATED : labels.NEW;
       item.labelType = item.labelText ? item.labelText.toLowerCase() : null;
