@@ -876,15 +876,14 @@ a.disable:hover {
   min-height: 100%; }
 
 .body-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   position: relative;
-  overflow: hidden;
   height: 100%; }
 
 @media only screen and (max-width: 991px) {
   .body-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-flow: column;
