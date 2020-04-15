@@ -630,7 +630,7 @@ $(function () {
         // Get leaf nodes
         $("#toc li>a")
           .filter(function (i, e) {
-            return $(e).siblings().not('.new__badge').length === 0;
+            return $(e).siblings().not('.new__badge').length > 0 && $(e).siblings().not('.updated__badge').length > 0;
           })
           .each(function (i, anchor) {
             var text = $(anchor).attr("title");
@@ -663,7 +663,7 @@ $(function () {
 
         $("#toc li>a")
           .filter(function (i, e) {
-            return $(e).siblings().not('.new__badge').length > 0;
+            return $(e).siblings().not('.new__badge').length > 0 && $(e).siblings().not('.updated__badge').length > 0;
           })
           .each(function (i, anchor) {
             var parent = $(anchor).parent();
