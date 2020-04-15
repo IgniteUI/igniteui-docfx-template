@@ -86,11 +86,11 @@ $(function () {
   }
 
   (function () {
-    $(this).on("scroll", () => checkIfFooterIsVisible())
+    $(this).on("scroll", function () {checkIfFooterIsVisible()})
   })();
 
   (function () {
-    $(this).on("resize", () => {
+    $(this).on("resize", function() {
       initialSidetocHeight =  document.body.clientHeight - 160;
       initialAffixHeight = (65 / 100 ) * document.body.clientHeight;
       checkIfFooterIsVisible()
