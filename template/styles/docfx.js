@@ -87,7 +87,7 @@ $(function () {
 
   (function () {
     $(this).on("scroll", function () {
-      setTimeout(() => {
+      setTimeout( function ()  {
         checkIfFooterIsVisible()
       }, 0)
     })
