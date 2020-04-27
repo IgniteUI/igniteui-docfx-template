@@ -86,7 +86,11 @@ $(function () {
   }
 
   (function () {
-    $(this).on("scroll", function () {checkIfFooterIsVisible()})
+    $(this).on("scroll", function () {
+      setTimeout( function ()  {
+        checkIfFooterIsVisible()
+      }, 0)
+    })
   })();
 
   (function () {
@@ -630,7 +634,7 @@ $(function () {
         // Get leaf nodes
         $("#toc li>a")
           .filter(function (i, e) {
-            return $(e).siblings().not('.new__badge').length > 0 && $(e).siblings().not('.updated__badge').length > 0;
+            return $(e).siblings().not('.new__badge').length === 0 || $(e).siblings().not('.updated__badge').length === 0;
           })
           .each(function (i, anchor) {
             var text = $(anchor).attr("title");
@@ -643,14 +647,14 @@ $(function () {
               var parentText;
               var parentNode = $(parentNodes[i]);
               if (parentNode.data("is-header")) {
-                parentText = parentNode.text();
+                parentText = parentNode.text().trim();
               } else {
                 parentText = $(parentNodes[i])
                   .children("a")
                   .attr("title");
               }
 
-              if (parentText) text = parentText + "." + text;
+              if (parentText) text = parentText + " " + text;
             }
             if (filterNavItem(text, val)) {
               parent.addClass(show);
@@ -661,13 +665,12 @@ $(function () {
             }
           });
 
-        $("#toc li>a")
+        $($("#toc li>a")
           .filter(function (i, e) {
             return $(e).siblings().not('.new__badge').length > 0 && $(e).siblings().not('.updated__badge').length > 0;
-          })
+          }).get().reverse())
           .each(function (i, anchor) {
             var parent = $(anchor).parent();
-
             if (parent.find("li.show").length > 0) {
               parent.addClass(show);
               parent.addClass(filtered);
