@@ -29,15 +29,7 @@ exports.transform = function (model) {
     item.topicHref = item.topicHref || null;
     item.tocHref = item.tocHref || null;
     item.name = item.name || null;
-    if(item.new || item.updated) {
 
-      item.new = true;
-      item.labelText = item.updated ? labels.UPDATED : labels.NEW;
-      item.labelType = item.labelText ? item.labelText.toLowerCase() : null;
-    } else {
-      item.new = null;
-      item.newType = '';
-    }
     item.level = level;
     if (item.items && item.items.length > 0) {
       var length = item.items.length;
@@ -48,5 +40,52 @@ exports.transform = function (model) {
       item.items = [];
       item.leaf = true;
     }
+
+    if(item.new || item.updated) {
+      item.withBadge = true;
+      item.labelText = item.updated ? labels.UPDATED : labels.NEW;
+      item.labelType = item.labelText ? item.labelText.toLowerCase() : null;
+    } else if(item.items && item.items.length > 0) {
+      const label = getLabelFromDirectChildren(item.items, item);
+      item.labelText = typeof label !== "undefined" ? label : null;
+      item.labelType = item.labelText !== null ? label.toLowerCase() : '';
+      item.withBadge =  item.labelType !== '';
+    } else {
+      item.withBadge = null;
+      item.newType = '';
+    }
   }
 }
+
+  function getLabelFromDirectChildren(items, parent) {
+    const childLabels = [];
+    var labelToReturn;
+     for (let index = 0; index < items.length; index++) {
+       const item = items[index];
+       var itemLabel;
+
+       if(item.updated) {
+         itemLabel = labels.UPDATED;
+       } else if(item.new) {
+         itemLabel = labels.NEW;
+       } else {
+         itemLabel = undefined;
+       }
+
+       if(typeof itemLabel !== "undefined") {
+        childLabels.push(itemLabel);
+       }
+     }
+
+     if(childLabels.length === 0 ) {
+        labelToReturn = undefined;
+     } else if(childLabels.indexOf(labels.UPDATED) !== -1) {
+        labelToReturn = labels.UPDATED;
+        parent.updated = true;
+     } else {
+        parent.new = true;
+        labelToReturn = labels.NEW
+     }
+
+     return labelToReturn;
+  }
