@@ -34,6 +34,7 @@ const bundles = [
             "lazyload.js",
             "lazysizes.js",
             "lazysizes-handler.js",
+            "sample-iframe-handler.js",
             "theming-handler.js"
         ],
         checksumMetadataKey: "_scriptsBundleChecksum"
