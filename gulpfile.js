@@ -29,12 +29,12 @@ const bundles = [
         files: [
             "igviewer.common.js",
             "igviewer.renderingService.js",
+            "lz-string.js",
             "nav-init.js",
             "stackblitz-handler.js",
             "lazyload.js",
             "lazysizes.js",
             "lazysizes-handler.js",
-            "sample-iframe-handler.js",
             "theming-handler.js"
         ],
         checksumMetadataKey: "_scriptsBundleChecksum"

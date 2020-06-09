@@ -1,9 +1,10 @@
 (function () {
+    console.log(window.LZString);
 	var buttonClass = "stackblitz-btn";
     var buttonIframeIdAttrName = "data-iframe-id";
     var buttonSampleSourceAttrName = "data-sample-src";
     var buttonDemosUrlAttrName = "data-demos-base-url";
-    var stackBlitzApiUrl = "https://run.stackblitz.com/api/angular/v1";
+    var stackBlitzApiUrl = "https://codesandbox.io/api/v1/sandboxes/define";
     var sharedFileName = "shared.json";
     var assetsFolder = "/assets/";
     var demoFilesFolderUrlPath =  assetsFolder + "samples/";
@@ -188,7 +189,62 @@
             tags: ["tagA", "tagB", "tagC"]
         }
     */
+   var  toObject = function (arr) {
+    var rv = {};
+    for (var i = 0; i < arr.length; ++i)
+    rv[arr[i]] = arr[i]
+    return rv;
+  }
+
+  function compress(input) {
+    return window.LZString.compressToBase64(input)
+      .replace(/\+/g, `-`) // Convert '+' to '-'
+      .replace(/\//g, `_`) // Convert '/' to '_'
+      .replace(/=+$/, ``); // Remove ending '='
+  }
+  
     var createStackblitzForm = function (data) {
+        const fileToSandbox = { files: {
+            "package.json": {
+                "content": {
+                    "dependencies": JSON.parse(data.dependencies),
+                    "devDependencies": {
+                        "@angular-devkit/build-angular": "^0.901.7",
+                        "@angular/cli": "9.1.7",
+                        "@angular/compiler-cli": "9.1.9",
+                        "@angular/language-service": "9.1.9",
+                        "@igniteui/angular-schematics": "^9.1.510",
+                        "@types/jasmine": "^3.5.10",
+                        "@types/jasminewd2": "^2.0.8",
+                        "@types/node": "^13.9.3",
+                        "codelyzer": "^5.2.1",
+                        "fs-extra": "^8.1.0",
+                        "gulp": "^4.0.2",
+                        "jasmine-core": "~3.5.0",
+                        "jasmine-spec-reporter": "~4.2.1",
+                        "karma": "^4.4.1",
+                        "karma-chrome-launcher": "~3.1.0",
+                        "karma-cli": "~2.0.0",
+                        "karma-coverage-istanbul-reporter": "^2.1.1",
+                        "karma-jasmine": "^3.1.1",
+                        "karma-jasmine-html-reporter": "^1.5.2",
+                        "node-sass": "^4.13.1",
+                        "protractor": "^5.4.3",
+                        "sass.js": "0.11.1",
+                        "ts-node": "^8.8.1",
+                        "tslint": "5.12.1",
+                        "typescript": "3.6.4"
+                      }
+                }
+            }
+        }};
+        const f = data.files.forEach(f => {
+            fileToSandbox.files[f["path"]] = {
+                content: f["content"]
+            }
+        });
+        console.log(fileToSandbox)
+
         var form = $("<form />", {
                 method: "POST",
                 action: stackBlitzApiUrl,
@@ -196,49 +252,51 @@
                 style: "display: none;"
         });
 
-        // files
-        for (var i = 0; i < data.files.length; i++) {
-            var fileInput = $("<input />", {
-                type: "hidden",
-                name: "files[" + data.files[i].path + "]",
-                value: data.files[i].content
-            });
-
-            fileInput.appendTo(form);
-        }
-    
-        // tags
-        if (data.tags) {
-            for (var i = 0; i < data.tags.length; i++) {
-                var tagInput = $("<input />", {
-                    type: "hidden",
-                    name: "tags[" + i + "]",
-                    value: data.tags[i]
-                });
-
-                tagInput.appendTo(tagInput);
-            }
-        } 
-  
-        // description
-        if (data.description) {
-            var descriptionInput = $("<input />", {
-                type: "hidden",
-                name: "description",
-                value: data.description
-            });
-
-            descriptionInput.appendTo(form);
-        }
-
-        // dependencies
-        var dependenciesInput = $("<input />", {
+        var fileInput = $("<input />", {
             type: "hidden",
-            name: "dependencies",
-            value: data.dependencies
+            name: "parameters",
+            value: compress(JSON.stringify(fileToSandbox))
         });
 
-        dependenciesInput.appendTo(form);
+        fileInput.appendTo(form)
+
+        // // files
+        // for (var i = 0; i < data.files.length; i++) {
+
+        // }
+    
+        // // tags
+        // if (data.tags) {
+        //     for (var i = 0; i < data.tags.length; i++) {
+        //         var tagInput = $("<input />", {
+        //             type: "hidden",
+        //             name: "tags[" + i + "]",
+        //             value: data.tags[i]
+        //         });
+
+        //         tagInput.appendTo(tagInput);
+        //     }
+        // } 
+  
+        // // description
+        // if (data.description) {
+        //     var descriptionInput = $("<input />", {
+        //         type: "hidden",
+        //         name: "description",
+        //         value: data.description
+        //     });
+
+        //     descriptionInput.appendTo(form);
+        // }
+
+        // // dependencies
+        // var dependenciesInput = $("<input />", {
+        //     type: "hidden",
+        //     name: "dependencies",
+        //     value: data.dependencies
+        // });
+
+        // dependenciesInput.appendTo(form);
         return form;
     }
 
