@@ -25,6 +25,7 @@ $(function () {
   renderHeader();
   copyCode();
   renderNoteBlocks();
+  addExternalLinkIcons();
 
   window.refresh = function (article) {
     // Update markup result
@@ -44,6 +45,20 @@ $(function () {
     texts.each(function () {
       $(this).breakWord();
     });
+  }
+
+  function addExternalLinkIcons(){
+    const viewer =  window.igViewer.common;
+    console.log( util.getAbsolutePath(window.location.host));
+    $('.article-container a[href^="http"]')
+      .each(function (i, anchor) {
+        if($(anchor).children().length > 0) {
+          const lastChild = $(anchor).children()[$(anchor).children().length - 1];
+          $(lastChild).addClass('external-link');
+        } else {
+          $(anchor).addClass('external-link');
+        }
+      })
   }
 
   function renderHeader() {}
