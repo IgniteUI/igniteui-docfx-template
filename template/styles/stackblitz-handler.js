@@ -1,10 +1,10 @@
 (function () {
-    console.log(window.LZString);
-	var buttonClass = "stackblitz-btn";
+    var stkbButtonClass = "stackblitz-btn";
+    var cbsButtonClass = "codesandbox-btn";
     var buttonIframeIdAttrName = "data-iframe-id";
     var buttonSampleSourceAttrName = "data-sample-src";
     var buttonDemosUrlAttrName = "data-demos-base-url";
-    var stackBlitzApiUrl = "https://codesandbox.io/api/v1/sandboxes/define";
+    var stackBlitzApiUrl = "https://run.stackblitz.com/api/angular/v1";
     var sharedFileName = "shared.json";
     var assetsFolder = "/assets/";
     var demoFilesFolderUrlPath =  assetsFolder + "samples/";
@@ -20,12 +20,12 @@
        
     var sharedFileContent;
 	var init = function () {
-        var stackblitzButtons = $("." + buttonClass);  
+        var projectButtons = $("." + stkbButtonClass + ", ." + cbsButtonClass );  
 
-        if (stackblitzButtons.length > 0) {
+        if (projectButtons.length > 0) {
             var demosBaseUrls = new Set();
 
-            $.each(stackblitzButtons, function(index, element){
+            $.each(projectButtons, function(index, element){
                 demosBaseUrls.add($(element).attr(buttonDemosUrlAttrName))
             });
 
@@ -33,15 +33,15 @@
 
             if (hasMultipleUrls) {
                 demosBaseUrls.forEach(function(url) {
-                    var currentDemoUrlButtons = $(stackblitzButtons).filter(function(index, element) {
+                    var currentDemoUrlButtons = $(projectButtons).filter(function(index, element) {
                         return $(element).attr(buttonDemosUrlAttrName) === url;
                     });
                     generateStackBlitz(url, currentDemoUrlButtons)
                 });
 
             } else {
-                demosBaseUrl = $(stackblitzButtons[0]).attr(buttonDemosUrlAttrName);
-                generateStackBlitz(demosBaseUrl, stackblitzButtons)
+                demosBaseUrl = $(projectButtons[0]).attr(buttonDemosUrlAttrName);
+                generateStackBlitz(demosBaseUrl, projectButtons)
             }
         } 
     }
@@ -58,7 +58,7 @@
                 samplesFilesUrls.push(sampleFileUrl);
             }
 
-            $button.on("click", onStackblitzButtonClicked);
+            $button.on("click", onProjectButtonClicked);
         });
            
         var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
@@ -147,7 +147,7 @@
         return demoFileUrl;
     }
 
-    var onStackblitzButtonClicked = function (event) {
+    var onProjectButtonClicked = function (event) {
 		if (isButtonClickInProgress) {
 			return;
         } 
@@ -160,8 +160,8 @@
             dependencies: sampleContent.sampleDependencies,
             files: sharedFileContent.files.concat(sampleContent.sampleFiles)
         }
-
-        var form = createStackblitzForm(formData);
+        var form = event.target.classList.value === stkbButtonClass ?  createStackblitzForm(formData) : 
+                                                                       createCodesandboxForm(formData);
         form.appendTo($("body"));
         form.submit();
         form.remove();
@@ -189,12 +189,6 @@
             tags: ["tagA", "tagB", "tagC"]
         }
     */
-   var  toObject = function (arr) {
-    var rv = {};
-    for (var i = 0; i < arr.length; ++i)
-    rv[arr[i]] = arr[i]
-    return rv;
-  }
 
   function compress(input) {
     return window.LZString.compressToBase64(input)
@@ -204,100 +198,128 @@
   }
   
     var createStackblitzForm = function (data) {
-        const fileToSandbox = { files: {
-            "package.json": {
-                "content": {
-                    "dependencies": JSON.parse(data.dependencies),
-                    "devDependencies": {
-                        "@angular-devkit/build-angular": "^0.901.7",
-                        "@angular/cli": "9.1.7",
-                        "@angular/compiler-cli": "9.1.9",
-                        "@angular/language-service": "9.1.9",
-                        "@igniteui/angular-schematics": "^9.1.510",
-                        "@types/jasmine": "^3.5.10",
-                        "@types/jasminewd2": "^2.0.8",
-                        "@types/node": "^13.9.3",
-                        "codelyzer": "^5.2.1",
-                        "fs-extra": "^8.1.0",
-                        "gulp": "^4.0.2",
-                        "jasmine-core": "~3.5.0",
-                        "jasmine-spec-reporter": "~4.2.1",
-                        "karma": "^4.4.1",
-                        "karma-chrome-launcher": "~3.1.0",
-                        "karma-cli": "~2.0.0",
-                        "karma-coverage-istanbul-reporter": "^2.1.1",
-                        "karma-jasmine": "^3.1.1",
-                        "karma-jasmine-html-reporter": "^1.5.2",
-                        "node-sass": "^4.13.1",
-                        "protractor": "^5.4.3",
-                        "sass.js": "0.11.1",
-                        "ts-node": "^8.8.1",
-                        "tslint": "5.12.1",
-                        "typescript": "3.6.4"
-                      }
-                }
-            }
-        }};
-        const f = data.files.forEach(f => {
-            fileToSandbox.files[f["path"]] = {
-                content: f["content"]
-            }
-        });
-        console.log(fileToSandbox)
-
         var form = $("<form />", {
-                method: "POST",
-                action: stackBlitzApiUrl,
-                target: "_blank",
-                style: "display: none;"
-        });
+            method: "POST",
+            action: stackBlitzApiUrl,
+            target: "_blank",
+            style: "display: none;"
+    });
 
+    // files
+    for (var i = 0; i < data.files.length; i++) {
         var fileInput = $("<input />", {
             type: "hidden",
-            name: "parameters",
-            value: compress(JSON.stringify(fileToSandbox))
+            name: "files[" + data.files[i].path + "]",
+            value: data.files[i].content
         });
 
-        fileInput.appendTo(form)
+        fileInput.appendTo(form);
+    }
 
-        // // files
-        // for (var i = 0; i < data.files.length; i++) {
+    // tags
+    if (data.tags) {
+        for (var i = 0; i < data.tags.length; i++) {
+            var tagInput = $("<input />", {
+                type: "hidden",
+                name: "tags[" + i + "]",
+                value: data.tags[i]
+            });
 
-        // }
+            tagInput.appendTo(tagInput);
+        }
+    } 
+
+    // description
+    if (data.description) {
+        var descriptionInput = $("<input />", {
+            type: "hidden",
+            name: "description",
+            value: data.description
+        });
+
+        descriptionInput.appendTo(form);
+    }
+
+    // dependencies
+    var dependenciesInput = $("<input />", {
+        type: "hidden",
+        name: "dependencies",
+        value: data.dependencies
+    });
+
+    dependenciesInput.appendTo(form);
+    return form;
+    }
+
+    var createCodesandboxForm = function (data) {
+        const fileToSandbox = { files: {
+            "tsconfig.json": {
+                    "content": {
+                        "compileOnSave": false,
+                        "compilerOptions": {
+                          "importHelpers": true,
+                          "module": "esnext",
+                          "outDir": "./dist/out-tsc",
+                          "sourceMap": false,
+                          "declaration": false,
+                          "moduleResolution": "node",
+                          "emitDecoratorMetadata": true,
+                          "experimentalDecorators": true,
+                          "target": "es2015",
+                          "typeRoots": [
+                            "node_modules/@types"
+                          ],
+                          "lib": [
+                            "es2017",
+                            "dom"
+                          ]
+                        }
+                      }
+                },
+                "package.json": {
+                    "content": {
+                        "dependencies": JSON.parse(data.dependencies),
+                        "devDependencies": {
+                            "@angular-devkit/build-angular": "~0.900.0",
+                            "@angular/cli": "^9.0.0",
+                            "@angular/compiler-cli": "9.0.0",
+                            "@angular/language-service": "9.0.0",
+                            "@types/jasmine": "~3.3.5",
+                            "@types/jasminewd2": "~2.0.2",
+                            "@types/node": "^12.11.1",
+                            "codelyzer": "^5.1.2",
+                            "jasmine-core": "~3.3.0",
+                            "jasmine-spec-reporter": "~4.2.1",
+                            "node-sass": "^4.11.0",
+                            "sass.js": "0.10.13",
+                            "ts-node": "^7.0.1",
+                            "tslint": "5.12.1",
+                            "typescript": "3.7.5"
+                        }
+                    }
+                }
+            }};
+            const f = data.files.forEach(f => {
+                fileToSandbox.files[f["path"].replace("./", "")] = {
+                    content: f["content"]
+                }
+            });
     
-        // // tags
-        // if (data.tags) {
-        //     for (var i = 0; i < data.tags.length; i++) {
-        //         var tagInput = $("<input />", {
-        //             type: "hidden",
-        //             name: "tags[" + i + "]",
-        //             value: data.tags[i]
-        //         });
-
-        //         tagInput.appendTo(tagInput);
-        //     }
-        // } 
-  
-        // // description
-        // if (data.description) {
-        //     var descriptionInput = $("<input />", {
-        //         type: "hidden",
-        //         name: "description",
-        //         value: data.description
-        //     });
-
-        //     descriptionInput.appendTo(form);
-        // }
-
-        // // dependencies
-        // var dependenciesInput = $("<input />", {
-        //     type: "hidden",
-        //     name: "dependencies",
-        //     value: data.dependencies
-        // });
-
-        // dependenciesInput.appendTo(form);
-        return form;
+            var form = $("<form />", {
+                    method: "POST",
+                    action: "https://codesandbox.io/api/v1/sandboxes/define",
+                    target: "_blank",
+                    style: "display: none;"
+            });
+    
+            var fileInput = $("<input />", {
+                type: "hidden",
+                name: "parameters",
+                value: compress(JSON.stringify(fileToSandbox))
+            });
+    
+            fileInput.appendTo(form)
+            return form;
     }
 
     $(document).ready(function() {
