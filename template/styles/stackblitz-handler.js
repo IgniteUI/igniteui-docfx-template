@@ -253,6 +253,14 @@
 
     var createCodesandboxForm = function (data) {
         const fileToSandbox = { files: {
+            "sandbox.config.json": {
+                "content": {
+                    "infiniteLoopProtection": false,
+                    "hardReloadOnChange": false,
+                    "view": "browser",
+                    "template": "angular-cli"
+                }
+            },
             "tsconfig.json": {
                     "content": {
                         "compileOnSave": false,
