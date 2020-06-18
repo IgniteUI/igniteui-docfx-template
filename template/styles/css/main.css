@@ -454,6 +454,15 @@ sub {
     .article-container {
       left: 0; } }
 
+.external-link::after {
+  font-family: Material Icons;
+  content: "open_in_new";
+  margin-left: 2px;
+  position: relative;
+  vertical-align: sub;
+  display: inline-block;
+  width: 16px; }
+
 .sideaffix {
   margin-top: 20px;
   max-height: 100%;
