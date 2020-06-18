@@ -9,6 +9,7 @@ $(function () {
   var util = new utility();
   var initialSidetocHeight;
   var initialAffixHeight;
+  addExternalLinkIcons();
   highlight();
   enableSearch();
 
@@ -25,7 +26,6 @@ $(function () {
   renderHeader();
   copyCode();
   renderNoteBlocks();
-  addExternalLinkIcons();
 
   window.refresh = function (article) {
     // Update markup result
@@ -47,18 +47,18 @@ $(function () {
     });
   }
 
-  function addExternalLinkIcons(){
-    const viewer =  window.igViewer.common;
-    console.log( util.getAbsolutePath(window.location.host));
+
+  function addExternalLinkIcons() {
     $('.article-container a[href^="http"]')
       .each(function (i, anchor) {
-        if($(anchor).children().length > 0) {
-          const lastChild = $(anchor).children()[$(anchor).children().length - 1];
+        const anchorChildren = $(anchor).children();
+        if(anchorChildren.length > 0) {
+          const lastChild = anchorChildren[anchorChildren.length - 1];
           $(lastChild).addClass('external-link');
         } else {
           $(anchor).addClass('external-link');
         }
-      })
+    })
   }
 
   function renderHeader() {}

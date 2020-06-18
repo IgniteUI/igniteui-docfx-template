@@ -23,11 +23,12 @@
     }
 }
 
-.external-link::after{
+.external-link::after {
     font-family: Material Icons;
     content: "open_in_new";
     margin-left: 2px;
     position: relative;
-    line-height: 24px;
     vertical-align: sub;
+    display: inline-block;
+    width: 16px;
 }
