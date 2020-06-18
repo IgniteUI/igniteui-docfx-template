@@ -461,7 +461,10 @@ sub {
   position: relative;
   vertical-align: sub;
   display: inline-block;
-  width: 16px; }
+  max-width: 15px;
+  max-height: 15px;
+  width: auto;
+  height: auto; }
 
 .sideaffix {
   margin-top: 20px;
