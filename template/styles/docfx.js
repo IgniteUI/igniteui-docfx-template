@@ -55,6 +55,7 @@ $(function () {
         if(anchorChildren.length > 0) {
           const lastChild = anchorChildren[anchorChildren.length - 1];
           $(lastChild).addClass('external-link');
+          $(anchor).addClass('external-link-parent');
         } else {
           $(anchor).addClass('external-link');
         }
