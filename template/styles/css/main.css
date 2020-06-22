@@ -454,6 +454,27 @@ sub {
     .article-container {
       left: 0; } }
 
+.external-link {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 18px;
+  position: relative; }
+  .external-link::after {
+    font-family: Material Icons;
+    content: "open_in_new";
+    margin-left: 2px;
+    min-width: 16px;
+    max-width: 16px;
+    overflow: hidden;
+    right: 0;
+    position: absolute; }
+  .external-link-parent {
+    line-height: normal; }
+
 .sideaffix {
   margin-top: 20px;
   max-height: 100%;
