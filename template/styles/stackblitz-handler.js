@@ -52,23 +52,23 @@
         $.each($buttons, function(index, element) {
 
             var $button = $(element);
-            var sampleFileUrl = getSampleUrlByStackBlitzButton($button, demosBaseUrl);
+            // var sampleFileUrl = getSampleUrlByStackBlitzButton($button, demosBaseUrl);
 
-            if (samplesFilesUrls.indexOf(sampleFileUrl) === -1) {
-                samplesFilesUrls.push(sampleFileUrl);
-            }
-
+            // if (samplesFilesUrls.indexOf(sampleFileUrl) === -1) {
+            //     samplesFilesUrls.push(sampleFileUrl);
+            // }
+            $button.removeAttr("disabled");
             $button.on("click", onProjectButtonClicked);
         });
            
-        var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
-        // prevent caching 
-        metaFileUrl += "?t=" + new Date().getTime();
+        // var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
+        // // prevent caching 
+        // metaFileUrl += "?t=" + new Date().getTime();
  
-        $.get(metaFileUrl).done(function(response) {
-            demosTimeStamp = response.generationTimeStamp;
-            getFiles($buttons, demosBaseUrl, samplesFilesUrls, demosTimeStamp);
-        });
+        // $.get(metaFileUrl).done(function(response) {
+        //     demosTimeStamp = response.generationTimeStamp;
+        //     getFiles($buttons, demosBaseUrl, samplesFilesUrls, demosTimeStamp);
+        // });
     }
 
    var getFiles = function($buttons, demosBaseUrl, samplesFilesUrls, demosTimeStamp) {
@@ -138,13 +138,15 @@
         } else {
             sampleSrc = $button.attr(buttonSampleSourceAttrName);
         }
-
-        var demoPath = sampleSrc.replace(demosBaseUrl + "/", "");
-        demoPath = demoPath.replace("/", "-");
-        var demoFileUrl = demosBaseUrl  +
-            getDemoFilesFolderUrlPath().substring(0, getDemoFilesFolderUrlPath().length - 1) +
-                "/" + demoPath + ".json";
-        return demoFileUrl;
+        // Get sample application base path
+        // demosBaseUrl.substring(demosBaseUrl.lastIndexOf("/") + 1)
+        var demoPath = sampleSrc.replace(demosBaseUrl + "/", "angular-demos/");
+        
+        // demoPath = demoPath.replace("/", "-");
+        // var demoFileUrl = demosBaseUrl  +
+        //     getDemoFilesFolderUrlPath().substring(0, getDemoFilesFolderUrlPath().length - 1) +
+        //         "/" + demoPath + ".json";
+        return demoPath;
     }
 
     var onProjectButtonClicked = function (event) {
@@ -155,17 +157,20 @@
         isButtonClickInProgress = true;
         var $button = $(this);
         var sampleFileUrl = getSampleUrlByStackBlitzButton($button, $(this).attr(buttonDemosUrlAttrName));
-        var sampleContent = sampleFilesContentByUrl[sampleFileUrl];
-        var formData = {
-            dependencies: sampleContent.sampleDependencies,
-            files: sharedFileContent.files.concat(sampleContent.sampleFiles)
-        }
-        var form = event.target.classList.value === stkbButtonClass ?  createStackblitzForm(formData) : 
-                                                                       createCodesandboxForm(formData);
-        form.appendTo($("body"));
-        form.submit();
-        form.remove();
+        // var sampleContent = sampleFilesContentByUrl[sampleFileUrl];
+        // var formData = {
+        //     dependencies: sampleContent.sampleDependencies,
+        //     files: sharedFileContent.files.concat(sampleContent.sampleFiles)
+        // }
+        var editor = event.target.classList.value === stkbButtonClass ?  "stackblitz" : 
+                                                                         "codesandbox";
+        window.open(getSampleAppRoute(editor, sampleFileUrl), '_blank');
         isButtonClickInProgress = false;
+    }
+
+    var getSampleAppRoute = (editor, sampleUrl) => {
+        if(editor === "stackblitz") return "https://stackblitz.com/github/HristoP96/test-angular-samples/tree/master/" + sampleUrl;
+        return "https://codesandbox.io/s/github/HristoP96/test-angular-samples/tree/master/" + sampleUrl +"?fontsize=14&hidenavigation=1&theme=dark&view=preview"
     }
 
     var replaceRelativeAssetsUrls = function (files, demosBaseUrl) {
