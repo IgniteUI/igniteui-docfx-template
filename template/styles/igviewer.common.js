@@ -262,7 +262,7 @@
             return pageName.indexOf("chart") !== -1 ||
                 pageName.indexOf("excel_library") !== -1 ||
                 pageName.indexOf("spreadsheet") !== -1 ||
-                pageName.indexOf("bulletgraph") !== -1 ||
+                pageName.indexOf("bullet-graph") !== -1 ||
                 pageName.indexOf("gauge") !==-1 ||
                 pageName.indexOf("exporter") !==-1 ||
                 pageName.indexOf("map") !==-1||
