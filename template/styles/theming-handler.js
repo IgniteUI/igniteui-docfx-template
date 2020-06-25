@@ -1,13 +1,14 @@
 (function () {
     $(document).ready(function() {
         var sampleIframes = document.querySelectorAll("iframe");
-        if ($(".themes-container").length !== 0 && sampleIframes.length !== 0 && !isDvPage()) {
+        var isIE = !(window.ActiveXObject) && "ActiveXObject" in window;
+        if ($(".themes-container").length !== 0 && sampleIframes.length !== 0 &&
+            (!isDvPage() || !isIE)) {
             $(".themes-container").css('display', 'inline-flex');
         } else {
             return;
         }
-        
-        var isIE = !(window.ActiveXObject) && "ActiveXObject" in window;
+
         if (isIE) {
             $('.theme-select-wrapper').css('display', 'inline-flex');
             $('.theme-select-wrapper').removeClass('theme-wrapper-hide');
