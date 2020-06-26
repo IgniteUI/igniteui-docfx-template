@@ -66,8 +66,8 @@
     }
 
     var getGitHubSampleUrl = function (editor, sampleUrl, branch) {
-        if (editor === "stackblitz") return "https://stackblitz.com/github/HristoP96/test-angular-samples/tree/" + branch + "/" + sampleUrl;
-        return "https://codesandbox.io/s/github/HristoP96/test-angular-samples/tree/" + branch + "/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+        if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-live-editing-samples/tree/" + branch + "/" + sampleUrl;
+        return "https://codesandbox.io/s/github/IgniteUI/igniteui-live-editing-samples/tree/" + branch + "/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
     }
 
     var getGitHubSampleUrlFromButton = function ($button, demosBaseUrl) {
@@ -197,7 +197,7 @@
         }
 
         var demoPath = sampleSrc.replace(demosBaseUrl + "/", "");
-        demoPath = demoPath.replace("/", "-");
+        demoPath = demoPath.replace("/", "--");
         var demoFileUrl = demosBaseUrl +
             getDemoFilesFolderUrlPath().substring(0, getDemoFilesFolderUrlPath().length - 1) +
             "/" + demoPath + ".json";
