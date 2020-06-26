@@ -27,38 +27,38 @@ full license information.}}
     {{/cta}}
     {{^header}} 
     {{^cta}}        
-        {{#new}}
+        {{#withBadge}}
             <li class="new">        
-        {{/new}}
-        {{^new}}
+        {{/withBadge}}
+        {{^withBadge}}
             <li>
-        {{/new}}
+        {{/withBadge}}
         {{^leaf}}
             <span class="expand-stub"></span>
         {{/leaf}}
         {{#topicHref}}
             <a class="{{labelType}}" href="{{topicHref}}" name="{{tocHref}}" title="{{name}}">
                 <span class="topic-name">{{name}}</span>
-                {{#new}}
+                {{#withBadge}}
                     {{^leaf}}
                         <span class="{{labelType}}__badge">{{labelText}}</span>
                     {{/leaf}}
-                {{/new}}
+                {{/withBadge}}
             </a>
         {{/topicHref}} 
         {{^topicHref}}
             <a class="{{labelType}}">
             <span class="topic-name">{{name}}</span>
-            {{#new}}
+            {{#withBadge}}
                     <span class="{{labelType}}__badge">{{labelText}}</span>
-            {{/new}}
+            {{/withBadge}}
             </a>
         {{/topicHref}} 
-        {{#new}}
+        {{#withBadge}}
             {{#leaf}}
                     <span class="{{labelType}}__badge">{{labelText}}</span>
             {{/leaf}}
-        {{/new}}
+        {{/withBadge}}
         {{^leaf}}
             {{>partials/li}} 
         {{/leaf}}

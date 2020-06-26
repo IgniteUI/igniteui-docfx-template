@@ -22,3 +22,23 @@
         left: 0;
     }
 }
+
+.external-link {
+    display: inline-flex;
+    align-items: center;
+    padding-right: 18px;
+    position: relative;
+    &::after {
+        font-family: Material Icons;
+        content: "open_in_new";
+        margin-left: 2px;
+        min-width: 16px;
+        max-width: 16px;
+        overflow: hidden;
+        right: 0;
+        position: absolute;
+    }
+    &-parent{
+        line-height: normal;
+    }
+}

@@ -9,6 +9,7 @@ $(function () {
   var util = new utility();
   var initialSidetocHeight;
   var initialAffixHeight;
+  addExternalLinkIcons();
   highlight();
   enableSearch();
 
@@ -44,6 +45,21 @@ $(function () {
     texts.each(function () {
       $(this).breakWord();
     });
+  }
+
+
+  function addExternalLinkIcons() {
+    $('.article-container a[href^="http"]')
+      .each(function (i, anchor) {
+        const anchorChildren = $(anchor).children();
+        if(anchorChildren.length > 0) {
+          const lastChild = anchorChildren[anchorChildren.length - 1];
+          $(lastChild).addClass('external-link');
+          $(anchor).addClass('external-link-parent');
+        } else {
+          $(anchor).addClass('external-link');
+        }
+    })
   }
 
   function renderHeader() {}
