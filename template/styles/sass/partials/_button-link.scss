@@ -97,6 +97,19 @@ a.disable:hover {
   }
 }
 
+.codesandbox-btn {
+@extend .stackblitz-btn;
+background: $darkgray;
+&::before {
+  background-image: url("../../images/code-sandbox-seeklogo.com.svg");
+}
+&[disabled] {
+  &::before {
+    background-image: url("../../images/code-sandbox-seeklogo.com.svg");
+  }
+}
+}
+
 
 
 .github-btn {

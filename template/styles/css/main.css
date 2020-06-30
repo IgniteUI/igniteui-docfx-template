@@ -818,7 +818,7 @@ a.disable:hover {
     -webkit-box-shadow: none;
             box-shadow: none; }
 
-.stackblitz-btn {
+.stackblitz-btn, .codesandbox-btn {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -836,11 +836,11 @@ a.disable:hover {
   -webkit-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out;
   background: #0099ff; }
-  .stackblitz-btn:hover, .stackblitz-btn:focus {
+  .stackblitz-btn:hover, .codesandbox-btn:hover, .stackblitz-btn:focus, .codesandbox-btn:focus {
     color: white;
     -webkit-box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
             box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08); }
-  .stackblitz-btn::before {
+  .stackblitz-btn::before, .codesandbox-btn::before {
     content: "";
     display: inline-block;
     width: 28px;
@@ -849,13 +849,20 @@ a.disable:hover {
     background-image: url("../../images/stackblitz-logo.svg");
     background-size: 100%;
     background-repeat: no-repeat; }
-  .stackblitz-btn[disabled] {
+  .stackblitz-btn[disabled], .codesandbox-btn[disabled] {
     color: rgba(0, 0, 0, 0.28);
     background: #eee;
     -webkit-box-shadow: none;
             box-shadow: none; }
-    .stackblitz-btn[disabled]::before {
+    .stackblitz-btn[disabled]::before, .codesandbox-btn[disabled]::before {
       background-image: url("../../images/stackblitz-logo-dark.svg"); }
+
+.codesandbox-btn {
+  background: #333; }
+  .codesandbox-btn::before {
+    background-image: url("../../images/code-sandbox-seeklogo.com.svg"); }
+  .codesandbox-btn[disabled]::before {
+    background-image: url("../../images/code-sandbox-seeklogo.com.svg"); }
 
 .github-btn {
   padding: 10px 0;
