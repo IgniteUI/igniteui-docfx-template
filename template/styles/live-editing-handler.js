@@ -32,7 +32,13 @@
     var demosTimeStamp;
     var sharedFileContent;
     var init = function () {
-        var projectButtons = $("." + stkbButtonClass + ", ." + cbsButtonClass);
+        var projectButtons;
+        if(isIE || isEdge) {
+            projectButtons = $("." + stkbButtonClass);
+            $("." + cbsButtonClass).remove();
+        } else {
+            projectButtons = $("." + stkbButtonClass + ", ." + cbsButtonClass);
+        }
 
         if (projectButtons.length > 0) {
             if (!isLocalhost) {
@@ -250,9 +256,9 @@
 
     function compress(input) {
         return window.LZString.compressToBase64(input)
-            .replace(/\+/g, `-`) // Convert '+' to '-'
-            .replace(/\//g, `_`) // Convert '/' to '_'
-            .replace(/=+$/, ``); // Remove ending '='
+            .replace(/\+/g, "-") // Convert '+' to '-'
+            .replace(/\//g, "_") // Convert '/' to '_'
+            .replace(/=+$/, ""); // Remove ending '='
     }
 
     var createStackblitzForm = function (data) {
