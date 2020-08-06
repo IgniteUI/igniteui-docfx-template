@@ -28,7 +28,7 @@
         window.location.hostname.match(
             /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
         ));
-
+    var demosUrls = new Map();
     var demosTimeStamp;
     var sharedFileContent;
     var init = function () {
@@ -42,30 +42,26 @@
 
         if (projectButtons.length > 0) {
             if (!isLocalhost) {
-                $.each(projectButtons, function (index, element) {
-                    $(element).removeAttr("disabled");
-                    $(element).on("click", onGithubProjectButtonClicked);
-                });
+                projectButtons.removeAttr("disabled");
+                projectButtons.on("click", onGithubProjectButtonClicked);
             } else {
-                var demosBaseUrls = new Set();
-
                 $.each(projectButtons, function (index, element) {
-                    demosBaseUrls.add($(element).attr(buttonDemosUrlAttrName))
+                    const $button = $(element);
+                    const baseUrl = $button.attr(buttonDemosUrlAttrName);
+                    const buttonSampleUrl = getSampleUrlFromButton($button, baseUrl);
+                    const buttonIframeID = $button.attr(buttonIframeIdAttrName);
+                    const sampleData = JSON.stringify({sampleUrl: buttonSampleUrl, iframeId: buttonIframeID});
+                    if(!demosUrls.has(baseUrl)) {
+                        demosUrls.set(baseUrl, new Set().add(sampleData));
+                    } else {
+                        demosUrls.get(baseUrl).add(sampleData);
+                    }
                 });
 
-                var hasMultipleUrls = demosBaseUrls.size > 1;
-
-                if (hasMultipleUrls) {
-                    demosBaseUrls.forEach(function (url) {
-                        var currentDemoUrlButtons = $(projectButtons).filter(function (index, element) {
-                            return $(element).attr(buttonDemosUrlAttrName) === url;
-                        });
-                        generateLiveEditingApp(url, currentDemoUrlButtons)
-                    });
-
-                } else {
-                    demosBaseUrl = $(projectButtons[0]).attr(buttonDemosUrlAttrName);
-                    generateLiveEditingApp(demosBaseUrl, projectButtons)
+                const demosBaseUrls = demosUrls.keys();
+                for (var head = demosBaseUrls.next(); !head.done; head = demosBaseUrls.next()) {
+                    const url = head.value;
+                    generateLiveEditingApp(url, demosUrls.get(url))
                 }
             }
         }
@@ -109,20 +105,7 @@
         isButtonClickInProgress = false;
     }
 
-    var generateLiveEditingApp = function (demosBaseUrl, $buttons) {
-        var samplesFilesUrls = [];
-
-        $.each($buttons, function (index, element) {
-
-            var $button = $(element);
-            var sampleFileUrl = getSampleUrlFromButton($button, demosBaseUrl);
-
-            if (samplesFilesUrls.indexOf(sampleFileUrl) === -1) {
-                samplesFilesUrls.push(sampleFileUrl);
-            }
-
-            $button.on("click", onProjectButtonClicked);
-        });
+    var generateLiveEditingApp = function (demosBaseUrl, samplesData) {
 
         var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
         // prevent caching 
@@ -130,38 +113,11 @@
 
         $.get(metaFileUrl).done(function (response) {
             demosTimeStamp = response.generationTimeStamp;
-            getFiles($buttons, demosBaseUrl, samplesFilesUrls, demosTimeStamp);
+            getFiles(demosBaseUrl, samplesData, demosTimeStamp);
         });
     }
 
-    var getFiles = function ($buttons, demosBaseUrl, samplesFilesUrls, demosTimeStamp) {
-
-        var sharedFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + sharedFileName;
-        sharedFileUrl = addTimeStamp(sharedFileUrl, demosTimeStamp);
-
-        var requests = [$.get(sharedFileUrl)];
-
-        $.each(samplesFilesUrls, function (index, url) {
-            url = addTimeStamp(url, demosTimeStamp);
-            var ajax = $.get(url);
-            requests.push(ajax);
-        });
-
-        $.when.apply($, requests).done(function () {
-            replaceRelativeAssetsUrls(arguments[0][0].files, demosBaseUrl);
-            sharedFileContent = arguments[0][0];
-
-            for (var i = 1; i < arguments.length; i++) {
-                replaceRelativeAssetsUrls(arguments[i][0].sampleFiles, demosBaseUrl);
-                var url = this[i].url;
-                url = removeQueryString(url);
-                sampleFilesContentByUrl[url] = arguments[i][0];
-            }
-
-            $buttons.removeAttr("disabled");
-        });
-    }
-
+    
     var addTimeStamp = function (url, demosTimeStamp) {
         if (!demosTimeStamp) {
             throw Error("Timestamp cannot be added.");
@@ -169,6 +125,49 @@
 
         url += "?t=" + demosTimeStamp;
         return url;
+    }
+
+    var getFiles = function (demosBaseUrl, samplesData, demosTimeStamp) {
+
+        var sharedFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + sharedFileName;
+        sharedFileUrl = addTimeStamp(sharedFileUrl, demosTimeStamp);
+        $.get(sharedFileUrl, sharedFilePostProcess(demosBaseUrl, function() {
+            samplesData.forEach(function (sample) {
+                const sampleDataObj = JSON.parse(sample);
+                const sampleFileUrl = sampleDataObj.sampleUrl;
+                const iframeID = sampleDataObj.iframeId;
+                $.get(sampleFileUrl, sampleFilePostProcess(demosBaseUrl, removeQueryString, iframeID))
+            });
+        }));
+    }
+
+    var sampleFilePostProcess = function(demosBaseUrl, cb, iframeID){
+            return function(data) {
+                const files = data.sampleFiles;
+                replaceRelativeAssetsUrls(files, demosBaseUrl);
+                var url = this.url;
+                url = cb(url);
+                sampleFilesContentByUrl[url] = data;
+                activateButton(iframeID);
+            }
+    }
+
+    var sharedFilePostProcess = function(demosBaseUrl, cb){
+        return function (data) {
+            const files = data.files;
+            replaceRelativeAssetsUrls(files, demosBaseUrl);
+            sharedFileContent = data;
+
+            if(cb){
+                cb();
+            }
+        }
+    }
+
+    var activateButton = function (iframeID){
+        const buttonsForActivation = 'button[' + buttonIframeIdAttrName + "=" + iframeID + "]";
+        $(buttonsForActivation).on("click", onProjectButtonClicked)
+        $(buttonsForActivation).removeAttr("disabled");
     }
 
     var removeQueryString = function (url) {
@@ -210,7 +209,7 @@
         return demoFileUrl;
     }
 
-    var onProjectButtonClicked = function (event) {
+    var onProjectButtonClicked = function () {
         if (isButtonClickInProgress) {
             return;
         }
@@ -334,7 +333,8 @@
                 }
             }
         };
-        const f = data.files.forEach( function (f) {
+
+        data.files.forEach( function (f) {
             fileToSandbox.files[f["path"].replace("./", "")] = {
                 content: f["content"]
             }
