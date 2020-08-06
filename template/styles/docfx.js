@@ -49,7 +49,7 @@ $(function () {
 
 
   function addExternalLinkIcons() {
-    $('.article-container a:not([class="no-icon"])[href^="http"]')
+    $('.article-container a:not([class="no-external-icon"])[href^="http"]')
       .each(function (i, anchor) {
         const anchorChildren = $(anchor).children();
         if(anchorChildren.length > 0) {
