@@ -166,8 +166,13 @@
 
     var activateButton = function (iframeID){
         const buttonsForActivation = 'button[' + buttonIframeIdAttrName + "=" + iframeID + "]";
-        $(buttonsForActivation).on("click", onProjectButtonClicked)
-        $(buttonsForActivation).removeAttr("disabled");
+        $(buttonsForActivation).on("click", onProjectButtonClicked);
+
+        if(iframeID.indexOf("grid") !== -1) {
+            $($(buttonsForActivation)[0]).removeAttr("disabled");
+        } else {
+            $(buttonsForActivation).removeAttr("disabled");
+        }
     }
 
     var removeQueryString = function (url) {
