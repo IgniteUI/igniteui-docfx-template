@@ -168,10 +168,17 @@
         const buttonsForActivation = 'button[' + buttonIframeIdAttrName + "=" + iframeID + "]";
         $(buttonsForActivation).on("click", onProjectButtonClicked);
 
+        console.log("---------start-------------");
+        console.log("Iframe ID:" + iframeID);
         if(iframeID.indexOf("grid") !== -1) {
             $($(buttonsForActivation)[0]).removeAttr("disabled");
+            console.log("Disabled attr removed only for CodeSandbox");
+            console.log("Editing buttons");
+            console.log(buttonsForActivation);
+            console.log($(buttonsForActivation));
         } else {
             $(buttonsForActivation).removeAttr("disabled");
+            console.log("Disabled attr removed fot both CodeSandbox and StackBlitz");
         }
     }
 
