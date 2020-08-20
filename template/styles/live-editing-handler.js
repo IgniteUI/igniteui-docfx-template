@@ -42,6 +42,7 @@
 
         if (projectButtons.length > 0) {
             if (!isLocalhost) {
+                projectButtons = $("." + stkbButtonClass + ":not([" + buttonIframeIdAttrName + "*=grid])" + ", ." + cbsButtonClass);
                 projectButtons.removeAttr("disabled");
                 projectButtons.on("click", onGithubProjectButtonClicked);
             } else {
@@ -165,20 +166,13 @@
     }
 
     var activateButton = function (iframeID){
-        const buttonsForActivation = 'button[' + buttonIframeIdAttrName + "=" + iframeID + "]";
+        var buttonsForActivation = 'button[' + buttonIframeIdAttrName + "=" + iframeID + "]";
         $(buttonsForActivation).on("click", onProjectButtonClicked);
-
-        console.log("---------start-------------");
-        console.log("Iframe ID:" + iframeID);
         if(iframeID.indexOf("grid") !== -1) {
-            $($(buttonsForActivation)[0]).removeAttr("disabled");
-            console.log("Disabled attr removed only for CodeSandbox");
-            console.log("Editing buttons");
-            console.log(buttonsForActivation);
-            console.log($(buttonsForActivation));
+            buttonsForActivation = 'button:not([class=' + stkbButtonClass +'])[' + buttonIframeIdAttrName + "=" + iframeID + "]"
+            $(buttonsForActivation).removeAttr("disabled");
         } else {
             $(buttonsForActivation).removeAttr("disabled");
-            console.log("Disabled attr removed fot both CodeSandbox and StackBlitz");
         }
     }
 
