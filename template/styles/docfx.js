@@ -9,7 +9,7 @@ $(function () {
   var util = new utility();
   var initialSidetocHeight;
   var initialAffixHeight;
-  var tocScrollPosition;
+
   addExternalLinkIcons();
   highlight();
   enableSearch();
