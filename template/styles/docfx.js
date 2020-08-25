@@ -248,6 +248,31 @@ $(function () {
     });
   }
 
+  function getActiveAnchorTopOffset(element, expandParents) {
+    var top = 0;
+    $(element.parents("li").get().reverse())
+             .each(function (i, e) {
+               if(expandParents) {
+                $(e).addClass(expanded);
+               }
+                top += $(e).position().top;
+              });
+    return top;
+  }
+
+  function getActiveAnchorID(element) {
+
+    var id = "";
+    const parentListItems = element.parents("li").get();
+    $(parentListItems.reverse())
+             .each(function (i, e) {
+              const listItemTopicName = $($(e).find("a > span.topic-name")[0]).text().trim();
+              id += i === parentListItems.length - 1 ? listItemTopicName : listItemTopicName + "~" 
+              });
+              console.log(id)
+    return id;
+  }
+
   // Support full-text-search
   function enableSearch() {
     var query;
@@ -597,50 +622,26 @@ $(function () {
 
       checkIfFooterIsVisible()
 
-      // Scroll to active item
-      var top;
-
+      var top = 0;
+      const activeTopicId = getActiveAnchorID($("#toc a.active"));
+      var storedActiveElement = sessionStorage.getItem('active-element');
+      if(storedActiveElement && activeTopicId === (storedActiveElement = JSON.parse(storedActiveElement)).id) {
+        const prevTopOffset = parseInt(storedActiveElement.top);
+        const currentOffsetTop = getActiveAnchorTopOffset($("#toc a.active"), true);
+        const scrollAmount = (currentOffsetTop - prevTopOffset);
+        top = scrollAmount;
+      } else {
+        $($("#toc a.active").
+        parents("li").get().reverse()).
+        each(function (i, e) {
+          $(e).addClass(expanded);
+          top += $(e).position().top;
+        });
+        top = top - 50;
+      }
+      sessionStorage.removeItem('active-element');
 
       $("#toc a.active").closest("li").addClass("active");
-
-      $($("#toc a.active")
-      .parents("li")
-      .get()
-      .reverse())
-      .each(function (i, e) {
-        if(!$(e).hasClass(expanded)) {
-          $(e).addClass(expanded);
-        }
-      });
-
-      if(sessionStorage.getItem('adjust-scroll')) {
-        const prevTop = parseInt(sessionStorage.getItem('el-top'));
-        var currentOffsetTop = 0;
-        $($('#toc a.active').parents("li")
-                            .get()
-                            .reverse())
-                          .each(function (i, e) {
-                            currentOffsetTop += $(e).position().top;
-                          });
-        const scrollAmount = (currentOffsetTop - prevTop);
-        top = scrollAmount;
-        const prevScrollPosition = parseInt(sessionStorage.getItem('toc-scroll-position'));
-
-                // const prevTocHeight = parseInt(sessionStorage.getItem('toc-scroll-height'));
-        // const tocScrollHeightPercentIncreaseDiff = Math.floor(((prevTocHeight - $('.sidetoc')[0].scrollHeight) / $('.sidetoc')[0].scrollHeight) * 100);
-        // const tocScrollPosition = prevScrollPosition - Math.floor((tocScrollHeightPercentIncreaseDiff / 100) * prevScrollPosition);
-        // top = prevScrollPosition;
-        // const titles = sessionStorage.getItem('toc-expanded').split("~");
-      //   $(".toc .nav > li > a").filter(function (i, v)  {return titles.indexOf($(v).attr("title")) !== -1})
-      //                          .each(function (i, v) {
-      //                            $(v).parents("li").each(function (i, v) {
-      //                              if(!$(v).hasClass(expanded)) {
-      //                                $(v).addClass(expanded);
-      //                              }
-      //                            })
-      //                          });
-      }
-
 
       $(".sidetoc").scrollTop(top)
 
@@ -658,38 +659,11 @@ $(function () {
           .toggleClass(expanded);
       });
       $(".toc .nav > li > a").click(function (e) {
-        // var offsetTop = 0;
-        // const newActiveLI =  $(e.target).closest("li")[0];
-        // const newActiveLIParentLIs = $(newActiveLI).parents("li").get();
-        // $("li.in").each((i,v) => { 
-        //   if(v === $(e.target).closest("li")[0] ){
-        //     return;
-        //   } else if(newActiveLIParentLIs.indexOf(v) === -1) {
-        //     offsetTop += $(v).height() - 30;
-        //   }
-        // });
-        // sessionStorage.setItem('toc-scroll-height', $(".sidetoc")[0].scrollHeight);
-        // sessionStorage.setItem('toc-offset-top', offsetTop);
-      //   var titles = "";
-      //   const openStubs = $("li.in > a");
-      //   openStubs.each((i,v) => { 
-      //     const title = $(v).attr("title");
-      //     titles += i === openStubs.length - 1 ? title: (title + "~");
-      //   });
-      //   sessionStorage.setItem('toc-scroll-position', $(".sidetoc").scrollTop());
-      //   sessionStorage.setItem('toc-expanded', titles);
-      
-      var offsetTop = 0;
-       $($(e.target).parents("li")
-                              .get()
-                              .reverse())
-                            .each(function (i, e) {
-                              offsetTop += $(e).position().top;
-                            });
-      
-      sessionStorage.setItem('el-top', offsetTop);
-      sessionStorage.setItem('adjust-scroll', true)
+      const offsetTop = getActiveAnchorTopOffset($(e.target));
+      const id = getActiveAnchorID($(e.target));
+      const activeElement = {id, top: offsetTop};
 
+      sessionStorage.setItem('active-element', JSON.stringify(activeElement));
       });
       $(".toc .nav > li > .expand-stub + a:not([href])").click(function (e) {
         $(e.target)
