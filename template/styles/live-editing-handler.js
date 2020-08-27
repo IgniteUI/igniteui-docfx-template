@@ -42,7 +42,6 @@
 
         if (projectButtons.length > 0) {
             if (!isLocalhost) {
-                projectButtons = $("." + stkbButtonClass + ":not([" + buttonIframeIdAttrName + "*=grid])" + ", ." + cbsButtonClass);
                 projectButtons.removeAttr("disabled");
                 projectButtons.on("click", onGithubProjectButtonClicked);
             } else {
@@ -168,12 +167,7 @@
     var activateButton = function (iframeID){
         var buttonsForActivation = 'button[' + buttonIframeIdAttrName + "=" + iframeID + "]";
         $(buttonsForActivation).on("click", onProjectButtonClicked);
-        if(iframeID.indexOf("grid") !== -1) {
-            buttonsForActivation = 'button:not([class=' + stkbButtonClass +'])[' + buttonIframeIdAttrName + "=" + iframeID + "]"
-            $(buttonsForActivation).removeAttr("disabled");
-        } else {
-            $(buttonsForActivation).removeAttr("disabled");
-        }
+        $(buttonsForActivation).removeAttr("disabled");
     }
 
     var removeQueryString = function (url) {

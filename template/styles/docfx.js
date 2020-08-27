@@ -9,6 +9,7 @@ $(function () {
   var util = new utility();
   var initialSidetocHeight;
   var initialAffixHeight;
+
   addExternalLinkIcons();
   highlight();
   enableSearch();
@@ -245,6 +246,31 @@ $(function () {
 
       block.innerHTML = lines.join("\n");
     });
+  }
+
+  function getActiveAnchorTopOffset(element, expandParents) {
+    var top = 0;
+    $(element.parents("li").get().reverse())
+             .each(function (i, e) {
+               if(expandParents) {
+                $(e).addClass(expanded);
+               }
+                top += $(e).position().top;
+              });
+    return top;
+  }
+
+  function getActiveAnchorID(element) {
+
+    var id = "";
+    const parentListItems = element.parents("li").get();
+    $(parentListItems.reverse())
+             .each(function (i, e) {
+              const listItemTopicName = $($(e).find("a > span.topic-name")[0]).text().trim();
+              id += i === parentListItems.length - 1 ? listItemTopicName : listItemTopicName + "~" 
+              });
+              console.log(id)
+    return id;
   }
 
   // Support full-text-search
@@ -596,22 +622,28 @@ $(function () {
 
       checkIfFooterIsVisible()
 
-      // Scroll to active item
       var top = 0;
-      $($("#toc a.active")
-        .parents("li")
-        .get()
-        .reverse())
-        .each(function (i, e) {
+      const activeTopicId = getActiveAnchorID($("#toc a.active"));
+      var storedActiveElement = sessionStorage.getItem('active-element');
+      if(storedActiveElement && activeTopicId === (storedActiveElement = JSON.parse(storedActiveElement)).id) {
+        const prevTopOffset = parseInt(storedActiveElement.top);
+        const currentOffsetTop = getActiveAnchorTopOffset($("#toc a.active"), true);
+        const scrollAmount = (currentOffsetTop - prevTopOffset);
+        top = scrollAmount;
+      } else {
+        $($("#toc a.active").
+        parents("li").get().reverse()).
+        each(function (i, e) {
           $(e).addClass(expanded);
           top += $(e).position().top;
         });
+        top = top - 50;
+      }
+      sessionStorage.removeItem('active-element');
 
       $("#toc a.active").closest("li").addClass("active");
 
-      if(top > 168) {
-        $(".sidetoc").scrollTop(top - 50)
-      } 
+      $(".sidetoc").scrollTop(top)
 
       if ($("footer").is(":visible")) {
         // $('.sidetoc').addClass('shiftup');
@@ -625,6 +657,13 @@ $(function () {
         $(e.target)
           .parent()
           .toggleClass(expanded);
+      });
+      $(".toc .nav > li > a").click(function (e) {
+      const offsetTop = getActiveAnchorTopOffset($(e.target));
+      const id = getActiveAnchorID($(e.target));
+      const activeElement = {id, top: offsetTop};
+
+      sessionStorage.setItem('active-element', JSON.stringify(activeElement));
       });
       $(".toc .nav > li > .expand-stub + a:not([href])").click(function (e) {
         $(e.target)
