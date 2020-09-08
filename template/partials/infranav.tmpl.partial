@@ -96,8 +96,8 @@
                             <li>
                                 <a class="navigation__sub-menu mchNoDecorate" title="UX" href="/products/indigo-design/desktop">UX</a>
                                 <ul style="display: none;">
-                                    <li><a title="Indigo.Design Desktop" href="/products/indigo-design/desktop" class="mchNoDecorate">Indigo.Design Desktop <span class="deemphasize">Collaborative prototyping and remote usability testing for UX &amp; usability professionals</span></a></li>
                                     <li><a title="Indigo.Design" href="/products/indigo-design" class="mchNoDecorate">Indigo.Design <span class="deemphasize">A Unified Platform for Visual Design, UX Prototyping, Code Generation, and App Development</span></a></li>
+                                    <li><a title="Indigo.Design Desktop" href="/products/indigo-design/desktop" class="mchNoDecorate">Indigo.Design Desktop <span class="deemphasize">Collaborative prototyping and remote usability testing for UX &amp; usability professionals</span></a></li>
                                 </ul>
                             </li>
                             <li class="">

@@ -42,15 +42,6 @@ h6 mark {
 
 h1,
 .h1 {
-    font-size: 4.25rem;
-    line-height: 4.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 3rem;
-    font-weight: 400;
-}
-
-h2,
-.h2 {
     font-size: 2.625rem;
     line-height: 3rem;
     margin-top: 1.5rem;
@@ -59,14 +50,22 @@ h2,
     color: $black;
 }
 
-h3,
-.h3 {
+h2,
+.h2 {
     font-size: 2rem;
     line-height: 3rem;
     margin-top: 2rem;
     margin-bottom: 0rem;
     font-weight: 300;
     position: relative;
+}
+
+h3,
+.h3 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0rem;
 }
 
 h4,
