@@ -84,8 +84,8 @@
                             </li>
                             <li><a class="navigation__sub-menu mchNoDecorate" title="UX" href="/products/indigo-design">UX</a>
                                 <ul style="display: none;">
-                                    <li><a title="Indigo.Design Desktop" href="/products/indigo-design/desktop" class="mchNoDecorate">Indigo.Design Desktop <span class="deemphasize">プロトタイプの迅速な構築、コラボレーションの実現、ユーザビリティ テストの実施を可能にする UX デザイン ツール</span></a></li>
                                     <li><a title="Indigo.Design" href="/products/indigo-design" class="mchNoDecorate">Indigo.Design <span class="deemphasize">3ステップでデザインから画面コードを生成できるアプリケーションデザインプラットフォーム</span></a></li>
+                                    <li><a title="Indigo.Design Desktop" href="/products/indigo-design/desktop" class="mchNoDecorate">Indigo.Design Desktop <span class="deemphasize">プロトタイプの迅速な構築、コラボレーションの実現、ユーザビリティ テストの実施を可能にする UX デザイン ツール</span></a></li>
                                 </ul>
                             </li>
                             <li><a href="https://www.revealbi.io/jp" class="mchNoDecorate">データ可視化</a></li>
