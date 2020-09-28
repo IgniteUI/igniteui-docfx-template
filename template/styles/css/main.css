@@ -507,9 +507,11 @@ sub {
 
 .affix {
   height: 65%;
+  margin-top: 2.4rem;
   overflow: auto; }
 
 .affix h5 {
+  display: none;
   font-size: 14px;
   margin-bottom: 16px;
   text-transform: uppercase;
@@ -528,14 +530,28 @@ sub {
     .affix ul > li > a:hover::before {
       background-color: rgba(0, 0, 0, 0.38); }
   .affix ul > li > a::before {
-    position: absolute;
-    content: '';
-    font-size: 14px;
-    width: 2px;
-    top: 6px;
-    bottom: 6px;
-    left: 0;
-    background-color: #0099ff; }
+    display: none; }
+
+.affix ul > li.active > a::before {
+  position: absolute;
+  content: '';
+  font-size: 14px;
+  width: 2px;
+  top: 6px;
+  bottom: 6px;
+  left: 0;
+  background-color: #0099ff; }
+
+.affix ul > li.active > ul > li.active > a::before {
+  position: absolute;
+  content: '';
+  font-size: 14px;
+  width: 1px;
+  height: 20px;
+  top: 10px;
+  bottom: 6px;
+  left: 0;
+  background-color: #0099ff; }
 
 .affix ul > li.active:hover > a {
   color: #585858; }
@@ -564,9 +580,11 @@ sub {
   .affix ul ul > li > a::before::hover {
     background: none; }
 
-.affix ul > li > a::before,
-.affix ul ul {
+.affix ul > li > a::before {
   display: none; }
+
+.affix ul ul > a {
+  display: block; }
 
 .affix ul > li.active > ul,
 .affix ul > li.active > a:before,
