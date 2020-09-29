@@ -41,10 +41,12 @@
 
 .affix {
     height: 65%;
+    margin-top: 2.4rem;
     overflow: auto;
 }
 
 .affix h5 {
+    display: none;
     font-size: 14px;
     margin-bottom: 16px;
     text-transform: uppercase;
@@ -67,11 +69,31 @@
         }
     }
     &::before {
+        display:none;
+    }
+}
+
+.affix ul>li.active>a {
+    &::before {
         position: absolute;
         content: '';
         font-size: 14px;
         width: 2px;
         top: 6px;
+        bottom: 6px;
+        left: 0;
+        background-color: $igblue;
+    }
+}
+
+.affix ul>li.active>ul>li.active>a {
+    &::before {
+        position: absolute;
+        content: '';
+        font-size: 14px;
+        width: 1px;
+        height: 20px;
+        top: 10px;
         bottom: 6px;
         left: 0;
         background-color: $igblue;
@@ -113,9 +135,11 @@
     }
 }
 
-.affix ul>li>a::before,
-.affix ul ul {
+.affix ul>li>a::before{
     display: none;
+}
+.affix ul ul>a {
+    display: block; // white-space: nowrap;
 }
 
 .affix ul>li.active>ul,
