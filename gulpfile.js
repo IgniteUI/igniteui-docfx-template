@@ -30,6 +30,7 @@ const bundles = [
             "igviewer.common.js",
             "igviewer.renderingService.js",
             "lz-string.js",
+            "resize-sensor.js",
             "nav-init.js",
             "live-editing-handler.js",
             "lazyload.js",
