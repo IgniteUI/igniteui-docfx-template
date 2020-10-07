@@ -27,6 +27,7 @@ $(function () {
   renderHeader();
   copyCode();
   renderNoteBlocks();
+  handleResizableContent();
 
   window.refresh = function (article) {
     // Update markup result
@@ -100,6 +101,18 @@ $(function () {
       $('#affix').height(initialAffixHeight);
 
     }
+  }
+
+  function handleResizableContent(){
+
+    $(".resizable-content").each( function(){
+      const element = this;
+      new ResizeSensor(this, function (evt){
+        if(evt.height !== $(element).height()){
+          checkIfFooterIsVisible();
+        }
+      });
+    });
   }
 
   (function () {
@@ -269,7 +282,6 @@ $(function () {
               const listItemTopicName = $($(e).find("a > span.topic-name")[0]).text().trim();
               id += i === parentListItems.length - 1 ? listItemTopicName : listItemTopicName + "~" 
               });
-              console.log(id)
     return id;
   }
 
@@ -661,7 +673,7 @@ $(function () {
       $(".toc .nav > li > a").click(function (e) {
       const offsetTop = getActiveAnchorTopOffset($(e.target));
       const id = getActiveAnchorID($(e.target));
-      const activeElement = {id, top: offsetTop};
+      const activeElement = {id: id, top: offsetTop};
 
       sessionStorage.setItem('active-element', JSON.stringify(activeElement));
       });
@@ -1172,13 +1184,13 @@ function closeContainer() {
   }
 }
 
-  function isDvPage() {
-    return window.igViewer.common.isDvPage();
-  }
+function isDvPage() {
+  return window.igViewer.common.isDvPage();
+}
 
-  function showGitHubButton() {
-    return window.location.pathname.search(RegExp("\\/\\b(\\w*grid\\w*)\\b\\/")) === -1
-  }
+function showGitHubButton() {
+  return window.location.pathname.search(RegExp("\\/\\b(\\w*grid\\w*)\\b\\/")) === -1
+}
 
 $(document).ready(function () {
   var contentOffset = $("#_content").offset().top;
