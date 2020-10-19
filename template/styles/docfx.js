@@ -69,10 +69,19 @@ $(function () {
 
   function addGtmButtons() {
     $(".sample-container").each(function (i, block) {
-      const paragraphContent = 'Like this sample? Get access to our complete Angular toolkit and start building your own apps in minutes. ' + '<a class="no-external-icon mchNoDecorate trackCTA" target="_blank" href="https://www.infragistics.com/products/ignite-ui-angular/download" data-xd-ga-action="Download" data-xd-ga-label="Ignite UI for Angular">Download it for free.</a>'
-
+      const paragraph = $('<p>').attr('style','margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete Angular toolkit and start building your own apps in minutes. ");
+      const link=$('<a>');
+      
+      link.attr('data-xd-ga-action','Download');
+      link.attr('data-xd-ga-label','Ignite UI for Angular');
+      link.attr({
+        target:"_blank",
+        href:"https://www.infragistics.com/products/ignite-ui-angular/download",
+        class: "no-external-icon mchNoDecorate trackCTA"
+      });
+      link.text("Download it for free.").appendTo(paragraph);
       if(i===0){
-        $(block).next().is('p') ? "" : $(block).after('<p style="margin: 0;padding-top: 0.5rem">' + paragraphContent + '</p>')
+        $(block).next().is('p') ? "" : $(block).after(paragraph)
       }
     });
   }
