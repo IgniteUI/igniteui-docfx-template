@@ -10,6 +10,8 @@ $(function () {
   var initialSidetocHeight;
   var initialAffixHeight;
 
+
+  
   addExternalLinkIcons();
   highlight();
   enableSearch();
@@ -28,6 +30,7 @@ $(function () {
   copyCode();
   renderNoteBlocks();
   handleResizableContent();
+  addGtmButtons();
 
   window.refresh = function (article) {
     // Update markup result
@@ -61,10 +64,20 @@ $(function () {
         } else {
           $(anchor).addClass('external-link');
         }
-    })
+      })
   }
 
-  function renderHeader() {}
+  function addGtmButtons() {
+    $(".sample-container").each(function (i, block) {
+      const paragraphContent = 'Like this sample? Get access to our complete Angular toolkit and start building your own apps in minutes. ' + '<a class="no-external-icon mchNoDecorate trackCTA" target="_blank" href="https://www.infragistics.com/products/ignite-ui-angular/download" data-xd-ga-action="Download" data-xd-ga-label="Ignite UI for Angular">Download it for free.</a>'
+
+      if(i===0){
+        $(block).next().is('p') ? "" : $(block).after('<p style="margin: 0;padding-top: 0.5rem">' + paragraphContent + '</p>')
+      }
+    });
+  }
+
+  function renderHeader() { }
 
   // Styling for tables in conceptual documents using Bootstrap.
   // See http://getbootstrap.com/css/#tables
@@ -86,16 +99,16 @@ $(function () {
     $('#affix').height(initialAffixHeight - height);
   }
 
-  function checkIfFooterIsVisible(){
+  function checkIfFooterIsVisible() {
     var $el = $('#footer-container'),
-    scrollTop = $(this).scrollTop(),
-    scrollBot = scrollTop + $(this).height(),
-    elTop = $el.offset().top,
-    elBottom = elTop + $el.outerHeight(),
-    visibleTop = elTop < scrollTop ? scrollTop : elTop,
-    visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
+      scrollTop = $(this).scrollTop(),
+      scrollBot = scrollTop + $(this).height(),
+      elTop = $el.offset().top,
+      elBottom = elTop + $el.outerHeight(),
+      visibleTop = elTop < scrollTop ? scrollTop : elTop,
+      visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
     if(visibleTop < visibleBottom) {
-      decreaseSideNavsHeight((visibleBottom - visibleTop)); 
+      decreaseSideNavsHeight((visibleBottom - visibleTop));
     } else {
       $('.sidetoc').height(initialSidetocHeight);
       $('#affix').height(initialAffixHeight);
@@ -264,12 +277,12 @@ $(function () {
   function getActiveAnchorTopOffset(element, expandParents) {
     var top = 0;
     $(element.parents("li").get().reverse())
-             .each(function (i, e) {
-               if(expandParents) {
-                $(e).addClass(expanded);
-               }
-                top += $(e).position().top;
-              });
+      .each(function (i, e) {
+        if(expandParents) {
+          $(e).addClass(expanded);
+        }
+        top += $(e).position().top;
+      });
     return top;
   }
 
@@ -278,10 +291,10 @@ $(function () {
     var id = "";
     const parentListItems = element.parents("li").get();
     $(parentListItems.reverse())
-             .each(function (i, e) {
-              const listItemTopicName = $($(e).find("a > span.topic-name")[0]).text().trim();
-              id += i === parentListItems.length - 1 ? listItemTopicName : listItemTopicName + "~" 
-              });
+      .each(function (i, e) {
+        const listItemTopicName = $($(e).find("a > span.topic-name")[0]).text().trim();
+        id += i === parentListItems.length - 1 ? listItemTopicName : listItemTopicName + "~"
+      });
     return id;
   }
 
@@ -514,9 +527,9 @@ $(function () {
                     .attr("class", "item-title")
                     .append(
                       $("<a>")
-                      .attr("href", itemHref)
-                      .attr("target", "_blank")
-                      .text(itemTitle)
+                        .attr("href", itemHref)
+                        .attr("target", "_blank")
+                        .text(itemTitle)
                     );
                   var itemHrefNode = $("<div>")
                     .attr("class", "item-href")
@@ -644,11 +657,11 @@ $(function () {
         top = scrollAmount;
       } else {
         $($("#toc a.active").
-        parents("li").get().reverse()).
-        each(function (i, e) {
-          $(e).addClass(expanded);
-          top += $(e).position().top;
-        });
+          parents("li").get().reverse()).
+          each(function (i, e) {
+            $(e).addClass(expanded);
+            top += $(e).position().top;
+          });
         top = top - 50;
       }
       sessionStorage.removeItem('active-element');
@@ -671,11 +684,11 @@ $(function () {
           .toggleClass(expanded);
       });
       $(".toc .nav > li > a").click(function (e) {
-      const offsetTop = getActiveAnchorTopOffset($(e.target));
-      const id = getActiveAnchorID($(e.target));
-      const activeElement = {id: id, top: offsetTop};
+        const offsetTop = getActiveAnchorTopOffset($(e.target));
+        const id = getActiveAnchorID($(e.target));
+        const activeElement = {id: id, top: offsetTop};
 
-      sessionStorage.setItem('active-element', JSON.stringify(activeElement));
+        sessionStorage.setItem('active-element', JSON.stringify(activeElement));
       });
       $(".toc .nav > li > .expand-stub + a:not([href])").click(function (e) {
         $(e.target)
@@ -691,7 +704,7 @@ $(function () {
             .removeClass(hide)
             .removeClass(expanded);
 
-            $("#toc li > a.active")
+          $("#toc li > a.active")
             .parents("li")
             .addClass(expanded);
 
@@ -860,18 +873,18 @@ $(function () {
           href: $(parent).children("a")[0].href,
           name: $(parent).children("a")[0].title
         });
-     });
+      });
 
       breadcrumb.push({
-          href: $(e).children("a")[0].href,
-          name: $(e).children("a")[0].title
-        });
+        href: $(e).children("a")[0].href,
+        name: $(e).children("a")[0].title
       });
+    });
 
     var html = util.formList(breadcrumb, "breadcrumb");
     $("#breadcrumb").html(html);
   }
- 
+
   //Setup Affix
   function renderAffix() {
     var hierarchy = getHierarchy();
@@ -909,12 +922,12 @@ $(function () {
         var hashLocation = $(this).attr("href");
         var scrollPos =
           $("body")
-          .find(hashLocation)
-          .offset().top - contentOffset;
+            .find(hashLocation)
+            .offset().top - contentOffset;
 
         $("body, html").animate({
-            scrollTop: scrollPos
-          },
+          scrollTop: scrollPos
+        },
           500,
           function () {
             updateUrl(hashLocation);
@@ -1205,14 +1218,14 @@ $(document).ready(function () {
 
     var scrollPos =
       $("body")
-      .find(hashLocation)
-      .offset().top - contentOffset;
+        .find(hashLocation)
+        .offset().top - contentOffset;
 
     $("body, html")
       .stop()
       .animate({
-          scrollTop: scrollPos
-        },
+        scrollTop: scrollPos
+      },
         500,
         function () {}
       );
