@@ -11,7 +11,7 @@ $(function () {
   var initialAffixHeight;
 
 
-  
+
   addExternalLinkIcons();
   highlight();
   enableSearch();
@@ -57,7 +57,7 @@ $(function () {
     $('.article-container a:not([class*="no-external-icon"])[href^="http"]')
       .each(function (i, anchor) {
         const anchorChildren = $(anchor).children();
-        if(anchorChildren.length > 0) {
+        if (anchorChildren.length > 0) {
           const lastChild = anchorChildren[anchorChildren.length - 1];
           $(lastChild).addClass('external-link');
           $(anchor).addClass('external-link-parent');
@@ -68,22 +68,20 @@ $(function () {
   }
 
   function addGtmButtons() {
-    $(".sample-container").each(function (i, block) {
-      const paragraph = $('<p>').attr('style','margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete Angular toolkit and start building your own apps in minutes. ");
-      const link=$('<a>');
-      
-      link.attr('data-xd-ga-action','Download');
-      link.attr('data-xd-ga-label','Ignite UI for Angular');
+    if ($(".sample-container")) {
+      const sample = $(".sample-container").first();
+      const paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete Angular toolkit and start building your own apps in minutes. ");
+      const link = $('<a>');
+      link.attr('data-xd-ga-action', 'Download');
+      link.attr('data-xd-ga-label', 'Ignite UI for Angular');
       link.attr({
-        target:"_blank",
-        href:"https://www.infragistics.com/products/ignite-ui-angular/download",
+        target: "_blank",
+        href: "https://www.infragistics.com/products/ignite-ui-angular/download",
         class: "no-external-icon mchNoDecorate trackCTA"
       });
       link.text("Download it for free.").appendTo(paragraph);
-      if(i===0){
-        $(block).next().is('p') ? "" : $(block).after(paragraph)
-      }
-    });
+      $(sample).next().is('p') && $(".sample-container").next().first(".trackCTA") ? "" : $(sample).after(paragraph)
+    }
   }
 
   function renderHeader() { }
@@ -116,7 +114,7 @@ $(function () {
       elBottom = elTop + $el.outerHeight(),
       visibleTop = elTop < scrollTop ? scrollTop : elTop,
       visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
-    if(visibleTop < visibleBottom) {
+    if (visibleTop < visibleBottom) {
       decreaseSideNavsHeight((visibleBottom - visibleTop));
     } else {
       $('.sidetoc').height(initialSidetocHeight);
@@ -125,12 +123,12 @@ $(function () {
     }
   }
 
-  function handleResizableContent(){
+  function handleResizableContent() {
 
-    $(".resizable-content").each( function(){
+    $(".resizable-content").each(function () {
       const element = this;
-      new ResizeSensor(this, function (evt){
-        if(evt.height !== $(element).height()){
+      new ResizeSensor(this, function (evt) {
+        if (evt.height !== $(element).height()) {
           checkIfFooterIsVisible();
         }
       });
@@ -139,16 +137,16 @@ $(function () {
 
   (function () {
     $(this).on("scroll", function () {
-      setTimeout( function ()  {
+      setTimeout(function () {
         checkIfFooterIsVisible()
       }, 0)
     })
   })();
 
   (function () {
-    $(this).on("resize", function() {
-      initialSidetocHeight =  document.body.clientHeight - 160;
-      initialAffixHeight = (65 / 100 ) * document.body.clientHeight;
+    $(this).on("resize", function () {
+      initialSidetocHeight = document.body.clientHeight - 160;
+      initialAffixHeight = (65 / 100) * document.body.clientHeight;
       checkIfFooterIsVisible()
     })
   })();
@@ -287,7 +285,7 @@ $(function () {
     var top = 0;
     $(element.parents("li").get().reverse())
       .each(function (i, e) {
-        if(expandParents) {
+        if (expandParents) {
           $(e).addClass(expanded);
         }
         top += $(e).position().top;
@@ -659,7 +657,7 @@ $(function () {
       var top = 0;
       const activeTopicId = getActiveAnchorID($("#toc a.active"));
       var storedActiveElement = sessionStorage.getItem('active-element');
-      if(storedActiveElement && activeTopicId === (storedActiveElement = JSON.parse(storedActiveElement)).id) {
+      if (storedActiveElement && activeTopicId === (storedActiveElement = JSON.parse(storedActiveElement)).id) {
         const prevTopOffset = parseInt(storedActiveElement.top);
         const currentOffsetTop = getActiveAnchorTopOffset($("#toc a.active"), true);
         const scrollAmount = (currentOffsetTop - prevTopOffset);
@@ -695,7 +693,7 @@ $(function () {
       $(".toc .nav > li > a").click(function (e) {
         const offsetTop = getActiveAnchorTopOffset($(e.target));
         const id = getActiveAnchorID($(e.target));
-        const activeElement = {id: id, top: offsetTop};
+        const activeElement = { id: id, top: offsetTop };
 
         sessionStorage.setItem('active-element', JSON.stringify(activeElement));
       });
@@ -794,7 +792,7 @@ $(function () {
         var isHeader = listItem.data(isHeaderDataAttrName) === true;
         if (isHeader) {
           if (header) {
-            headers.push( {
+            headers.push({
               header: header,
               children: children
             });
@@ -877,7 +875,7 @@ $(function () {
     var breadcrumb = [];
     $("#toc li.active").each(function (i, e) {
 
-      $($(e).parents("li").get().reverse()).each(function (index, parent){
+      $($(e).parents("li").get().reverse()).each(function (index, parent) {
         breadcrumb.push({
           href: $(parent).children("a")[0].href,
           name: $(parent).children("a")[0].title
@@ -1236,7 +1234,7 @@ $(document).ready(function () {
         scrollTop: scrollPos
       },
         500,
-        function () {}
+        function () { }
       );
     return false;
   });
