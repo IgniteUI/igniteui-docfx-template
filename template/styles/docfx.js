@@ -69,7 +69,8 @@ $(function () {
 
   function addGtmButtons() {
 
-    if (!$(".sample-container:first + p>a.trackCTA").length) {
+    if ($(".sample-container").length && !$(".sample-container:first + p>a.trackCTA").length) {
+
       const sample = $(".sample-container").first();
       const paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete Angular toolkit and start building your own apps in minutes. ");
       const link = $('<a>');
