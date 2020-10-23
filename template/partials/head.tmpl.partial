@@ -13,7 +13,7 @@ full license information.}}
     <meta property="docfx:navrel" content="{{_navRel}}">
     <meta property="docfx:tocrel" content="{{_tocRel}}"> {{#_noindex}}
     <meta name="searchOption" content="noindex">{{/_noindex}} {{#_enableSearch}}
-    <meta property="docfx:rel" content="{{_rel}}">{{/_enableSearch}} {{#_enableNewTab}}
+    <meta property="docfx:rel" content="{environment:rewriteBaseUrl}">{{/_enableSearch}} {{#_enableNewTab}}
     <meta property="docfx:newtab" content="true">{{/_enableNewTab}} 
     <link rel="canonical" href="{{_currentBaseUrl}}{{_path}}" />
     <link rel="alternate" href="{{_ENBaseUrl}}{{_path}}" hreflang="en" />
@@ -31,8 +31,8 @@ full license information.}}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://infragistics.com/css/navigation.css">
     <link rel="stylesheet" href="https://infragistics.com/css/footer.css">
-    <link rel="stylesheet" href="{{_rel}}styles/bundles/styles-bundle.min.css?checksum={{_stylesBundleFileName}}">
-    <script type="text/javascript" src="{{_rel}}styles/sample-iframe-handler.js?t={{_timestamp}}"></script>
+    <link rel="stylesheet" href="{environment:rewriteBaseUrl}styles/bundles/styles-bundle.min.css?checksum={{_stylesBundleFileName}}">
+    <script type="text/javascript" src="{environment:rewriteBaseUrl}styles/sample-iframe-handler.js?t={{_timestamp}}"></script>
     <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/theming-widget/{environment:themingWidgetVersion}/igniteui-theming-widget.js?t=?t={{_timestamp}}"></script>
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
