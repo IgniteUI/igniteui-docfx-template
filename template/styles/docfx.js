@@ -68,7 +68,8 @@ $(function () {
   }
 
   function addGtmButtons() {
-    if ($(".sample-container")) {
+
+    if (!$(".sample-container:first + p>a.trackCTA").length) {
       const sample = $(".sample-container").first();
       const paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete Angular toolkit and start building your own apps in minutes. ");
       const link = $('<a>');
@@ -80,7 +81,7 @@ $(function () {
         class: "no-external-icon mchNoDecorate trackCTA"
       });
       link.text("Download it for free.").appendTo(paragraph);
-      $(sample).next().is('p') && $(".sample-container").next().first(".trackCTA") ? "" : $(sample).after(paragraph)
+      $(sample).after(paragraph)
     }
   }
 
