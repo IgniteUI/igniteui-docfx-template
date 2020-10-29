@@ -68,21 +68,22 @@ $(function () {
   }
 
   function addGtmButtons() {
-
     if ($(".sample-container").length && !$(".sample-container:first + p>a.trackCTA").length) {
+      const productTitle = $("meta[property='docfx:title']").attr("content");
+      const productLink = $("meta[property='docfx:link']").attr("content") + "download";
 
       const sample = $(".sample-container").first();
-      const paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete Angular toolkit and start building your own apps in minutes. ");
+      const paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete " + productTitle + " toolkit and start building your own apps in minutes.");
       const link = $('<a>');
       link.attr('data-xd-ga-action', 'Download');
-      link.attr('data-xd-ga-label', 'Ignite UI for Angular');
+      link.attr('data-xd-ga-label', productTitle);
       link.attr({
         target: "_blank",
-        href: "https://www.infragistics.com/products/ignite-ui-angular/download",
+        href: productLink,
         class: "no-external-icon mchNoDecorate trackCTA"
       });
       link.text("Download it for free.").appendTo(paragraph);
-      $(sample).after(paragraph)
+      sample.after(paragraph);
     }
   }
 
