@@ -70,7 +70,13 @@ $(function () {
   function addGtmButtons() {
     if ($(".sample-container").length && !$(".sample-container:first + p>a.trackCTA").length) {
       const productTitle = $("meta[property='docfx:title']").attr("content");
-      const productLink = $("meta[property='docfx:link']").attr("content") + "download";
+      let productLink = $("meta[property='docfx:link']").attr("content");
+
+      if(productLink.charAt(productLink.length-1) === '/'){
+        productLink += "download";
+      }else{
+        productLink += "/download";
+      }
 
       const sample = $(".sample-container").first();
       const paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete " + productTitle + " toolkit and start building your own apps in minutes.");
@@ -82,7 +88,7 @@ $(function () {
         href: productLink,
         class: "no-external-icon mchNoDecorate trackCTA"
       });
-      link.text("Download it for free.").appendTo(paragraph);
+      link.text(" Download it for free.").appendTo(paragraph);
       sample.after(paragraph);
     }
   }
