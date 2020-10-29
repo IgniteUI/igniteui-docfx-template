@@ -16,8 +16,9 @@ full license information.}}
     <meta property="docfx:tocrel" content="{{_tocRel}}"> {{#_noindex}}
     <meta name="searchOption" content="noindex">{{/_noindex}} {{#_enableSearch}}
     <meta property="docfx:rel" content="{{_rel}}">{{/_enableSearch}} {{#_enableNewTab}}
-    <meta property="docfx:newtab" content="true">{{/_enableNewTab}} 
-    <link rel="canonical" href="{{_currentBaseUrl}}{{_path}}" />
+    <meta property="docfx:newtab" content="true">{{/_enableNewTab}}
+    {{#_canonicalLink}}<link rel="canonical" href="{{_currentBaseUrl}}components/{{_canonicalLink}}.html"/>{{/_canonicalLink}}
+    {{^_canonicalLink}}<link rel="canonical" href="{{_currentBaseUrl}}{{_path}}" />{{/_canonicalLink}}
     <link rel="alternate" href="{{_ENBaseUrl}}{{_path}}" hreflang="en" />
     <link rel="alternate" href="{{_ENBaseUrl}}{{_path}}" hreflang="en-us" />
     <link rel="alternate" href="{{_JABaseUrl}}{{_path}}" hreflang="ja" />
