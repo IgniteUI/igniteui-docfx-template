@@ -863,6 +863,11 @@ $(function () {
           .find("a[href]")
           .each(function (i, e) {
             var href = $(e).attr("href");
+
+            if (href.includes('.html')){
+              href = href.replace('.html','')
+            }
+            
             if (util.isRelativePath(href)) {
               href = tocrel + href;
               $(e).attr("href", href);
