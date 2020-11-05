@@ -13,6 +13,7 @@ $(function () {
 
 
   addExternalLinkIcons();
+  removeHTMLExtenesionFromInternalAnchors();
   highlight();
   enableSearch();
 
@@ -65,6 +66,17 @@ $(function () {
           $(anchor).addClass('external-link');
         }
       })
+  }
+
+  function removeHTMLExtenesionFromInternalAnchors() {
+    var absPath = util.getAbsolutePath(window.location.pathname);
+    if(absPath.indexOf('.html') === -1){
+      $('.article-container a:not([href^="http"])')
+        .each(function () {
+          var anchorHref = $(this).attr('href');
+          $(this).attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
+        });
+    }
   }
 
   function addGtmButtons() {

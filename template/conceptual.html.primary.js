@@ -16,6 +16,9 @@ exports.transform = function (model) {
   }
   
   // We support English (default), Japanese and Korean. 
+  if(model._path){
+    model._path = model._path.slice(0, model._path.lastIndexOf('.html'));
+  }
   model._isLangEn = true;
   model._isLangJa = false;
   model._isLangKr = false;
