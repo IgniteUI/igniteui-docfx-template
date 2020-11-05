@@ -864,7 +864,7 @@ $(function () {
           .each(function (i, e) {
             var href = $(e).attr("href");
 
-            if (href.includes('.html')){
+            if (!currentHref.includes('.html')){
               href = href.replace('.html','')
             }
             
