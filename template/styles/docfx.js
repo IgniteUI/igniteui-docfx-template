@@ -707,9 +707,7 @@ $(function () {
         sessionStorage.setItem('active-element', JSON.stringify(activeElement));
       });
       $(".toc .nav > li > .expand-stub + a:not([href])").click(function (e) {
-        $(e.target)
-          .parent()
-          .toggleClass(expanded);
+        $(e.target).closest('li').toggleClass(expanded)
       });
       $("#toc_filter_input").on("input", function (e) {
         var val = this.value;
@@ -864,10 +862,10 @@ $(function () {
           .each(function (i, e) {
             var href = $(e).attr("href");
 
-            if (!currentHref.includes('.html')){
-              href = href.replace('.html','')
+            if (currentHref.indexOf('.html') === -1) {
+              href = href.replace('.html', '')
             }
-            
+
             if (util.isRelativePath(href)) {
               href = tocrel + href;
               $(e).attr("href", href);
