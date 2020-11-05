@@ -13,7 +13,7 @@ $(function () {
 
 
   addExternalLinkIcons();
-  removeHTMLExtenesionFromInternalAnchors();
+  removeHTMLExtensionFromInternalAnchors();
   highlight();
   enableSearch();
 
@@ -68,7 +68,7 @@ $(function () {
       })
   }
 
-  function removeHTMLExtenesionFromInternalAnchors() {
+  function removeHTMLExtensionFromInternalAnchors() {
     var absPath = util.getAbsolutePath(window.location.pathname);
     if(absPath.indexOf('.html') === -1){
       $('.article-container a:not([href^="http"])')
