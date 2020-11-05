@@ -54,17 +54,17 @@ $(function () {
     $('.article-container a:not([class*="no-external-icon"])[href^="http"]')
       .each(function (i, anchor) {
         const anchorChildren = $(anchor).children();
-        if(anchorChildren.length > 0) {
+        if (anchorChildren.length > 0) {
           const lastChild = anchorChildren[anchorChildren.length - 1];
           $(lastChild).addClass('external-link');
           $(anchor).addClass('external-link-parent');
         } else {
           $(anchor).addClass('external-link');
         }
-    })
+      })
   }
 
-  function renderHeader() {}
+  function renderHeader() { }
 
   // Styling for tables in conceptual documents using Bootstrap.
   // See http://getbootstrap.com/css/#tables
@@ -86,16 +86,16 @@ $(function () {
     $('#affix').height(initialAffixHeight - height);
   }
 
-  function checkIfFooterIsVisible(){
+  function checkIfFooterIsVisible() {
     var $el = $('#footer-container'),
-    scrollTop = $(this).scrollTop(),
-    scrollBot = scrollTop + $(this).height(),
-    elTop = $el.offset().top,
-    elBottom = elTop + $el.outerHeight(),
-    visibleTop = elTop < scrollTop ? scrollTop : elTop,
-    visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
-    if(visibleTop < visibleBottom) {
-      decreaseSideNavsHeight((visibleBottom - visibleTop)); 
+      scrollTop = $(this).scrollTop(),
+      scrollBot = scrollTop + $(this).height(),
+      elTop = $el.offset().top,
+      elBottom = elTop + $el.outerHeight(),
+      visibleTop = elTop < scrollTop ? scrollTop : elTop,
+      visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
+    if (visibleTop < visibleBottom) {
+      decreaseSideNavsHeight((visibleBottom - visibleTop));
     } else {
       $('.sidetoc').height(initialSidetocHeight);
       $('#affix').height(initialAffixHeight);
@@ -103,12 +103,12 @@ $(function () {
     }
   }
 
-  function handleResizableContent(){
+  function handleResizableContent() {
 
-    $(".resizable-content").each( function(){
+    $(".resizable-content").each(function () {
       const element = this;
-      new ResizeSensor(this, function (evt){
-        if(evt.height !== $(element).height()){
+      new ResizeSensor(this, function (evt) {
+        if (evt.height !== $(element).height()) {
           checkIfFooterIsVisible();
         }
       });
@@ -117,16 +117,16 @@ $(function () {
 
   (function () {
     $(this).on("scroll", function () {
-      setTimeout( function ()  {
+      setTimeout(function () {
         checkIfFooterIsVisible()
       }, 0)
     })
   })();
 
   (function () {
-    $(this).on("resize", function() {
-      initialSidetocHeight =  document.body.clientHeight - 160;
-      initialAffixHeight = (65 / 100 ) * document.body.clientHeight;
+    $(this).on("resize", function () {
+      initialSidetocHeight = document.body.clientHeight - 160;
+      initialAffixHeight = (65 / 100) * document.body.clientHeight;
       checkIfFooterIsVisible()
     })
   })();
@@ -264,12 +264,12 @@ $(function () {
   function getActiveAnchorTopOffset(element, expandParents) {
     var top = 0;
     $(element.parents("li").get().reverse())
-             .each(function (i, e) {
-               if(expandParents) {
-                $(e).addClass(expanded);
-               }
-                top += $(e).position().top;
-              });
+      .each(function (i, e) {
+        if (expandParents) {
+          $(e).addClass(expanded);
+        }
+        top += $(e).position().top;
+      });
     return top;
   }
 
@@ -278,10 +278,10 @@ $(function () {
     var id = "";
     const parentListItems = element.parents("li").get();
     $(parentListItems.reverse())
-             .each(function (i, e) {
-              const listItemTopicName = $($(e).find("a > span.topic-name")[0]).text().trim();
-              id += i === parentListItems.length - 1 ? listItemTopicName : listItemTopicName + "~" 
-              });
+      .each(function (i, e) {
+        const listItemTopicName = $($(e).find("a > span.topic-name")[0]).text().trim();
+        id += i === parentListItems.length - 1 ? listItemTopicName : listItemTopicName + "~"
+      });
     return id;
   }
 
@@ -514,9 +514,9 @@ $(function () {
                     .attr("class", "item-title")
                     .append(
                       $("<a>")
-                      .attr("href", itemHref)
-                      .attr("target", "_blank")
-                      .text(itemTitle)
+                        .attr("href", itemHref)
+                        .attr("target", "_blank")
+                        .text(itemTitle)
                     );
                   var itemHrefNode = $("<div>")
                     .attr("class", "item-href")
@@ -637,18 +637,18 @@ $(function () {
       var top = 0;
       const activeTopicId = getActiveAnchorID($("#toc a.active"));
       var storedActiveElement = sessionStorage.getItem('active-element');
-      if(storedActiveElement && activeTopicId === (storedActiveElement = JSON.parse(storedActiveElement)).id) {
+      if (storedActiveElement && activeTopicId === (storedActiveElement = JSON.parse(storedActiveElement)).id) {
         const prevTopOffset = parseInt(storedActiveElement.top);
         const currentOffsetTop = getActiveAnchorTopOffset($("#toc a.active"), true);
         const scrollAmount = (currentOffsetTop - prevTopOffset);
         top = scrollAmount;
       } else {
         $($("#toc a.active").
-        parents("li").get().reverse()).
-        each(function (i, e) {
-          $(e).addClass(expanded);
-          top += $(e).position().top;
-        });
+          parents("li").get().reverse()).
+          each(function (i, e) {
+            $(e).addClass(expanded);
+            top += $(e).position().top;
+          });
         top = top - 50;
       }
       sessionStorage.removeItem('active-element');
@@ -671,11 +671,11 @@ $(function () {
           .toggleClass(expanded);
       });
       $(".toc .nav > li > a").click(function (e) {
-      const offsetTop = getActiveAnchorTopOffset($(e.target));
-      const id = getActiveAnchorID($(e.target));
-      const activeElement = {id: id, top: offsetTop};
+        const offsetTop = getActiveAnchorTopOffset($(e.target));
+        const id = getActiveAnchorID($(e.target));
+        const activeElement = { id: id, top: offsetTop };
 
-      sessionStorage.setItem('active-element', JSON.stringify(activeElement));
+        sessionStorage.setItem('active-element', JSON.stringify(activeElement));
       });
       $(".toc .nav > li > .expand-stub + a:not([href])").click(function (e) {
         $(e.target).closest('li').toggleClass(expanded)
@@ -689,7 +689,7 @@ $(function () {
             .removeClass(hide)
             .removeClass(expanded);
 
-            $("#toc li > a.active")
+          $("#toc li > a.active")
             .parents("li")
             .addClass(expanded);
 
@@ -770,7 +770,7 @@ $(function () {
         var isHeader = listItem.data(isHeaderDataAttrName) === true;
         if (isHeader) {
           if (header) {
-            headers.push( {
+            headers.push({
               header: header,
               children: children
             });
@@ -832,6 +832,11 @@ $(function () {
           .find("a[href]")
           .each(function (i, e) {
             var href = $(e).attr("href");
+
+            if (currentHref.indexOf('.html') === -1) {
+              href = href.replace('.html', '')
+            }
+
             if (util.isRelativePath(href)) {
               href = tocrel + href;
               $(e).attr("href", href);
@@ -853,23 +858,23 @@ $(function () {
     var breadcrumb = [];
     $("#toc li.active").each(function (i, e) {
 
-      $($(e).parents("li").get().reverse()).each(function (index, parent){
+      $($(e).parents("li").get().reverse()).each(function (index, parent) {
         breadcrumb.push({
           href: $(parent).children("a")[0].href,
           name: $(parent).children("a")[0].title
         });
-     });
+      });
 
       breadcrumb.push({
-          href: $(e).children("a")[0].href,
-          name: $(e).children("a")[0].title
-        });
+        href: $(e).children("a")[0].href,
+        name: $(e).children("a")[0].title
       });
+    });
 
     var html = util.formList(breadcrumb, "breadcrumb");
     $("#breadcrumb").html(html);
   }
- 
+
   //Setup Affix
   function renderAffix() {
     var hierarchy = getHierarchy();
@@ -907,12 +912,12 @@ $(function () {
         var hashLocation = $(this).attr("href");
         var scrollPos =
           $("body")
-          .find(hashLocation)
-          .offset().top - contentOffset;
+            .find(hashLocation)
+            .offset().top - contentOffset;
 
         $("body, html").animate({
-            scrollTop: scrollPos
-          },
+          scrollTop: scrollPos
+        },
           500,
           function () {
             updateUrl(hashLocation);
@@ -1203,16 +1208,16 @@ $(document).ready(function () {
 
     var scrollPos =
       $("body")
-      .find(hashLocation)
-      .offset().top - contentOffset;
+        .find(hashLocation)
+        .offset().top - contentOffset;
 
     $("body, html")
       .stop()
       .animate({
-          scrollTop: scrollPos
-        },
+        scrollTop: scrollPos
+      },
         500,
-        function () {}
+        function () { }
       );
     return false;
   });
