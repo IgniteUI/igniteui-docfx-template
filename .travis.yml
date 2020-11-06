@@ -4,16 +4,16 @@ node_js:
 install: true
 script: true
 
-before_deploy:
-# update package versions
-- npm version "${TRAVIS_TAG}" --no-git-tag-version --save
+# before_deploy:
+# # update package versions
+# - npm version "${TRAVIS_TAG}" --no-git-tag-version --save
 
-deploy:
-  provider: npm
-  skip_cleanup: true
-  email: igniteui@infragistics.com
-  api_key:
-    secure: UicBUWtKyPL2sGxUHdJK7pLXlHxWD264fQh5/sRw5IMy1GW/USIjCGZhjI01Hn13E3AU8qIJi7gbYphjOrTifXOBzlQCGda7hE+Sz32fSTRk74EFpzNab17NS/BiXadlx/aNkW4m1/9Nial29HY7WKUzkX7rD5BUY5tPRMTWXw5OS29IEGJ7K4O+Ky2Kn+HjlcWNgdL5r/E9Mky6X+W1uG/4VzbwpP4K2L5CDIK7M2fkodfcOosNXBTUnlCKcA7l+ojPKGMEhrVMSusGZLgUky/Qvu2/8fyqkXhPM9rkPZxGR0yM1zRiAXKJo3Z/dxzl+bWJxBlX2csk2OBPuaPHlJX7eIILejzRKFXLTNm9uCqlD9MEIsNFefG39Kbh8n6axUJ2f9PVsTroYx3C0skK6670xQKsmcUlbbl1z/7u8IkILnoM44WVlBB8YQquiLmdQ2pk85jhtr4T1CU7a9z3R/cs7tBVrMW4LeTg4lOe1pnFsvHNLLkXL5BPvuk/59agnJnJxMvOKw97DW3w9RztbJ0Cc3RA5zhCgh7iJ0MP00ZjdV9zoliA0uPvB994e/tpBbOgY7O7zXSX89l7hr9o+dJjNYFTlU/4i4VBr6qzwg/JGBlxt5FiSTtPRYUzMV5syKBf7kIGFcdtjKGk9TfdMKmavnrEoy816pSAl6pbaC4=
-  on:
-    tags: true
-    repo: IgniteUI/igniteui-docfx-template
+# deploy:
+#   provider: npm
+#   skip_cleanup: true
+#   email: igniteui@infragistics.com
+#   api_key:
+#     secure: UicBUWtKyPL2sGxUHdJK7pLXlHxWD264fQh5/sRw5IMy1GW/USIjCGZhjI01Hn13E3AU8qIJi7gbYphjOrTifXOBzlQCGda7hE+Sz32fSTRk74EFpzNab17NS/BiXadlx/aNkW4m1/9Nial29HY7WKUzkX7rD5BUY5tPRMTWXw5OS29IEGJ7K4O+Ky2Kn+HjlcWNgdL5r/E9Mky6X+W1uG/4VzbwpP4K2L5CDIK7M2fkodfcOosNXBTUnlCKcA7l+ojPKGMEhrVMSusGZLgUky/Qvu2/8fyqkXhPM9rkPZxGR0yM1zRiAXKJo3Z/dxzl+bWJxBlX2csk2OBPuaPHlJX7eIILejzRKFXLTNm9uCqlD9MEIsNFefG39Kbh8n6axUJ2f9PVsTroYx3C0skK6670xQKsmcUlbbl1z/7u8IkILnoM44WVlBB8YQquiLmdQ2pk85jhtr4T1CU7a9z3R/cs7tBVrMW4LeTg4lOe1pnFsvHNLLkXL5BPvuk/59agnJnJxMvOKw97DW3w9RztbJ0Cc3RA5zhCgh7iJ0MP00ZjdV9zoliA0uPvB994e/tpBbOgY7O7zXSX89l7hr9o+dJjNYFTlU/4i4VBr6qzwg/JGBlxt5FiSTtPRYUzMV5syKBf7kIGFcdtjKGk9TfdMKmavnrEoy816pSAl6pbaC4=
+#   on:
+#     tags: true
+#     repo: IgniteUI/igniteui-docfx-template
