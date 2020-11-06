@@ -14,10 +14,11 @@ jobs:
           node-version: 12
           registry-url: 'https://registry.npmjs.org'
           scope: igniteui@infragistics.com
-      - run: export VERSION=${GITHUB_REF/refs\/tags\//}
+      # - run: ::set-output name=VERSION_T::${GITHUB_REF/refs\/tags\//}
+      - run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
       - run: echo ${VERSION}
       - run: npm version "${VERSION}" --no-git-tag-version --save
-      - run: if [[ "${VERSION}" == *"alpha"* || "${VERSION}" == *"beta"* || "${VERSION}" == *"rc"* ]]; then export NPM_TAG="next"; else export NPM_TAG="latest"; fi
+      - run: if [[ "${VERSION}" == *"alpha"* || "${VERSION}" == *"beta"* || "${VERSION}" == *"rc"* ]]; then echo "NPM_TAG='next'"; else echo "NPM_TAG='latest'"; fi >> $GITHUB_ENV
       - run: echo ${NPM_TAG}
       - run: npm publish --tag ${NPM_TAG}
         env:
