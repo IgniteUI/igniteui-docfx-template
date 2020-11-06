@@ -16,6 +16,7 @@ jobs:
           scope: igniteui@infragistics.com
       - run: echo ${GITHUB_REF}
       - run: npm version "${GITHUB_REF}" --no-git-tag-version --save
-      - run: npm publish
+      - run: if [[ "${GITHUB_REF}" == *"alpha"* || "${GITHUB_REF}" == *"beta"* || "${GITHUB_REF}" == *"rc"* ]]; then export NPM_TAG="next"; else export NPM_TAG="latest"; fi
+      - run: npm publish --tag ${NPM_TAG}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
