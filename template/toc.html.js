@@ -41,6 +41,21 @@ exports.transform = function (model) {
       item.leaf = true;
     }
 
+    if (item.items && item.items.length > 0) {
+      if (item.sortable) {
+        for (let i = 0; i < item.items.length; i++) {
+          if (item.items[i].items && item.items[i].items.length > 0) {
+            item.items[i].items.sort(function (a, b) {
+              return a.name.localeCompare(b.name);
+            })
+          }
+        }
+        item.items.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
+        })
+      }
+    }
+
     if(item.new || item.updated) {
       item.withBadge = true;
       item.labelText = item.updated ? labels.UPDATED : labels.NEW;
