@@ -45,7 +45,7 @@ exports.transform = function (model) {
       sortItems(item)
       
       function sortItems(item) {
-        if (item.items && item.items.length > 0 ) {
+        if (item.items && item.items.length > 1 ) {
             item.items.sort(function (a, b) {
                 return a.name.localeCompare(b.name);
             })
