@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es5"
+    },
+    "typeAcquisition": {
+        "include": ["jquery"]
+      },
+    "exclude": ["node_modules", "post-processors"]
+  }
+  

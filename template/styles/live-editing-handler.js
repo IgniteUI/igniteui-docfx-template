@@ -359,5 +359,15 @@
 
     $(document).ready(function () {
         init();
+        $(".sample-container").each(function (i, e){
+            // const iframe = $(e).find("iframe");
+            // const id = iframe.attr("id");
+            // var codeView = $("<div/>", {class: "code-view", id: id});
+            // $(this).wrap(codeView);
+            // codeView = $("div#"+id);
+            // const buttons = $("button[data-iframe-id=" + id + "]");
+            // $(codeView).append(buttons);
+            $(this).test();
+        });
     });
 }());
