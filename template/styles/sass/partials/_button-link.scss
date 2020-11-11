@@ -56,15 +56,16 @@ a.disable:hover {
 }
 
 .stackblitz-btn {
-  display: inline-flex;
+  visibility: hidden;
+  width: 100px;
   align-items: center;
-  font-size: 13px;
+  font-size: .7rem;
   font-weight: 400;
   color: #fff;
   border: 0;
-  text-transform: uppercase;
-  padding: 8px 16px;
-  margin: 24px 0;
+  padding: .2rem .4rem;
+  margin-left: .2rem;
+  display: inline-flex;
   outline-style: none;
   transition: all 0.25s ease-out;
 
@@ -78,9 +79,9 @@ a.disable:hover {
   &::before {
     content: "";
     display: inline-block;
-    width: 28px;
-    height: 28px;
-    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
     background-image: url("../../images/stackblitz-logo.svg");
     background-size: 100%;
     background-repeat: no-repeat;
@@ -99,6 +100,7 @@ a.disable:hover {
 
 .codesandbox-btn {
 @extend .stackblitz-btn;
+width: 120px;
 background: $darkgray;
 &::before {
   background-image: url("../../images/code-sandbox-seeklogo.com.svg");

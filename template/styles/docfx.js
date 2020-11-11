@@ -11,14 +11,13 @@ $(function () {
   var initialAffixHeight;
 
 
-
   addExternalLinkIcons();
   removeHTMLExtensionFromInternalAnchors();
   highlight();
   enableSearch();
 
   renderTables();
-  renderAlerts();
+  renderAlerts(); 
   renderLinks();
   renderNavbar();
   renderSidebar();

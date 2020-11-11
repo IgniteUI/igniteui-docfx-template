@@ -1,3 +1,70 @@
 .code-view{
-    border: 1px solid #000;
+    outline: 2px solid #dedede;
+    .sample-container{
+        padding: 1rem;
+    }
+}
+
+.code-view-navbar{
+    background-color: #e5f4fe;
+    display: flex;
+    .code-view-tab{
+        background-color: transparent;
+        width: 9%;
+        height: 47px;
+        padding: .7rem;
+        align-self: center;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: .8rem;
+        font-weight: 600;
+        cursor: pointer;
+        &:hover{
+            background-color: #fff;
+            color: $igblue;
+        }
+        &--active{
+            @extend .code-view-tab;
+            background-color: #fff;
+            border-top: 2.5px solid $igblue;
+            color: $igblue;
+        }
+    }
+    
+    .fs-button-container{
+        height: 50%;
+        display: inline-flex;
+        align-self: center;
+        padding: .5rem;
+        margin-left: auto;
+        margin-right: 1.5rem;
+        cursor: pointer;
+        &:hover{
+            background-color: #CBE9FC;
+            color: $igblue;
+        }
+        .code-view-fullscreen{
+            font-size: 18px;
+            text-align: center;
+            align-self: center;
+        }
+    }
+}
+
+.editing-buttons-container{
+    padding: .5rem;
+    border-top: 2px solid #dedede;
+    font-size: .7rem;
+    display: flex;
+    align-items: center;
+    &::before{
+        font-family: Material Icons;
+        content: "open_in_new";
+        margin-right: 2px;
+        overflow: hidden;
+    }
+
+    .editing-label{
+        margin-right: .4rem
+    }
 }
