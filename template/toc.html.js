@@ -21,6 +21,57 @@ exports.transform = function (model) {
   if (extension && extension.postTransform) {
     model = extension.postTransform(model);
   }
+  var globalCollection = [];
+  var currentChain = false;
+  var collection = [];
+  var topicHeader = null;
+
+  for (var i = 0; i < model.items.length; i++) {
+    if(model.items[i].cta){
+      globalCollection.unshift(model.items[i])
+    }
+
+    if (model.items[i].level === 2 && model.items[i].header && model.items[i].sortable && !currentChain) {
+      currentChain = true;
+      topicHeader = model.items[i];
+    } else if (model.items[i].level === 2 && model.items[i].header && model.items[i].sortable && currentChain) {
+      if (collection > 1) {
+        collection.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
+        })
+      }
+      collection.unshift(topicHeader)
+      globalCollection = globalCollection.concat(collection);
+      currentChain = true;
+      topicHeader = model.items[i];
+      collection = [];
+    } else if (model.items[i].level === 2 && model.items[i].header && !model.items[i].sortable && currentChain) {
+      if (collection.length > 1) {
+        collection.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
+        })
+      }
+      collection.unshift(topicHeader)
+      globalCollection = globalCollection.concat(collection);
+      currentChain = false;
+      topicHeader = model.items[i];
+      collection = [];
+    } else if (model.items[i].level === 2 && model.items[i].header && !model.items[i].sortable && !currentChain) {
+      collection.unshift(topicHeader)
+      globalCollection = globalCollection.concat(collection);
+      currentChain = false;
+      topicHeader = model.items[i];
+      collection = [];
+    } else {
+      if (model.items[i].items.length > 1 && currentChain) {
+        sortItems(model.items[i])
+      }
+      collection.push(model.items[i]);
+    }
+  }
+
+  model.items = globalCollection;
+  
 
   return model;
 
@@ -43,17 +94,6 @@ exports.transform = function (model) {
 
     if (item.sortable) {
       sortItems(item)
-      
-      function sortItems(item) {
-        if (item.items && item.items.length > 1 ) {
-            item.items.sort(function (a, b) {
-                return a.name.localeCompare(b.name);
-            })
-            for (var i in item.items) {
-              sortItems(item.items[i])
-          }
-        }
-      }
     }
 
     if(item.new || item.updated) {
@@ -71,6 +111,16 @@ exports.transform = function (model) {
     }
   }
 }
+  function sortItems(item) {
+    if (item.items && item.items.length > 1 ) {
+      item.items.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
+      })
+      for (var i in item.items) {
+        sortItems(item.items[i])
+      }
+    }
+  }
 
   function getLabelFromDirectChildren(items, parent) {
     const childLabels = [];
