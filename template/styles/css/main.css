@@ -1875,7 +1875,7 @@ pre {
 .code-view {
   outline: 2px solid #dedede; }
   .code-view .sample-container {
-    padding: 1rem; }
+    padding: .1rem; }
 
 .code-view-navbar {
   background-color: #e5f4fe;
