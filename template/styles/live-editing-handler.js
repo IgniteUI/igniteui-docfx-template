@@ -148,6 +148,9 @@
                 var url = this.url;
                 url = cb(url);
                 sampleFilesContentByUrl[url] = data;
+                var cv = $('#'+iframeID).closest(".sample-container").codeView();
+                cv.codeView("files", files);
+                console.log(cv.codeView("files"))
                 activateButton(iframeID);
             }
     }
@@ -359,8 +362,5 @@
 
     $(document).ready(function () {
         init();
-        $(".sample-container").each(function (i, e){;
-            $(this).codeView();
-        });
     });
 }());

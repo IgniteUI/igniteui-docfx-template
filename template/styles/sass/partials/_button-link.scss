@@ -57,7 +57,8 @@ a.disable:hover {
 
 .stackblitz-btn {
   visibility: hidden;
-  width: 100px;
+  width: 120px;
+  justify-content: center;
   align-items: center;
   font-size: .7rem;
   font-weight: 400;
@@ -100,7 +101,6 @@ a.disable:hover {
 
 .codesandbox-btn {
 @extend .stackblitz-btn;
-width: 120px;
 background: $darkgray;
 &::before {
   background-image: url("../../images/code-sandbox-seeklogo.com.svg");

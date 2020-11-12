@@ -837,7 +837,10 @@ a.disable:hover {
 
 .stackblitz-btn, .codesandbox-btn {
   visibility: hidden;
-  width: 100px;
+  width: 120px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -876,7 +879,6 @@ a.disable:hover {
       background-image: url("../../images/stackblitz-logo-dark.svg"); }
 
 .codesandbox-btn {
-  width: 120px;
   background: #333; }
   .codesandbox-btn::before {
     background-image: url("../../images/code-sandbox-seeklogo.com.svg"); }
@@ -1924,7 +1926,7 @@ pre {
 .editing-buttons-container {
   padding: .5rem;
   border-top: 2px solid #dedede;
-  font-size: .7rem;
+  font-size: .8rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
