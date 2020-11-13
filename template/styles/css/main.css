@@ -1878,6 +1878,88 @@ pre {
   outline: 2px solid #dedede; }
   .code-view .sample-container {
     padding: .1rem; }
+  .code-view pre {
+    padding: 0;
+    /*
+ * Visual Studio 2015 dark style
+ * Author: Nicolas LLOBERA <nllobera@gmail.com>
+ */
+    /*.hljs-code {
+    font-family:'Monospace';
+  }*/ }
+    .code-view pre:hover {
+      -webkit-box-shadow: none;
+              box-shadow: none; }
+    .code-view pre .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      background: #1E1E1E;
+      color: #DCDCDC; }
+    .code-view pre .hljs-keyword,
+    .code-view pre .hljs-literal,
+    .code-view pre .hljs-symbol,
+    .code-view pre .hljs-name {
+      color: #569CD6; }
+    .code-view pre .hljs-link {
+      color: #569CD6;
+      text-decoration: underline; }
+    .code-view pre .hljs-built_in,
+    .code-view pre .hljs-type {
+      color: #4EC9B0; }
+    .code-view pre .hljs-number,
+    .code-view pre .hljs-class {
+      color: #B8D7A3; }
+    .code-view pre .hljs-string,
+    .code-view pre .hljs-meta-string {
+      color: #D69D85; }
+    .code-view pre .hljs-regexp,
+    .code-view pre .hljs-template-tag {
+      color: #9A5334; }
+    .code-view pre .hljs-subst,
+    .code-view pre .hljs-function,
+    .code-view pre .hljs-title,
+    .code-view pre .hljs-params,
+    .code-view pre .hljs-formula {
+      color: #DCDCDC; }
+    .code-view pre .hljs-comment,
+    .code-view pre .hljs-quote {
+      color: #57A64A;
+      font-style: italic; }
+    .code-view pre .hljs-doctag {
+      color: #608B4E; }
+    .code-view pre .hljs-meta,
+    .code-view pre .hljs-meta-keyword,
+    .code-view pre .hljs-tag {
+      color: #9B9B9B; }
+    .code-view pre .hljs-variable,
+    .code-view pre .hljs-template-variable {
+      color: #BD63C5; }
+    .code-view pre .hljs-attr,
+    .code-view pre .hljs-attribute,
+    .code-view pre .hljs-builtin-name {
+      color: #9CDCFE; }
+    .code-view pre .hljs-section {
+      color: gold; }
+    .code-view pre .hljs-emphasis {
+      font-style: italic; }
+    .code-view pre .hljs-strong {
+      font-weight: bold; }
+    .code-view pre .hljs-bullet,
+    .code-view pre .hljs-selector-tag,
+    .code-view pre .hljs-selector-id,
+    .code-view pre .hljs-selector-class,
+    .code-view pre .hljs-selector-attr,
+    .code-view pre .hljs-selector-pseudo {
+      color: #D7BA7D; }
+    .code-view pre .hljs-addition {
+      background-color: #144212;
+      display: inline-block;
+      width: 100%; }
+    .code-view pre .hljs-deletion {
+      background-color: #600;
+      display: inline-block;
+      width: 100%; }
 
 .code-view-navbar {
   background-color: #e5f4fe;

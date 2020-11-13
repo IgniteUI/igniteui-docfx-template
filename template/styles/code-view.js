@@ -83,11 +83,14 @@
                     ext;
                 if(f.path.indexOf('app.module.ts') !== -1){
                     contentId = '#code-view-' + self.options.iframeId + '-' +'modules-tab-content';
+                    ext='typescript';
                 } else {
                     ext = f.path.slice(f.path.lastIndexOf('.') + 1);
                     contentId = '#code-view-' + self.options.iframeId + '-' + ext + '-tab-content';
                 }
-                $(contentId).html($('<pre>').text(f.content));
+                var codeSnippet = $("<code>", {class: (ext === 'ts' ? 'typescript' : ext)}).text(f.content).addClass('hljs');
+                hljs.highlightBlock(codeSnippet[0])
+                $(contentId).html($('<pre>').append(codeSnippet));
             })
 
         }
