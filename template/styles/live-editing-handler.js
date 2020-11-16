@@ -143,14 +143,14 @@
 
     var sampleFilePostProcess = function(demosBaseUrl, cb, iframeID){
             return function(data) {
+                var codeViewFiles, url;
                 const files = data.sampleFiles;
                 replaceRelativeAssetsUrls(files, demosBaseUrl);
-                var url = this.url;
+                url = this.url;
                 url = cb(url);
                 sampleFilesContentByUrl[url] = data;
-                var cv = $('#'+iframeID).closest(".sample-container").codeView();
-                cv.codeView("files", files);
-                console.log(cv.codeView("files"))
+                codeViewFiles = files.filter(function (f) {return f.isMain});
+                $('#' + iframeID).closest(".sample-container").codeView({files: codeViewFiles});
                 activateButton(iframeID);
             }
     }

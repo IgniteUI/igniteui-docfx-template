@@ -1189,7 +1189,7 @@ footer {
   .globalnav__search-toggle {
     right: 0; } }
 
-pre {
+.article-container pre {
   position: relative;
   opacity: 1;
   background: #fff;
@@ -1197,17 +1197,17 @@ pre {
   border: 1px solid #ededed;
   -webkit-box-shadow: none;
           box-shadow: none; }
-  pre:hover {
+  .article-container pre:hover {
     -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
             box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15); }
 
-.hljs {
+.article-container .hljs {
   display: block;
   overflow-x: auto;
   background: inherit;
   position: relative; }
 
-.hljs-lang-name {
+.article-container .hljs-lang-name {
   position: absolute;
   padding: 8px;
   top: 0;
@@ -1217,7 +1217,7 @@ pre {
   font-weight: bold;
   opacity: 0.7; }
 
-.hljs-code-copy {
+.article-container .hljs-code-copy {
   position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1236,73 +1236,73 @@ pre {
   outline-style: none;
   -webkit-transition: color 0.25s ease-in-out;
   transition: color 0.25s ease-in-out; }
-  .hljs-code-copy:hover {
+  .article-container .hljs-code-copy:hover {
     color: #fff; }
-  .hljs-code-copy::before {
+  .article-container .hljs-code-copy::before {
     font-family: 'Material Icons';
     font-size: inherit;
     content: '\E14D';
     color: inherit;
     margin-right: 8px; }
-  .hljs-code-copy.hidden {
+  .article-container .hljs-code-copy.hidden {
     display: none; }
 
-.hljs-comment,
-.hljs-quote {
+.article-container .hljs-comment,
+.article-container .hljs-quote {
   color: #5c6370;
   font-style: italic; }
 
-.hljs-doctag,
-.hljs-keyword,
-.hljs-formula {
+.article-container .hljs-doctag,
+.article-container .hljs-keyword,
+.article-container .hljs-formula {
   color: #fb9a00; }
 
-.hljs-section,
-.hljs-name,
-.hljs-selector-tag,
-.hljs-deletion,
-.hljs-subst {
+.article-container .hljs-section,
+.article-container .hljs-name,
+.article-container .hljs-selector-tag,
+.article-container .hljs-deletion,
+.article-container .hljs-subst {
   color: #e06c75; }
 
-.hljs-literal {
+.article-container .hljs-literal {
   color: #e32659; }
 
-.hljs-string,
-.hljs-regexp,
-.hljs-addition,
-.hljs-attribute,
-.hljs-meta-string {
+.article-container .hljs-string,
+.article-container .hljs-regexp,
+.article-container .hljs-addition,
+.article-container .hljs-attribute,
+.article-container .hljs-meta-string {
   color: #68b400; }
 
-.hljs-built_in,
-.hljs-class .hljs-title {
+.article-container .hljs-built_in,
+.article-container .hljs-class .hljs-title {
   color: #dc65ff; }
 
-.hljs-attr,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-type,
-.hljs-selector-class,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-number {
+.article-container .hljs-attr,
+.article-container .hljs-variable,
+.article-container .hljs-template-variable,
+.article-container .hljs-type,
+.article-container .hljs-selector-class,
+.article-container .hljs-selector-attr,
+.article-container .hljs-selector-pseudo,
+.article-container .hljs-number {
   color: #d19a66; }
 
-.hljs-symbol,
-.hljs-bullet,
-.hljs-link,
-.hljs-meta,
-.hljs-selector-id,
-.hljs-title {
+.article-container .hljs-symbol,
+.article-container .hljs-bullet,
+.article-container .hljs-link,
+.article-container .hljs-meta,
+.article-container .hljs-selector-id,
+.article-container .hljs-title {
   color: #0072be; }
 
-.hljs-emphasis {
+.article-container .hljs-emphasis {
   font-style: italic; }
 
-.hljs-strong {
+.article-container .hljs-strong {
   font-weight: bold; }
 
-.hljs-link {
+.article-container .hljs-link {
   text-decoration: underline; }
 
 .sample-title {
@@ -1876,99 +1876,118 @@ pre {
 
 .code-view {
   outline: 2px solid #dedede; }
+  .code-view .code-views-container {
+    overflow: auto;
+    background-color: transparent; }
   .code-view .sample-container {
     padding: .1rem; }
-  .code-view pre {
+  .code-view .code-view-tab-content:nth-child(n + 2) {
+    background: #1E1E1E;
+    height: 100%; }
+  .code-view pre.code-wrapper {
     padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
     /*
  * Visual Studio 2015 dark style
  * Author: Nicolas LLOBERA <nllobera@gmail.com>
- */
-    /*.hljs-code {
-    font-family:'Monospace';
-  }*/ }
-    .code-view pre:hover {
+ */ }
+    .code-view pre.code-wrapper:hover {
       -webkit-box-shadow: none;
               box-shadow: none; }
-    .code-view pre .hljs {
+    .code-view pre.code-wrapper code {
+      border-radius: 0;
+      font-size: 14px; }
+    .code-view pre.code-wrapper .hljs {
       display: block;
       overflow-x: auto;
       padding: 0.5em;
       background: #1E1E1E;
       color: #DCDCDC; }
-    .code-view pre .hljs-keyword,
-    .code-view pre .hljs-literal,
-    .code-view pre .hljs-symbol,
-    .code-view pre .hljs-name {
+    .code-view pre.code-wrapper .hljs-keyword,
+    .code-view pre.code-wrapper .hljs-literal,
+    .code-view pre.code-wrapper .hljs-symbol,
+    .code-view pre.code-wrapper .hljs-name {
       color: #569CD6; }
-    .code-view pre .hljs-link {
+    .code-view pre.code-wrapper .hljs-link {
       color: #569CD6;
       text-decoration: underline; }
-    .code-view pre .hljs-built_in,
-    .code-view pre .hljs-type {
+    .code-view pre.code-wrapper .hljs-built_in,
+    .code-view pre.code-wrapper .hljs-type {
       color: #4EC9B0; }
-    .code-view pre .hljs-number,
-    .code-view pre .hljs-class {
+    .code-view pre.code-wrapper .hljs-number,
+    .code-view pre.code-wrapper .hljs-class {
       color: #B8D7A3; }
-    .code-view pre .hljs-string,
-    .code-view pre .hljs-meta-string {
+    .code-view pre.code-wrapper .hljs-string,
+    .code-view pre.code-wrapper .hljs-meta-string {
       color: #D69D85; }
-    .code-view pre .hljs-regexp,
-    .code-view pre .hljs-template-tag {
+    .code-view pre.code-wrapper .hljs-regexp,
+    .code-view pre.code-wrapper .hljs-template-tag {
       color: #9A5334; }
-    .code-view pre .hljs-subst,
-    .code-view pre .hljs-function,
-    .code-view pre .hljs-title,
-    .code-view pre .hljs-params,
-    .code-view pre .hljs-formula {
+    .code-view pre.code-wrapper .hljs-subst,
+    .code-view pre.code-wrapper .hljs-function,
+    .code-view pre.code-wrapper .hljs-title,
+    .code-view pre.code-wrapper .hljs-params,
+    .code-view pre.code-wrapper .hljs-formula {
       color: #DCDCDC; }
-    .code-view pre .hljs-comment,
-    .code-view pre .hljs-quote {
+    .code-view pre.code-wrapper .hljs-comment,
+    .code-view pre.code-wrapper .hljs-quote {
       color: #57A64A;
       font-style: italic; }
-    .code-view pre .hljs-doctag {
+    .code-view pre.code-wrapper .hljs-doctag {
       color: #608B4E; }
-    .code-view pre .hljs-meta,
-    .code-view pre .hljs-meta-keyword,
-    .code-view pre .hljs-tag {
+    .code-view pre.code-wrapper .hljs-meta {
+      color: #dcdcaa; }
+    .code-view pre.code-wrapper .hljs-meta-keyword,
+    .code-view pre.code-wrapper .hljs-tag {
       color: #9B9B9B; }
-    .code-view pre .hljs-variable,
-    .code-view pre .hljs-template-variable {
+    .code-view pre.code-wrapper .hljs-variable,
+    .code-view pre.code-wrapper .hljs-template-variable {
       color: #BD63C5; }
-    .code-view pre .hljs-attr,
-    .code-view pre .hljs-attribute,
-    .code-view pre .hljs-builtin-name {
+    .code-view pre.code-wrapper .hljs-attr,
+    .code-view pre.code-wrapper .hljs-attribute,
+    .code-view pre.code-wrapper .hljs-builtin-name {
       color: #9CDCFE; }
-    .code-view pre .hljs-section {
+    .code-view pre.code-wrapper .hljs-section {
       color: gold; }
-    .code-view pre .hljs-emphasis {
+    .code-view pre.code-wrapper .hljs-emphasis {
       font-style: italic; }
-    .code-view pre .hljs-strong {
+    .code-view pre.code-wrapper .hljs-strong {
       font-weight: bold; }
-    .code-view pre .hljs-bullet,
-    .code-view pre .hljs-selector-tag,
-    .code-view pre .hljs-selector-id,
-    .code-view pre .hljs-selector-class,
-    .code-view pre .hljs-selector-attr,
-    .code-view pre .hljs-selector-pseudo {
+    .code-view pre.code-wrapper .hljs-code {
+      font-family: 'Monospace'; }
+    .code-view pre.code-wrapper .hljs-bullet,
+    .code-view pre.code-wrapper .hljs-selector-tag,
+    .code-view pre.code-wrapper .hljs-selector-id,
+    .code-view pre.code-wrapper .hljs-selector-class,
+    .code-view pre.code-wrapper .hljs-selector-attr,
+    .code-view pre.code-wrapper .hljs-selector-pseudo {
       color: #D7BA7D; }
-    .code-view pre .hljs-addition {
+    .code-view pre.code-wrapper .hljs-addition {
       background-color: #144212;
       display: inline-block;
       width: 100%; }
-    .code-view pre .hljs-deletion {
+    .code-view pre.code-wrapper .hljs-deletion {
       background-color: #600;
       display: inline-block;
       width: 100%; }
 
 .code-view-navbar {
+  overflow-x: auto;
   background-color: #e5f4fe;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex; }
+  .code-view-navbar::-webkit-scrollbar {
+    width: 2px; }
+  .code-view-navbar::-webkit-scrollbar-track {
+    background: #f1f1f1; }
+  .code-view-navbar::-webkit-scrollbar-thumb {
+    background: #888; }
   .code-view-navbar .code-view-tab, .code-view-navbar .code-view-tab--active {
     background-color: transparent;
-    width: 9%;
+    width: 87px;
     height: 47px;
     padding: .7rem;
     -ms-flex-item-align: center;
@@ -1979,7 +1998,6 @@ pre {
     font-weight: 600;
     cursor: pointer; }
     .code-view-navbar .code-view-tab:hover, .code-view-navbar .code-view-tab--active:hover {
-      background-color: #fff;
       color: #0099ff; }
     .code-view-navbar .code-view-tab--active {
       background-color: #fff;
@@ -2000,6 +2018,7 @@ pre {
       background-color: #CBE9FC;
       color: #0099ff; }
     .code-view-navbar .fs-button-container .code-view-fullscreen {
+      overflow: hidden;
       font-size: 18px;
       text-align: center;
       -ms-flex-item-align: center;
