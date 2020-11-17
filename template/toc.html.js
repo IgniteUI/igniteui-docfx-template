@@ -22,7 +22,81 @@ exports.transform = function (model) {
     model = extension.postTransform(model);
   }
 
+  if(model.items.length > 1){
+
+    var globalCollection = [];
+    var currentChain = false;
+    var collection = [];
+    var topicHeader = null;
+
+    for (var i = 0; i < model.items.length; i++) {
+      if (model.items[i].header){
+        if (model.items[i].sortable && !currentChain) {
+          if(collection.length > 0 && topicHeader){
+            globalCollection=appendToGlobalCollection(globalCollection,collection,topicHeader)
+            collection = [];
+          }
+          currentChain = true;
+          topicHeader = model.items[i];
+        } else if (model.items[i].sortable && currentChain) {
+          if (collection.length > 1) {
+            collection.sort(function (a, b) {
+              return a.name.localeCompare(b.name);
+            })
+          }
+          globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
+          currentChain = true;
+          topicHeader = model.items[i];
+          collection = [];
+        } else if (!model.items[i].sortable && currentChain) {
+          if (collection.length > 1) {
+            collection.sort(function (a, b) {
+              return a.name.localeCompare(b.name);
+            })
+          }
+          globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
+          currentChain = false;
+          topicHeader = model.items[i];
+          collection = [];
+        } else if (!model.items[i].sortable && !currentChain) {
+          if (topicHeader){
+            globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
+            currentChain = false;
+            topicHeader = model.items[i];
+            collection = [];
+          }else{
+            topicHeader = model.items[i];
+            currentChain = false;
+            collection = [];
+          }
+        }
+      }else {
+        if (model.items[i].items.length > 1 && currentChain) {
+          sortItems(model.items[i])
+        }
+        collection.push(model.items[i]);
+      }
+    }
+
+    if(collection.length > 0 && currentChain){
+      collection.sort(function (a, b) {
+        return a.name.localeCompare(b.name);
+      })
+      globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
+    }else{
+      globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
+    }
+    
+    model.items = globalCollection;
+  }
   return model;
+}
+
+  function appendToGlobalCollection(global,current,header){
+    current.unshift(header)
+    global = global.concat(current);
+    return global;
+  }
 
   function transformItem(item, level) {
     // set to null incase mustache looks up
@@ -41,6 +115,10 @@ exports.transform = function (model) {
       item.leaf = true;
     }
 
+    if (item.sortable) {
+      sortItems(item)
+    }
+
     if(item.new || item.updated) {
       item.withBadge = true;
       item.labelText = item.updated ? labels.UPDATED : labels.NEW;
@@ -55,7 +133,17 @@ exports.transform = function (model) {
       item.newType = '';
     }
   }
-}
+  
+  function sortItems(item) {
+    if (item.items && item.items.length > 1 ) {
+      item.items.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
+      })
+      for (var i in item.items) {
+        sortItems(item.items[i])
+      }
+    }
+  }
 
   function getLabelFromDirectChildren(items, parent) {
     const childLabels = [];
