@@ -1,5 +1,39 @@
 .code-view {
-    outline: 2px solid #dedede;
+    outline: 1px solid #dedede;
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    ::-webkit-scrollbar-button {
+      width: 0px;
+      height: 0px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #e1e1e1;
+      border: 0px none #ffffff;
+      border-radius: 50px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ffffff;
+    }
+    ::-webkit-scrollbar-thumb:active {
+      background: #e1e1e1;
+    }
+    ::-webkit-scrollbar-track {
+      background: #666666;
+      border: 0px none #ffffff;
+      border-radius: 44px;
+    }
+    ::-webkit-scrollbar-track:hover {
+      background: #666666;
+    }
+    ::-webkit-scrollbar-track:active {
+      background: #333333;
+    }
+    ::-webkit-scrollbar-corner {
+      background: transparent;
+    }
 
     .code-views-container {
         overflow: auto;
@@ -24,8 +58,33 @@
             box-shadow: none;
         }
 
+        .hljs-code-copy::before{
+            margin: 0;
+        }
+
         code {
             border-radius: 0;
+        }
+
+        .hljs-code-copy{
+            width: 100px;
+            height: 40px;
+            background: #1E1E1E;
+            border: 1px solid #333;
+            justify-content: center;
+            &::before{
+                display: none;
+            }
+
+            &:hover{
+                border-color: $igblue;
+                color: $igblue
+            }
+
+            &--active{
+                border-color: $igblue;
+                color: $igblue
+            }
         }
         /*
  * Visual Studio 2015 dark style
@@ -164,6 +223,7 @@
         background: #888; 
     }
     .code-view-tab {
+        position: relative;
         background-color: transparent;
         width: 87px;
         height: 47px;
@@ -182,8 +242,17 @@
         &--active {
             @extend .code-view-tab;
             background-color: #fff;
-            border-top: 2.5px solid $igblue;
             color: $igblue;
+
+            &::after{
+                content: "";
+                height: 2.5px;
+                background: $igblue;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+            }
         }
     }
 

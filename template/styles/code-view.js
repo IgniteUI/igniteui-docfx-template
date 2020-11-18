@@ -52,6 +52,8 @@
             if(!$tab.hasClass("code-view-tab--active")){
                 $(".code-view-tab--active").switchClass("code-view-tab--active", "code-view-tab",  0);
                 $tab.switchClass("code-view-tab", "code-view-tab--active", 0);
+                $tab.is('[tab-content-id=' + 'code-view-' + this.options.iframeId + '-' + 'example-tab-content]') ? $tab.siblings('.fs-button-container').css('visibility', 'visible') :
+                                                                                                                    $tab.siblings('.fs-button-container').css('visibility', 'hidden')
                 $('#cv-' + this.options.iframeId + ' > .code-views-container > .code-view-tab-content').css('display', 'none');
                 $('#' + $tab.attr('tab-content-id')).css('display', 'block');
             }
@@ -80,7 +82,7 @@
                 $codeWrapper
                 .append([
                   '<span class="hljs-lang-name">' + language + "</span>",
-                  '<button data-localize="hljs.copyCode" class="hljs-code-copy hidden"></button>'
+                  '<button data-localize="hljs.copyCode" class="hljs-code-copy hidden">COPY CODE</button>'
                 ])
                 .on("mouseenter", function () {
                   $(this)
@@ -133,9 +135,11 @@
             });
         
             cpb.on("success", function (e) {
-              e.trigger.innerText = 'COPIED';
+              e.trigger.innertext = 'COPIED';
+              $(e.trigger).addClass('hljs-code-copy--active');
               setTimeout(function () {
-                e.trigger.innerText = '';
+                $(e.trigger).text('COPY CODE');
+                $(e.trigger).removeClass('hljs-code-copy--active');
               }, 1000);
             });
         }

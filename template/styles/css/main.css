@@ -837,10 +837,7 @@ a.disable:hover {
 
 .stackblitz-btn, .codesandbox-btn {
   visibility: hidden;
-  width: 120px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  width: 100px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -879,6 +876,7 @@ a.disable:hover {
       background-image: url("../../images/stackblitz-logo-dark.svg"); }
 
 .codesandbox-btn {
+  width: 120px;
   background: #333; }
   .codesandbox-btn::before {
     background-image: url("../../images/code-sandbox-seeklogo.com.svg"); }
@@ -1875,7 +1873,31 @@ footer {
   max-width: 100%; }
 
 .code-view {
-  outline: 2px solid #dedede; }
+  outline: 1px solid #dedede; }
+  .code-view ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px; }
+  .code-view ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px; }
+  .code-view ::-webkit-scrollbar-thumb {
+    background: #e1e1e1;
+    border: 0px none #ffffff;
+    border-radius: 50px; }
+  .code-view ::-webkit-scrollbar-thumb:hover {
+    background: #ffffff; }
+  .code-view ::-webkit-scrollbar-thumb:active {
+    background: #e1e1e1; }
+  .code-view ::-webkit-scrollbar-track {
+    background: #666666;
+    border: 0px none #ffffff;
+    border-radius: 44px; }
+  .code-view ::-webkit-scrollbar-track:hover {
+    background: #666666; }
+  .code-view ::-webkit-scrollbar-track:active {
+    background: #333333; }
+  .code-view ::-webkit-scrollbar-corner {
+    background: transparent; }
   .code-view .code-views-container {
     overflow: auto;
     background-color: transparent; }
@@ -1896,9 +1918,26 @@ footer {
     .code-view pre.code-wrapper:hover {
       -webkit-box-shadow: none;
               box-shadow: none; }
+    .code-view pre.code-wrapper .hljs-code-copy::before {
+      margin: 0; }
     .code-view pre.code-wrapper code {
-      border-radius: 0;
-      font-size: 14px; }
+      border-radius: 0; }
+    .code-view pre.code-wrapper .hljs-code-copy {
+      width: 100px;
+      height: 40px;
+      background: #1E1E1E;
+      border: 1px solid #333;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center; }
+      .code-view pre.code-wrapper .hljs-code-copy::before {
+        display: none; }
+      .code-view pre.code-wrapper .hljs-code-copy:hover {
+        border-color: #0099ff;
+        color: #0099ff; }
+      .code-view pre.code-wrapper .hljs-code-copy--active {
+        border-color: #0099ff;
+        color: #0099ff; }
     .code-view pre.code-wrapper .hljs {
       display: block;
       overflow-x: auto;
@@ -1986,6 +2025,7 @@ footer {
   .code-view-navbar::-webkit-scrollbar-thumb {
     background: #888; }
   .code-view-navbar .code-view-tab, .code-view-navbar .code-view-tab--active {
+    position: relative;
     background-color: transparent;
     width: 87px;
     height: 47px;
@@ -2001,8 +2041,15 @@ footer {
       color: #0099ff; }
     .code-view-navbar .code-view-tab--active {
       background-color: #fff;
-      border-top: 2.5px solid #0099ff;
       color: #0099ff; }
+      .code-view-navbar .code-view-tab--active::after {
+        content: "";
+        height: 2.5px;
+        background: #0099ff;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0; }
   .code-view-navbar .fs-button-container {
     height: 50%;
     display: -webkit-inline-box;
