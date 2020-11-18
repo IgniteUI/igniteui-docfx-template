@@ -74,7 +74,9 @@ $(function () {
       $('.article-container a:not([href^="http"])')
         .each(function () {
           var anchorHref = $(this).attr('href');
-          $(this).attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
+          if (anchorHref) {
+            $(this).attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
+          }
         });
     }
   }
