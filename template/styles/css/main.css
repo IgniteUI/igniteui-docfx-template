@@ -1869,3 +1869,7 @@ pre {
 
 .responsive-img {
   max-width: 100%; }
+
+.compliance table {
+    width: 100%;
+}
