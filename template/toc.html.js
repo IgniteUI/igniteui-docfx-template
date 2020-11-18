@@ -22,23 +22,28 @@ exports.transform = function (model) {
     model = extension.postTransform(model);
   }
 
-  if(model.items.length > 1){
+  if(!model.items[0].navbarToc){
+    model.items = alphabeticalSort(model.items);
+  }
+  return model;
+}
 
+  function alphabeticalSort(items){
     var globalCollection = [];
     var currentChain = false;
     var collection = [];
     var topicHeader = null;
 
-    for (var i = 0; i < model.items.length; i++) {
-      if (model.items[i].header){
-        if (model.items[i].sortable && !currentChain) {
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].header){
+        if (items[i].sortable && !currentChain) {
           if(collection.length > 0 && topicHeader){
             globalCollection=appendToGlobalCollection(globalCollection,collection,topicHeader)
             collection = [];
           }
           currentChain = true;
-          topicHeader = model.items[i];
-        } else if (model.items[i].sortable && currentChain) {
+          topicHeader = items[i];
+        } else if (items[i].sortable && currentChain) {
           if (collection.length > 1) {
             collection.sort(function (a, b) {
               return a.name.localeCompare(b.name);
@@ -46,9 +51,9 @@ exports.transform = function (model) {
           }
           globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
           currentChain = true;
-          topicHeader = model.items[i];
+          topicHeader = items[i];
           collection = [];
-        } else if (!model.items[i].sortable && currentChain) {
+        } else if (!items[i].sortable && currentChain) {
           if (collection.length > 1) {
             collection.sort(function (a, b) {
               return a.name.localeCompare(b.name);
@@ -56,25 +61,25 @@ exports.transform = function (model) {
           }
           globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
           currentChain = false;
-          topicHeader = model.items[i];
+          topicHeader = items[i];
           collection = [];
-        } else if (!model.items[i].sortable && !currentChain) {
+        } else if (!items[i].sortable && !currentChain) {
           if (topicHeader){
             globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
             currentChain = false;
-            topicHeader = model.items[i];
+            topicHeader = items[i];
             collection = [];
           }else{
-            topicHeader = model.items[i];
+            topicHeader = items[i];
             currentChain = false;
             collection = [];
           }
         }
       }else {
-        if (model.items[i].items.length > 1 && currentChain) {
-          sortItems(model.items[i])
+        if (items[i].items.length > 1 && currentChain) {
+          sortItems(items[i])
         }
-        collection.push(model.items[i]);
+        collection.push(items[i]);
       }
     }
 
@@ -86,11 +91,8 @@ exports.transform = function (model) {
     }else{
       globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
     }
-    
-    model.items = globalCollection;
+    return globalCollection;
   }
-  return model;
-}
 
   function appendToGlobalCollection(global,current,header){
     current.unshift(header)
