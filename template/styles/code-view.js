@@ -9,20 +9,21 @@
 
             //Init the main elements
             $iframe  = $(this.element.find('iframe'));
-            self.options.iframeId = $iframe.attr('id');
             $codeView = $("<div>", { id: "cv-" + self.options.iframeId, class: "code-view" });
             $navbar = $("<div>", {class:"code-view-navbar"});
             $codeViewsContainer = $('<div>', {class: 'code-views-container'}).css('height', this.element.height());
             $footer = $("<div>", {class: "code-view-footer"});
             
             //Wrap the sample container with code a views container
-            this.element.wrap($codeViewsContainer);
-            this.element.attr('id','code-view-' + self.options.iframeId + '-' + 'example-tab-content');
-            this.element.addClass('code-view-tab-content');
+            this.element.wrap($codeViewsContainer)
+                        .attr('id','code-view-' + self.options.iframeId + '-' + 'example-tab-content')
+                        .addClass('code-view-tab-content');
             $codeViewsContainer = $(this.element.parent());
 
-            //Create navbar element with tabs and add code views to the code views container
-            this._createTabsWithCodeViews($navbar, $codeViewsContainer);
+            if(this.options.files && this.options.files.length > 0){
+              //Create navbar element with tabs and add code views to the code views container
+              this._createTabsWithCodeViews($navbar, $codeViewsContainer);
+            }
 
             //Add initial selected tab for the Example view
             $navbar.prepend($("<div>", {
@@ -50,7 +51,7 @@
         _codeViewTabClick: function(event) {
             var $tab = $(event.target);
             if(!$tab.hasClass("code-view-tab--active")){
-                $(".code-view-tab--active").switchClass("code-view-tab--active", "code-view-tab",  0);
+                $('#cv-' + this.options.iframeId + " .code-view-tab--active").switchClass("code-view-tab--active", "code-view-tab",  0);
                 $tab.switchClass("code-view-tab", "code-view-tab--active", 0);
                 $tab.is('[tab-content-id=' + 'code-view-' + this.options.iframeId + '-' + 'example-tab-content]') ? $tab.siblings('.fs-button-container').css('visibility', 'visible') :
                                                                                                                     $tab.siblings('.fs-button-container').css('visibility', 'hidden')
@@ -114,7 +115,6 @@
                 append('<span class="editing-label">Edit in: </span>').
                 append($lVButtons).
                 appendTo($footer);
-                $lVButtons.css('visibility', 'visible');
                 $lVButtons.text(function (i, text) {
                     return text.toLowerCase().indexOf("stackblitz") !== -1 ? "StackBlitz" : "Codesandbox"
                 } );
@@ -124,7 +124,7 @@
             }
         },
         _copyCode: function (){
-            var btn = ".hljs-code-copy";
+            var btn = "#cv-" + this.options.iframeId + " .hljs-code-copy";
             var cpb = new Clipboard(btn, {
               text: function (trigger) {
                 var codeSnippet = $(trigger)

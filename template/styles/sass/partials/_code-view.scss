@@ -296,4 +296,25 @@
     .editing-label {
         margin-right: .4rem
     }
+
+    .stackblitz-btn, .codesandbox-btn {
+        display: inline-flex;
+        padding: .2rem .4rem;
+        margin: 0 0 0 .2rem;
+        width: 100px;
+        font-size: .7rem;
+        padding: .2rem .4rem;
+        font-weight: 400;
+        text-transform: none;
+      
+        &::before {
+          width: 20px;
+          height: 20px;
+          margin-right: 5px;
+        }
+    }
+      
+      .codesandbox-btn {
+           width: 120px;
+      }
 }

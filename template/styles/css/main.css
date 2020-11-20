@@ -837,19 +837,19 @@ a.disable:hover {
 
 .stackblitz-btn, .codesandbox-btn {
   visibility: hidden;
-  width: 100px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-size: .7rem;
-  font-weight: 400;
-  color: #fff;
-  border: 0;
-  padding: .2rem .4rem;
-  margin-left: .2rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: #fff;
+  border: 0;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  margin: 24px 0;
   outline-style: none;
   -webkit-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out;
@@ -861,9 +861,9 @@ a.disable:hover {
   .stackblitz-btn::before, .codesandbox-btn::before {
     content: "";
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
     background-image: url("../../images/stackblitz-logo.svg");
     background-size: 100%;
     background-repeat: no-repeat; }
@@ -876,7 +876,6 @@ a.disable:hover {
       background-image: url("../../images/stackblitz-logo-dark.svg"); }
 
 .codesandbox-btn {
-  width: 120px;
   background: #333; }
   .codesandbox-btn::before {
     background-image: url("../../images/code-sandbox-seeklogo.com.svg"); }
@@ -2088,3 +2087,20 @@ footer {
     overflow: hidden; }
   .editing-buttons-container .editing-label {
     margin-right: .4rem; }
+  .editing-buttons-container .stackblitz-btn, .editing-buttons-container .codesandbox-btn, .editing-buttons-container .codesandbox-btn {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    padding: .2rem .4rem;
+    margin: 0 0 0 .2rem;
+    width: 100px;
+    font-size: .7rem;
+    padding: .2rem .4rem;
+    font-weight: 400;
+    text-transform: none; }
+    .editing-buttons-container .stackblitz-btn::before, .editing-buttons-container .codesandbox-btn::before, .editing-buttons-container .codesandbox-btn::before {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px; }
+  .editing-buttons-container .codesandbox-btn {
+    width: 120px; }
