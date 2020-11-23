@@ -22,11 +22,11 @@ exports.transform = function (model) {
     model = extension.postTransform(model);
   }
 
-  var sortableItems = model.items.filter(function(item){
-    return item.header && item.sortable
+  var sortableHeaders = model.items.filter(function(item){
+    return item && item.header && item.sortable
   });
   
-  if(sortableItems.length>0 && !model.items[0].navbarToc){
+  if(sortableHeaders.length > 0){
     model.items = alphabeticalSort(model.items);
   }
 
