@@ -21,12 +21,12 @@ exports.transform = function (model) {
   if (extension && extension.postTransform) {
     model = extension.postTransform(model);
   }
- 
-  var nestedItems = model.items.filter(function(item){
-    return item.items.length > 1;
-  });
 
-  if(nestedItems.length>0 && !model.items[0].navbarToc){
+  var sortableItems = model.items.filter(function(item){
+    return item.header && item.sortable
+  });
+  
+  if(sortableItems.length>0 && !model.items[0].navbarToc){
     model.items = alphabeticalSort(model.items);
   }
 
