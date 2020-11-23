@@ -21,10 +21,15 @@ exports.transform = function (model) {
   if (extension && extension.postTransform) {
     model = extension.postTransform(model);
   }
+ 
+  var nestedItems = model.items.filter(function(item){
+    return item.items.length > 1;
+  });
 
-  if(!model.items[0].navbarToc){
+  if(nestedItems.length>0 && !model.items[0].navbarToc){
     model.items = alphabeticalSort(model.items);
   }
+
   return model;
 }
 
@@ -87,10 +92,8 @@ exports.transform = function (model) {
       collection.sort(function (a, b) {
         return a.name.localeCompare(b.name);
       })
-      globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
-    }else{
-      globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
     }
+    globalCollection = appendToGlobalCollection(globalCollection,collection,topicHeader)
     return globalCollection;
   }
 
