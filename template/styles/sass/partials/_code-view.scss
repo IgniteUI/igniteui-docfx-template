@@ -1,38 +1,46 @@
 .code-view {
     outline: 1px solid #dedede;
+
     ::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
+        width: 4px;
+        height: 4px;
     }
 
     ::-webkit-scrollbar-button {
-      width: 0px;
-      height: 0px;
+        width: 0px;
+        height: 0px;
     }
+
     ::-webkit-scrollbar-thumb {
-      background: #e1e1e1;
-      border: 0px none #ffffff;
-      border-radius: 50px;
+        background: #e1e1e1;
+        border: 0px none #ffffff;
+        border-radius: 50px;
     }
+
     ::-webkit-scrollbar-thumb:hover {
-      background: #ffffff;
+        background: #ffffff;
     }
+
     ::-webkit-scrollbar-thumb:active {
-      background: #e1e1e1;
+        background: #e1e1e1;
     }
+
     ::-webkit-scrollbar-track {
-      background: #666666;
-      border: 0px none #ffffff;
-      border-radius: 44px;
+        background: #666666;
+        border: 0px none #ffffff;
+        border-radius: 44px;
     }
+
     ::-webkit-scrollbar-track:hover {
-      background: #666666;
+        background: #666666;
     }
+
     ::-webkit-scrollbar-track:active {
-      background: #333333;
+        background: #333333;
     }
+
     ::-webkit-scrollbar-corner {
-      background: transparent;
+        background: transparent;
     }
 
     .code-views-container {
@@ -44,7 +52,7 @@
         padding: .1rem;
     }
 
-    .code-view-tab-content:nth-child(n + 2){
+    .code-view-tab-content:nth-child(n + 2) {
         background: #1E1E1E;
         height: 100%;
     }
@@ -52,13 +60,12 @@
     pre.code-wrapper {
         padding: 0;
         margin: 0;
-        border: none;
-        border-radius: 0;
+
         &:hover {
             box-shadow: none;
         }
 
-        .hljs-code-copy::before{
+        .hljs-code-copy::before {
             margin: 0;
         }
 
@@ -66,145 +73,31 @@
             border-radius: 0;
         }
 
-        .hljs-code-copy{
+        .hljs-code-copy {
             width: 100px;
             height: 40px;
             background: #1E1E1E;
             border: 1px solid #333;
             justify-content: center;
-            &::before{
+
+            &::before {
                 display: none;
             }
 
-            &:hover{
+            &:hover {
                 border-color: $igblue;
                 color: $igblue
             }
 
-            &--active{
+            &--active {
                 border-color: $igblue;
                 color: $igblue
             }
         }
-        /*
- * Visual Studio 2015 dark style
- * Author: Nicolas LLOBERA <nllobera@gmail.com>
- */
 
-    .hljs {
-        display: block;
-        overflow-x: auto;
-        padding: 0.5em;
-        background: #1E1E1E;
-        color: #DCDCDC;
-    }
-
-    .hljs-keyword,
-    .hljs-literal,
-    .hljs-symbol,
-    .hljs-name {
-        color: #569CD6;
-    }
-
-    .hljs-link {
-        color: #569CD6;
-        text-decoration: underline;
-    }
-
-    .hljs-built_in,
-    .hljs-type {
-        color: #4EC9B0;
-    }
-
-    .hljs-number,
-    .hljs-class {
-        color: #B8D7A3;
-    }
-
-    .hljs-string,
-    .hljs-meta-string {
-        color: #D69D85;
-    }
-
-    .hljs-regexp,
-    .hljs-template-tag {
-        color: #9A5334;
-    }
-
-    .hljs-subst,
-    .hljs-function,
-    .hljs-title,
-    .hljs-params,
-    .hljs-formula {
-        color: #DCDCDC;
-    }
-
-    .hljs-comment,
-    .hljs-quote {
-        color: #57A64A;
-        font-style: italic;
-    }
-
-    .hljs-doctag {
-        color: #608B4E;
-    }
-
-    .hljs-meta {
-        color: #dcdcaa
-     }
-
-    .hljs-meta-keyword,
-    .hljs-tag {
-        color: #9B9B9B;
-    }
-
-    .hljs-variable,
-    .hljs-template-variable {
-        color: #BD63C5;
-    }
-
-    .hljs-attr,
-    .hljs-attribute,
-    .hljs-builtin-name {
-        color: #9CDCFE;
-    }
-
-    .hljs-section {
-        color: gold;
-    }
-
-    .hljs-emphasis {
-        font-style: italic;
-    }
-
-    .hljs-strong {
-        font-weight: bold;
-    }
-
-    .hljs-code {
-    font-family:'Monospace';
-    }
-
-    .hljs-bullet,
-    .hljs-selector-tag,
-    .hljs-selector-id,
-    .hljs-selector-class,
-    .hljs-selector-attr,
-    .hljs-selector-pseudo {
-        color: #D7BA7D;
-    }
-
-    .hljs-addition {
-        background-color: #144212;
-        display: inline-block;
-        width: 100%;
-    }
-
-    .hljs-deletion {
-        background-color: #600;
-        display: inline-block;
-        width: 100%;
-    }
+        .hljs {
+            padding: 0.5em;
+        }
     }
 }
 
@@ -216,12 +109,15 @@
     &::-webkit-scrollbar {
         width: 2px;
     }
+
     &::-webkit-scrollbar-track {
-        background: #f1f1f1; 
+        background: #f1f1f1;
     }
+
     &::-webkit-scrollbar-thumb {
-        background: #888; 
+        background: #888;
     }
+
     .code-view-tab {
         position: relative;
         background-color: transparent;
@@ -244,7 +140,7 @@
             background-color: #fff;
             color: $igblue;
 
-            &::after{
+            &::after {
                 content: "";
                 height: 2.5px;
                 background: $igblue;
@@ -297,7 +193,8 @@
         margin-right: .4rem
     }
 
-    .stackblitz-btn, .codesandbox-btn {
+    .stackblitz-btn,
+    .codesandbox-btn {
         display: inline-flex;
         padding: .2rem .4rem;
         margin: 0 0 0 .2rem;
@@ -306,15 +203,15 @@
         padding: .2rem .4rem;
         font-weight: 400;
         text-transform: none;
-      
+
         &::before {
-          width: 20px;
-          height: 20px;
-          margin-right: 5px;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
         }
     }
-      
-      .codesandbox-btn {
-           width: 120px;
-      }
+
+    .codesandbox-btn {
+        width: 120px;
+    }
 }
