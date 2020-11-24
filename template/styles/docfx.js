@@ -73,13 +73,16 @@ $(function () {
       $('.article-container a:not([href^="http"])')
         .each(function () {
           var anchorHref = $(this).attr('href');
-          $(this).attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
+          if (anchorHref) {
+            $(this).attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
+          }
         });
     }
   }
 
   function addGtmButtons() {
     if ($(".sample-container").length && !$(".sample-container:first + p>a.trackCTA").length) {
+      const languageVersion = $('html')[0].lang;
       const productTitle = $("meta[property='docfx:title']").attr("content");
       let productLink = $("meta[property='docfx:link']").attr("content");
 
@@ -90,8 +93,22 @@ $(function () {
       }
 
       const sample = $(".sample-container").first();
-      const paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete " + productTitle + " toolkit and start building your own apps in minutes.");
-      const link = $('<a>');
+      let paragraph = "";
+      if(languageVersion === 'ja'){
+        paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("このサンプルが気に入りましたか? 完全な " + productTitle + "ツールキットにアクセスして、すばやく独自のアプリの作成を開始します。");
+        const link = appendLinkAttributes(productTitle,productLink);
+        link.text("無料でダウンロードできます。").appendTo(paragraph);
+      }else {
+        paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete " + productTitle + " toolkit and start building your own apps in minutes.");
+        const link = appendLinkAttributes(productTitle,productLink);
+        link.text(" Download it for free.").appendTo(paragraph);
+      }
+      
+      sample.after(paragraph);
+    }
+
+    function appendLinkAttributes(productTitle,productLink) {
+      let link = $('<a>');
       link.attr('data-xd-ga-action', 'Download');
       link.attr('data-xd-ga-label', productTitle);
       link.attr({
@@ -99,8 +116,7 @@ $(function () {
         href: productLink,
         class: "no-external-icon mchNoDecorate trackCTA"
       });
-      link.text(" Download it for free.").appendTo(paragraph);
-      sample.after(paragraph);
+      return link;
     }
   }
 
