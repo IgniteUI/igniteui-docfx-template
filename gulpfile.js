@@ -18,6 +18,7 @@ const bundles = [
         name: "docfx-bundle.min.js",
         files: [
             "docfx.vendor.js",
+            "jquery-ui-1.12.0.js",
             "jquery-localize.js",
             "docfx.js"
         ],
@@ -32,6 +33,7 @@ const bundles = [
             "lz-string.js",
             "resize-sensor.js",
             "nav-init.js",
+            "code-view.js",
             "live-editing-handler.js",
             "lazyload.js",
             "lazysizes.js",

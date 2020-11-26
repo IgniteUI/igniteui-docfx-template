@@ -3,7 +3,7 @@
     var cbsButtonClass = "codesandbox-btn";
     var stackBlitzApiUrl = "https://run.stackblitz.com/api/angular/v1";
     var codesandboxApiUrl = "https://codesandbox.io/api/v1/sandboxes/define";
-
+    const angularSampleOrder = ['modules', 'ts', 'html', 'scss'];
     var buttonIframeIdAttrName = "data-iframe-id";
     var buttonSampleSourceAttrName = "data-sample-src";
     var buttonDemosUrlAttrName = "data-demos-base-url";
@@ -31,6 +31,7 @@
     var demosUrls = new Map();
     var demosTimeStamp;
     var sharedFileContent;
+    var liveEditingButtonClickHandler;
     var init = function () {
         var projectButtons;
         if(isIE || isEdge) {
@@ -41,10 +42,7 @@
         }
 
         if (projectButtons.length > 0) {
-            if (!isLocalhost) {
-                projectButtons.removeAttr("disabled");
-                projectButtons.on("click", onGithubProjectButtonClicked);
-            } else {
+            liveEditingButtonClickHandler = isLocalhost ? onProjectButtonClicked : onGithubProjectButtonClicked;
                 $.each(projectButtons, function (index, element) {
                     const $button = $(element);
                     const baseUrl = $button.attr(buttonDemosUrlAttrName);
@@ -61,8 +59,15 @@
                 const demosBaseUrls = demosUrls.keys();
                 for (var head = demosBaseUrls.next(); !head.done; head = demosBaseUrls.next()) {
                     const url = head.value;
-                    generateLiveEditingApp(url, demosUrls.get(url))
-                }
+                    if(isLocalhost){
+                        generateLiveEditingApp(url, demosUrls.get(url));
+                    } else {
+                        getSampleFiles(url, demosUrls.get(url), function (){
+                            projectButtons.removeAttr("disabled");
+                            projectButtons.css("visibility", 'visible');
+                            projectButtons.on("click", onGithubProjectButtonClicked);
+                        });
+                    }
             }
         }
     }
@@ -98,8 +103,7 @@
         isButtonClickInProgress = true;
         var $button = $(this);
         var sampleFileUrl = getGitHubSampleUrlFromButton($button, $(this).attr(buttonDemosUrlAttrName));
-        var editor = event.target.classList.value === stkbButtonClass ? "stackblitz" :
-            "codesandbox";
+        var editor = event.target.classList.value === stkbButtonClass ? "stackblitz" : "codesandbox";
         var branch = $(this).attr(buttonDemosUrlAttrName).indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
         window.open(getGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
         isButtonClickInProgress = false;
@@ -141,13 +145,40 @@
         }));
     }
 
+    var getSampleFiles = function (demosBaseUrl, samplesData, err){
+        var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
+        // prevent caching 
+        metaFileUrl += "?t=" + new Date().getTime();
+
+        $.get(metaFileUrl)
+        .done(function (response) {
+            demosTimeStamp = response.generationTimeStamp;
+            samplesData.forEach(function (sample) {
+                const sampleDataObj = JSON.parse(sample);
+                const sampleFileUrl = sampleDataObj.sampleUrl;
+                const iframeID = sampleDataObj.iframeId;
+                $.get(sampleFileUrl, sampleFilePostProcess(demosBaseUrl, removeQueryString, iframeID))
+            });
+        })
+        .fail(function (){
+            err();
+            throw new Error('Error on fetching sample files!');
+        });
+    }
+
     var sampleFilePostProcess = function(demosBaseUrl, cb, iframeID){
             return function(data) {
+                var codeViewFiles, url;
                 const files = data.sampleFiles;
                 replaceRelativeAssetsUrls(files, demosBaseUrl);
-                var url = this.url;
+                url = this.url;
                 url = cb(url);
                 sampleFilesContentByUrl[url] = data;
+                codeViewFiles = files.filter(function (f) {return f.isMain})
+                                     .sort(function (a,b){
+                                        return angularSampleOrder.indexOf(a.fileHeader) - angularSampleOrder.indexOf(b.fileHeader);
+                                     });
+                $('#' + iframeID).closest(".sample-container").codeView({files: codeViewFiles, iframeId: iframeID});
                 activateButton(iframeID);
             }
     }
@@ -165,9 +196,10 @@
     }
 
     var activateButton = function (iframeID){
-        var buttonsForActivation = 'button[' + buttonIframeIdAttrName + "=" + iframeID + "]";
-        $(buttonsForActivation).on("click", onProjectButtonClicked);
-        $(buttonsForActivation).removeAttr("disabled");
+        var $liveEditingButtons = $('button[' + buttonIframeIdAttrName + "=" + iframeID + "]");
+        $liveEditingButtons.on("click", liveEditingButtonClickHandler);
+        $liveEditingButtons.removeAttr("disabled");
+        $liveEditingButtons.css('visibility', 'visible');
     }
 
     var removeQueryString = function (url) {

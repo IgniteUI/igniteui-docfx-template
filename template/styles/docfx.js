@@ -11,14 +11,13 @@ $(function () {
   var initialAffixHeight;
 
 
-
   addExternalLinkIcons();
   removeHTMLExtensionFromInternalAnchors();
   highlight();
   enableSearch();
 
   renderTables();
-  renderAlerts();
+  renderAlerts(); 
   renderLinks();
   renderNavbar();
   renderSidebar();
@@ -222,10 +221,10 @@ $(function () {
     });
 
     cpb.on("success", function (e) {
-      e.trigger.innerText = localeData.resources.hljs.codeCopied;
+      e.trigger.innerText = 'COPIED';
       setTimeout(function () {
-        e.trigger.innerText = localeData.resources.hljs.copyCode;
-      }, 500);
+        e.trigger.innerText = '';
+      }, 1000);
     });
   }
 
