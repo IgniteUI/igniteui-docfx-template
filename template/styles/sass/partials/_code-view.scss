@@ -54,7 +54,8 @@
 
     .code-view-tab-content:nth-child(n + 2) {
         background: #1E1E1E;
-        height: 100%;
+        min-height: 100px;
+        max-height: 600px;
     }
 
     pre.code-wrapper {

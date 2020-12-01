@@ -11,7 +11,7 @@
             $iframe  = $(this.element.find('iframe'));
             $codeView = $("<div>", { id: "cv-" + self.options.iframeId, class: "code-view" });
             $navbar = $("<div>", {class:"code-view-navbar"});
-            $codeViewsContainer = $('<div>', {class: 'code-views-container'}).css('height', this.element.height() + 5);
+            $codeViewsContainer = $('<div>', {class: 'code-views-container'});
             $footer = $("<div>", {class: "code-view-footer"});
             
             //Wrap the sample container with code a views container
