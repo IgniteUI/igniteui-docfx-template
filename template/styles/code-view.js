@@ -61,7 +61,9 @@
         },
         _createTabsWithCodeViews: function($navbar, $codeViewsContainer) {
             var self = this;
-            this.options.files.forEach(function (f){
+
+            var isEmptyFile = new RegExp('^[ \t\r\n]*$');
+            this.options.files.filter(function (f)  {return !isEmptyFile.test(f.content)}).forEach(function (f){
                 var language = f.fileExtension === 'ts' ? 'typescript' : f.fileExtension;
                 var $tab, $tabView, $code, $codeWrapper;
 
