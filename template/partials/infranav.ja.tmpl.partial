@@ -48,39 +48,49 @@
                                     <li><a class="signInLink mchNoDecorate" href="https://jp.infragistics.com/my-account/keys-and-downloads">ログイン</a></li>
                                 </ul>
                             </li>
-                            <li class="menu-full-width"><a class="navigation__sub-menu mchNoDecorate" title="開発" href="/products/all"><span>開発</span></a>
-                                <ul style="display: none; opacity: 0;">
-                                    <li>
-                                        <div class="mar-bottom--sm">
-                                            <div class="navigation__sub-menu-header">お買い得</div>
-                                            <div class="emphasize"><a href="/products/ultimate" class="mchNoDecorate">Infragistics Ultimate <span class="deemphasize">Web、モバイル、デスクトップ アプリケーション開発をサポート</span> </a></div>
-                                        </div>
-                                        <div>
-                                            <div class="emphasize"><a href="/products/indigo-design" class="mchNoDecorate">Indigo.Design <span class="deemphasize">3ステップでデザインから画面コードを生成できるアプリケーションデザインプラットフォーム</span> </a></div>
-                                        </div>
+                            <li class="menu-full-width">
+	                            <a class="navigation__sub-menu" title="Design and Development" href="/products/ultimate"><span class="hidden-md">開発</span><span class="visible-md hidden-lg hidden-sm hidden-xs hidden-xxs">開発</span></a>
+	                            <ul>
+		                            <li>
+			                            <div class="navigation__sub-menu--left">
+				                            <div class="navigation__sub-menu--left-item">
+					                            <div class="navigation__sub-menu-header">おすすめパッケージ</div>
+					                            <div class="emphasize"><a href="/products/ultimate"><span class="navigation__sub-menu-title">Infragistics Ultimate</span> <span class="navigation__sub-menu-price bgColor--ultimate" style="font-size: 9pt;">¥190,000<br />(税抜き)</span> <span class="deemphasize">Web、モバイル、デスクトップアプリ構築のためのUX / UIツールキット完全版</span> </a></div>
+				                            </div>
+				                            <div class="navigation__sub-menu--left-item">
+					                            <div class="emphasize"><a href="/products/ignite-ui"><span class="navigation__sub-menu-title">Ignite UI</span> <span class="navigation__sub-menu-price bgColor--ignite" style="font-size: 9pt;">¥150,000<br />(税抜き)</span> <span class="deemphasize">Webアプリを構築するためのUIコンポーネント完全版ライブラリ</span> </a></div>
+				                            </div>
+				                            <div class="navigation__sub-menu--left-item hidden-sm hidden-xs hidden-xxs">
+					                            <div class="emphasize"><a href="/products/indigo-design"><span class="navigation__sub-menu-title">Indigo.Design</span> <span class="navigation__sub-menu-price bgColor--san-marino" style="font-size: 9pt;">¥120,000<br />(税抜き)</span> <span class="deemphasize">プロトタイピング、ユーザビリティテスト、コード生成をワンストップで</span> </a></div>
+				                            </div>
+			                            </div>
+		                            </li>
+		                            <li>
+                                        <div class="navigation__sub-menu-header">Web向け</div>
+                                        <a class="deemphasize" href="/products/ignite-ui">Ignite UI</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-angular">Ignite UI for Angular</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-core">Ignite UI for ASP.NET Core</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-mvc">Ignite UI for ASP.NET MVC</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-blazor">Ignite UI for Blazor</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-jquery">Ignite UI for jQuery</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-react">Ignite UI for React</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-web-components">Ignite UI for Web Components</a>
+                                        <a class="deemphasize" href="/products/aspnet">Ultimate UI for ASP.NET Web Forms</a>
+                                        <a class="deemphasize hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
                                     </li>
-                                    <li>
-                                        <div class="navigation__sub-menu-header">WEB向け</div>
-                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-angular">Ignite UI for Angular</a> 
-                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui">Ignite UI for JavaScript</a> 
-                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-react">Ignite UI for React</a> 
-                                        <a class="deemphasize mchNoDecorate" href="/products/aspnet">Ultimate UI for ASP.NET</a> 
-                                        <a class="deemphasize mchNoDecorate hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a></li>
-                                    <li>
-                                        <div class="navigation__sub-menu-header">デスクトップ向け</div>
-                                        <a href="/products/windows-forms" class="mchNoDecorate">Ultimate UI for Windows Forms</a> <a href="/products/wpf" class="mchNoDecorate">Ultimate UI for WPF</a>
-                                        <div class="navigation__sub-menu-header">プロトタイピング</div>
-                                        <a href="/products/indigo-design" class="mchNoDecorate  hidden-sm hidden-xs hidden-xxs">Indigo.Design</a></li>
-                                    <li>
-                                        <div class="navigation__sub-menu-header">モバイル向け</div>
-                                        <a href="/products/xamarin" class="mchNoDecorate">Ultimate UI for Xamarin</a> <a href="/products/ios" class="mchNoDecorate">Ultimate UI for iOS</a> <a href="/products/android" class="mchNoDecorate">Ultimate UI for Android</a></li>
-                                    <li>
-                                        <div class="navigation__sub-menu-header">自動テスト ツール</div>
-                                        <a href="/products/test-automation-micro-focus-uft" class="mchNoDecorate">Test Automation for Micro Focus UFT: Windows Forms</a>
-                                        <a href="/products/test-automation-micro-focus-uft" class="mchNoDecorate">Test Automation for Micro Focus UFT: WPF</a>
-                                        <a href="/products/test-automation-ibm-rft" class="mchNoDecorate">Test Automation for IBM RFT: Windows Forms</a>
+		                            <li>
+			                            <div class="navigation__sub-menu-header">デスクトップ向け</div>
+                                        <a href="/products/windows-forms">Ultimate UI for Windows Forms</a>
+                                        <a href="/products/wpf">Ultimate UI for WPF</a>
+			                            <div class="navigation__sub-menu-header">クロスプラットフォーム向け</div>
+                                        <a href="/products/uno-platform">Ultimate UI for Uno</a>
+                                        <a href="/products/uwp">Ultimate UI for UWP</a>
+                                        <a href="/products/winui">Ultimate UI for WinUI</a>
+                                        <a href="/products/xamarin">Ultimate UI for Xamarin</a>
+			                            <div class="navigation__sub-menu-header">プロトタイピング</div>
+                                        <a class="hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
                                     </li>
-                                </ul>
+	                            </ul>
                             </li>
                             <li><a class="navigation__sub-menu mchNoDecorate" title="UX" href="/products/indigo-design">UX</a>
                                 <ul style="display: none;">

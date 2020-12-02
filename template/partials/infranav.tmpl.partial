@@ -53,45 +53,55 @@
                                 </ul>
                             </li>
                             <li class="menu-full-width">
-                                <a class="navigation__sub-menu mchNoDecorate" title="Design and Development" href="/products/ultimate"><span class="hidden-md">Design &amp; Development</span><span class="visible-md hidden-lg hidden-sm hidden-xs hidden-xxs">Design &amp; Develop</span></a>
-                                <ul style="display: none; opacity: 0;">
-                                    <li>
-                                        <div class="mar-bottom--sm">
-                                            <div class="navigation__sub-menu-header">Best Value</div>
-                                            <div class="emphasize"><a href="/products/ultimate" class="mchNoDecorate">Infragistics Ultimate <span class="deemphasize">The complete toolkit for building high performing web, mobile and desktop apps.</span> </a></div>
-                                        </div>
-                                        <div>
-                                            <div class="emphasize"><a href="/products/indigo-design" class="mchNoDecorate">Indigo.Design <span class="deemphasize">Use a unified platform for visual design, UX prototyping, code generation and application development.</span> </a></div>
-                                        </div>
-                                    </li>
-                                    <li>
+	                            <a class="navigation__sub-menu" title="Design and Development" href="/products/ultimate"><span class="hidden-md">Design &amp; Development</span><span class="visible-md hidden-lg hidden-sm hidden-xs hidden-xxs">Design &amp; Develop</span></a>
+	                            <ul>
+		                            <li>
+			                            <div class="navigation__sub-menu--left">
+				                            <div class="navigation__sub-menu--left-item">
+					                            <div class="navigation__sub-menu-header">Best Value Bundles</div>
+					                            <div class="emphasize"><a href="/products/ultimate"><span class="navigation__sub-menu-title">Infragistics Ultimate</span> <span class="navigation__sub-menu-price bgColor--ultimate">$1,099</span> <span class="deemphasize">The only complete UX/UI toolkit for building high performance, modern web, mobile and desktop applications.</span> </a></div>
+				                            </div>
+				                            <div class="navigation__sub-menu--left-item">
+					                            <div class="emphasize"><a href="/products/pro"><span class="navigation__sub-menu-title">Infragistics Professional</span> <span class="navigation__sub-menu-price bgColor--pro">$999</span> <span class="deemphasize">The comprehensive UI components library for web, mobile and desktop developers.</span> </a></div>
+				                            </div>
+				                            <div class="navigation__sub-menu--left-item hidden-sm hidden-xs hidden-xxs">
+					                            <div class="emphasize"><a href="/products/ignite-ui"><span class="navigation__sub-menu-title">Ignite UI</span> <span class="navigation__sub-menu-price bgColor--ignite">$849</span> <span class="deemphasize">A complete library of UI components for building modern, data-rich and responsive web apps.</span> </a></div>
+				                            </div>
+			                            </div>
+		                            </li>
+		                            <li>
                                         <div class="navigation__sub-menu-header">Web</div>
-                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-angular">Ignite UI for Angular</a>
-                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui">Ignite UI for JavaScript</a>
-                                        <a class="deemphasize mchNoDecorate" href="/products/ignite-ui-react">Ignite UI for React</a>
-                                        <a class="deemphasize mchNoDecorate" href="/products/aspnet">Ultimate UI for ASP.NET</a>
-                                        <a class="deemphasize mchNoDecorate hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
+                                        <a class="deemphasize" href="/products/ignite-ui">Ignite UI</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-angular">Ignite UI for Angular</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-core">Ignite UI for ASP.NET Core</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-mvc">Ignite UI for ASP.NET MVC</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-blazor">Ignite UI for Blazor</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-jquery">Ignite UI for jQuery</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-react">Ignite UI for React</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-web-components">Ignite UI for Web Components</a>
+                                        <a class="deemphasize" href="/products/aspnet">Ultimate UI for ASP.NET Web Forms</a>
+                                        <a class="deemphasize hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a></li>
+		                            <li>
+			                            <div class="navigation__sub-menu-header">Design to Code</div>
+                                        <a class=" hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
+			                            <div class="navigation__sub-menu-header">Desktop</div>
+                                        <a href="/products/windows-forms">Ultimate UI for Windows Forms</a>
+                                        <a href="/products/wpf">Ultimate UI for WPF</a>
+			                            <div class="navigation__sub-menu-header">Cross Platform</div>
+                                        <a href="/products/uno-platform">Ultimate UI for Uno</a>
+                                        <a href="/products/uwp">Ultimate UI for UWP</a>
+                                        <a href="/products/winui">Ultimate UI for WinUI</a>
+                                        <a href="/products/xamarin">Ultimate UI for Xamarin</a>
                                     </li>
-                                    <li>
-                                        <div class="navigation__sub-menu-header">Desktop</div>
-                                        <a href="/products/windows-forms" class="mchNoDecorate">Ultimate UI for Windows Forms</a>
-                                        <a href="/products/wpf" class="mchNoDecorate">Ultimate UI for WPF</a>
-                                        <div class="navigation__sub-menu-header">Prototyping</div>
-                                        <a href="/products/indigo-design" class="mchNoDecorate hidden-sm hidden-xs hidden-xxs">Indigo.Design</a>
+		                            <li>
+			                            <div class="navigation__sub-menu-header">Prototyping</div>
+                                        <a class="hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
+			                            <div class="navigation__sub-menu-header">Automated Testing Tools</div>
+                                        <a href="/products/test-automation-micro-focus-uft">Test automation for Micro Focus UFT: Windows Forms</a>
+                                        <a href="/products/test-automation-micro-focus-uft">Test automation for Micro Focus UFT: WPF</a>
+                                        <a href="/products/test-automation-ibm-rft">Test automation for IBM RFT: Windows Forms</a>
                                     </li>
-                                    <li>
-                                        <div class="navigation__sub-menu-header">Mobile</div>
-                                        <a href="/products/xamarin" class="mchNoDecorate">Ultimate UI for Xamarin</a>
-                                        <a href="/products/ios" class="mchNoDecorate">Ultimate UI for iOS</a>
-                                        <a href="/products/android" class="mchNoDecorate">Ultimate UI for Android</a>
-                                    </li>
-                                    <li>
-                                        <div class="navigation__sub-menu-header">Automated Testing Tools</div>
-                                        <a href="/products/test-automation-micro-focus-uft" class="mchNoDecorate">Test Automation for Micro Focus UFT: Windows Forms</a>
-                                        <a href="/products/test-automation-micro-focus-uft" class="mchNoDecorate">Test Automation for Micro Focus UFT: WPF</a>
-                                        <a href="/products/test-automation-ibm-rft" class="mchNoDecorate">Test Automation for IBM RFT: Windows Forms</a>
-                                    </li>
-                                </ul>
+	                            </ul>
                             </li>
                             <li>
                                 <a class="navigation__sub-menu mchNoDecorate" title="UX" href="/products/indigo-design">UX</a>
