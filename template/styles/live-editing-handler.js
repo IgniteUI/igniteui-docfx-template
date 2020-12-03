@@ -12,7 +12,6 @@
     var sharedFileName = "shared.json";
     var assetsFolder = "/assets/";
     var demoFilesFolderUrlPath = assetsFolder + "samples/";
-    var demoFilesCSSSupportFolderUrlPath = demoFilesFolderUrlPath + "css-support/";
 
     var isIE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0;
     var isEdge = navigator.userAgent.indexOf('Edge') !== -1;
@@ -28,19 +27,14 @@
         window.location.hostname.match(
             /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
         ));
-    var demosUrls = new Map();
+    var demosUrls = new MockMap();
     var demosTimeStamp;
     var sharedFileContent;
     var liveEditingButtonClickHandler;
     var init = function () {
-        var projectButtons;
-        if(isIE || isEdge) {
-            projectButtons = $("." + stkbButtonClass);
-            $("." + cbsButtonClass).remove();
-        } else {
-            projectButtons = $("." + stkbButtonClass + ", ." + cbsButtonClass);
-        }
+        var projectButtons = $("." + stkbButtonClass + ", ." + cbsButtonClass);
 
+        //Get sample urls via live editing buttons
         if (projectButtons.length > 0) {
             liveEditingButtonClickHandler = isLocalhost ? onProjectButtonClicked : onGithubProjectButtonClicked;
                 $.each(projectButtons, function (index, element) {
@@ -50,22 +44,27 @@
                     const buttonIframeID = $button.attr(buttonIframeIdAttrName);
                     const sampleData = JSON.stringify({sampleUrl: buttonSampleUrl, iframeId: buttonIframeID});
                     if(!demosUrls.has(baseUrl)) {
-                        demosUrls.set(baseUrl, new Set().add(sampleData));
+                        demosUrls.set(baseUrl, new MockSet().add(sampleData));
                     } else {
                         demosUrls.get(baseUrl).add(sampleData);
                     }
                 });
 
                 const demosBaseUrls = demosUrls.keys();
-                for (var head = demosBaseUrls.next(); !head.done; head = demosBaseUrls.next()) {
-                    const url = head.value;
+                for (var i = 0; i < demosBaseUrls.length; i++) {
+                    const url = demosBaseUrls[i];
+                    const urlSamplesData = demosUrls.get(url).values;
                     if(isLocalhost){
-                        generateLiveEditingApp(url, demosUrls.get(url));
+                        generateLiveEditingApp(url, urlSamplesData);
                     } else {
-                        getSampleFiles(url, demosUrls.get(url), function (){
-                            projectButtons.removeAttr("disabled");
-                            projectButtons.css("visibility", 'visible');
-                            projectButtons.on("click", onGithubProjectButtonClicked);
+                        getSampleFiles(url, urlSamplesData, function (){
+                            if(isIE || isEdge) {
+                                projectButtons.remove();
+                            } else {
+                                projectButtons.removeAttr("disabled");
+                                projectButtons.css("visibility", 'visible');
+                                projectButtons.on("click", onGithubProjectButtonClicked);
+                            }
                         });
                     }
             }
@@ -92,7 +91,7 @@
         }
         // Get sample application base path
         const projectPath = demosBaseUrl.substring(demosBaseUrl.lastIndexOf("/") + 1)
-        var demoPath = sampleSrc.replace(demosBaseUrl + "/", projectPath + (isIE || isEdge ? "/css-support/" : "/"));
+        var demoPath = sampleSrc.replace(demosBaseUrl + "/", projectPath + "/");
         return demoPath;
     }
 
@@ -111,7 +110,7 @@
 
     var generateLiveEditingApp = function (demosBaseUrl, samplesData) {
 
-        var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
+        var metaFileUrl = demosBaseUrl + demoFilesFolderUrlPath + "meta.json";
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
 
@@ -133,7 +132,7 @@
 
     var getFiles = function (demosBaseUrl, samplesData, demosTimeStamp) {
 
-        var sharedFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + sharedFileName;
+        var sharedFileUrl = demosBaseUrl + demoFilesFolderUrlPath + sharedFileName;
         sharedFileUrl = addTimeStamp(sharedFileUrl, demosTimeStamp);
         $.get(sharedFileUrl, sharedFilePostProcess(demosBaseUrl, function() {
             samplesData.forEach(function (sample) {
@@ -146,7 +145,7 @@
     }
 
     var getSampleFiles = function (demosBaseUrl, samplesData, err){
-        var metaFileUrl = demosBaseUrl + getDemoFilesFolderUrlPath() + "meta.json";
+        var metaFileUrl = demosBaseUrl + demoFilesFolderUrlPath + "meta.json";
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
 
@@ -168,6 +167,9 @@
 
     var sampleFilePostProcess = function(demosBaseUrl, cb, iframeID){
             return function(data) {
+                if(isIE || isEdge) {
+                    deactivateButton(iframeID);
+                }
                 var codeViewFiles, url;
                 const files = data.sampleFiles;
                 replaceRelativeAssetsUrls(files, demosBaseUrl);
@@ -202,6 +204,10 @@
         $liveEditingButtons.css('visibility', 'visible');
     }
 
+    var deactivateButton = function (iframeID){
+        $('button[' + buttonIframeIdAttrName + "=" + iframeID + "]").remove();
+    }
+
     var removeQueryString = function (url) {
         var questionMarkIndex = url.indexOf('?');
         if (questionMarkIndex !== -1) {
@@ -209,14 +215,6 @@
         }
 
         return url;
-    }
-
-    var getDemoFilesFolderUrlPath = function () {
-        if (isIE || isEdge) {
-            return demoFilesCSSSupportFolderUrlPath;
-        }
-
-        return demoFilesFolderUrlPath;
     }
 
     var getSampleUrlFromButton = function ($button, demosBaseUrl) {
@@ -236,7 +234,7 @@
         var demoPath = sampleSrc.replace(demosBaseUrl + "/", "");
         demoPath = demoPath.replace("/", "--");
         var demoFileUrl = demosBaseUrl +
-            getDemoFilesFolderUrlPath().substring(0, getDemoFilesFolderUrlPath().length - 1) +
+            demoFilesFolderUrlPath.substring(0, demoFilesFolderUrlPath.length - 1) +
             "/" + demoPath + ".json";
         return demoFileUrl;
     }
@@ -392,4 +390,37 @@
     $(document).ready(function () {
         init();
     });
+    function MockMap(){
+        this._keys = [];
+        this.pairs = {};
+    }
+
+    MockMap.prototype.set = function (key, value){
+        if(this._keys.indexOf(key) === -1){
+            this._keys.push(key);
+        }
+        this.pairs[key] = value;
+    }
+
+    MockMap.prototype.get = function (key){
+        if(this.has(key)) return this.pairs[key]
+        return undefined;
+    }
+
+    MockMap.prototype.has = function (key){
+         return this._keys.indexOf(key) !== -1;
+    }
+
+    MockMap.prototype.keys = function (){
+        return this._keys;
+   }
+    function MockSet(){
+        this.values = [];
+    }
+
+    MockSet.prototype.add = function (value) {
+        if(this.values.indexOf(value) === -1) this.values.push(value);
+        return this;
+    }
+
 }());

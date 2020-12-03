@@ -4,20 +4,27 @@
             files: null,
             iframeId: null
         },
+        css:{
+          navbar: "code-view-navbar",
+          tab: "code-view-tab",
+          viewContainer: "code-views-container",
+          tabContent: 'code-view-tab-content',
+          footer: "code-view-footer",
+        },
         _create: function(){ 
             var self = this, $iframe, $codeView, $navbar, $codeViewsContainer, $footer;
 
             //Init the main elements
             $iframe  = $(this.element.find('iframe'));
             $codeView = $("<div>", { id: "cv-" + self.options.iframeId, class: "code-view" });
-            $navbar = $("<div>", {class:"code-view-navbar"});
-            $codeViewsContainer = $('<div>', {class: 'code-views-container'});
-            $footer = $("<div>", {class: "code-view-footer"});
+            $navbar = $("<div>", {class: this.css.navbar});
+            $codeViewsContainer = $('<div>', {class: this.css.viewContainer});
+            $footer = $("<div>", {class: this.css.footer});
             
             //Wrap the sample container with code a views container
             this.element.wrap($codeViewsContainer)
                         .attr('id','code-view-' + self.options.iframeId + '-' + 'example-tab-content')
-                        .addClass('code-view-tab-content');
+                        .addClass(this.css.tabContent);
             $codeViewsContainer = $(this.element.parent());
 
             if(this.options.files && this.options.files.length > 0){
@@ -27,7 +34,7 @@
 
             //Add initial selected tab for the Example view
             $navbar.prepend($("<div>", {
-                class: "code-view-tab--active",
+                class: this.css.tab + "--active",
                 text: "EXAMPLE"
             }).attr('tab-content-id', 'code-view-' + self.options.iframeId + '-' + 'example-tab-content'));
 
@@ -50,12 +57,12 @@
         },
         _codeViewTabClick: function(event) {
             var $tab = $(event.target);
-            if(!$tab.hasClass("code-view-tab--active")){
-                $('#cv-' + this.options.iframeId + " .code-view-tab--active").switchClass("code-view-tab--active", "code-view-tab",  0);
-                $tab.switchClass("code-view-tab", "code-view-tab--active", 0);
+            if(!$tab.hasClass("." + this.css.tab + "--active")){
+                $('#cv-' + this.options.iframeId + " .code-view-tab--active").switchClass(this.css.tab + "--active", this.css.tab,  0);
+                $tab.switchClass(this.css.tab, this.css.tab + "--active", 0);
                 $tab.is('[tab-content-id=' + 'code-view-' + this.options.iframeId + '-' + 'example-tab-content]') ? $tab.siblings('.fs-button-container').css('visibility', 'visible') :
                                                                                                                     $tab.siblings('.fs-button-container').css('visibility', 'hidden')
-                $('#cv-' + this.options.iframeId + ' > .code-views-container > .code-view-tab-content').css('display', 'none');
+                $('#cv-' + this.options.iframeId + ' > .' + this.css.viewContainer + ' > .'+ this.css.tabContent).css('display', 'none');
                 $('#' + $tab.attr('tab-content-id')).css('display', 'block');
             }
         },
@@ -69,7 +76,7 @@
 
                 //Create a tab element
                 $tab = $("<div>", {
-                    class: 'code-view-tab',
+                    class: self.css.tab,
                     text: f.fileHeader.toUpperCase(),
                 }).attr("tab-content-id", 'code-view-' + self.options.iframeId + '-' + f.fileHeader +'-tab-content');
     
@@ -100,7 +107,7 @@
 
                 $tabView = $("<div>", {
                     id: $tab.attr('tab-content-id'),
-                    class: 'code-view-tab-content'
+                    class: self.css.tabContent
                 }).css('display', 'none')
                   .html($codeWrapper);
 
