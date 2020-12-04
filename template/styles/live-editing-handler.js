@@ -37,36 +37,36 @@
         //Get sample urls via live editing buttons
         if (projectButtons.length > 0) {
             liveEditingButtonClickHandler = isLocalhost ? onProjectButtonClicked : onGithubProjectButtonClicked;
-                $.each(projectButtons, function (index, element) {
-                    const $button = $(element);
-                    const baseUrl = $button.attr(buttonDemosUrlAttrName);
-                    const buttonSampleUrl = getSampleUrlFromButton($button, baseUrl);
-                    const buttonIframeID = $button.attr(buttonIframeIdAttrName);
-                    const sampleData = JSON.stringify({sampleUrl: buttonSampleUrl, iframeId: buttonIframeID});
-                    if(!demosUrls.has(baseUrl)) {
-                        demosUrls.set(baseUrl, new MockSet().add(sampleData));
-                    } else {
-                        demosUrls.get(baseUrl).add(sampleData);
-                    }
-                });
+            $.each(projectButtons, function (index, element) {
+                const $button = $(element);
+                const baseUrl = $button.attr(buttonDemosUrlAttrName);
+                const buttonSampleUrl = getSampleUrlFromButton($button, baseUrl);
+                const buttonIframeID = $button.attr(buttonIframeIdAttrName);
+                const sampleData = JSON.stringify({ sampleUrl: buttonSampleUrl, iframeId: buttonIframeID });
+                if (!demosUrls.has(baseUrl)) {
+                    demosUrls.set(baseUrl, new MockSet().add(sampleData));
+                } else {
+                    demosUrls.get(baseUrl).add(sampleData);
+                }
+            });
 
-                const demosBaseUrls = demosUrls.keys();
-                for (var i = 0; i < demosBaseUrls.length; i++) {
-                    const url = demosBaseUrls[i];
-                    const urlSamplesData = demosUrls.get(url).values;
-                    if(isLocalhost){
-                        generateLiveEditingApp(url, urlSamplesData);
-                    } else {
-                        getSampleFiles(url, urlSamplesData, function (){
-                            if(isIE || isEdge) {
-                                projectButtons.remove();
-                            } else {
-                                projectButtons.removeAttr("disabled");
-                                projectButtons.css("visibility", 'visible');
-                                projectButtons.on("click", onGithubProjectButtonClicked);
-                            }
-                        });
-                    }
+            const demosBaseUrls = demosUrls.keys();
+            for (var i = 0; i < demosBaseUrls.length; i++) {
+                const url = demosBaseUrls[i];
+                const urlSamplesData = demosUrls.get(url).values;
+                if (isLocalhost) {
+                    generateLiveEditingApp(url, urlSamplesData);
+                } else {
+                    getSampleFiles(url, urlSamplesData, function () {
+                        if (isIE || isEdge) {
+                            projectButtons.remove();
+                        } else {
+                            projectButtons.removeAttr("disabled");
+                            projectButtons.css("visibility", 'visible');
+                            projectButtons.on("click", onGithubProjectButtonClicked);
+                        }
+                    });
+                }
             }
         }
     }
@@ -120,7 +120,6 @@
         });
     }
 
-    
     var addTimeStamp = function (url, demosTimeStamp) {
         if (!demosTimeStamp) {
             throw Error("Timestamp cannot be added.");
@@ -134,7 +133,7 @@
 
         var sharedFileUrl = demosBaseUrl + demoFilesFolderUrlPath + sharedFileName;
         sharedFileUrl = addTimeStamp(sharedFileUrl, demosTimeStamp);
-        $.get(sharedFileUrl, sharedFilePostProcess(demosBaseUrl, function() {
+        $.get(sharedFileUrl, sharedFilePostProcess(demosBaseUrl, function () {
             samplesData.forEach(function (sample) {
                 const sampleDataObj = JSON.parse(sample);
                 const sampleFileUrl = sampleDataObj.sampleUrl;
@@ -144,68 +143,58 @@
         }));
     }
 
-    var getSampleFiles = function (demosBaseUrl, samplesData, err){
+    var getSampleFiles = function (demosBaseUrl, samplesData, err) {
         var metaFileUrl = demosBaseUrl + demoFilesFolderUrlPath + "meta.json";
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
 
         $.get(metaFileUrl)
-        .done(function (response) {
-            demosTimeStamp = response.generationTimeStamp;
-            samplesData.forEach(function (sample) {
-                const sampleDataObj = JSON.parse(sample);
-                const sampleFileUrl = sampleDataObj.sampleUrl;
-                const iframeID = sampleDataObj.iframeId;
-                $.get(sampleFileUrl, sampleFilePostProcess(demosBaseUrl, removeQueryString, iframeID))
+            .done(function (response) {
+                demosTimeStamp = response.generationTimeStamp;
+                samplesData.forEach(function (sample) {
+                    const sampleDataObj = JSON.parse(sample);
+                    const sampleFileUrl = sampleDataObj.sampleUrl;
+                    const iframeID = sampleDataObj.iframeId;
+                    $.get(sampleFileUrl, sampleFilePostProcess(demosBaseUrl, removeQueryString, iframeID))
+                });
+            })
+            .fail(function () {
+                err();
+                throw new Error('Error on fetching sample files!');
             });
-        })
-        .fail(function (){
-            err();
-            throw new Error('Error on fetching sample files!');
-        });
     }
 
-    var sampleFilePostProcess = function(demosBaseUrl, cb, iframeID){
-            return function(data) {
-                if(isIE || isEdge) {
-                    deactivateButton(iframeID);
-                }
-                var codeViewFiles, url;
-                const files = data.sampleFiles;
-                replaceRelativeAssetsUrls(files, demosBaseUrl);
-                url = this.url;
-                url = cb(url);
-                sampleFilesContentByUrl[url] = data;
-                codeViewFiles = files.filter(function (f) {return f.isMain})
-                                     .sort(function (a,b){
-                                        return angularSampleOrder.indexOf(a.fileHeader) - angularSampleOrder.indexOf(b.fileHeader);
-                                     });
-                $('#' + iframeID).closest(".sample-container").codeView({files: codeViewFiles, iframeId: iframeID});
-                activateButton(iframeID);
-            }
+    var sampleFilePostProcess = function (demosBaseUrl, cb, iframeID) {
+        return function (data) {
+            var codeViewFiles, url;
+            const files = data.sampleFiles;
+            replaceRelativeAssetsUrls(files, demosBaseUrl);
+            url = this.url;
+            url = cb(url);
+            sampleFilesContentByUrl[url] = data;
+            codeViewFiles = files.filter(function (f) { return f.isMain })
+                .sort(function (a, b) {
+                    return angularSampleOrder.indexOf(a.fileHeader) - angularSampleOrder.indexOf(b.fileHeader);
+                });
+            $('#' + iframeID).closest(".sample-container")
+                            .codeView({
+                                files: codeViewFiles,
+                                iframeId: iframeID,
+                                onLiveEditingButtonClick: liveEditingButtonClickHandler
+                            });
+        }
     }
 
-    var sharedFilePostProcess = function(demosBaseUrl, cb){
+    var sharedFilePostProcess = function (demosBaseUrl, cb) {
         return function (data) {
             const files = data.files;
             replaceRelativeAssetsUrls(files, demosBaseUrl);
             sharedFileContent = data;
 
-            if(cb){
+            if (cb) {
                 cb();
             }
         }
-    }
-
-    var activateButton = function (iframeID){
-        var $liveEditingButtons = $('button[' + buttonIframeIdAttrName + "=" + iframeID + "]");
-        $liveEditingButtons.on("click", liveEditingButtonClickHandler);
-        $liveEditingButtons.removeAttr("disabled");
-        $liveEditingButtons.css('visibility', 'visible');
-    }
-
-    var deactivateButton = function (iframeID){
-        $('button[' + buttonIframeIdAttrName + "=" + iframeID + "]").remove();
     }
 
     var removeQueryString = function (url) {
@@ -254,7 +243,7 @@
             devDependencies: sharedFileContent.devDependencies
         }
         var form = $button.hasClass(stkbButtonClass) ? createStackblitzForm(formData) :
-                                                                      createCodesandboxForm(formData);
+            createCodesandboxForm(formData);
         form.appendTo($("body"));
         form.submit();
         form.remove();
@@ -364,7 +353,7 @@
             }
         };
 
-        data.files.forEach( function (f) {
+        data.files.forEach(function (f) {
             fileToSandbox.files[f["path"].replace("./", "")] = {
                 content: f["content"]
             }
@@ -390,36 +379,36 @@
     $(document).ready(function () {
         init();
     });
-    function MockMap(){
+    function MockMap() {
         this._keys = [];
         this.pairs = {};
     }
 
-    MockMap.prototype.set = function (key, value){
-        if(this._keys.indexOf(key) === -1){
+    MockMap.prototype.set = function (key, value) {
+        if (this._keys.indexOf(key) === -1) {
             this._keys.push(key);
         }
         this.pairs[key] = value;
     }
 
-    MockMap.prototype.get = function (key){
-        if(this.has(key)) return this.pairs[key]
+    MockMap.prototype.get = function (key) {
+        if (this.has(key)) return this.pairs[key]
         return undefined;
     }
 
-    MockMap.prototype.has = function (key){
-         return this._keys.indexOf(key) !== -1;
+    MockMap.prototype.has = function (key) {
+        return this._keys.indexOf(key) !== -1;
     }
 
-    MockMap.prototype.keys = function (){
+    MockMap.prototype.keys = function () {
         return this._keys;
-   }
-    function MockSet(){
+    }
+    function MockSet() {
         this.values = [];
     }
 
     MockSet.prototype.add = function (value) {
-        if(this.values.indexOf(value) === -1) this.values.push(value);
+        if (this.values.indexOf(value) === -1) this.values.push(value);
         return this;
     }
 

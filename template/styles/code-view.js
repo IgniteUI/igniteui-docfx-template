@@ -2,7 +2,8 @@
     $.widget("custom.codeView", {
         options: {
             files: null,
-            iframeId: null
+            iframeId: null,
+            onLiveEditingButtonClick: null
         },
         css:{
           navbar: "code-view-navbar",
@@ -117,20 +118,34 @@
             //Enable clipboard copy action
             this._copyCode();
         },
+        _isIE: navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0,
+        _isEdge: navigator.userAgent.indexOf('Edge') !== -1,
         _renderFooter: function ($footer, $codeView){
-            var $lVButtons = $("button[data-iframe-id=" + this.options.iframeId + "]");
-            if($lVButtons.length > 0) {
-                $('<div class="editing-buttons-container"></div>').
+            var $liveEditingButtons = $("button[data-iframe-id=" + this.options.iframeId + "]");
+            if($liveEditingButtons.length === 0) {
+              $footer.remove();
+              return;
+            }
+
+            var $footerContainer = $('<div class="editing-buttons-container"></div>');
+            if(!(this._isIE || this._isEdge)) {
+                $footerContainer.
                 append('<span class="editing-label">Edit in: </span>').
-                append($lVButtons).
+                append($liveEditingButtons).
                 appendTo($footer);
-                $lVButtons.text(function (i, text) {
+                $liveEditingButtons.text(function (i, text) {
                     return text.toLowerCase().indexOf("stackblitz") !== -1 ? "StackBlitz" : "Codesandbox"
                 } );
-                $codeView.append($footer);
+                $liveEditingButtons.on("click", this.options.onLiveEditingButtonClick);
+                $liveEditingButtons.removeAttr("disabled");
+                $liveEditingButtons.css('visibility', 'visible');
             } else {
-                $footer.remove();
+              $footerContainer.append("<span>", {class: 'open-new-browser-label'})
+                              .css("font-weight", 500)
+                              .text('For live-editing capabilities, please open the topic in a browser different than IE11 and Edge (version lower than 79)')
+                              .appendTo($footer);
             }
+            $codeView.append($footer);
         },
         _copyCode: function (){
             var btn = "#cv-" + this.options.iframeId + " .hljs-code-copy";
