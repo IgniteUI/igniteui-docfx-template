@@ -2,7 +2,15 @@
     $.widget("custom.codeView", {
         options: {
             files: null,
-            iframeId: null
+            iframeId: null,
+            onLiveEditingButtonClick: null
+        },
+        css:{
+          navbar: "code-view-navbar",
+          tab: "code-view-tab",
+          viewContainer: "code-views-container",
+          tabContent: 'code-view-tab-content',
+          footer: "code-view-footer",
         },
         _create: function(){ 
             var self = this, $iframe, $codeView, $navbar, $codeViewsContainer, $footer;
@@ -10,14 +18,14 @@
             //Init the main elements
             $iframe  = $(this.element.find('iframe'));
             $codeView = $("<div>", { id: "cv-" + self.options.iframeId, class: "code-view" });
-            $navbar = $("<div>", {class:"code-view-navbar"});
-            $codeViewsContainer = $('<div>', {class: 'code-views-container'});
-            $footer = $("<div>", {class: "code-view-footer"});
+            $navbar = $("<div>", {class: this.css.navbar});
+            $codeViewsContainer = $('<div>', {class: this.css.viewContainer});
+            $footer = $("<div>", {class: this.css.footer});
             
             //Wrap the sample container with code a views container
             this.element.wrap($codeViewsContainer)
                         .attr('id','code-view-' + self.options.iframeId + '-' + 'example-tab-content')
-                        .addClass('code-view-tab-content');
+                        .addClass(this.css.tabContent);
             $codeViewsContainer = $(this.element.parent());
 
             if(this.options.files && this.options.files.length > 0){
@@ -27,7 +35,7 @@
 
             //Add initial selected tab for the Example view
             $navbar.prepend($("<div>", {
-                class: "code-view-tab--active",
+                class: this.css.tab + "--active",
                 text: "EXAMPLE"
             }).attr('tab-content-id', 'code-view-' + self.options.iframeId + '-' + 'example-tab-content'));
 
@@ -50,12 +58,12 @@
         },
         _codeViewTabClick: function(event) {
             var $tab = $(event.target);
-            if(!$tab.hasClass("code-view-tab--active")){
-                $('#cv-' + this.options.iframeId + " .code-view-tab--active").switchClass("code-view-tab--active", "code-view-tab",  0);
-                $tab.switchClass("code-view-tab", "code-view-tab--active", 0);
+            if(!$tab.hasClass("." + this.css.tab + "--active")){
+                $('#cv-' + this.options.iframeId + " .code-view-tab--active").switchClass(this.css.tab + "--active", this.css.tab,  0);
+                $tab.switchClass(this.css.tab, this.css.tab + "--active", 0);
                 $tab.is('[tab-content-id=' + 'code-view-' + this.options.iframeId + '-' + 'example-tab-content]') ? $tab.siblings('.fs-button-container').css('visibility', 'visible') :
                                                                                                                     $tab.siblings('.fs-button-container').css('visibility', 'hidden')
-                $('#cv-' + this.options.iframeId + ' > .code-views-container > .code-view-tab-content').css('display', 'none');
+                $('#cv-' + this.options.iframeId + ' > .' + this.css.viewContainer + ' > .'+ this.css.tabContent).css('display', 'none');
                 $('#' + $tab.attr('tab-content-id')).css('display', 'block');
             }
         },
@@ -69,7 +77,7 @@
 
                 //Create a tab element
                 $tab = $("<div>", {
-                    class: 'code-view-tab',
+                    class: self.css.tab,
                     text: f.fileHeader.toUpperCase(),
                 }).attr("tab-content-id", 'code-view-' + self.options.iframeId + '-' + f.fileHeader +'-tab-content');
     
@@ -100,7 +108,7 @@
 
                 $tabView = $("<div>", {
                     id: $tab.attr('tab-content-id'),
-                    class: 'code-view-tab-content'
+                    class: self.css.tabContent
                 }).css('display', 'none')
                   .html($codeWrapper);
 
@@ -110,20 +118,34 @@
             //Enable clipboard copy action
             this._copyCode();
         },
+        _isIE: navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0,
+        _isEdge: navigator.userAgent.indexOf('Edge') !== -1,
         _renderFooter: function ($footer, $codeView){
-            var $lVButtons = $("button[data-iframe-id=" + this.options.iframeId + "]");
-            if($lVButtons.length > 0) {
-                $('<div class="editing-buttons-container"></div>').
+            var $liveEditingButtons = $("button[data-iframe-id=" + this.options.iframeId + "]");
+            if($liveEditingButtons.length === 0) {
+              $footer.remove();
+              return;
+            }
+
+            var $footerContainer = $('<div class="editing-buttons-container"></div>');
+            if(!(this._isIE || this._isEdge)) {
+                $footerContainer.
                 append('<span class="editing-label">Edit in: </span>').
-                append($lVButtons).
+                append($liveEditingButtons).
                 appendTo($footer);
-                $lVButtons.text(function (i, text) {
+                $liveEditingButtons.text(function (i, text) {
                     return text.toLowerCase().indexOf("stackblitz") !== -1 ? "StackBlitz" : "Codesandbox"
                 } );
-                $codeView.append($footer);
+                $liveEditingButtons.on("click", this.options.onLiveEditingButtonClick);
+                $liveEditingButtons.removeAttr("disabled");
+                $liveEditingButtons.css('visibility', 'visible');
             } else {
-                $footer.remove();
+              $footerContainer.append("<span>", {class: 'open-new-browser-label'})
+                              .css("font-weight", 500)
+                              .text('For live-editing capabilities, please open the topic in a browser different than IE11 and Edge (version lower than 79)')
+                              .appendTo($footer);
             }
+            $codeView.append($footer);
         },
         _copyCode: function (){
             var btn = "#cv-" + this.options.iframeId + " .hljs-code-copy";
