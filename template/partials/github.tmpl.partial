@@ -6,7 +6,7 @@
         <span>{{_gitHubBtnLbl}}</span>
 
         <a target="_blank" href="{{_repoUrl}}{{path}}">
-            <img src="{{_rel}}/styles/images/github.svg"/>
+            <img src="{{_rel}}styles/images/github.svg"/>
             <span>GitHub</span>
         </a>
     </div>
