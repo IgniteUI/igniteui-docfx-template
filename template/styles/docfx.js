@@ -1278,20 +1278,6 @@ $(document).ready(function () {
     return false;
   });
 
-  var resourcesBaseUrl = "";
-  try {
-    var docfxjsSrc = $("script[src$='styles/docfx.js']")[0].src;
-    resourcesBaseUrl = docfxjsSrc.replace("styles/docfx.js", "resources");
-  } catch (err) {
-    console.log("Cannot load resources: " + err.message);
-  }
-
-  $("[data-localize]").localize("resources", {
-    pathPrefix: resourcesBaseUrl,
-    language: pageLanguage
-  });
-
-
   if ($(".github-btn-wrapper").length && showGitHubButton()) {
     $(".github-btn-wrapper").attr("hidden", false);
   }
