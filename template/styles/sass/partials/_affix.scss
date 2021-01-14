@@ -1,7 +1,8 @@
 .sideaffix {
     margin-top: 20px; 
-    max-height: 100%;
-    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
     top: 127px;
     font-size: 13px;
     z-index: 2;
@@ -31,19 +32,26 @@
     ::-webkit-scrollbar-thumb {
         background: #888; 
     }
+
+    .themes-container {
+        align-self: center;
+    }
 }
 
 .docfx-affix {
+    height: 100%;
     position: fixed;
+    max-width: 16.66666667%;
     right: 0;
     z-index: 1;
+    padding: 0 .3rem 1rem 1rem;
 }
 
 .affix {
-    height: 65%;
-    margin-top: 2.4rem;
+    height: 70%;
+    margin-top: 1.5rem;
     overflow: auto;
-    width: 200px;
+    position: relative;
 }
 
 .affix h5 {
