@@ -593,17 +593,23 @@ sub {
 .sideaffix ::-webkit-scrollbar-thumb {
   background: #888;
 }
+.sideaffix .themes-container {
+  -ms-flex-item-align: center;
+      align-self: center;
+}
 
 .docfx-affix {
+  height: 100%;
   position: fixed;
+  max-width: 16.66666667%;
   right: 0;
   z-index: 1;
   height: 100%;
 }
 
 .affix {
-  height: 65%;
-  margin-top: 2.4rem;
+  height: 70%;
+  margin-top: 1.5rem;
   overflow: auto;
 }
 
