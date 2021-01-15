@@ -1,8 +1,8 @@
 .sideaffix {
-    margin-top: 20px; 
+    margin-top: 20px;
     height: 100%;
-    display: flex;
-    flex-flow: column;
+    max-height: 100%;
+    overflow: hidden;
     top: 127px;
     font-size: 13px;
     z-index: 2;
@@ -44,14 +44,13 @@
     max-width: 16.66666667%;
     right: 0;
     z-index: 1;
-    padding: 0 .3rem 1rem 1rem;
+    height: 100%;
 }
 
 .affix {
     height: 70%;
     margin-top: 1.5rem;
     overflow: auto;
-    position: relative;
 }
 
 .affix h5 {
