@@ -67,3 +67,6 @@ typings/
 /post-processors/PostProcessors/obj/
 /template/plugins/*
 !/template/plugins/PostProcessors.dll
+
+/template/styles/css/main.css
+dist

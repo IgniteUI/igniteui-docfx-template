@@ -2,6 +2,7 @@
   "name": "igniteui-docfx-template",
   "version": "0.0.1",
   "description": "",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/IgniteUI/igniteui-docfx-template.git"
@@ -23,15 +24,20 @@
   "homepage": "https://github.com/IgniteUI/igniteui-docfx-template#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
+    "gulp-dart-sass": "^1.0.2",
     "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^2.0.0",
     "gulp-util": "^3.0.8",
     "md5-file": "^4.0.0",
+    "postcss": "^8.2.4",
     "uglify-save-license": "^0.4.1",
     "yargs": "^12.0.5"
   },
   "dependencies": {
-    "gulp-uglify-es": "^2.0.0"
+    "del": "^6.0.0",
+    "slash": "^3.0.0"
   }
 }
