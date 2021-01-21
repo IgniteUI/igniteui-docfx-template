@@ -105,6 +105,7 @@ const generateBundlingGlobalMetadata = (done) => {
 
     done();
 }
+
 const bundleAndMinify = async (done) => {
     var isDebugMode = argv.debugMode !== undefined && argv.debugMode.toLowerCase().trim() === "true";
     var promises = [];
@@ -164,13 +165,18 @@ const buildPackageStatics = () => {
     return gulp.src(packageStatics).pipe(gulp.dest("dist"));
 }
 
-const buildTemplate = () => {
-    return gulp.src(['./src/**/*', './template/**/*', '!./src/modules', '!./src/**/*.js', '!./src/styles/**/**', '!./template/styles/**']).pipe(gulp.dest("dist/template"));
+const createTemplate = () => {
+    return gulp.src(['./src/**/*',
+                     './template/**/*',
+                     '!./template/styles/**',
+                     '!./src/modules',
+                     '!./src/**/*.js',
+                     '!./src/styles/**/**']).pipe(gulp.dest("dist/template"));
 }
 
-exports.buildTemplate = buildTemplate;
+exports.createTemplate = createTemplate;
 exports.styles = styles;
 exports.bundleAndMinify = bundleAndMinify;
-exports.build = gulp.series(buildPackageStatics, buildTemplate, styles, bundleAndMinify);
-exports.bundleAndMinifyWatch = gulp.series(this.build, generateFileCheckSumMap, addWatcher);
+exports.build = gulp.series(buildPackageStatics, createTemplate, styles, bundleAndMinify);
+exports['build-watch'] = gulp.series(this.build, generateFileCheckSumMap, addWatcher);
 

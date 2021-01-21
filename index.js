@@ -3,50 +3,50 @@ var path = require('path');
 var slash = require('slash');
 var { spawn } = require('child_process');
 var del = require('del');
+var preconfigs = require('./preconfig.json');
 
-var environmentVariablesPreConfig = require('./preconfig.json');
-
-const getPath = p => {
+let getPath = p => {
     return slash(path.isAbsolute(p) ? p : path.join(process.cwd(), p));
 }
 
-const supportedLanguages = Object.freeze({
-    en: 'en',
-    jp: 'jp',
-    kr: 'kr'
-});
+let getEnvironmentVariables = conigPath => {
+    return fs.existsSync(conigPath) ? JSON.parse(fs.readFileSync(conigPath)) : {};
+}
+
 
 exports.buildDocfx = (options = {
-    language: 'en',
+    projectDir: '',
     environment: '',
-    docfxSite: '',
-    docfxJson: '',
+    siteDir: ''
 }) => {
 
-
-    const environmentConfig = JSON.parse(JSON.stringify(environmentVariablesPreConfig));
-    if (!(options.language in supportedLanguages)) {
-        throw new Error(`${language} is not supported`);
+    if (!options.projectDir) {
+        throw new Error("The directory of the docfx project must be specified.");
     }
 
-    if (fs.existsSync(getPath(options.docfxSite))) {
-        del.sync(getPath(options.docfxSite));
+    const globalPreconfigs = preconfigs;
+    let docfxJsonPath = path.normalize(path.join(getPath(options.projectDir), 'docfx.json'));
+    let docfxPreconfigPath = path.normalize(path.join(getPath(options.projectDir), 'environment.json'));
+    let environmentConfigs = getEnvironmentVariables(docfxPreconfigPath);
+    environmentConfigs.environment = options.environment || 'development';
+
+    globalPreconfigs['variables'] = environmentConfigs[environmentConfigs.environment];
+
+    if (fs.existsSync(getPath(options.siteDir))) {
+        del.sync(getPath(options.siteDir));
     }
-    environmentConfig.environment = options.environment || 'development';
 
-    environmentConfig.variables =
-        environmentConfig.variables[options.language.trim()][environmentConfig.environment];
-
-    fs.mkdirSync(`${getPath(options.docfxSite)}`);
+    fs.mkdirSync(`${getPath(options.siteDir)}`);
 
     fs.writeFileSync(
-        getPath(`${options.docfxSite}/${environmentConfig._configFileName}`),
-        JSON.stringify(environmentConfig)
+        getPath(`${options.siteDir}/${globalPreconfigs._configFileName}`),
+        JSON.stringify(globalPreconfigs)
     );
 
-    console.log(`Starting docfx for: ${getPath(options.docfxJson)}`);
-    console.log()
-    return spawn("docfx", ["build", `${path.normalize(getPath(options.docfxJson))}`], { stdio: 'inherit' }).on('close', (err) => {
+    console.log(`Starting docfx build for: ${getPath(options.projectDir)}`);
+    console.log();
+
+    return spawn("docfx", ["build", `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('close', (err) => {
         if (err) {
             console.error(err);
         }

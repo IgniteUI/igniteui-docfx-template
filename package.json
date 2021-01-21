@@ -14,8 +14,10 @@
   ],
   "author": "Infragistics",
   "scripts": {
+    "build": "gulp build",
+    "build:dev": "gulp build-watch --debugMode=true",
+    "build:watch": "gulp build-watch",
     "bundle-and-minify": "gulp bundleAndMinify",
-    "bundle-and-minify:watch": "gulp bundleAndMinifyWatch",
     "generate-bundling-global-metadata": "gulp generateBundlingGlobalMetadata"
   },
   "bugs": {
