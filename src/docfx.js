@@ -2,7 +2,6 @@
 $(function () {
   var active = "active";
   var expanded = "in";
-  var collapsed = "collapsed";
   var filtered = "filtered";
   var show = "show";
   var hide = "hide";
@@ -50,6 +49,7 @@ $(function () {
   addGtmButtons();
 
   window.refresh = function (article) {
+    console.log(article);
     // Update markup result
     if (typeof article == "undefined" || typeof article.content == "undefined")
       console.error("Null Argument");
@@ -366,7 +366,6 @@ $(function () {
       $("#navbar ul a.active")
         .parents("li")
         .addClass(active);
-      renderBreadcrumb();
     }
 
     function loadNavbar() {
@@ -670,6 +669,7 @@ $(function () {
 
   function renderBreadcrumb() {
     var breadcrumb = [];
+
     $("#toc li.active").each(function (i, e) {
 
       $($(e).parents("li").get().reverse()).each(function (index, parent) {
@@ -952,17 +952,6 @@ function updateUrl(target) {
   history.pushState({}, "", window.location.href.split("#")[0] + target);
 }
 
-
-function closeContainer() {
-  if ($(".toggle").is(":visible")) {
-    $(".toggle").slideToggle(200);
-  }
-}
-
-function isDvPage() {
-  return window.igViewer.common.isDvPage();
-}
-
 function showGitHubButton() {
   return window.location.pathname.search(RegExp("\\/\\b(\\w*grid\\w*)\\b\\/")) === -1
 }
@@ -975,6 +964,7 @@ $(document).ready(function () {
   }
 
   $(".anchorjs-link").on("click", function (e) {
+    console.log(e);
     var hashLocation = $(this).attr("href");
     updateUrl(hashLocation);
 
@@ -995,6 +985,6 @@ $(document).ready(function () {
   });
 
   if ($(".github-btn-wrapper").length && showGitHubButton()) {
-    $(".github-btn-wrapper").attr("hidden", false);
+    $(".github-btn-wrapper").show();
   }
 });
