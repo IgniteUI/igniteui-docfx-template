@@ -1,5 +1,4 @@
-import $ from 'jquery';
-import {IListNode, IListNodeStart } from './interfaces';
+import { IListNode, IListNodeStart } from "./common";
 
 class UtilityService {
 
@@ -83,6 +82,45 @@ class UtilityService {
     private breakPlainText(text: string) {
         if (!text) return text;
         return text.replace(/([a-z])([A-Z])|(\.)(\w)/g, "$1$3<wbr>$2$4");
+    }
+
+    public htmlEncode(str: string) {
+        if (!str) return str;
+        return str
+            .replace(/&/g, "&amp;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+    }
+
+    public htmlDecode(str: string) {
+        if (!str) return str;
+        return str
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">")
+            .replace(/&amp;/g, "&");
+    }
+
+    public cssEscape(str: string) {
+        // see: http://stackoverflow.com/questions/2786538/need-to-escape-a-special-character-in-a-jquery-selector-string#answer-2837646
+        if (!str) return str;
+        return str.replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&");
+    }
+
+    public updateUrl(target: string) {
+        history.pushState({}, "", window.location.href.split("#")[0] + target);
+    }
+
+    public scrollAnimation<T extends HTMLElement>(event: JQuery.ClickEvent<T>) {
+        let contentOffset = $("#_content").offset()!.top;
+        $("body").data("offset", contentOffset);
+        let hashLocation = $(event?.target)?.attr("href")!;
+        let scrollPos = $("body").find(hashLocation).offset()!.top - contentOffset;
+        $("body, html").animate({scrollTop: scrollPos}, 500, () => this.updateUrl(hashLocation));
+        return false;
     }
 }
 
