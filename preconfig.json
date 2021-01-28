@@ -1,0 +1,6 @@
+﻿{
+	"environment": "development",
+	"fileExtensionsToProcess": [ "html" ],
+	"deleteConfigAfterProcessing": true,
+	"_configFileName": "set-environment-variables.config"
+}
