@@ -82,7 +82,7 @@ a.disable:hover {
     width: 28px;
     height: 28px;
     margin-right: 8px;
-    background-image: url("../../images/stackblitz-logo.svg");
+    background-image: url("../../assets/images/stackblitz-logo.svg");
     background-size: 100%;
     background-repeat: no-repeat;
   }
@@ -93,7 +93,7 @@ a.disable:hover {
     box-shadow: none;
 
     &::before {
-      background-image: url("../../images/stackblitz-logo-dark.svg");
+      background-image: url("../../assets/images/stackblitz-logo-dark.svg");
     }
   }
 }
@@ -102,11 +102,11 @@ a.disable:hover {
 @extend .stackblitz-btn;
 background: $darkgray;
 &::before {
-  background-image: url("../../images/code-sandbox-seeklogo.com.svg");
+  background-image: url("../../assets/images/code-sandbox-seeklogo.com.svg");
 }
 &[disabled] {
   &::before {
-    background-image: url("../../images/code-sandbox-seeklogo.com.svg");
+    background-image: url("../../assets/images/code-sandbox-seeklogo.com.svg");
   }
 }
 }
