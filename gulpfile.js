@@ -5,32 +5,18 @@ var autoprefixer = require('gulp-autoprefixer');
 var uglify = require("gulp-uglify-es").default;
 var gulp = require("gulp");
 var path = require("path");
-var sass = require('gulp-dart-sass');
 var util = require("gulp-util");
 var saveLicense = require("uglify-save-license");
 var md5File = require('md5-file')
 var argv = require("yargs").argv;
 
 const SRC = "./src";
-const DOCFX_STYLES = `${SRC}/styles`;
-const TEMPLATE_STATIC = "./template/styles";
 const TEMPLATE_DIST = "/dist/template";
 const MODULES = `${SRC}/modules`;
 
 const packageStatics = ['package.json', 'README.md', 'index.js', 'preconfig.json'];
 
 const bundles = [
-    {
-        type: "JS",
-        name: "docfx-bundle.min.js",
-        files: [
-            `${TEMPLATE_STATIC}/docfx.vendor.js`,
-            `${MODULES}/jquery-ui-1.12.0.js`,
-            `${MODULES}/jquery-localize.js`,
-            `${SRC}/docfx.js`
-        ],
-        checksumMetadataKey: "_docFXBundleChecksum"
-    },
     {
         type: "JS",
         name: "scripts-bundle.min.js",
@@ -49,32 +35,10 @@ const bundles = [
             `${SRC}/sample-iframe-handler.js`
         ],
         checksumMetadataKey: "_scriptsBundleChecksum"
-    },
-    {
-        type: "CSS",
-        name: "styles-bundle.min.css",
-        files: [
-            `${TEMPLATE_STATIC}/docfx.vendor.css`,
-            `${TEMPLATE_STATIC}/docfx.css`,
-            `${TEMPLATE_STATIC}/css/main.css`
-        ],
-        checksumMetadataKey: "_stylesBundleFileName"
     }
 ];
 
 var md5HashMap = {};
-  
-const styles = () => {
-   return gulp.src(path.join(__dirname, `${DOCFX_STYLES}/main.scss`))
-            .pipe(sass().on('error', sass.logError))
-            .pipe(
-                autoprefixer({
-                    overrideBrowserslist: ['last 2 versions'],
-                    cascase: false
-                })
-            )
-            .pipe(gulp.dest(`${TEMPLATE_STATIC}/css`));
-}
 
 // Generating hash per each file in the bundles based on its content.
 // It is used to generate a new bundle only if the content of a file is changed.
@@ -110,11 +74,7 @@ const bundleAndMinify = async (done) => {
     var isDebugMode = argv.debugMode !== undefined && argv.debugMode.toLowerCase().trim() === "true";
     var promises = [];
     bundles.forEach(bundle => {
-        if (bundle.type === "JS") {
-            promises.push(bundleAndMinifyJS(bundle.files, bundle.name, `.${TEMPLATE_DIST}/bundles`, isDebugMode));
-        } else if (bundle.type === "CSS") {
-            promises.push(bundleAndMinifyCSS(bundle.files, bundle.name, `.${TEMPLATE_DIST}/bundles`, isDebugMode));
-        }   
+        promises.push(bundleAndMinifyJS(bundle.files, bundle.name, `.${TEMPLATE_DIST}/bundles`, isDebugMode));
     });
     return await Promise.all(promises).then(() => generateBundlingGlobalMetadata(done));
 }
@@ -134,29 +94,18 @@ function bundleAndMinifyJS(files, fileName, outputFolder, isDebugMode) {
     });
 }
 
-function bundleAndMinifyCSS(files, fileName, outputFolder, isDebugMode) {
-    return new Promise(function(resolve, reject) {
-        gulp.src(files)
-            .pipe(concat(fileName))
-            .pipe(isDebugMode ? util.noop() : cleanCSS()
-                .on('error', util.log))
-            .on('error', reject)
-            .pipe(gulp.dest(outputFolder))
-            .on('end', resolve);
-    });
-}
-
 const addWatcher = (done) => {
     var allFiles = [];
     bundles.forEach(bundle => {
         allFiles = allFiles.concat(bundle.files);
     });
-    gulp.watch(allFiles.concat(['./template/**/*', '!./template/styles/css', './index.js', './preconfig.json']), gulp.series(buildPackageStatics, bundleAndMinify)).on("change", function(file) {
-        var filePath = path.join(`${__dirname}\\${file}`);
-        var hash = md5File.sync(filePath);
-        if (md5HashMap[filePath] !== hash) {
-            md5HashMap[filePath] = hash;
-        }
+    gulp.watch(allFiles.concat(['./template/**/*', 'src/styles/**/*', './index.js', './preconfig.json', './ts-source']), 
+        gulp.series(this.wbBuild, this.build)).on("change", function(file) {
+            var filePath = path.join(`${__dirname}\\${file}`);
+            var hash = md5File.sync(filePath);
+            if (md5HashMap[filePath] !== hash) {
+                md5HashMap[filePath] = hash;
+            }
     });
     done();
 }
@@ -168,15 +117,19 @@ const buildPackageStatics = () => {
 const createTemplate = () => {
     return gulp.src(['./src/**/*',
                      './template/**/*',
-                     '!./template/styles/**',
                      '!./src/modules',
-                     '!./src/**/*.js',
-                     '!./src/styles/**/**']).pipe(gulp.dest("dist/template"));
+                     '!./src/**/*.js']).pipe(gulp.dest("dist/template"));
+}
+
+exports.wbBuils = () => {
+    return gulp.src('./ts-dist/**').pipe(gulp.dest('./dist/template/bundles'));
+}
+
+exports.wbBuild = () => {
+    return require('child_process').spawn(path.normalize('./node_modules/.bin/webpack.cmd'), {stdio: 'inherit'});
 }
 
 exports.createTemplate = createTemplate;
-exports.styles = styles;
 exports.bundleAndMinify = bundleAndMinify;
-exports.build = gulp.series(buildPackageStatics, createTemplate, styles, bundleAndMinify);
-exports['build-watch'] = gulp.series(this.build, generateFileCheckSumMap, addWatcher);
-
+exports.build = gulp.series(buildPackageStatics, createTemplate, bundleAndMinify, this.wbBuils);
+exports['build-watch'] = gulp.series(this.wbBuild, this.build, generateFileCheckSumMap, addWatcher, this.wbBuils);

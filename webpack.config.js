@@ -21,25 +21,30 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './source/index.js',
+  entry: './ts-source/docfx.ts',
 
   output: {
-    filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'source/dist')
+    filename: '[name].js',
+    path: path.resolve(__dirname, './ts-dist')
   },
 
   plugins: [
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles-bundle.css' }),
+    new MiniCssExtractPlugin({ filename: 'styles-bundle.min.css' }),
     new webpack.ProvidePlugin({
       $: 'jquery',
-      JQuery: 'jquery'
-    }),
-    new HtmlWebpackPlugin()
+      JQuery: 'jquery',
+      jQuery: 'jquery'
+    })
   ],
 
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /.(sa|sc|c)ss$/,
 
@@ -81,7 +86,10 @@ module.exports = {
             plugins: ["@babel/plugin-proposal-class-properties"]
           }
         }
-      }]
+      }],
+  },
+  resolve: {
+    extensions: ['.ts', '.js']
   },
   optimization: {
     moduleIds: 'deterministic',
