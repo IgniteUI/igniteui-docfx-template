@@ -36,7 +36,7 @@ export class AffixRenderingService extends RenderingService implements Resizable
       $("#affix").empty().append(html);
       this.$element = $("#affix");
       this.initialDimension = $("#affix").height()!;
-
+      this.resizingService.observeElement(this);
       $("#affix").on("activate.bs.scrollspy", (e) => {
         if (e.target) {
           if ($(e.target).find("li.active").length > 0) {
@@ -51,7 +51,7 @@ export class AffixRenderingService extends RenderingService implements Resizable
           container.scrollTop(container.scrollTop()! + top - height / 2);
         }
       });
-      $<HTMLAnchorElement>(".bs-docs-sidenav a").on("click", util.scrollAnimation);
+      $<HTMLAnchorElement>(".bs-docs-sidenav a").on("click", (evt) => util.scrollAnimation(evt));
     }
   }
 

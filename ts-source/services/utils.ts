@@ -2,8 +2,11 @@ import { IListNode, IListNodeStart } from "./common";
 
 class UtilityService {
 
+    private offset: number;
     constructor() {
         console.log(1);
+        this.offset = $('.navbar').first().height()!;
+        $("body").data("offset", this.offset + 50);
     }
 
     public getAbsolutePath(href: string) {
@@ -52,7 +55,7 @@ class UtilityService {
             var name = item.name;
             if (!name) continue;
             html += href ?
-                `<li><a href="${href}">${name}</a>` :
+                `<li class="nav-item" ><a class="nav-link" href="${href}">${name}</a>` :
                 `<li>${name}`;
             html += this.getList(item, classes, level) || "";
             html += "</li>";
@@ -115,10 +118,8 @@ class UtilityService {
     }
 
     public scrollAnimation<T extends HTMLElement>(event: JQuery.ClickEvent<T>) {
-        let contentOffset = $("#_content").offset()!.top;
-        $("body").data("offset", contentOffset);
         let hashLocation = $(event?.target)?.attr("href")!;
-        let scrollPos = $("body").find(hashLocation).offset()!.top - contentOffset;
+        let scrollPos = $("body").find(hashLocation).offset()!.top - this.offset;
         $("body, html").animate({scrollTop: scrollPos}, 500, () => this.updateUrl(hashLocation));
         return false;
     }

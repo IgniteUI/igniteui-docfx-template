@@ -3,7 +3,7 @@ import { ResizableObservable, DimensionType } from "./common";
 
 export class ResizingService {
 
-    private resizables: ResizableObservable[];
+    private resizables: ResizableObservable[] = [];
 
     public observeElement(toWatch: ResizableObservable) {
         this.resizables.push(toWatch);

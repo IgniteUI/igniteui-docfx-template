@@ -195,7 +195,7 @@ export class ArticleRenderingService extends RenderingService {
     }
 
     private anchorJs() {
-        $(".anchorjs-link").on("click", util.scrollAnimation);
+        $(".anchorjs-link").on("click", (evt) => util.scrollAnimation(evt));
     }
 
     private renderGithubBtn(){
