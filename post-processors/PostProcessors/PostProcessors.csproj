@@ -73,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="EnvironmentVariables\preconfig.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
