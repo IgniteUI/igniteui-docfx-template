@@ -54,11 +54,6 @@
 
     function handleThemeSelection(theme, item) {
         if (theme) {
-            if (isDvPage()) {
-            // reset the theme to the default one
-                theme = "default-theme";
-                window.sessionStorage.setItem('theme', theme);
-            }
             if (item) {
                 postMessage(theme);
             }
