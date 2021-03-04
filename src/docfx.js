@@ -93,7 +93,7 @@ $(function () {
       $(currentView).css("display", "block");
       const sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content loading");
       const iframe = $('<iframe>', {
-        'sample-iframe-id': i,
+        id: 'sample-iframe-id-' +  i,
         frameborder: 0,
         seamless: ""
       }).width("100%").height("100%");
