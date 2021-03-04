@@ -88,16 +88,23 @@ $(function () {
       const style = $(currentView).attr("style");
       const iframeSrc = $(currentView).attr("iframe-src");
       const alt = $(currentView).attr("alt");
-
-      const sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content");
+      const productTitle = $("meta[property='docfx:title']").attr("content");
+      
+      $(currentView).css("display", "block");
+      const sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content loading");
       const iframe = $('<iframe>', {
-        id: i,
+        'sample-iframe-id': i,
         frameborder: 0,
         seamless: ""
       }).width("100%").height("100%");
 
       if (i === 0){
-        iframe.attr("onload","onSampleIframeContentLoaded(this);");
+        if (productTitle.indexOf('Angular') !== -1){
+          iframe.attr("onload","onSampleIframeContentLoaded(this);");
+        }else {
+          iframe.attr("onload","onXPlatSampleIframeContentLoaded(this);");
+        }
+        
         iframe.attr("src", iframeSrc);
       }else {
         iframe.attr("class","lazyload");
@@ -110,7 +117,7 @@ $(function () {
 
       iframe.appendTo(sampleContainer);
       sampleContainer.appendTo(currentView);
-      $(currentView).codeView();
+      $(currentView).codeView({iframeId : i});
     }
   }
 
