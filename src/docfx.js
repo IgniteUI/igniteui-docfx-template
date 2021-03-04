@@ -122,7 +122,7 @@ $(function () {
   }
 
   function addGtmButtons() {
-    if ($(".sample-container").length && !$(".sample-container:first + p>a.trackCTA").length) {
+    if ($("code-view").length && !$("code-view:first + p>a.trackCTA").length) {
       const languageVersion = $('html')[0].lang;
       const productTitle = $("meta[property='docfx:title']").attr("content");
       let productLink = $("meta[property='docfx:link']").attr("content");
@@ -133,7 +133,7 @@ $(function () {
         productLink += "/download";
       }
 
-      const sample = $(".sample-container").first();
+      const sample = $("code-view").first();
       let paragraph = "";
       if (languageVersion === 'ja') {
         paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("このサンプルが気に入りましたか? 完全な " + productTitle + "ツールキットにアクセスして、すばやく独自のアプリの作成を開始します。");
