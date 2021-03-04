@@ -89,8 +89,8 @@ $(function () {
       const iframeSrc = $(currentView).attr("iframe-src");
       const alt = $(currentView).attr("alt");
       const productTitle = $("meta[property='docfx:title']").attr("content");
-      
-      $(currentView).css("display", "block");
+      $(currentView).removeAttr("style");
+
       const sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content loading");
       const iframe = $('<iframe>', {
         id: 'sample-iframe-id-' +  i,
