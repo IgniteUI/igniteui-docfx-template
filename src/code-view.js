@@ -13,20 +13,20 @@
           footer: "code-view-footer",
         },
         _create: function(){ 
-            var self = this, $iframe, $codeView, $navbar, $codeViewsContainer, $footer;
+            var self = this, $iframe, $navbar, $codeViewsContainer, $footer;
 
             //Init the main elements
             $iframe  = $(this.element.find('iframe'));
-            $codeView = $("<div>", { id: "cv-" + self.options.iframeId, class: "code-view" });
             $navbar = $("<div>", {class: this.css.navbar});
             $codeViewsContainer = $('<div>', {class: this.css.viewContainer});
             $footer = $("<div>", {class: this.css.footer});
+            $(this.element.attr("class","code-view"));
             
             //Wrap the sample container with code a views container
-            this.element.wrap($codeViewsContainer)
+            $sampleContainer  = $(this.element.find('.sample-container'));
+            $sampleContainer.wrap($codeViewsContainer)
                         .attr('id','code-view-' + self.options.iframeId + '-' + 'example-tab-content')
                         .addClass(this.css.tabContent);
-            $codeViewsContainer = $(this.element.parent());
 
             if(this.options.files && this.options.files.length > 0){
               //Create navbar element with tabs and add code views to the code views container
@@ -38,22 +38,18 @@
                 class: this.css.tab + "--active",
                 text: "EXAMPLE"
             }).attr('tab-content-id', 'code-view-' + self.options.iframeId + '-' + 'example-tab-content'));
-
             $navbar.children().on('click',$.proxy(self._codeViewTabClick, self));
 
-            
             //Create fullscreen button and add it to the code view navbar
             $fullscreenButton = $("<span class='fs-button-container' title='Expand to fullscreen'><i class='material-icons code-view-fullscreen'>open_in_full</i></span>");
             $fullscreenButton.on('click', function () { window.open($iframe.attr("src") || $iframe.attr("data-src"))});
             $fullscreenButton.appendTo($navbar);
 
             //Render the code view widget
-            $codeViewsContainer.wrap($codeView);
-            $codeView = $($codeViewsContainer.parent());
-            $codeView.prepend($navbar);
+            $(this.element).prepend($navbar);
 
             // Render a footer with CSB and SB buttons (if any !!) 
-            this._renderFooter($footer, $codeView);
+            this._renderFooter($footer, this.element);
 
         },
         _codeViewTabClick: function(event) {

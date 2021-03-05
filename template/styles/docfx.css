@@ -255,6 +255,10 @@ svg:hover path {
     color: #333;
 }
 
+code-view {
+    display: block;
+}
+
 .theme-item {
     display: flex;
     justify-content: flex-start;
