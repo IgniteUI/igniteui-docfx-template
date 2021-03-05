@@ -257,6 +257,7 @@ svg:hover path {
 
 code-view {
     display: block;
+    line-height: 1.5rem;
 }
 
 .theme-item {

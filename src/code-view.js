@@ -28,17 +28,16 @@
                         .attr('id','code-view-' + self.options.iframeId + '-' + 'example-tab-content')
                         .addClass(this.css.tabContent);
 
-            if(this.options.files && this.options.files.length > 0){
-              //Create navbar element with tabs and add code views to the code views container
-              this._createTabsWithCodeViews($navbar, $codeViewsContainer);
-            }
+            $codeViewsContainer = $sampleContainer.parent();
+
+            $exampleTab = $("<div>", {
+              class: this.css.tab + "--active",
+              text: "EXAMPLE"
+             }).attr('tab-content-id', 'code-view-' + self.options.iframeId + '-' + 'example-tab-content');
+            $exampleTab.on('click',$.proxy(self._codeViewTabClick, self));
 
             //Add initial selected tab for the Example view
-            $navbar.prepend($("<div>", {
-                class: this.css.tab + "--active",
-                text: "EXAMPLE"
-            }).attr('tab-content-id', 'code-view-' + self.options.iframeId + '-' + 'example-tab-content'));
-            $navbar.children().on('click',$.proxy(self._codeViewTabClick, self));
+            $navbar.prepend($exampleTab);
 
             //Create fullscreen button and add it to the code view navbar
             $fullscreenButton = $("<span class='fs-button-container' title='Expand to fullscreen'><i class='material-icons code-view-fullscreen'>open_in_full</i></span>");
@@ -48,6 +47,12 @@
             //Render the code view widget
             $(this.element).prepend($navbar);
 
+            this._options = {
+              $navbar: $navbar,
+              $codeViewsContainer: $codeViewsContainer,
+              $activeTab: $exampleTab,
+              $activeView: $sampleContainer
+            }
             // Render a footer with CSB and SB buttons (if any !!) 
             this._renderFooter($footer, this.element);
 
@@ -55,19 +60,33 @@
         _codeViewTabClick: function(event) {
             var $tab = $(event.target);
             if(!$tab.hasClass("." + this.css.tab + "--active")){
-                $('#cv-' + this.options.iframeId + " .code-view-tab--active").switchClass(this.css.tab + "--active", this.css.tab,  0);
+                this._options.$activeTab.switchClass(this.css.tab + "--active", this.css.tab,  0)
+                // $('#cv-' + this.options.iframeId + " .code-view-tab--active").switchClass(this.css.tab + "--active", this.css.tab,  0);
                 $tab.switchClass(this.css.tab, this.css.tab + "--active", 0);
+                this._options.$activeTab = $tab;
                 $tab.is('[tab-content-id=' + 'code-view-' + this.options.iframeId + '-' + 'example-tab-content]') ? $tab.siblings('.fs-button-container').css('visibility', 'visible') :
                                                                                                                     $tab.siblings('.fs-button-container').css('visibility', 'hidden')
-                $('#cv-' + this.options.iframeId + ' > .' + this.css.viewContainer + ' > .'+ this.css.tabContent).css('display', 'none');
-                $('#' + $tab.attr('tab-content-id')).css('display', 'block');
+                this._options.$activeView.css('display', 'none');
+                this._options.$activeView = $('#' + $tab.attr('tab-content-id'))
+                this._options.$activeView.css('display', 'block');
             }
         },
-        _createTabsWithCodeViews: function($navbar, $codeViewsContainer) {
+        createTabsWithCodeViews: function(filesData) {
             var self = this;
-
+            if(!filesData || filesData.length === 0){
+              return;
+            }
             var isEmptyFile = new RegExp('^[ \t\r\n]*$');
-            this.options.files.filter(function (f)  {return !isEmptyFile.test(f.content)}).forEach(function (f){
+
+            var _filesData = filesData.filter(function (f)  {return !isEmptyFile.test(f.content)});
+
+            if(_filesData.length === 0) {
+              return;
+            }
+            
+            this.options.files = _filesData;
+      
+            _filesData.forEach(function (f){
                 var language = f.fileExtension === 'ts' ? 'typescript' : f.fileExtension;
                 var $tab, $tabView, $code, $codeWrapper;
 
@@ -76,8 +95,9 @@
                     class: self.css.tab,
                     text: f.fileHeader.toUpperCase(),
                 }).attr("tab-content-id", 'code-view-' + self.options.iframeId + '-' + f.fileHeader +'-tab-content');
-    
-                $navbar.append($tab);
+                $tab.on('click',$.proxy(self._codeViewTabClick, self));
+
+                $tab.insertBefore(self._options.$navbar.children().last());
 
                 //Create tab view container element
                 $codeWrapper = $('<pre>', {class: 'code-wrapper'});
@@ -108,7 +128,7 @@
                 }).css('display', 'none')
                   .html($codeWrapper);
 
-                $codeViewsContainer.append($tabView);
+                self._options.$codeViewsContainer.append($tabView);
             });
 
             //Enable clipboard copy action

@@ -7,17 +7,23 @@
     var buttonIframeIdAttrName = "data-iframe-id";
     var buttonSampleSourceAttrName = "data-sample-src";
     var buttonDemosUrlAttrName = "data-demos-base-url";
+    var demosBaseUrlAttrName = buttonDemosUrlAttrName;
+    var sampleUrlAttrName = "iframe-src";
 
-
+    //Only for Angular
     var sharedFileName = "shared.json";
+    //Only for Angular
     var assetsFolder = "/assets/";
+    //Only for Angular
     var demoFilesFolderUrlPath = assetsFolder + "samples/";
 
     var isIE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0;
     var isEdge = navigator.userAgent.indexOf('Edge') !== -1;
 
+    //Only for Angular
     var assetsRegex = new RegExp("\/?assets\/", "g");
     var sampleFilesContentByUrl = {};
+
     var isButtonClickInProgress = false;
     var isLocalhost = Boolean(
         window.location.hostname === 'localhost' ||
@@ -28,9 +34,66 @@
             /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
         ));
     var demosUrls = new MockMap();
+
+    //Only for Angular
     var demosTimeStamp;
+    //Only for Angular
     var sharedFileContent;
+
     var liveEditingButtonClickHandler;
+    var isAngular = $("meta[property='docfx:title']").attr("content").indexOf("Angular") !== -1;
+    var newInit = function(){
+        var codeViewElements = $("code-view");
+
+        if(codeViewElements.length > 0) {
+            
+            if(isAngular) {
+                liveEditingButtonClickHandler = isLocalhost ? onProjectButtonClicked : onGithubProjectButtonClicked;
+                $.each(codeViewElements, function(index, element) {
+                    var $codeView = $(element);
+                    var samplesBaseUrl = $codeView.attr(demosBaseUrlAttrName);
+                    var sampleUrl = $codeView.attr(sampleUrlAttrName);
+                    if (!demosUrls.has(samplesBaseUrl)) {
+                        demosUrls.set(samplesBaseUrl, new MockSet().add({url: sampleUrl, codeView: $codeView}));
+                    } else {
+                        demosUrls.get(samplesBaseUrl).add({url: sampleUrl, codeView: $codeView});
+                    }
+                });
+
+                var allDemosBaseUrls = demosUrls.keys();
+                for (var i = 0; i < allDemosBaseUrls.length; i++) {
+                    var baseUrl = allDemosBaseUrls[i];
+                    var codeViewsData = demosUrls.get(baseUrl).values;
+                    if(isLocalhost) {
+                        generateLiveEditingAngularApp(baseUrl, codeViewsData);
+                    }
+                }
+            }
+        }
+    }
+
+    var generateLiveEditingAngularApp = function (samplesBaseUrl, data) {
+        var metaFileUrl = samplesBaseUrl + demoFilesFolderUrlPath + "meta.json";
+        // prevent caching 
+        metaFileUrl += "?t=" + new Date().getTime();
+        $.get(metaFileUrl).done(function (response) {
+            demosTimeStamp = response.generationTimeStamp;
+            getAngularFiles(samplesBaseUrl, data, demosTimeStamp);
+        });
+    }
+
+    var getAngularFiles = function(samplesBaseUrl, data, timeStamp) {
+        var sharedFileUrl = samplesBaseUrl + demoFilesFolderUrlPath + sharedFileName;
+        sharedFileUrl = addTimeStamp(sharedFileUrl, timeStamp);
+        $.get(sharedFileUrl, sharedFilePostProcess(samplesBaseUrl, function () {
+            data.forEach(function (sample) {
+                var sampleFileMedataData = getAngularSampleMetadataUrl(samplesBaseUrl, sample.url);
+                var $codeView = sample.codeView;
+                $.get(sampleFileMedataData, sampleFilePostProcess(samplesBaseUrl, removeQueryString, $codeView))
+            });
+        }));
+    }
+
     var init = function () {
         var projectButtons = $("." + stkbButtonClass + ", ." + cbsButtonClass);
 
@@ -164,7 +227,7 @@
             });
     }
 
-    var sampleFilePostProcess = function (demosBaseUrl, cb, iframeID) {
+    var sampleFilePostProcess = function (demosBaseUrl, cb, $codeView) {
         return function (data) {
             var codeViewFiles, url;
             const files = data.sampleFiles;
@@ -176,12 +239,7 @@
                 .sort(function (a, b) {
                     return angularSampleOrder.indexOf(a.fileHeader) - angularSampleOrder.indexOf(b.fileHeader);
                 });
-            $('#' + iframeID).closest(".sample-container")
-                            .codeView({
-                                files: codeViewFiles,
-                                iframeId: iframeID,
-                                onLiveEditingButtonClick: liveEditingButtonClickHandler
-                            });
+                $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
         }
     }
 
@@ -226,6 +284,13 @@
             demoFilesFolderUrlPath.substring(0, demoFilesFolderUrlPath.length - 1) +
             "/" + demoPath + ".json";
         return demoFileUrl;
+    }
+
+    var getAngularSampleMetadataUrl = function(demosBaseUrl, sampleUrl) {
+        var demoFileMetadataName= sampleUrl.replace(demosBaseUrl + "/", "");
+        demoFileMetadataName = demoFileMetadataName.replace("/", "--");
+        var demoFileMetadataPath = demosBaseUrl + demoFilesFolderUrlPath.substring(0, demoFilesFolderUrlPath.length - 1) + '/' + demoFileMetadataName + '.json';
+        return demoFileMetadataPath;
     }
 
     var onProjectButtonClicked = function () {
@@ -377,7 +442,7 @@
     }
 
     $(document).ready(function () {
-        init();
+        newInit();
     });
     function MockMap() {
         this._keys = [];
