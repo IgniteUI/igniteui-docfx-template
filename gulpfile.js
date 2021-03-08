@@ -151,7 +151,7 @@ const addWatcher = (done) => {
     bundles.forEach(bundle => {
         allFiles = allFiles.concat(bundle.files);
     });
-    gulp.watch(allFiles.concat(['./template/**/*', '!./template/styles/css', './index.js', './preconfig.json']), gulp.series(buildPackageStatics, bundleAndMinify)).on("change", function(file) {
+    gulp.watch(allFiles.concat(['./template/**/*', './src/**/*', '!./template/styles/css/main.css', './index.js', './preconfig.json']), gulp.series(buildPackageStatics, styles, bundleAndMinify)).on("change", function(file) {
         var filePath = path.join(`${__dirname}\\${file}`);
         var hash = md5File.sync(filePath);
         if (md5HashMap[filePath] !== hash) {

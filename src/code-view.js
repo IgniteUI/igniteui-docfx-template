@@ -51,10 +51,9 @@
               $navbar: $navbar,
               $codeViewsContainer: $codeViewsContainer,
               $activeTab: $exampleTab,
-              $activeView: $sampleContainer
+              $activeView: $sampleContainer,
+              $footer: $footer
             }
-            // Render a footer with CSB and SB buttons (if any !!) 
-            this._renderFooter($footer, this.element);
 
         },
         _codeViewTabClick: function(event) {
@@ -136,32 +135,36 @@
         },
         _isIE: navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0,
         _isEdge: navigator.userAgent.indexOf('Edge') !== -1,
-        _renderFooter: function ($footer, $codeView){
-            var $liveEditingButtons = $("button[data-iframe-id=" + this.options.iframeId + "]");
-            if($liveEditingButtons.length === 0) {
-              $footer.remove();
-              return;
-            }
+        renderFooter: function (liveEditingButtonsClickHandler) { 
 
             var $footerContainer = $('<div class="editing-buttons-container"></div>');
             if(!(this._isIE || this._isEdge)) {
-                $footerContainer.
-                append('<span class="editing-label">Edit in: </span>').
-                append($liveEditingButtons).
-                appendTo($footer);
-                $liveEditingButtons.text(function (i, text) {
-                    return text.toLowerCase().indexOf("stackblitz") !== -1 ? "StackBlitz" : "Codesandbox"
-                } );
-                $liveEditingButtons.on("click", this.options.onLiveEditingButtonClick);
-                $liveEditingButtons.removeAttr("disabled");
-                $liveEditingButtons.css('visibility', 'visible');
+              //Create Codesandbox live editing button
+              var $csbB = $("<button>", {class: 'codesandbox-btn'});
+              $csbB.text("Codesandbox");
+              $csbB.css("font-weight", 500);
+
+              //Create Stackblizt live editing button
+              var $stackblitzB = $("<button>", {class: 'stackblitz-btn'});
+              $stackblitzB.text("StackBlitz");
+              $stackblitzB.css("font-weight", 500);
+              
+              $liveEditingButtons = $.makeArray([$csbB, $stackblitzB]);
+              $footerContainer.append('<span class="editing-label">Edit in: </span>').
+                               append([$csbB, $stackblitzB]).
+                               appendTo(this._options.$footer);
+
+              $csbB.on("click", liveEditingButtonsClickHandler.bind($csbB, $(this.element)));
+              $stackblitzB.on("click", liveEditingButtonsClickHandler.bind($stackblitzB, $(this.element)));
+
+
             } else {
               $footerContainer.append("<span>", {class: 'open-new-browser-label'})
                               .css("font-weight", 500)
                               .text('For live-editing capabilities, please open the topic in a browser different than IE11 and Edge (version lower than 79)')
-                              .appendTo($footer);
+                              .appendTo(this._options.$footer);
             }
-            $codeView.append($footer);
+            $(this.element).append(this._options.$footer);
         },
         _copyCode: function (){
             var btn = "#cv-" + this.options.iframeId + " .hljs-code-copy";

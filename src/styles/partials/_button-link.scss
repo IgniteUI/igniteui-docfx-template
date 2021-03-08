@@ -56,7 +56,6 @@ a.disable:hover {
 }
 
 .stackblitz-btn {
-  visibility: hidden;
   display: inline-flex;
   align-items: center;
   font-size: 13px;
@@ -71,7 +70,7 @@ a.disable:hover {
 
   &:hover,
   &:focus {
-    color: rgba($white, 20%);
+    color: rgba($white, 80%);
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
   }
 
