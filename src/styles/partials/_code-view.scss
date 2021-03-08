@@ -152,28 +152,6 @@
             }
         }
     }
-
-    .fs-button-container {
-        height: 50%;
-        display: inline-flex;
-        align-self: center;
-        padding: .5rem;
-        margin-left: auto;
-        margin-right: 1.5rem;
-        cursor: pointer;
-
-        &:hover {
-            background-color: #CBE9FC;
-            color: $igblue;
-        }
-
-        .code-view-fullscreen {
-            overflow: hidden;
-            font-size: 18px;
-            text-align: center;
-            align-self: center;
-        }
-    }
 }
 
 .editing-buttons-container {

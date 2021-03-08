@@ -14,14 +14,12 @@
         },
         _create: function(){ 
             var self = this, $iframe, $navbar, $codeViewsContainer, $footer;
-
             //Init the main elements
             $iframe  = $(this.element.find('iframe'));
             $navbar = $("<div>", {class: this.css.navbar});
             $codeViewsContainer = $('<div>', {class: this.css.viewContainer});
             $footer = $("<div>", {class: this.css.footer});
             $(this.element.attr("class","code-view"));
-            
             //Wrap the sample container with code a views container
             $sampleContainer  = $(this.element.find('.sample-container'));
             $sampleContainer.wrap($codeViewsContainer)
@@ -40,7 +38,7 @@
             $navbar.prepend($exampleTab);
 
             //Create fullscreen button and add it to the code view navbar
-            $fullscreenButton = $("<span class='fs-button-container' title='Expand to fullscreen'><i class='material-icons code-view-fullscreen'>open_in_full</i></span>");
+            $fullscreenButton = $("<span class='fs-button-container' title='Expand to fullscreen'></span>");
             $fullscreenButton.on('click', function () { window.open($iframe.attr("src") || $iframe.attr("data-src"))});
             $fullscreenButton.appendTo($navbar);
 

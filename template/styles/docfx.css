@@ -260,6 +260,31 @@ code-view {
     line-height: 1.5rem;
 }
 
+.fs-button-container {
+    height: 50%;
+    display: inline-flex;
+    align-self: center;
+    padding: .4rem;
+    margin-left: auto;
+    margin-right: 1.5rem;
+    cursor: pointer;
+}
+
+.fs-button-container:hover {
+    background-color: #CBE9FC;
+    color: #0099ff;
+}
+
+.fs-button-container::before {
+    overflow: hidden;
+    font-size: 18px;
+    text-align: center;
+    align-self: center;
+    font-family: Material Icons;
+    content: "open_in_full";
+    overflow: hidden;
+}
+
 .theme-item {
     display: flex;
     justify-content: flex-start;
