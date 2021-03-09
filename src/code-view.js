@@ -85,7 +85,18 @@
             var headers = _filesData.map(f => f.fileHeader);
 
             _filesData.forEach(function (f){
-                var language = f.fileExtension === 'ts' ? 'typescript' : f.fileExtension;
+                var language;
+                switch(f.fileExtension) {
+                  case "ts":
+                    language = 'typescript';
+                    break;
+                  case "js":
+                    language = 'javascript';
+                    break;
+                  case "razor":
+                    language = 'html';
+                    break;
+                }
                 var $tab, $tabView, $code, $codeWrapper;
                 var fileNameWithExtension = undefined;
                 if(headers.indexOf(f.fileHeader) !== headers.lastIndexOf(f.fileHeader)) {
