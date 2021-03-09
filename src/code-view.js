@@ -82,16 +82,21 @@
             }
             
             this.options.files = _filesData;
-      
+            var headers = _filesData.map(f => f.fileHeader);
+
             _filesData.forEach(function (f){
                 var language = f.fileExtension === 'ts' ? 'typescript' : f.fileExtension;
                 var $tab, $tabView, $code, $codeWrapper;
+                var fileNameWithExtension = undefined;
+                if(headers.indexOf(f.fileHeader) !== headers.lastIndexOf(f.fileHeader)) {
+                  fileNameWithExtension = f.path.substring(f.path.lastIndexOf("/") + 1);
+                }
 
                 //Create a tab element
                 $tab = $("<div>", {
                     class: self.css.tab,
-                    text: f.fileHeader.toUpperCase(),
-                }).attr("tab-content-id", 'code-view-' + self.options.iframeId + '-' + f.fileHeader +'-tab-content');
+                    text: (fileNameWithExtension || f.fileHeader.toUpperCase()),
+                }).attr("tab-content-id", 'code-view-' + self.options.iframeId + '-' + (fileNameWithExtension || f.fileHeader).replace(".", "--") +'-tab-content');
                 $tab.on('click',$.proxy(self._codeViewTabClick, self));
 
                 $tab.insertBefore(self._options.$navbar.children().last());

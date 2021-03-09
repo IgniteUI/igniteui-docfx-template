@@ -1,6 +1,12 @@
 (function () {
     $(document).ready(function () {
-        var service = new AngularCodeService();
+        var title = $("meta[property='docfx:title']").attr("content");
+        var service;
+        if(title.indexOf("React") !== -1){
+            var service = new ReactCodeService();
+        } else if(title.indexOf("Angular") !== -1) {
+            var service = new AngularCodeService();
+        }
         service.init();
     });
     function MockMap() {
@@ -428,8 +434,116 @@
             fileInput.appendTo(form)
             return form;
         }
-
     }
 
+    function ReactCodeService() {
+
+        this.samplesCodeBasePath = "/code-viewer/";
+        this.samplesOrder = ['tsx', 'ts', 'css'];
+        this.githubSourceAttrName = "github-src";
+        this.init = function () {
+            var $codeViewElements = $("code-view");
+            // var $standaloneliveEditingButtons = $("button[data-sample-src]");
+            var _this = this;
+            if ($codeViewElements.length > 0) {
+
+                this.codeViewLiveEditingButtonClickHandler = this.onGithubProjectButtonClicked();
+                $.each($codeViewElements, function (index, element) {
+                    var $codeView = $(element);
+                    var samplesBaseUrl = $codeView.attr(_this.demosBaseUrlAttrName);
+                    var sampleUrl = $codeView.attr(_this.sampleUrlAttrName);
+                    if (!_this.demosUrls.has(samplesBaseUrl)) {
+                        _this.demosUrls.set(samplesBaseUrl, new MockSet().add({ url: sampleUrl, codeView: $codeView }));
+                    } else {
+                        _this.demosUrls.get(samplesBaseUrl).add({ url: sampleUrl, codeView: $codeView });
+                    }
+                });
+
+                var allDemosBaseUrls = this.demosUrls.keys();
+                for (var i = 0; i < allDemosBaseUrls.length; i++) {
+                    var baseUrl = allDemosBaseUrls[i];
+                    var codeViewsData = this.demosUrls.get(baseUrl).values;
+                    this.getSamplesContent(baseUrl, codeViewsData);
+                }
+                // if (!(this.isIE || this.isEdge)) {
+                //     $standaloneliveEditingButtons.on('click', this.onAngularGithubProjectStandaloneButtonClicked);
+                // } else {
+                //     $standaloneliveEditingButtons.css("display", "none");
+                // }
+            }
+        }
+        this.onGithubProjectButtonClicked = function () {
+            _this = this;
+            return function ($codeView) {
+                if (_this.isButtonClickInProgress) {
+                    return;
+                }
+                _this.isButtonClickInProgress = true;
+                var $button = this;
+                var demosBaseUrl = $codeView.attr(_this.demosBaseUrlAttrName);
+                var sampleFileUrl = $codeView.attr(_this.githubSourceAttrName);
+                var editor = $button.hasClass(_this.stkbButtonClass) ? "stackblitz" : "codesandbox";
+                var branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
+                window.open(_this.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
+                _this.isButtonClickInProgress = false;
+            }
+        }
+
+        this.getSamplesContent = function (samplesBaseUrl, data) {
+
+            var _this = this;
+            data.forEach(function (sample) {
+                var sampleFileMedata = _this.getSampleMetadataUrl(samplesBaseUrl, sample.url);
+                var $codeView = sample.codeView;
+                $.ajax({
+                    url:sampleFileMedata,
+                    type: "GET",
+                    crossDomain: true,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    dataType: "json",
+                    success: _this.sampleFilePostProcess($codeView),
+                    error: function(){
+                        if($codeView.is("[" + _this.githubSourceAttrName +"]")) {
+                            $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler);
+                        }
+                        throw new Error('Error on fetching sample files!');
+                    }
+                })
+            }); 
+        }
+
+        this.getSampleMetadataUrl = function (demosBaseUrl, sampleUrl) {
+            var demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
+            var demoJsonPath = demosBaseUrl + this.samplesCodeBasePath + demoFileMetadataName + ".json";
+            return demoJsonPath;
+        }
+
+        this.sampleFilePostProcess = function($codeView) {
+            var _this = this;
+            return function (data) {
+                var codeViewFiles;
+                const files = data.sampleFiles;
+                codeViewFiles = files.filter(function (f) { return f.isMain })
+                    .sort(function (a, b) {
+                        return _this.samplesOrder.indexOf(a.fileHeader) - _this.samplesOrder.indexOf(b.fileHeader);
+                    });
+                $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
+                if($codeView.is("[" + _this.githubSourceAttrName +"]")) {
+                    $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler);
+                }
+            }
+        }
+
+        // Only for Angular
+        this.getAngularGitHubSampleUrl = function (editor, sampleUrl, branch) {
+            if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-react-examples/tree/" + branch.toLowerCase() + "/samples/" + sampleUrl;
+            return "https://codesandbox.io/s/github/IgniteUI/igniteui-react-examples/tree/" + branch.toLowerCase() + "/samples/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+        }
+        
+    }
+
+    ReactCodeService.prototype = CodeService.prototype;
     AngularCodeService.prototype = CodeService.prototype;
 }());
