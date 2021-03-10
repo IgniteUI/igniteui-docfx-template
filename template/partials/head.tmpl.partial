@@ -11,6 +11,7 @@ full license information.}}
     <meta name="description" content="{{_description}}">{{/_description}} {{#_keywords}}
     <meta name="keywords" content="{{_keywords}}">{{/_keywords}}
     <meta property="docfx:navrel" content="{{_navRel}}">
+    {{#_platform}}<meta property="docfx:platform" content="{{_platform}}">{{/_platform}}
     <meta property="docfx:title" content="{{_navBarTitle}}">
     <meta property="docfx:link" content="{{_navBarTitleHref}}">
     <meta property="docfx:tocrel" content="{{_tocRel}}"> {{#_noindex}}

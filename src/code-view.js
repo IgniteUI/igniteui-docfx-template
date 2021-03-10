@@ -121,7 +121,7 @@
                 //Add copy code button
                 $codeWrapper
                 .append([
-                  '<span class="hljs-lang-name">' + language + "</span>",
+                  '<span class="hljs-lang-name">' + f.fileExtension + "</span>",
                   '<button data-localize="hljs.copyCode" class="hljs-code-copy hidden">COPY CODE</button>'
                 ])
                 .on("mouseenter", function () {

@@ -1,16 +1,21 @@
 (function () {
     $(document).ready(function () {
-        var title = $("meta[property='docfx:title']").attr("content");
-        var service;
-        if(title.indexOf("React") !== -1){
-            var service = new ReactCodeService();
-        } else if(title.indexOf("Angular") !== -1) {
-            var service = new AngularCodeService();
-        } else if(title.indexOf("Blazor") !== -1) {
-            var service = new BlazorCodeService();
+        var platformMeta = $("meta[property='docfx:platform']");
+        if (!platformMeta) {
+            return;
         }
-        service.init();
+        setTimeout(() => {
+            var service, platform, 
+            platform = platformMeta.attr("content");
+            if (platform === "angular") {
+                service = new AngularCodeService();
+            } else {
+                service = new XplatCodeService(platform)
+            }
+            service.init();
+        })
     });
+
     function MockMap() {
         this._keys = [];
         this.pairs = {};
@@ -46,7 +51,6 @@
 
     function CodeService() { }
 
-
     CodeService.prototype.stkbButtonClass = "stackblitz-btn";
     CodeService.prototype.buttonSampleSourceAttrName = "data-sample-src";
     CodeService.prototype.demosBaseUrlAttrName = "data-demos-base-url";
@@ -68,25 +72,15 @@
     CodeService.prototype.init = function () { };
 
     function AngularCodeService() {
-        //Only for Angular
         this.stackBlitzApiUrl = "https://run.stackblitz.com/api/angular/v1";
-        //Only for Angular
         this.codesandboxApiUrl = "https://codesandbox.io/api/v1/sandboxes/define";
-        //Only for Angular
         this.samplesOrder = ['modules', 'ts', 'html', 'scss'];
-        //Only for Angular
         this.sharedFileName = "shared.json";
-        //Only for Angular
         this.assetsFolder = "/assets/";
-        //Only for Angular
         this.demoFilesFolderUrlPath = this.assetsFolder + "samples/";
-        //Only for Angular
         this.assetsRegex = new RegExp("\/?assets\/", "g");
-        // Only for Angular
         this.sampleFilesContentByUrl = {};
-        //Only for Angular
         this.demosTimeStamp;
-        //Only for Angular
         this.sharedFileContent = {};
 
         this.init = function () {
@@ -131,7 +125,7 @@
             })
         }
 
-        // Only for Angular. Create a post API form after fetching samples files
+        //Create a post API form after fetching samples files
         this.generateLiveEditingAngularApp = function (samplesBaseUrl, data) {
             var metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
             // prevent caching 
@@ -143,7 +137,7 @@
             });
         }
 
-        // Only for Angular. Fetch angular samples files
+        //Fetch angular samples files
         this.getAngularFiles = function (samplesBaseUrl, data, timeStamp) {
             var sharedFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + this.sharedFileName;
             sharedFileUrl = this.addTimeStamp(sharedFileUrl, timeStamp);
@@ -157,7 +151,6 @@
             }));
         }
 
-        // Only for Angular
         this.getAngularGitHubSampleUrl = function (editor, sampleUrl, branch) {
             if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-live-editing-samples/tree/" + branch + "/" + sampleUrl;
             return "https://codesandbox.io/s/github/IgniteUI/igniteui-live-editing-samples/tree/" + branch + "/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
@@ -170,7 +163,6 @@
             return demoPath;
         }
 
-        // Only for Angular
         this.onAngularGithubProjectButtonClicked = function () {
             _this = this;
             return function ($codeView) {
@@ -188,7 +180,6 @@
             }
         }
 
-        // Only for Angular
         this.onAngularGithubProjectStandaloneButtonClicked = function () {
             if (isButtonClickInProgress) {
                 return;
@@ -212,7 +203,6 @@
             return url;
         }
 
-        // Only for Angular
         this.getAngularSampleFiles = function (samplesBaseUrl, data, err) {
             var metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
             // prevent caching 
@@ -233,7 +223,6 @@
                 });
         }
 
-        // Only for Angular
         this.angularSampleFilePostProcess = function (demosBaseUrl, cb, $codeView) {
             var _this = this;
             return function (data) {
@@ -252,7 +241,6 @@
             }
         }
 
-        // Only for Angular
         this.angularSharedFilePostProcess = function (demosBaseUrl, cb) {
             var _this = this;
             return function (data) {
@@ -275,7 +263,6 @@
             return url;
         }
 
-        //Only for Angular
         this.getAngularSampleMetadataUrl = function (demosBaseUrl, sampleUrl) {
             var demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
             demoFileMetadataName = demoFileMetadataName.replace("/", "--");
@@ -283,7 +270,6 @@
             return demoFileMetadataPath;
         }
 
-        //Only for Angyular
         this.createPostApiFormFromCodeView = function () {
             var _this = this;
             return function ($codeView) {
@@ -308,7 +294,6 @@
             }
         }
 
-        //Only for Angular
         this.replaceRelativeAssetsUrls = function (files, demosBaseUrl) {
             var assetsUrl = demosBaseUrl + this.assetsFolder;
             for (var i = 0; i < files.length; i++) {
@@ -330,7 +315,6 @@
                 tags: ["tagA", "tagB", "tagC"]
             }
         */
-        // Only for Angular
         this.compress = function (input) {
             return window.LZString.compressToBase64(input)
                 .replace(/\+/g, "-") // Convert '+' to '-'
@@ -338,7 +322,6 @@
                 .replace(/=+$/, ""); // Remove ending '='
         }
 
-        // Only for Angular
         this.createStackblitzForm = function (data) {
             var form = $("<form />", {
                 method: "POST",
@@ -393,7 +376,6 @@
             return form;
         }
 
-        // Only for Angular
         this.createCodesandboxForm = function (data) {
             const fileToSandbox = {
                 files: {
@@ -438,18 +420,19 @@
         }
     }
 
-    function ReactCodeService() {
-
+    function XplatCodeService(plat) {
+        this.xplat = plat === "web-components" ? "wc" : plat;
         this.samplesCodeBasePath = "/code-viewer/";
-        this.samplesOrder = ['tsx', 'ts', 'css'];
-        this.githubSourceAttrName = "github-src";
+
         this.init = function () {
             var $codeViewElements = $("code-view");
-            // var $standaloneliveEditingButtons = $("button[data-sample-src]");
             var _this = this;
             if ($codeViewElements.length > 0) {
 
-                this.codeViewLiveEditingButtonClickHandler = this.onGithubProjectButtonClicked();
+                if(this.enableLiveEditing){
+                    this.codeViewLiveEditingButtonClickHandler = this.onGithubProjectButtonClicked();
+                }
+
                 $.each($codeViewElements, function (index, element) {
                     var $codeView = $(element);
                     var samplesBaseUrl = $codeView.attr(_this.demosBaseUrlAttrName);
@@ -467,62 +450,27 @@
                     var codeViewsData = this.demosUrls.get(baseUrl).values;
                     this.getSamplesContent(baseUrl, codeViewsData);
                 }
-                // if (!(this.isIE || this.isEdge)) {
-                //     $standaloneliveEditingButtons.on('click', this.onAngularGithubProjectStandaloneButtonClicked);
-                // } else {
-                //     $standaloneliveEditingButtons.css("display", "none");
-                // }
-            }
-        }
-        this.onGithubProjectButtonClicked = function () {
-            _this = this;
-            return function ($codeView) {
-                if (_this.isButtonClickInProgress) {
-                    return;
-                }
-                _this.isButtonClickInProgress = true;
-                var $button = this;
-                var demosBaseUrl = $codeView.attr(_this.demosBaseUrlAttrName);
-                var sampleFileUrl = $codeView.attr(_this.githubSourceAttrName);
-                var editor = $button.hasClass(_this.stkbButtonClass) ? "stackblitz" : "codesandbox";
-                var branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-                window.open(_this.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
-                _this.isButtonClickInProgress = false;
             }
         }
 
         this.getSamplesContent = function (samplesBaseUrl, data) {
-
             var _this = this;
+
             data.forEach(function (sample) {
                 var sampleFileMedata = _this.getSampleMetadataUrl(samplesBaseUrl, sample.url);
                 var $codeView = sample.codeView;
                 $.ajax({
-                    url:sampleFileMedata,
+                    url: sampleFileMedata,
                     type: "GET",
                     crossDomain: true,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*'
-                    },
                     dataType: "json",
                     success: _this.sampleFilePostProcess($codeView),
-                    error: function(){
-                        if($codeView.is("[" + _this.githubSourceAttrName +"]")) {
-                            $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler);
-                        }
-                        throw new Error('Error on fetching sample files!');
-                    }
+                    error: _this.sampleFilesFetchErrorHandler($codeView)
                 })
-            }); 
+            });
         }
 
-        this.getSampleMetadataUrl = function (demosBaseUrl, sampleUrl) {
-            var demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
-            var demoJsonPath = demosBaseUrl + this.samplesCodeBasePath + demoFileMetadataName + ".json";
-            return demoJsonPath;
-        }
-
-        this.sampleFilePostProcess = function($codeView) {
+        this.sampleFilePostProcess = function ($codeView) {
             var _this = this;
             return function (data) {
                 var codeViewFiles;
@@ -532,93 +480,20 @@
                         return _this.samplesOrder.indexOf(a.fileHeader) - _this.samplesOrder.indexOf(b.fileHeader);
                     });
                 $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
-                if($codeView.is("[" + _this.githubSourceAttrName +"]")) {
+                if(_this.enableLiveEditing && $codeView.is("[" + _this.githubSourceAttrName + "]")) {
                     $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler);
                 }
             }
         }
 
-        // Only for Angular
-        this.getAngularGitHubSampleUrl = function (editor, sampleUrl, branch) {
-            if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-react-examples/tree/" + branch.toLowerCase() + "/samples/" + sampleUrl;
-            return "https://codesandbox.io/s/github/IgniteUI/igniteui-react-examples/tree/" + branch.toLowerCase() + "/samples/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
-        }
-        
-    }
-
-    function BlazorCodeService() {
-
-        this.samplesCodeBasePath = "/code-viewer/";
-        this.samplesOrder = ['razor', "js", 'css'];
-        // this.githubSourceAttrName = "github-src";
-        this.init = function () {
-            var $codeViewElements = $("code-view");
-            // var $standaloneliveEditingButtons = $("button[data-sample-src]");
+        this.sampleFilesFetchErrorHandler = function ($codeView) {
             var _this = this;
-            if ($codeViewElements.length > 0) {
-
-                // this.codeViewLiveEditingButtonClickHandler = this.onGithubProjectButtonClicked();
-                $.each($codeViewElements, function (index, element) {
-                    var $codeView = $(element);
-                    var samplesBaseUrl = $codeView.attr(_this.demosBaseUrlAttrName);
-                    var sampleUrl = $codeView.attr(_this.sampleUrlAttrName);
-                    if (!_this.demosUrls.has(samplesBaseUrl)) {
-                        _this.demosUrls.set(samplesBaseUrl, new MockSet().add({ url: sampleUrl, codeView: $codeView }));
-                    } else {
-                        _this.demosUrls.get(samplesBaseUrl).add({ url: sampleUrl, codeView: $codeView });
-                    }
-                });
-
-                var allDemosBaseUrls = this.demosUrls.keys();
-                for (var i = 0; i < allDemosBaseUrls.length; i++) {
-                    var baseUrl = allDemosBaseUrls[i];
-                    var codeViewsData = this.demosUrls.get(baseUrl).values;
-                    this.getSamplesContent(baseUrl, codeViewsData);
+            return function (){
+                if(_this.enableLiveEditing && $codeView.is("[" + _this.githubSourceAttrName + "]")) {
+                    $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler);
                 }
-                // if (!(this.isIE || this.isEdge)) {
-                //     $standaloneliveEditingButtons.on('click', this.onAngularGithubProjectStandaloneButtonClicked);
-                // } else {
-                //     $standaloneliveEditingButtons.css("display", "none");
-                // }
+                throw new Error('Error on fetching sample files!');
             }
-        }
-        // this.onGithubProjectButtonClicked = function () {
-        //     _this = this;
-        //     return function ($codeView) {
-        //         if (_this.isButtonClickInProgress) {
-        //             return;
-        //         }
-        //         _this.isButtonClickInProgress = true;
-        //         var $button = this;
-        //         var demosBaseUrl = $codeView.attr(_this.demosBaseUrlAttrName);
-        //         var sampleFileUrl = $codeView.attr(_this.githubSourceAttrName);
-        //         var editor = $button.hasClass(_this.stkbButtonClass) ? "stackblitz" : "codesandbox";
-        //         var branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-        //         window.open(_this.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
-        //         _this.isButtonClickInProgress = false;
-        //     }
-        // }
-
-        this.getSamplesContent = function (samplesBaseUrl, data) {
-
-            var _this = this;
-            data.forEach(function (sample) {
-                var sampleFileMedata = _this.getSampleMetadataUrl(samplesBaseUrl, sample.url);
-                var $codeView = sample.codeView;
-                $.ajax({
-                    url:sampleFileMedata,
-                    type: "GET",
-                    crossDomain: true,
-                    dataType: "json",
-                    success: _this.sampleFilePostProcess($codeView),
-                    error: function(){
-                        // if($codeView.is("[" + _this.githubSourceAttrName +"]")) {
-                        //     $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler);
-                        // }
-                        throw new Error('Error on fetching sample files!');
-                    }
-                })
-            }); 
         }
 
         this.getSampleMetadataUrl = function (demosBaseUrl, sampleUrl) {
@@ -627,30 +502,43 @@
             return demoJsonPath;
         }
 
-        this.sampleFilePostProcess = function($codeView) {
-            var _this = this;
-            return function (data) {
-                var codeViewFiles;
-                const files = data.sampleFiles;
-                codeViewFiles = files.filter(function (f) { return f.isMain })
-                    .sort(function (a, b) {
-                        return _this.samplesOrder.indexOf(a.fileHeader) - _this.samplesOrder.indexOf(b.fileHeader);
-                    });
-                $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
-                // if($codeView.is("[" + _this.githubSourceAttrName +"]")) {
-                //     $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler);
-                // }
-            }
-        }
+        switch (this.xplat) {
+            case "react":
+            case "wc":
+                this.samplesOrder = ['tsx', 'ts', 'css'];
+                this.githubSourceAttrName = "github-src";
+                this.enableLiveEditing = true;
+                this.onGithubProjectButtonClicked = function () {
+                    _this = this;
+                    return function ($codeView) {
+                        if (_this.isButtonClickInProgress) {
+                            return;
+                        }
+                        _this.isButtonClickInProgress = true;
+                        var $button = this;
+                        var demosBaseUrl = $codeView.attr(_this.demosBaseUrlAttrName);
+                        var sampleFileUrl = $codeView.attr(_this.githubSourceAttrName);
+                        var editor = $button.hasClass(_this.stkbButtonClass) ? "stackblitz" : "codesandbox";
+                        var branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
+                        window.open(_this.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
+                        _this.isButtonClickInProgress = false;
+                    }
+                }
 
-        // this.getAngularGitHubSampleUrl = function (editor, sampleUrl, branch) {
-        //     if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-blazor-examples/tree/" + branch.toLowerCase() + "/samples/" + sampleUrl;
-        //     return "https://codesandbox.io/s/github/IgniteUI/igniteui-blazor-examples/tree/" + branch.toLowerCase() + "/samples/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
-        // }
-        
+                this.getAngularGitHubSampleUrl = function (editor, sampleUrl, branch) {
+                    if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch.toLowerCase() + "/samples/" + sampleUrl;
+                    return "https://codesandbox.io/s/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch.toLowerCase() + "/samples/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+                }
+            break;
+
+            case "blazor":
+                this.samplesOrder = ['razor', 'js', 'css'];
+                this.enableLiveEditing = false;
+            break;
+        }
     }
 
-    BlazorCodeService.prototype = CodeService.prototype;
-    ReactCodeService.prototype = CodeService.prototype;
     AngularCodeService.prototype = CodeService.prototype;
+    XplatCodeService.prototype = CodeService.prototype;
+
 }());
