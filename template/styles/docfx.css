@@ -275,7 +275,13 @@ code-view {
     color: #0099ff;
 }
 
-.fs-button-container::before {
+.code-view-fullscreen {
+    font-size: 18px;
+    text-align: center;
+    align-self: center;
+}
+
+.fs-button-container:before {
     overflow: hidden;
     font-size: 18px;
     text-align: center;

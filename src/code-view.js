@@ -38,7 +38,7 @@
             $navbar.prepend($exampleTab);
 
             //Create fullscreen button and add it to the code view navbar
-            $fullscreenButton = $("<span class='fs-button-container' title='Expand to fullscreen'></span>");
+            $fullscreenButton = $((this._isIE ? "<span class='fs-button-container' style='width: 35px'><i class='material-icons code-view-fullscreen'>open_in_full</i></span>": "<span class='fs-button-container' title='Expand to fullscreen'></span>"));
             $fullscreenButton.on('click', function () { window.open($iframe.attr("src") || $iframe.attr("data-src"))});
             $fullscreenButton.appendTo($navbar);
 
@@ -81,7 +81,7 @@
             }
             
             this.options.files = _filesData;
-            var headers = _filesData.map(f => f.fileHeader);
+            var headers = _filesData.map(function(f) {return f.fileHeader} );
 
             _filesData.forEach(function (f){
                 var language;

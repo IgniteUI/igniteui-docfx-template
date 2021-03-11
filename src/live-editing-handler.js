@@ -4,7 +4,7 @@
         if (!platformMeta) {
             return;
         }
-        setTimeout(() => {
+        setTimeout(function () {
             var service, platform, 
             platform = platformMeta.attr("content");
             if (platform === "angular") {
