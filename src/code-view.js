@@ -162,7 +162,6 @@
               $stackblitzB.text("StackBlitz");
               $stackblitzB.css("font-weight", 500);
               
-              $liveEditingButtons = $.makeArray([$csbB, $stackblitzB]);
               $footerContainer.append('<span class="editing-label">Edit in: </span>').
                                append([$csbB, $stackblitzB]).
                                appendTo(this._options.$footer);
