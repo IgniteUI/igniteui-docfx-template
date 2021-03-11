@@ -519,15 +519,15 @@
                         var demosBaseUrl = $codeView.attr(_this.demosBaseUrlAttrName);
                         var sampleFileUrl = $codeView.attr(_this.githubSourceAttrName);
                         var editor = $button.hasClass(_this.stkbButtonClass) ? "stackblitz" : "codesandbox";
-                        var branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
+                        var branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vnext" : "master";
                         window.open(_this.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
                         _this.isButtonClickInProgress = false;
                     }
                 }
 
                 this.getAngularGitHubSampleUrl = function (editor, sampleUrl, branch) {
-                    if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch.toLowerCase() + "/samples/" + sampleUrl;
-                    return "https://codesandbox.io/s/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch.toLowerCase() + "/samples/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+                    if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch + "/samples/" + sampleUrl;
+                    return "https://codesandbox.io/s/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch + "/samples/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
                 }
             break;
 
