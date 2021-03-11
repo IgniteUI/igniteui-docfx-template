@@ -58,7 +58,6 @@
             var $tab = $(event.target);
             if(!$tab.hasClass("." + this.css.tab + "--active")){
                 this._options.$activeTab.switchClass(this.css.tab + "--active", this.css.tab,  0)
-                // $('#cv-' + this.options.iframeId + " .code-view-tab--active").switchClass(this.css.tab + "--active", this.css.tab,  0);
                 $tab.switchClass(this.css.tab, this.css.tab + "--active", 0);
                 this._options.$activeTab = $tab;
                 $tab.is('[tab-content-id=' + 'code-view-' + this.options.iframeId + '-' + 'example-tab-content]') ? $tab.siblings('.fs-button-container').css('visibility', 'visible') :
