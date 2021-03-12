@@ -95,6 +95,9 @@
                   case "razor":
                     language = 'html';
                     break;
+                  default:
+                    language = f.fileExtension;
+                    break;
                 }
                 var $tab, $tabView, $code, $codeWrapper;
                 var fileNameWithExtension = undefined;
