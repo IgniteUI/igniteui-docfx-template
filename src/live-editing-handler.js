@@ -422,7 +422,7 @@
 
     function XplatCodeService(plat) {
         this.xplat = plat === "web-components" ? "wc" : plat;
-        this.samplesCodeBasePath = "/code-viewer/";
+        this.samplesCodeBasePath = plat === "web-components" ? "/assets/code-viewer/" : "/code-viewer/";
 
         this.init = function () {
             var $codeViewElements = $("code-view");
@@ -481,7 +481,7 @@
                     });
                 $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
                 if(_this.enableLiveEditing && $codeView.is("[" + _this.githubSourceAttrName + "]")) {
-                    $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler);
+                    $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler, "csb");
                 }
             }
         }
@@ -490,7 +490,7 @@
             var _this = this;
             return function (){
                 if(_this.enableLiveEditing && $codeView.is("[" + _this.githubSourceAttrName + "]")) {
-                    $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler);
+                    $codeView.codeView("renderFooter", _this.codeViewLiveEditingButtonClickHandler, "csb");
                 }
                 throw new Error('Error on fetching sample files!');
             }
@@ -505,7 +505,7 @@
         switch (this.xplat) {
             case "react":
             case "wc":
-                this.samplesOrder = ['tsx', 'ts', 'css'];
+                this.samplesOrder = ['tsx', 'ts', 'html', 'css'];
                 this.githubSourceAttrName = "github-src";
                 this.enableLiveEditing = true;
                 this.onGithubProjectButtonClicked = function () {
