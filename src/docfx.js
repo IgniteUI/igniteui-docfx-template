@@ -47,6 +47,7 @@ $(function () {
 
   //Adds paragraph after every element with .sample-container class
   addGtmButtons();
+  instantiateCodeViews();
 
   window.refresh = function (article) {
     console.log(article);
@@ -86,7 +87,7 @@ $(function () {
 
   function removeHTMLExtensionFromInternalAnchors() {
     var absPath = util.getAbsolutePath(window.location.pathname);
-    if(absPath.indexOf('.html') === -1){
+    if (absPath.indexOf('.html') === -1) {
       $('.article-container a:not([href^="http"])')
         .each(function () {
           var anchorHref = $(this).attr('href');
@@ -97,34 +98,74 @@ $(function () {
     }
   }
 
+  function instantiateCodeViews() {
+    const views = $("code-view");
+    for (let i = 0; i < views.length; i++) {
+      const currentView = views[i];
+      const style = $(currentView).attr("style");
+      const iframeSrc = $(currentView).attr("iframe-src");
+      const alt = $(currentView).attr("alt");
+      const productTitle = $("meta[property='docfx:title']").attr("content");
+      $(currentView).removeAttr("style");
+
+      const sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content loading");
+      const iframe = $('<iframe>', {
+        id: 'sample-iframe-id-' +  i,
+        frameborder: 0,
+        seamless: ""
+      }).width("100%").height("100%");
+
+      if (i === 0){
+        if (productTitle.indexOf('Angular') !== -1){
+          iframe.attr("onload","onSampleIframeContentLoaded(this);");
+        }else {
+          iframe.attr("onload","onXPlatSampleIframeContentLoaded(this);");
+        }
+        
+        iframe.attr("src", iframeSrc);
+      }else {
+        iframe.attr("class","lazyload");
+        iframe.attr("data-src", iframeSrc);
+      }
+
+      if (alt){
+        iframe.attr("alt", alt)
+      }
+
+      iframe.appendTo(sampleContainer);
+      sampleContainer.appendTo(currentView);
+      $(currentView).codeView({iframeId : i});
+    }
+  }
+
   function addGtmButtons() {
-    if ($(".sample-container").length && !$(".sample-container:first + p>a.trackCTA").length) {
+    if ($("code-view").length && !$("code-view:first + p>a.trackCTA").length) {
       const languageVersion = $('html')[0].lang;
       const productTitle = $("meta[property='docfx:title']").attr("content");
       let productLink = $("meta[property='docfx:link']").attr("content");
 
-      if(productLink.charAt(productLink.length-1) === '/'){
+      if (productLink.charAt(productLink.length - 1) === '/') {
         productLink += "download";
-      }else{
+      } else {
         productLink += "/download";
       }
 
-      const sample = $(".sample-container").first();
+      const sample = $("code-view").first();
       let paragraph = "";
-      if(languageVersion === 'ja'){
+      if (languageVersion === 'ja') {
         paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("このサンプルが気に入りましたか? 完全な " + productTitle + "ツールキットにアクセスして、すばやく独自のアプリの作成を開始します。");
-        const link = appendLinkAttributes(productTitle,productLink);
+        const link = appendLinkAttributes(productTitle, productLink);
         link.text("無料でダウンロードできます。").appendTo(paragraph);
-      }else {
+      } else {
         paragraph = $('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text("Like this sample? Get access to our complete " + productTitle + " toolkit and start building your own apps in minutes.");
-        const link = appendLinkAttributes(productTitle,productLink);
+        const link = appendLinkAttributes(productTitle, productLink);
         link.text(" Download it for free.").appendTo(paragraph);
       }
-      
+
       sample.after(paragraph);
     }
 
-    function appendLinkAttributes(productTitle,productLink) {
+    function appendLinkAttributes(productTitle, productLink) {
       let link = $('<a>');
       link.attr('data-xd-ga-action', 'Download');
       link.attr('data-xd-ga-label', productTitle);
