@@ -136,8 +136,9 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             $(e.target).closest('li').toggleClass(this.expanded)
         });
 
-        $("#toc_filter_input").on("input", (e) => {
-            let val = e.target?.nodeValue!;
+        $("#toc_filter_input").on("input", (e: any) => {
+
+            let val = e.target?.value! as string;
             if (val === "") {
                 // Clear 'filtered' class
                 $("#toc li")
@@ -210,7 +211,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
 
     private filterNavItem(anchorValue: string, inputText?: string) {
         if (!inputText) return true;
-        if (anchorValue.toLowerCase().indexOf(anchorValue.toLowerCase()) > -1) return true;
+        if (anchorValue.toLowerCase().indexOf(inputText.toLowerCase()) > -1) return true;
         return false;
     }
 

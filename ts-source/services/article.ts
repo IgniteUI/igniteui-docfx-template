@@ -3,7 +3,7 @@ import util from "./utils";
 import { RenderingService, HTMLHighlightedCodeElement } from "./common";
 import anchors from 'anchor-js';
 import hljs from "highlight.js";
-
+import type { IgniteUIPlatform} from '../shared/types';
 export class ArticleRenderingService extends RenderingService {
 
     constructor() {
@@ -23,6 +23,7 @@ export class ArticleRenderingService extends RenderingService {
         this.copyCode();
         this.anchorJs();
         this.renderGithubBtn();
+        this.instantiateCodeViews();
 
     }
 
@@ -174,6 +175,52 @@ export class ArticleRenderingService extends RenderingService {
             $(el?.firstElementChild!).replaceWith(newHeaderElement);
         });
     }
+
+    private instantiateCodeViews() {
+        let platform: IgniteUIPlatform  = $("meta[property='docfx:platform']")?.attr("content")! as IgniteUIPlatform;
+
+        if(!platform) {
+            return;
+        }
+
+        let views = $("code-view");
+        for (let i = 0; i < views.length; i++) {
+          let currentView = views[i];
+          let style = $(currentView).attr("style")!;
+          let iframeSrc = $(currentView).attr("iframe-src")!;
+          let alt = $(currentView).attr("alt");
+
+          $(currentView).removeAttr("style");
+    
+          let sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content loading");
+          let iframe = $<HTMLIFrameElement>('<iframe>', {
+            id: 'sample-iframe-id-' +  i,
+            frameborder: 0,
+            seamless: ""
+          }).width("100%").height("100%");
+    
+          if (i === 0){
+            if (platform === "angular" ){
+              iframe.attr("onload","onSampleIframeContentLoaded(this);");
+            }else {
+              iframe.attr("onload","onXPlatSampleIframeContentLoaded(this);");
+            }
+            
+            iframe.attr("src", iframeSrc);
+          }else {
+            iframe.attr("class","lazyload");
+            iframe.attr("data-src", iframeSrc);
+          }
+    
+          if (alt){
+            iframe.attr("alt", alt)
+          }
+    
+          iframe.appendTo(sampleContainer);
+          sampleContainer.appendTo(currentView);
+          $(currentView).codeView({iframeId : i});
+        }
+      }
 
     private copyCode() {
         let btn = ".hljs-code-copy";

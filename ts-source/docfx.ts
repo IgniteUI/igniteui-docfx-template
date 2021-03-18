@@ -1,4 +1,8 @@
+import '../src/styles/main.scss';
+import 'bootstrap';
+import 'jquery-ui';
 import { RenderingService } from './services/common';
+import { CodeView } from './services/code-view';
 import {
         AffixRenderingService, 
         ArticleRenderingService,
@@ -6,14 +10,14 @@ import {
         ResizingService,
         TocRenderingService
     } from './services/index';
-import '../src/styles/main.scss';
-import 'bootstrap';
+
 $(() => {
+    $.widget("custom.codeView", new CodeView())
     let navbarService = new NavbarRenderingService();
     let resizingService = new ResizingService();
     let tocService = new TocRenderingService(resizingService);
     let affixService = new AffixRenderingService(resizingService);
     let articleService = new ArticleRenderingService();
-    let services:Array<RenderingService> = [ affixService, navbarService, articleService, tocService];
+    let services: Array<RenderingService> = [affixService, navbarService, articleService, tocService];
     services.forEach(service => service.render());
 })

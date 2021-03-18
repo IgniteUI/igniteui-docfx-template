@@ -31,6 +31,7 @@
     "@types/anchor-js": "^4.2.0",
     "@types/clipboard": "^2.0.1",
     "@types/jquery": "^3.5.5",
+    "@types/jqueryui": "^1.12.15",
     "@webpack-cli/init": "^1.1.2",
     "babel-loader": "^8.2.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -59,7 +60,6 @@
     "yargs": "^12.0.5"
   },
   "dependencies": {
-    "@types/jqueryui": "^1.12.14",
     "anchor-js": "^4.3.0",
     "blazy": "^1.8.2",
     "bootstrap": "^3.3.7",
