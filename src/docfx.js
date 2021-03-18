@@ -31,6 +31,7 @@ $(function () {
   renderNoteBlocks();
   handleResizableContent();
   addGtmButtons();
+  addCtaBanners();
 
   window.refresh = function (article) {
     // Update markup result
@@ -77,6 +78,35 @@ $(function () {
             $(this).attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
           }
         });
+    }
+  }
+
+  function addCtaBanners() {
+    let productLink = $("meta[property='docfx:link']").attr("content");
+    const imageUrlPart = productLink.split("/")[4];
+
+    if (productLink.indexOf("indigo") !== -1){
+      productLink = "https://cloud.indigo.design";
+    }else if (productLink.charAt(productLink.length - 1) === '/'){
+      productLink += "download";
+    }else {
+      productLink += "/download";
+    }
+
+    if ($('h2')[2]) {
+      const secondHeader = $('h2')[2];
+      const divTag = $('<div>');
+      const imgTag = $('<img>');
+      $(imgTag).attr("src", "../../../images/marketing/" + imageUrlPart + "-cta-banner-2.png");
+      $(imgTag).css({ "width": "100%", "display": "block", "margin": "auto", "cursor": "pointer" });
+      $(imgTag).on('click', downloadAction);
+
+      $(divTag).append(imgTag);
+      $(secondHeader).before(divTag);
+    }
+
+    function downloadAction() {
+      window.location.href = productLink;
     }
   }
 
