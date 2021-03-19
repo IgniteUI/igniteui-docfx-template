@@ -10,6 +10,8 @@ import {
         ResizingService,
         TocRenderingService
     } from './services/index';
+import {IgViewer} from './shared/igViewer.common';
+import {initNavigation} from './services/navigation';
 
 $(() => {
     $.widget("custom.codeView", new CodeView())
@@ -20,4 +22,8 @@ $(() => {
     let articleService = new ArticleRenderingService();
     let services: Array<RenderingService> = [affixService, navbarService, articleService, tocService];
     services.forEach(service => service.render());
+    
+    let igViewer = IgViewer.getInstance();
+    initNavigation();
+    igViewer.adjustTopLinkPos();
 })

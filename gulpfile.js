@@ -1,7 +1,5 @@
 var fs = require("fs");
-var cleanCSS = require("gulp-clean-css");
 var concat = require("gulp-concat");
-var autoprefixer = require('gulp-autoprefixer');
 var uglify = require("gulp-uglify-es").default;
 var gulp = require("gulp");
 var path = require("path");

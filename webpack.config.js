@@ -22,7 +22,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'development',
   entry: './ts-source/docfx.ts',
-
+  externals: {
+    jquery: 'jQuery'
+  },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, './ts-dist')

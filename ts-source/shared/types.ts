@@ -56,4 +56,15 @@ declare global {
         codeView(methodName: 'createTabsWithCodeViews', filesData: ICodeViewFilesData): void;
         codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler: Function, explicitEditor?: string): void;
     }
+
+    class igNavigation {
+        static init():void;
+    }
+}
+
+export interface IThemingData {
+    origin?: string;
+    theme?: string;
+    themeStyle?: string;
+    themeName?: string;
 }

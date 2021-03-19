@@ -3,7 +3,7 @@ import util from "./utils";
 import { RenderingService, HTMLHighlightedCodeElement } from "./common";
 import anchors from 'anchor-js';
 import hljs from "highlight.js";
-import type { IgniteUIPlatform} from '../shared/types';
+import type { IgniteUIPlatform, IThemingData} from '../shared/types';
 export class ArticleRenderingService extends RenderingService {
 
     constructor() {
@@ -201,9 +201,32 @@ export class ArticleRenderingService extends RenderingService {
     
           if (i === 0){
             if (platform === "angular" ){
-              iframe.attr("onload","onSampleIframeContentLoaded(this);");
+              iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => {
+                let _iframe = event.target;
+                _iframe.parentElement!.classList.remove("loading");
+                if (!$(_iframe).hasClass("no-theming")) {
+            
+                    let isIE = !((window as any).ActiveXObject) && "ActiveXObject" in window;
+                    let theme = window.sessionStorage.getItem(isIE ? "theme" : "themeStyle")!;
+                    let targetOrigin = document.body.getAttribute("data-demos-base-url")!;
+                    let data: IThemingData = { origin: window.location.origin };
+                    if (isIE) {
+                        data.theme = theme;
+                    } else {
+                        data.themeStyle = theme;
+                    }
+                    var themingWidget = $('igniteui-theming-widget') as any;
+                    if (themingWidget.length > 0) {
+                        data.themeName = themingWidget[0].theme.globalTheme;
+                        _iframe.contentWindow!.postMessage(data, targetOrigin);
+                    }
+                }
+              });
             }else {
-              iframe.attr("onload","onXPlatSampleIframeContentLoaded(this);");
+                iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => {
+                    let _iframe = event.target;
+                    _iframe.parentElement!.classList.remove("loading");    
+                });
             }
             
             iframe.attr("src", iframeSrc);
