@@ -138,7 +138,11 @@ $(function () {
       const secondHeader = $('h2')[2];
       const divTag = $('<div>');
       const imgTag = $('<img>');
-      $(imgTag).attr("src", "../../../images/marketing/" + imageUrlPart + "-cta-banner-2.png");
+      let path = $("[data-docfx-rel]").attr("data-docfx-rel");
+      if (!path){
+        path = "./";
+      }
+      $(imgTag).attr("src", path + "images/marketing/" + imageUrlPart + "-cta-banner-2.png");
       $(imgTag).css({ "width": "100%", "display": "block", "margin": "auto", "cursor": "pointer" });
       $(imgTag).on('click', downloadAction);
 
