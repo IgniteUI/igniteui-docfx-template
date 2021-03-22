@@ -127,26 +127,29 @@ $(function () {
     let path = $("[data-docfx-rel]").attr("data-docfx-rel");
     const platform = $("meta[property='docfx:platform']").attr("content");
     const imgTag = $('<img>');
-    $(imgTag).attr("src", path + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png");
 
-    if (productLink.indexOf("indigo") !== -1){
+    if (!path) {
+      path = "./";
+    }
+
+    if (productLink.indexOf("indigo") !== -1) {
       productLink = "https://cloud.indigo.design";
       $(imgTag).attr("src", path + "images/marketing/indigo-design-cta-banner-2.png");
-    }else if (productLink.charAt(productLink.length - 1) === '/'){
-      productLink += "download";
-    }else {
-      productLink += "/download";
+    } else {
+      $(imgTag).attr("src", path + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png");
+      if (productLink.charAt(productLink.length - 1) === '/') {
+        productLink += "download";
+      } else {
+        productLink += "/download";
+      }
     }
 
     if ($(".article-container h2")[2]) {
       const secondHeader = $(".article-container h2")[2];
       const divTag = $('<div>');
-      if (!path){
-        path = "./";
-      }
+
       $(imgTag).css({ "width": "100%", "display": "block", "margin": "auto", "cursor": "pointer" });
       $(imgTag).on('click', downloadAction);
-
       $(divTag).append(imgTag);
       $(secondHeader).before(divTag);
     }
