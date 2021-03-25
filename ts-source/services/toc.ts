@@ -1,4 +1,4 @@
-import util from "./utils";
+import util from "../shared/utils";;
 import { RenderingService,
         ResizableObservable,
         DimensionType,
@@ -6,7 +6,7 @@ import { RenderingService,
         StoredActiveElement,
         IActiveTocElement,
         IListNode,
-        TOCHeaderElement } from "./common";
+        TOCHeaderElement } from "../shared/types";;
 import { ResizingService } from "./resizing";
 
 export class TocRenderingService extends RenderingService implements ResizableObservable {

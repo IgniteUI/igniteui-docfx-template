@@ -1,6 +1,6 @@
 import ClipboardJS from "clipboard";
-import util from "./utils";
-import { RenderingService, HTMLHighlightedCodeElement } from "./common";
+import util from "../shared/utils";
+import { RenderingService, HTMLHighlightedCodeElement } from "../shared/types";;
 import anchors from 'anchor-js';
 import hljs from "highlight.js";
 import type { IgniteUIPlatform, IThemingData} from '../shared/types';

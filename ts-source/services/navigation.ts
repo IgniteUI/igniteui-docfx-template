@@ -1,4 +1,4 @@
-import util from './utils';
+import util from '../shared/utils';
 
 export function initNavigation() {
 

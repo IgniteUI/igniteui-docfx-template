@@ -2,7 +2,7 @@ import '../src/styles/main.scss';
 import 'bootstrap';
 import 'jquery-ui';
 import "lazysizes";
-import { RenderingService } from './services/common';
+import { RenderingService } from './shared/types';
 import { CodeView } from './services/code-view';
 import {
         AffixRenderingService, 
@@ -13,7 +13,9 @@ import {
     } from './services/index';
 import {IgViewer} from './shared/igViewer.common';
 import {initNavigation} from './services/navigation';
-import { IThemingData } from './shared/types';
+import {attachLazyLoadHandler} from './handlers/lazyload';
+import { CodeService } from './services/code/base-code-service';
+import { AngularCodeService } from './services/code/angular-code-service';
 
 $(() => {
     $.widget("custom.codeView", new CodeView())
@@ -28,21 +30,21 @@ $(() => {
     let igViewer = IgViewer.getInstance();
     initNavigation();
     igViewer.adjustTopLinkPos();
+    attachLazyLoadHandler();
 
-    document.addEventListener('lazyloaded', (e: Event) =>{
-        $(e.target!).parent().removeClass("loading");
-        if (!igViewer.isDvPage() && !$(e.target!).hasClass("no-theming")) {
-            var isIE = !((window as any).ActiveXObject) && "ActiveXObject" in window;
-            var targetOrigin = document.body.getAttribute("data-demos-base-url")!;
-            var theme = window.sessionStorage.getItem(isIE ? "theme" : "themeStyle")!;
-            var data: IThemingData = { origin: window.location.origin };
-            data.themeName =  $('igniteui-theming-widget').length > 0 ?  ($('igniteui-theming-widget') as any)[0].theme.globalTheme: null;
-            if (isIE) {
-                data.theme = theme;
-            } else {
-                data.themeStyle = theme;
-            }
-            (e.target as HTMLIFrameElement)!.contentWindow!.postMessage(data, targetOrigin);
+    let platformMeta = $("meta[property='docfx:platform']");
+    if (!platformMeta) {
+        return;
+    }
+    setTimeout(() => {
+        let service!: CodeService, platform: string | undefined; 
+        platform = platformMeta.attr("content");
+        if (platform === "angular") {
+            service = new AngularCodeService();
+        } else {
+            // TO DO: XplatCodeService
         }
+        service.init();
     });
+
 })

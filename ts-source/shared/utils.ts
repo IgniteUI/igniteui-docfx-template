@@ -1,4 +1,4 @@
-import { IListNode, IListNodeStart } from "./common";
+import { IListNode, IListNodeStart } from "./types";
 
 class UtilityService {
 

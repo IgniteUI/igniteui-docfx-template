@@ -1,19 +1,4 @@
-
-interface IPageInfo {
-    pageName?: string;
-    title?: string;
-    fileName?: string;
-    path?: IPageInfoPath
-    isContentPage?: boolean;
-}
-
-interface IPageInfoPath {
-    navigation?: string;
-    service?: string;
-    noExt?: string;
-    api?: string;
-    ext?: string;
-}
+import { IPageInfo } from "./types";
 
 export class IgViewer {
 
@@ -22,7 +7,6 @@ export class IgViewer {
         if(!IgViewer.instance) {
             IgViewer.instance = new IgViewer();
         }
-
         return this.instance;
     }
 
@@ -43,7 +27,6 @@ export class IgViewer {
     private $body = $('body');
     private $mainBox = $(".main-box");
     private $navContainer:JQuery<HTMLElement> & Partial<{collapse(mode: any): void }> = $('#nav-container');
-    private $navButton = $('#nav-button');
     private $content: JQuery<HTMLElement>;
     private _currentPageInfo: IPageInfo = {};
 
@@ -66,7 +49,7 @@ export class IgViewer {
         this.adjustTopLinkPos();
         this.refreshHash();
         this.$window.on("scroll",this.adjustTopLinkPos.bind(this));
-        this.$window.one("load", this.syncSidebarHeight() as any);
+        this.$window.one("load", this.syncSidebarHeight.bind(this));
 
         if (this.$mainBox.length === 1) {
             this.addImgResponsiveClass(this.$mainBox);
@@ -76,7 +59,7 @@ export class IgViewer {
         this.$navContainer.collapse!({ toggle: false });
         this.showOrHideNavigation();
 
-        this.$window.on('resize', this.showOrHideNavigation);
+        this.$window.on('resize', this.showOrHideNavigation.bind(this));
     }
 
     public set currentPageInfo(info: IPageInfo) {
@@ -222,25 +205,21 @@ export class IgViewer {
         this.$errorPublishedMessage.fadeIn();
     }
 
-    public syncSidebarHeight(): Function {
-        let self = this;
+    public syncSidebarHeight(): void {
+        console.log(1);
+        let contentMinHeight = undefined,
+            sidebarHeight = this.$sidebar.height()!;
+        this.$content = this.$content ?? $(this.contentContainerId).parent();
+        contentMinHeight = this.$content.data("defaultMinHeight");
+        if (contentMinHeight === undefined) {
+            contentMinHeight = parseInt(this.$content.css("minHeight"), 10);
+            this.$content.data("defaultMinHeight", contentMinHeight);
+        }
 
-        return () => {
-            console.log(1);
-            let contentMinHeight = undefined,
-                sidebarHeight = self.$sidebar.height()!;
-            self.$content = self.$content ?? $(self.contentContainerId).parent();
-            contentMinHeight = self.$content.data("defaultMinHeight");
-            if (contentMinHeight === undefined) {
-                contentMinHeight = parseInt(self.$content.css("minHeight"), 10);
-                self.$content.data("defaultMinHeight", contentMinHeight);
-            }
-    
-            if (sidebarHeight > contentMinHeight) {
-                self.$content.css("minHeight", sidebarHeight);
-            } else {
-                self.$content.css("minHeight", contentMinHeight);
-            }
+        if (sidebarHeight > contentMinHeight) {
+            this.$content.css("minHeight", sidebarHeight);
+        } else {
+            this.$content.css("minHeight", contentMinHeight);
         }
     }
 
@@ -305,6 +284,6 @@ export class IgViewer {
         if (window.matchMedia && window.matchMedia("print").matches) return;
         let mode = this.isSmallDeviceWidth() ? 'hide' : 'show';
         this.$navContainer.collapse!(mode);
-        this.syncSidebarHeight()();
+        this.syncSidebarHeight();
     }
 }
