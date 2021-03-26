@@ -99,7 +99,7 @@ export class AngularCodeService extends CodeService {
     private onAngularGithubProjectButtonClicked() {
         const codeService = this;
 
-        return function ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) {
+        return  ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => {
             if (codeService.isButtonClickInProgress) {
                 return;
             }
@@ -160,16 +160,16 @@ export class AngularCodeService extends CodeService {
     private angularSampleFilePostProcess(demosBaseUrl: string, cb: (url: string) => string, $codeView: JQuery<HTMLElement>) {
         const codeService = this;
         return function (this: JQuery.UrlAjaxSettings, data: any) {
-            let codeViewFiles: ICodeViewFilesData, url: string;
-            const files = data.sampleFiles;
+            let codeViewFiles: ICodeViewFilesData[], url: string;
+            const files: ICodeViewFilesData[] = data.sampleFiles;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
             url = this.url;
             url = cb(url);
             codeService.sampleFilesContentByUrl[url] = data;
-            codeViewFiles = files.filter(function (f: any) { return f.isMain })
-                .sort((a: any, b: any) => {
-                    return codeService.samplesOrder.indexOf(a.fileHeader) - codeService.samplesOrder.indexOf(b.fileHeader);
-                });
+            codeViewFiles = files.filter(f =>  f.isMain)
+                                 .sort((a: any, b: any) => {
+                                    return codeService.samplesOrder.indexOf(a.fileHeader) - codeService.samplesOrder.indexOf(b.fileHeader);
+                                 });
             $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
             $codeView.codeView("renderFooter", codeService.codeViewLiveEditingButtonClickHandler);
         }
@@ -205,7 +205,7 @@ export class AngularCodeService extends CodeService {
     private createPostApiFormFromCodeView() {
         const codeService = this;
 
-        return function ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) {
+        return ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => {
             if (codeService.isButtonClickInProgress) {
                 return;
             }

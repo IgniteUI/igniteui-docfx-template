@@ -16,6 +16,7 @@ import {initNavigation} from './services/navigation';
 import {attachLazyLoadHandler} from './handlers/lazyload';
 import { CodeService } from './services/code/base-code-service';
 import { AngularCodeService } from './services/code/angular-code-service';
+import { XplatCodeService } from './services/code/xplat-code-service';
 
 $(() => {
     $.widget("custom.codeView", new CodeView())
@@ -37,12 +38,12 @@ $(() => {
         return;
     }
     setTimeout(() => {
-        let service!: CodeService, platform: string | undefined; 
-        platform = platformMeta.attr("content");
+        let service!: CodeService, platform: string | undefined;
+        platform = platformMeta.attr("content")!;
         if (platform === "angular") {
             service = new AngularCodeService();
         } else {
-            // TO DO: XplatCodeService
+           service = new XplatCodeService(platform);
         }
         service.init();
     });

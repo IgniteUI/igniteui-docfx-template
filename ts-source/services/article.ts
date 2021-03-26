@@ -1,4 +1,3 @@
-import ClipboardJS from "clipboard";
 import util from "../shared/utils";
 import { RenderingService, HTMLHighlightedCodeElement } from "../shared/types";;
 import anchors from 'anchor-js';
@@ -20,10 +19,10 @@ export class ArticleRenderingService extends RenderingService {
         this.renderAlerts();
         this.breakText();
         this.renderNoteBlocks();
-        this.copyCode();
         this.anchorJs();
         this.renderGithubBtn();
         this.instantiateCodeViews();
+        util.copyCode(".hljs-code-copy");
 
     }
 
@@ -244,25 +243,6 @@ export class ArticleRenderingService extends RenderingService {
           $(currentView).codeView({iframeId : i});
         }
       }
-
-    private copyCode() {
-        let btn = ".hljs-code-copy";
-        let cpb = new ClipboardJS(btn, {
-            text: function (trigger) {
-                let codeSnippet = $(trigger)
-                    .prevAll("code")
-                    .text();
-                return codeSnippet;
-            }
-        });
-
-        cpb.on("success", (e) => {
-            e.trigger.textContent = 'COPIED';
-            setTimeout(() => {
-                e.trigger.textContent = '';
-            }, 1000);
-        });
-    }
 
     private anchorJs() {
         $(".anchorjs-link").on("click", (evt) => util.scrollAnimation(evt));

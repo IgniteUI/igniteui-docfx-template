@@ -1,7 +1,15 @@
+import ClipboardJS from "clipboard";
 import { IListNode, IListNodeStart } from "./types";
 
 class UtilityService {
-
+    public isLocalhost = Boolean(
+        window.location.hostname === 'localhost' ||
+        // [::1] is the IPv6 localhost address.
+        window.location.hostname === '[::1]' ||
+        // 127.0.0.1/8 is considered localhost for IPv4.
+        window.location.hostname.match(
+            /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+        ));
     private offset: number;
     constructor() {
         console.log(1);
@@ -124,14 +132,22 @@ class UtilityService {
         return false;
     }
 
-    public isLocalhost = Boolean(
-        window.location.hostname === 'localhost' ||
-        // [::1] is the IPv6 localhost address.
-        window.location.hostname === '[::1]' ||
-        // 127.0.0.1/8 is considered localhost for IPv4.
-        window.location.hostname.match(
-            /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-        ));
+    public copyCode(buttonSelector: string, postCopyText?: string) {
+        let btn = buttonSelector;
+        let cpb = new ClipboardJS(btn, {
+          text: (trigger) => {
+            let codeSnippet = $(trigger).prevAll("code").text();
+            return codeSnippet;
+          }
+        });
+  
+        cpb.on("success", (e: ClipboardJS.Event) => {
+          e.trigger.textContent = "COPIED";
+          setTimeout(() => {
+            $(e.trigger).text(postCopyText ?? '');
+          }, 1000);
+        });
+    }
 }
 
 const util: UtilityService = new UtilityService();

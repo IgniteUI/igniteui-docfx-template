@@ -12,7 +12,7 @@ type Merge<T, TT> = {
 
 export type HTMLHighlightedCodeElement = Merge<HTMLElement, IHighlighted>;
 export interface ICodeViewFilesData {
-    isMain: true;
+    isMain: boolean;
     path: string;
     hasRelativeAssetsUrls: boolean;
     content: string;
@@ -47,7 +47,6 @@ export interface ICodeViewOptions {
 export interface ICodeViewEvents {
     _create(): void;
     _codeViewTabClick(event: MouseEvent): void;
-    _copyCode(): void;
     createTabsWithCodeViews(filesData: ICodeViewFilesData[]): void;
     renderFooter(liveEditingButtonsClickHandler: Function, explicitEditor?: string): void;
 }
@@ -137,8 +136,8 @@ declare global {
     interface JQuery {
         codeView(): JQuery;
         codeView(options: ICodeViewOptions): JQuery;
-        codeView(methodName: 'createTabsWithCodeViews', filesData: ICodeViewFilesData): void;
-        codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler: Function, explicitEditor?: string): void;
+        codeView(methodName: 'createTabsWithCodeViews', filesData: ICodeViewFilesData[]): void;
+        codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string): void;
     }
 
     class igNavigation {
