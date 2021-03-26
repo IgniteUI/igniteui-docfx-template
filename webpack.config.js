@@ -16,11 +16,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-
-
-
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './ts-source/docfx.ts',
   externals: {
     jquery: 'jQuery'
@@ -39,7 +36,7 @@ module.exports = {
       jQuery: 'jquery'
     })
   ],
-
+  target: ['web', 'es5'],
   module: {
     rules: [
       {
@@ -80,7 +77,7 @@ module.exports = {
       },
       {
         test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules\/?!(highlight.js)\/)/,
         use: {
           loader: 'babel-loader',
           options: {

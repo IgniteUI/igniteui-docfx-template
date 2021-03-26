@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import '../src/styles/main.scss';
 import 'bootstrap';
 import 'jquery-ui';
