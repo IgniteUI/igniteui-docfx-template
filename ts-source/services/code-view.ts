@@ -2,7 +2,6 @@ import { ICodeViewCSS, ICodeViewElements, ICodeViewEvents, ICodeViewFilesData, I
 import ClipboardJS from "clipboard";
 import hljs from "highlight.js";
 import util from '../shared/utils';
-
 export class CodeView implements ICodeViewEvents, ICodeViewMembers {
    
     public options: ICodeViewOptions;
@@ -20,8 +19,6 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
     private element: JQuery;
     private _elements: ICodeViewElements;
 
-    _isIE: boolean =  navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0;
-    _isEdge: boolean =  navigator.userAgent.indexOf('Edge') !== -1;
     _stackblitzText: string = "StackBlitz";
     _csbText: string =  "Codesandbox";
 
@@ -59,7 +56,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
         $navbar.prepend($exampleTab);
   
         //Create fullscreen button and add it to the code view navbar
-        $fullscreenButton = $((this._isIE ? "<span class='fs-button-container' style='width: 35px'><i class='material-icons code-view-fullscreen'>open_in_full</i></span>" : "<span class='fs-button-container' title='Expand to fullscreen'></span>"));
+        $fullscreenButton = $((util.isIE ? "<span class='fs-button-container' style='width: 35px'><i class='material-icons code-view-fullscreen'>open_in_full</i></span>" : "<span class='fs-button-container' title='Expand to fullscreen'></span>"));
         $fullscreenButton.on('click', function () { window.open($iframe.attr("src") || $iframe.attr("data-src")) });
         $fullscreenButton.appendTo($navbar);
   
@@ -172,7 +169,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
 
     renderFooter(liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string): void {
       let $footerContainer = $('<div class="editing-buttons-container"></div>');
-      if (!(this._isIE || this._isEdge)) {
+      if (!(util.isIE || util.isEdge)) {
 
         if (!explicitEditor) {
           //Create Codesandbox live editing button

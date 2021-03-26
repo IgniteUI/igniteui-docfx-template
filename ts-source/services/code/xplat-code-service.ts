@@ -25,6 +25,9 @@ export class XplatCodeService extends CodeService {
             case "blazor":
                 this.samplesOrder = ['razor', 'cs', 'js', 'css'];
                 this.enableLiveEditing = false;
+                delete this.codeViewLiveEditingButtonClickHandler;
+                delete this.getGithubSampleUrl;
+                delete this.onGithubProjectButtonClicked;
             break;
         }
     }
@@ -32,30 +35,28 @@ export class XplatCodeService extends CodeService {
     public init() {
         let $codeViewElements = $("code-view");
         if ($codeViewElements.length > 0) {
-
             $.each($codeViewElements, (index, element) => {
                 let $codeView = $(element);
                 let samplesBaseUrl = $codeView.attr(this.demosBaseUrlAttrName)!;
                 let sampleUrl = $codeView.attr(this.sampleUrlAttrName)!;
                 if (!this.demosUrls.has(samplesBaseUrl)) {
-                    this.demosUrls.set(samplesBaseUrl, new Set<ISampleData>().add({ url: sampleUrl, codeView: $codeView }));
+                    this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, codeView: $codeView }]);
                 } else {
-                    this.demosUrls.get(samplesBaseUrl)!.add({ url: sampleUrl, codeView: $codeView });
+                    this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, codeView: $codeView });
                 }
             });
 
             let allDemosBaseUrls = this.demosUrls.keys();
 
             for (const baseUrl of allDemosBaseUrls) {
-                let codeViewsData = this.demosUrls.get(baseUrl)!.values();
+                let codeViewsData = this.demosUrls.get(baseUrl)!;
                 this.getSamplesContent(baseUrl, codeViewsData);
             }
         }
     }
 
-    protected codeViewLiveEditingButtonClickHandler = this.onGithubProjectButtonClicked();
-
-    private getSamplesContent(samplesBaseUrl: string, data: IterableIterator<ISampleData>) {
+    
+    private getSamplesContent(samplesBaseUrl: string, data: ISampleData[]) {
         for (const sampleData of data) {
             let sampleFileMedata = this.getSampleMetadataUrl(samplesBaseUrl, sampleData.url);
             let $codeView = sampleData.codeView;
@@ -76,27 +77,27 @@ export class XplatCodeService extends CodeService {
         codeViewFiles = files.filter(f => f.isMain)
                                 .sort( (a, b) => {
                                 return this.samplesOrder.indexOf(a.fileHeader) - this.samplesOrder.indexOf(b.fileHeader);
-                                });
+                            });
         $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
         if(this.enableLiveEditing && $codeView.is(`[${this.githubSourceAttrName}]`)) {
-            $codeView.codeView("renderFooter", this.codeViewLiveEditingButtonClickHandler, "csb");
+            $codeView.codeView("renderFooter", this.codeViewLiveEditingButtonClickHandler!, "csb");
         }
     }
 
     private sampleFilesFetchErrorHandler($codeView: JQuery<HTMLElement>) {
         if(this.enableLiveEditing && $codeView.is("[" + this.githubSourceAttrName + "]")) {
-            $codeView.codeView("renderFooter", this.codeViewLiveEditingButtonClickHandler, "csb");
+            $codeView.codeView("renderFooter", this.codeViewLiveEditingButtonClickHandler!, "csb");
         }
         throw new Error('Error on fetching sample files!');
     }
-
+    
     private getSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string): string {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
         let demoJsonPath = demosBaseUrl + this.samplesCodeBasePath + demoFileMetadataName + ".json";
         return demoJsonPath;
     }
 
-    private onGithubProjectButtonClicked() {
+    private onGithubProjectButtonClicked?() {
         const codeService = this;
         return ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => {
             if (codeService.isButtonClickInProgress) {
@@ -107,12 +108,14 @@ export class XplatCodeService extends CodeService {
             let sampleFileUrl = $codeView.attr(codeService.githubSourceAttrName)!;
             let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
             let branch = demosBaseUrl.includes("staging.infragistics.com") ? "vnext" : "master";
-            window.open(codeService.getGithubSampleUrl(editor, sampleFileUrl, branch), '_blank');
+            window.open(codeService.getGithubSampleUrl!(editor, sampleFileUrl, branch), '_blank');
             codeService.isButtonClickInProgress = false;
         }
     }
 
-    private getGithubSampleUrl(editor: string, sampleUrl: string, branch: string) {
+    protected codeViewLiveEditingButtonClickHandler? = this.onGithubProjectButtonClicked!();
+
+    private getGithubSampleUrl?(editor: string, sampleUrl: string, branch: string) {
         if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch + "/samples/" + sampleUrl;
         return "https://codesandbox.io/s/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch + "/samples/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
     }

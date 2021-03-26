@@ -205,11 +205,10 @@ export class ArticleRenderingService extends RenderingService {
                 _iframe.parentElement!.classList.remove("loading");
                 if (!$(_iframe).hasClass("no-theming")) {
             
-                    let isIE = !((window as any).ActiveXObject) && "ActiveXObject" in window;
-                    let theme = window.sessionStorage.getItem(isIE ? "theme" : "themeStyle")!;
+                    let theme = window.sessionStorage.getItem(util.isIE ? "theme" : "themeStyle")!;
                     let targetOrigin = document.body.getAttribute("data-demos-base-url")!;
                     let data: IThemingData = { origin: window.location.origin };
-                    if (isIE) {
+                    if (util.isIE) {
                         data.theme = theme;
                     } else {
                         data.themeStyle = theme;

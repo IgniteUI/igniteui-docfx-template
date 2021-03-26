@@ -54,8 +54,6 @@ export interface ICodeViewEvents {
 export interface ICodeViewMembers {
      options: Partial<ICodeViewOptions>;
      css: Readonly<ICodeViewCSS>;
-    _isIE: boolean;
-    _isEdge: boolean;
     _stackblitzText: string;
     _csbText: string;
 }

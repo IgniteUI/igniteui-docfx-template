@@ -28,39 +28,37 @@ export class AngularCodeService extends CodeService {
                 let samplesBaseUrl = $codeView.attr(this.demosBaseUrlAttrName)!;
                 let sampleUrl = $codeView.attr(this.sampleUrlAttrName)!;
                 if (!this.demosUrls.has(samplesBaseUrl)) {
-                    this.demosUrls.set(samplesBaseUrl, new Set<ISampleData>().add({ url: sampleUrl, codeView: $codeView }));
+                    this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, codeView: $codeView }]);
                 } else {
-                    this.demosUrls.get(samplesBaseUrl)!.add({ url: sampleUrl, codeView: $codeView });
+                    this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, codeView: $codeView });
                 }
             });
 
             let allDemosBaseUrls = this.demosUrls.keys();
-            for (let head = allDemosBaseUrls.next(); !head.done; head = allDemosBaseUrls.next()) {
-                let baseUrl = head.value;
-                let codeViewsData = this.demosUrls.get(baseUrl)!.values();
+            for (const baseUrl of allDemosBaseUrls) {
+                let codeViewsData = this.demosUrls.get(baseUrl)!;
                 if (util.isLocalhost) {
                     this.generateLiveEditingAngularApp(baseUrl, codeViewsData);
                 } else {
                     this.getAngularSampleFiles(baseUrl, codeViewsData, () => this.renderFooters(codeViewsData));
                 }
             }
-            if (!(this.isIE || this.isEdge)) {
-                $standaloneliveEditingButtons.on('click', this.onAngularGithubProjectStandaloneButtonClicked);
+            if (!(util.isIE || util.isEdge)) {
+                $standaloneliveEditingButtons.on('click', this.onAngularGithubProjectStandaloneButtonClicked());
             } else {
                 $standaloneliveEditingButtons.css("display", "none");
             }
         }
     }
 
-    private renderFooters(codeViewsData: IterableIterator<ISampleData>) {
-        for (let head = codeViewsData.next(); !head.done; head = codeViewsData.next()) {
-            let codeViewData = head.value;
-            codeViewData.codeView.codeView("renderFooter", this.onAngularGithubProjectButtonClicked);
+    private renderFooters(codeViewsData: ISampleData[]) {
+        for (const data of codeViewsData) {
+            data.codeView.codeView("renderFooter", this.onAngularGithubProjectButtonClicked);
         }
     }
 
     //Create a post API form after fetching samples files
-    private generateLiveEditingAngularApp(samplesBaseUrl: string, data: IterableIterator<ISampleData>) {
+    private generateLiveEditingAngularApp(samplesBaseUrl: string, data: ISampleData[]) {
         let metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
@@ -71,12 +69,11 @@ export class AngularCodeService extends CodeService {
     }
 
     //Fetch angular samples files
-    private getAngularFiles(samplesBaseUrl: string, data: IterableIterator<ISampleData>, timeStamp: number) {
+    private getAngularFiles(samplesBaseUrl: string, data: ISampleData[], timeStamp: number) {
         let sharedFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + this.sharedFileName;
         sharedFileUrl = this.addTimeStamp(sharedFileUrl, timeStamp);
         $.get(sharedFileUrl, this.angularSharedFilePostProcess(samplesBaseUrl, () => {
-            for (let head = data.next(); !head.done; head = data.next()) {
-                let sampleData = head.value;
+            for (const sampleData of data) {
                 let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
                 let $codeView = sampleData.codeView;
                 $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView))
@@ -114,17 +111,20 @@ export class AngularCodeService extends CodeService {
     }
 
     private onAngularGithubProjectStandaloneButtonClicked() {
-        if (this.isButtonClickInProgress) {
-            return;
+        const codeService = this;
+        return function (this: HTMLButtonElement) {
+            if (codeService.isButtonClickInProgress) {
+                return;
+            }
+            codeService.isButtonClickInProgress = true;
+            let $button = $(this);
+            let demosBaseUrl = $button.attr(codeService.demosBaseUrlAttrName)!;
+            let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $button.attr(codeService.buttonSampleSourceAttrName)!);
+            let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
+            let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
+            window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
+            codeService.isButtonClickInProgress = false;
         }
-        this.isButtonClickInProgress = true;
-        let $button = $(this);
-        let demosBaseUrl = $button.attr(this.demosBaseUrlAttrName)!;
-        let sampleFileUrl = this.getGitHubSampleUrl(demosBaseUrl, $button.attr(this.buttonSampleSourceAttrName)!);
-        let editor = $button.hasClass(this.stkbButtonClass) ? "stackblitz" : "codesandbox";
-        let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-        window.open(this.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
-        this.isButtonClickInProgress = false;
     }
 
     private addTimeStamp(url: string, demosTimeStamp?: number): string {
@@ -136,19 +136,17 @@ export class AngularCodeService extends CodeService {
         return url;
     }
 
-    private getAngularSampleFiles(samplesBaseUrl: string, data: IterableIterator<ISampleData>, err: () => void) {
+    private getAngularSampleFiles(samplesBaseUrl: string, data: ISampleData[], err: () => void) {
         let metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
         $.get(metaFileUrl)
             .done((response: any) => {
                 this.demosTimeStamp = response.generationTimeStamp;
-                for (let head = data.next(); !head.done; head = data.next()) {
-                    let sampleData = head.value;
+                for (const sampleData of data) {
                     let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
                     let $codeView = sampleData.codeView;
                     $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView))
-
                 }
             })
             .fail(() => {
