@@ -206,7 +206,6 @@ export class IgViewer {
     }
 
     public syncSidebarHeight(): void {
-        console.log(1);
         let contentMinHeight = undefined,
             sidebarHeight = this.$sidebar.height()!;
         this.$content = this.$content ?? $(this.contentContainerId).parent();

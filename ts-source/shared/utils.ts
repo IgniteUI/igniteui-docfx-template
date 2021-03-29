@@ -14,7 +14,6 @@ class UtilityService {
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
     private offset: number;
     constructor() {
-        console.log(1);
         this.offset = $('.navbar').first().height()!;
         $("body").data("offset", this.offset + 50);
     }

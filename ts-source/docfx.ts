@@ -18,6 +18,7 @@ import {attachLazyLoadHandler} from './handlers/lazyload';
 import { CodeService } from './services/code/base-code-service';
 import { AngularCodeService } from './services/code/angular-code-service';
 import { XplatCodeService } from './services/code/xplat-code-service';
+import {attachThemingHandler} from './handlers/theming';
 
 $(() => {
     $.widget("custom.codeView", new CodeView())
@@ -29,16 +30,16 @@ $(() => {
     let services: Array<RenderingService> = [affixService, navbarService, articleService, tocService];
     services.forEach(service => service.render());
     
-    let igViewer = IgViewer.getInstance();
-    initNavigation();
-    igViewer.adjustTopLinkPos();
-    attachLazyLoadHandler();
-
-    let platformMeta = $("meta[property='docfx:platform']");
-    if (!platformMeta) {
-        return;
-    }
     setTimeout(() => {
+        let igViewer = IgViewer.getInstance();
+        initNavigation();
+        igViewer.adjustTopLinkPos();
+        attachLazyLoadHandler();
+        attachThemingHandler();
+        let platformMeta = $("meta[property='docfx:platform']");
+        if (!platformMeta) {
+            return;
+        }
         let service!: CodeService, platform: string | undefined;
         platform = platformMeta.attr("content")!;
         if (platform === "angular") {

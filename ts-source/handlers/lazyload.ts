@@ -4,7 +4,6 @@ import util from '../shared/utils';
 
 export function attachLazyLoadHandler() {
     document.addEventListener('lazyloaded', (e: Event) =>{
-        $(e.target!).parent().removeClass("loading");
         if (!IgViewer.getInstance().isDvPage() && !$(e.target!).hasClass("no-theming")) {
             let targetOrigin = document.body.getAttribute("data-demos-base-url")!;
             let theme = window.sessionStorage.getItem(util.isIE ? "theme" : "themeStyle")!;
@@ -17,6 +16,7 @@ export function attachLazyLoadHandler() {
             }
             (e.target as HTMLIFrameElement)!.contentWindow!.postMessage(data, targetOrigin);
         }
+        $(e.target!).parent().removeClass("loading");
     });
 }
 
