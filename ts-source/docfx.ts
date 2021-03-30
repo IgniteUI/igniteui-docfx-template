@@ -1,5 +1,5 @@
-import 'babel-polyfill';
 import '../src/styles/main.scss';
+import 'babel-polyfill';
 import 'bootstrap';
 import 'jquery-ui';
 import "lazysizes";
@@ -12,13 +12,13 @@ import {
         ResizingService,
         TocRenderingService
     } from './services/index';
-import {IgViewer} from './shared/igViewer.common';
-import {initNavigation} from './services/navigation';
-import {attachLazyLoadHandler} from './handlers/lazyload';
+import { IgViewer } from './shared/igViewer.common';
+import { attachLazyLoadHandler } from './handlers/lazyload';
+import { attachThemingHandler } from './handlers/theming';
+import { initNavigation } from './services/navigation';
 import { CodeService } from './services/code/base-code-service';
 import { AngularCodeService } from './services/code/angular-code-service';
 import { XplatCodeService } from './services/code/xplat-code-service';
-import {attachThemingHandler} from './handlers/theming';
 
 $(() => {
     $.widget("custom.codeView", new CodeView())

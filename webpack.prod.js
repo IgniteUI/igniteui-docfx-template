@@ -1,35 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-
-
-
-/*
- * We've enabled MiniCssExtractPlugin for you. This allows your app to
- * use css modules that will be moved into a separate CSS file instead of inside
- * one of your module entries!
- *
- * https://github.com/webpack-contrib/mini-css-extract-plugin
- *
- */
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './ts-source/docfx.ts',
   externals: {
     jquery: 'jQuery'
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, './ts-dist')
+    filename: '[name].bundle.[chunkhash].js',
+    path: path.resolve(__dirname, './dist/template/bundles')
   },
 
   plugins: [
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles-bundle.min.css' }),
+    new MiniCssExtractPlugin({filename: 'styles.bundle.[contenthash].css' }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       JQuery: 'jquery',
@@ -46,28 +33,19 @@ module.exports = {
       },
       {
         test: /.(sa|sc|c)ss$/,
-
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: './'
+                publicPath: './'
             }
           },
           {
             loader: "css-loader",
-
-            options: {
-              sourceMap: true
-            }
           },
-          'resolve-url-loader',
+            'resolve-url-loader',
           {
             loader: "sass-loader",
-
-            options: {
-              sourceMap: true
-            }
           }
         ],
       },
@@ -90,8 +68,10 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js']
   },
+  performance: {
+    hints: false
+  },
   optimization: {
-    moduleIds: 'deterministic',
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {

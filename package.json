@@ -14,7 +14,7 @@
   ],
   "author": "Infragistics",
   "scripts": {
-    "build": "webpack && gulp build",
+    "build": "gulp build && webpack --config webpack.prod.js && gulp generateBundlingGlobalMetadata",
     "build:dev": "gulp build-watch --debugMode=true",
     "build:watch": "gulp build-watch",
     "bundle-and-minify": "gulp bundleAndMinify",
