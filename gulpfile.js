@@ -2,6 +2,7 @@ var fs = require("fs");
 var gulp = require("gulp");
 var path = require("path");
 var del = require('del');
+const os = require('os');
 
 const TEMPLATE_DIST = "/dist/template";
 const WEBPACK_BUILD_DIST = `${TEMPLATE_DIST}/bundles/`;
@@ -10,15 +11,11 @@ const packageStatics = ['package.json', 'README.md', 'index.js', 'preconfig.json
 
 const addWatchers = () => {
 
-    gulp.watch(['./template/**/*', './index.js', './preconfig.json', './src/app/**/*', './src/styles/**/*'], 
-               gulp.series( buildPackageStatics, createTemplate, generateBundlingGlobalMetadata)
-               )
-    
-    return require('child_process').spawn(
-                                        path.normalize('./node_modules/.bin/webpack.cmd'),
-                                        ['--config', 'webpack.dev.js', '--watch'],
-                                        { stdio: 'inherit' }
-                                        );
+    gulp.watch(['./template/**/*', './index.js', './preconfig.json', './src/app/**/*', './src/styles/**/*'],
+        gulp.series(buildPackageStatics, createTemplate, generateBundlingGlobalMetadata)
+    )
+
+    return webpackBuild(true);
 }
 
 const cleanup = (done) => {
@@ -53,17 +50,27 @@ const generateBundlingGlobalMetadata = (done) => {
     done();
 }
 
-const webpackBuild = () => {
+const webpackBuild = (dev = false) => {
+    let config, commandArgs = [], watch = "--watch";
+
+    config = dev ? "webpack.dev.js" : 'webpack.prod.js';
+    commandArgs.push(config);
+    if (dev) {
+        commandArgs.push(watch)
+    }
+
     return require('child_process').
         spawn(
-            path.normalize('./node_modules/.bin/webpack.cmd'),
-            ['--config', 'webpack.prod.js'],
+            path.normalize(`./node_modules/.bin/webpack${/^win/.test(os.platform()) ? '.cmd' : ''}`),
+            ['--config'].concat(commandArgs),
             { stdio: 'inherit' }
         );
 }
 
+let buildProd;
+
 exports.generateBundlingGlobalMetadata = generateBundlingGlobalMetadata;
-exports.webpackBuild = webpackBuild;
 exports.createTemplate = createTemplate;
-exports.build = gulp.series(cleanup, buildPackageStatics, createTemplate, webpackBuild, generateBundlingGlobalMetadata);
+exports.webpackBuildProd = buildProd = () => webpackBuild();
+exports.build = gulp.series(cleanup, buildPackageStatics, createTemplate, this.webpackBuildProd, generateBundlingGlobalMetadata);
 exports['build-watch'] = gulp.series(cleanup, addWatchers);
