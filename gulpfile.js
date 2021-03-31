@@ -1,13 +1,45 @@
 var fs = require("fs");
-
 var gulp = require("gulp");
 var path = require("path");
+var del = require('del');
 
 const TEMPLATE_DIST = "/dist/template";
 const WEBPACK_BUILD_DIST = `${TEMPLATE_DIST}/bundles/`;
 const packageStatics = ['package.json', 'README.md', 'index.js', 'preconfig.json'];
 
-exports.generateBundlingGlobalMetadata = (done) => {
+
+const addWatchers = () => {
+
+    gulp.watch(['./template/**/*', './index.js', './preconfig.json', './src/app/**/*', './src/styles/**/*'], 
+               gulp.series( buildPackageStatics, createTemplate, generateBundlingGlobalMetadata)
+               )
+    
+    return require('child_process').spawn(
+                                        path.normalize('./node_modules/.bin/webpack.cmd'),
+                                        ['--config', 'webpack.dev.js', '--watch'],
+                                        { stdio: 'inherit' }
+                                        );
+}
+
+const cleanup = (done) => {
+    del.sync(path.resolve(__dirname, "dist"));
+    done();
+}
+const buildPackageStatics = () => {
+    return gulp.src(packageStatics).pipe(gulp.dest("dist"));
+}
+
+const createTemplate = () => {
+    return gulp.src([
+        './src/**',
+        './template/**/*',
+        '!./src/app/**',
+        '!./src/styles/**',
+        '!./src/assets/images/**',
+    ]).pipe(gulp.dest("dist/template"));
+}
+
+const generateBundlingGlobalMetadata = (done) => {
     let metadata = {};
     metadata["_timestamp"] = new Date().getTime();
     let outputBuildFiles = fs.readdirSync(path.join(__dirname, WEBPACK_BUILD_DIST));
@@ -21,29 +53,17 @@ exports.generateBundlingGlobalMetadata = (done) => {
     done();
 }
 
-
-const addWatcher = (done) => {
-
-    gulp.watch(['./template/**/*', 'src/styles/**/*', './index.js', './preconfig.json', './ts-source'], this.build)
-    done();
+const webpackBuild = () => {
+    return require('child_process').
+        spawn(
+            path.normalize('./node_modules/.bin/webpack.cmd'),
+            ['--config', 'webpack.prod.js'],
+            { stdio: 'inherit' }
+        );
 }
 
-const buildPackageStatics = () => {
-    return gulp.src(packageStatics).pipe(gulp.dest("dist"));
-}
-
-const createTemplate = () => {
-    return gulp.src(['./src/**/*',
-                     './template/**/*',
-                     '!./src/modules',
-                     '!./src/assets/images/**/*',
-                     '!./src/**/*.js']).pipe(gulp.dest("dist/template"));
-}
+exports.generateBundlingGlobalMetadata = generateBundlingGlobalMetadata;
+exports.webpackBuild = webpackBuild;
 exports.createTemplate = createTemplate;
-
-exports.wbBuild = () => {
-    return require('child_process').spawn(path.normalize('./node_modules/.bin/webpack.cmd'), {stdio: 'inherit'});
-}
-
-exports.build = gulp.series(buildPackageStatics, createTemplate);
-exports['build-watch'] = gulp.series(this.wbBuild, this.build, addWatcher);
+exports.build = gulp.series(cleanup, buildPackageStatics, createTemplate, webpackBuild, generateBundlingGlobalMetadata);
+exports['build-watch'] = gulp.series(cleanup, addWatchers);

@@ -20,7 +20,7 @@
   ],
   "author": "Infragistics",
   "scripts": {
-    "build": "set NODE_ENV=production && gulp build",
+    "build": "gulp build",
     "build:dev": "gulp build-watch",
     "generate-bundling-global-metadata": "gulp generateBundlingGlobalMetadata"
   },
