@@ -21,8 +21,7 @@
   "author": "Infragistics",
   "scripts": {
     "build": "gulp build",
-    "build:dev": "gulp build-watch",
-    "generate-bundling-global-metadata": "gulp generateBundlingGlobalMetadata"
+    "build:dev": "gulp build-watch"
   },
   "bugs": {
     "url": "https://github.com/IgniteUI/igniteui-docfx-template/issues"
