@@ -1,22 +1,23 @@
 const path = require('path');
 const webpack = require('webpack');
-
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: './src/docfx.ts',
+  entry: './src/app/docfx.ts',
   externals: {
     jquery: 'jQuery'
   },
   output: {
-    filename: '[name].bundle.[chunkhash].js',
+    filename: '[name].bundle.[contenthash].js',
     path: path.resolve(__dirname, './dist/template/bundles')
   },
 
   plugins: [
+    new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({filename: 'styles.bundle.[contenthash].css' })
+    new MiniCssExtractPlugin({ filename: 'styles.bundle.[contenthash].css' })
   ],
   target: ['web', 'es5'],
   module: {
@@ -32,13 +33,13 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-                publicPath: './'
+              publicPath: './'
             }
           },
           {
-            loader: "css-loader",
+            loader: "css-loader"
           },
-            'resolve-url-loader',
+          'resolve-url-loader',
           {
             loader: "sass-loader",
           }
@@ -49,9 +50,11 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules\/?!(highlight.js)\/)/,
-        use: {
+        test: /\.js$/,
+        include: [
+          path.resolve(__dirname, "src/app"),
+          path.resolve(__dirname, "node_modules/highlight.js/lib")
+        ], use: {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],

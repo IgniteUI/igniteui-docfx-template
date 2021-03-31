@@ -21,6 +21,7 @@ export class ArticleRenderingService extends RenderingService {
         this.renderNoteBlocks();
         this.anchorJs();
         this.renderGithubBtn();
+        this.addCtaBanners();
         this.instantiateCodeViews();
         util.copyCode(".hljs-code-copy");
 
@@ -242,6 +243,30 @@ export class ArticleRenderingService extends RenderingService {
           $(currentView).codeView({iframeId : i});
         }
       }
+    
+    private addCtaBanners() {
+        let productLink = $("meta[property='docfx:link']").attr("content")!,
+            path = $("[data-docfx-rel]").attr("data-docfx-rel") ?? "./",
+            platform = $("meta[property='docfx:platform']").attr("content"),
+            imgTag = $('<img>');
+    
+    
+        if (productLink.includes("indigo")) {
+          productLink = "https://cloud.indigo.design";
+          $(imgTag).attr("src", path + "images/marketing/indigo-design-cta-banner-2.png");
+        } else {
+          $(imgTag).attr("src", path + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png");
+          productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+        }
+    
+        if ($(".article-container h2")[2]) {
+          let thirdHeader = $(".article-container h2")[2], divTag = $('<div>');
+          $(imgTag).css({ "width": "100%", "display": "block", "margin": "auto", "cursor": "pointer" });
+          $(imgTag).on('click', () => window.location.href = productLink);
+          $(divTag).append(imgTag);
+          $(thirdHeader).before(divTag);
+        } 
+    }
 
     private anchorJs() {
         $(".anchorjs-link").on("click", (evt) => util.scrollAnimation(evt));
