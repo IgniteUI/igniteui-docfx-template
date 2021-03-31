@@ -1,4 +1,4 @@
-import { ICodeViewFilesData, ISampleData } from "../../shared/types";
+import { ICodeViewFilesData, ISampleData } from "../../types";
 import { CodeService } from "./base-code-service";
 
 export class XplatCodeService extends CodeService {

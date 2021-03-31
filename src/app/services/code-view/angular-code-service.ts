@@ -1,6 +1,6 @@
 import { CodeService } from "./base-code-service";
-import util from '../../shared/utils';
-import { ICodeViewFilesData, ISampleData } from "../../shared/types";
+import util from '../utils';
+import { ICodeViewFilesData, ISampleData } from "../../types";
 import { compressToBase64 } from 'lz-string';
 
 export class AngularCodeService extends CodeService {

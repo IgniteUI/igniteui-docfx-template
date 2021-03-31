@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './ts-source/docfx.ts',
+  entry: './src/docfx.ts',
   externals: {
     jquery: 'jQuery'
   },
@@ -16,12 +16,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles-bundle.min.css' }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      JQuery: 'jquery',
-      jQuery: 'jquery'
-    })
+    new MiniCssExtractPlugin({ filename: 'styles-bundle.min.css' })
   ],
   target: ['web', 'es5'],
   module: {

@@ -1,5 +1,5 @@
-import util from "../shared/utils";;
-import { RenderingService } from "../shared/types";;
+import util from "../utils";;
+import { RenderingService } from "../../types";;
 
 export class NavbarRenderingService extends RenderingService {
 

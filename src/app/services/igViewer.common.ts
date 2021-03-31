@@ -1,4 +1,4 @@
-import { IPageInfo } from "./types";
+import { IPageInfo } from "../types";
 
 export class IgViewer {
 

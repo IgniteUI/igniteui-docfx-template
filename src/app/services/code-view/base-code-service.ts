@@ -1,4 +1,4 @@
-import { ISampleData } from "../../shared/types";
+import { ISampleData } from "../../types";
 
 export abstract class CodeService {
 

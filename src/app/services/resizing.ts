@@ -1,5 +1,5 @@
 import ResizeObserver from "resize-observer-polyfill";
-import { ResizableObservable, DimensionType } from "../shared/types";;
+import { ResizableObservable, DimensionType } from "../types";;
 
 export class ResizingService {
 

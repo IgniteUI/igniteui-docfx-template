@@ -1,7 +1,7 @@
-import { ICodeViewCSS, ICodeViewElements, ICodeViewEvents, ICodeViewFilesData, ICodeViewMembers, ICodeViewOptions } from '../shared/types';
-import ClipboardJS from "clipboard";
+import { ICodeViewCSS, ICodeViewElements, ICodeViewEvents, ICodeViewFilesData, ICodeViewMembers, ICodeViewOptions } from '../../types';
 import hljs from "highlight.js";
-import util from '../shared/utils';
+import util from '../utils';
+
 export class CodeView implements ICodeViewEvents, ICodeViewMembers {
    
     public options: ICodeViewOptions;
@@ -191,7 +191,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
 
         } else if (explicitEditor === "stackblitz" || explicitEditor === "csb") {
           let $liveEditingButton = $<HTMLButtonElement>("<button>", {class: this.css[explicitEditor]});
-          $liveEditingButton.text((this as any)["_" + explicitEditor + "Text"]);
+          $liveEditingButton.text((this as any)[`_${explicitEditor}Text`]);
           $liveEditingButton.css("font-weight", 500);
 
           $footerContainer.append('<span class="editing-label">Edit in: </span>').
@@ -199,7 +199,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
           appendTo(this._elements.$footer);
           $liveEditingButton.on("click", () => liveEditingButtonsClickHandler($liveEditingButton, $(this.element)))
         } else {
-          console.error("We do not support an online editor with name: " + explicitEditor);
+          console.error(`We do not support an online editor with name: ${explicitEditor}`);
           return;
         }
 

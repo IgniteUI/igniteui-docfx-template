@@ -1,5 +1,5 @@
 import ClipboardJS from "clipboard";
-import { IListNode, IListNodeStart } from "./types";
+import { IListNode, IListNodeStart } from "../types";
 
 class UtilityService {
     public isLocalhost = Boolean(

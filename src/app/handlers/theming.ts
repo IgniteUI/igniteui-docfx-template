@@ -1,6 +1,6 @@
-import { IgViewer } from "../shared/igViewer.common";
-import { IThemingData } from "../shared/types";
-import util from '../shared/utils';
+import { IgViewer } from "../services/igViewer.common";
+import { IThemingData } from "../types";
+import util from '../services/utils';
 
 export function closeContainer() {
     if ($(".toggle").is(":visible")) {

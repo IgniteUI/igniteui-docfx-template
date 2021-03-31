@@ -1,6 +1,6 @@
-import util from "../shared/utils";
-import { RenderingService, ResizableObservable, DimensionType, DimensionChangeType, IListNode } from "../shared/types";
-import { ResizingService } from "./resizing";
+import util from "../utils";
+import { RenderingService, ResizableObservable, DimensionType, DimensionChangeType, IListNode } from "../../types";
+import { ResizingService } from "../resizing";
 
 export class AffixRenderingService extends RenderingService implements ResizableObservable {
 

@@ -1,4 +1,4 @@
-import util from '../shared/utils';
+import util from './utils';
 
 export function initNavigation() {
 
@@ -33,7 +33,7 @@ export function initNavigation() {
             $('#footer').replaceWith(copyrightFooter);
 
             igNavigation.init();
-        }).fail(function () {
+        }).fail(() => {
             igNavigation.init();
         });
     }
