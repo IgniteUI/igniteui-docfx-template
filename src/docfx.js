@@ -47,6 +47,7 @@ $(function () {
 
   //Adds paragraph after every element with .sample-container class
   addGtmButtons();
+  addCtaBanners();
   instantiateCodeViews();
 
   window.refresh = function (article) {
@@ -108,33 +109,70 @@ $(function () {
       const productTitle = $("meta[property='docfx:title']").attr("content");
       $(currentView).removeAttr("style");
 
-      const sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content loading");
+      const sampleContainer = $('<div>').attr("style", style).addClass("sample-container code-view-tab-content loading");
       const iframe = $('<iframe>', {
-        id: 'sample-iframe-id-' +  i,
+        id: 'sample-iframe-id-' + i,
         frameborder: 0,
         seamless: ""
       }).width("100%").height("100%");
 
-      if (i === 0){
-        if (productTitle.indexOf('Angular') !== -1){
-          iframe.attr("onload","onSampleIframeContentLoaded(this);");
-        }else {
-          iframe.attr("onload","onXPlatSampleIframeContentLoaded(this);");
+      if (i === 0) {
+        if (productTitle.indexOf('Angular') !== -1) {
+          iframe.attr("onload", "onSampleIframeContentLoaded(this);");
+        } else {
+          iframe.attr("onload", "onXPlatSampleIframeContentLoaded(this);");
         }
-        
+
         iframe.attr("src", iframeSrc);
-      }else {
-        iframe.attr("class","lazyload");
+      } else {
+        iframe.attr("class", "lazyload");
         iframe.attr("data-src", iframeSrc);
       }
 
-      if (alt){
+      if (alt) {
         iframe.attr("alt", alt)
       }
 
       iframe.appendTo(sampleContainer);
       sampleContainer.appendTo(currentView);
-      $(currentView).codeView({iframeId : i});
+      $(currentView).codeView({ iframeId: i });
+    }
+  }
+
+  function addCtaBanners() {
+    let productLink = $("meta[property='docfx:link']").attr("content");
+    let path = $("[data-docfx-rel]").attr("data-docfx-rel");
+    const platform = $("meta[property='docfx:platform']").attr("content");
+    const imgTag = $('<img>');
+
+    if (!path) {
+      path = "./";
+    }
+
+    if (productLink.indexOf("indigo") !== -1) {
+      productLink = "https://cloud.indigo.design";
+      $(imgTag).attr("src", path + "images/marketing/indigo-design-cta-banner-2.png");
+    } else {
+      $(imgTag).attr("src", path + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png");
+      if (productLink.charAt(productLink.length - 1) === '/') {
+        productLink += "download";
+      } else {
+        productLink += "/download";
+      }
+    }
+
+    if ($(".article-container h2")[2]) {
+      const secondHeader = $(".article-container h2")[2];
+      const divTag = $('<div>');
+
+      $(imgTag).css({ "width": "100%", "display": "block", "margin": "auto", "cursor": "pointer" });
+      $(imgTag).on('click', downloadAction);
+      $(divTag).append(imgTag);
+      $(secondHeader).before(divTag);
+    }
+
+    function downloadAction() {
+      window.location.href = productLink;
     }
   }
 
