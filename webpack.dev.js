@@ -16,7 +16,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles-bundle.css' }),
+    new MiniCssExtractPlugin({ filename: 'styles.bundle.css' }),
   ],
   target: ['web', 'es5'],
   module: {

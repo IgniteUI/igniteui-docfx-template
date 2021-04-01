@@ -15,13 +15,15 @@ const addWatchers = () => {
         gulp.series(buildPackageStatics, createTemplate, generateBundlingGlobalMetadata)
     )
 
+    generateBundlingGlobalMetadata(null, true);
+
     return webpackBuild(true);
 }
 
-const cleanup = (done) => {
-    del.sync(path.resolve(__dirname, "dist"));
-    done();
+const cleanup = () => {
+    return del(path.resolve(__dirname, "dist"));
 }
+
 const buildPackageStatics = () => {
     return gulp.src(packageStatics).pipe(gulp.dest("dist"));
 }
@@ -36,18 +38,28 @@ const createTemplate = () => {
     ]).pipe(gulp.dest("dist/template"));
 }
 
-const generateBundlingGlobalMetadata = (done) => {
-    let metadata = {};
+const generateBundlingGlobalMetadata = (done, dev=false) => {
+    let metadata = {}, 
+        outputBuildFiles = undefined,
+        bundlesToObserve = [{name:"vendor", ext: "js"}, 
+                            {name:"main", ext: "js"},
+                            {name:"runtime", ext: "js"},
+                            {name:"styles", ext: "css"}] 
+    if(!dev) {
+        outputBuildFiles = fs.readdirSync(path.join(__dirname, WEBPACK_BUILD_DIST));
+    }
     metadata["_timestamp"] = new Date().getTime();
-    let outputBuildFiles = fs.readdirSync(path.join(__dirname, WEBPACK_BUILD_DIST));
-    ["vendor", "main", "runtime", "styles"].forEach(bundle => {
-        let bundleFileName = outputBuildFiles.find((file) => file.startsWith(bundle));
-        metadata[`_${bundle}`] = bundleFileName;
-    })
+    bundlesToObserve.forEach(bundle => {
+        
+        let bundleFileName = outputBuildFiles != null ? outputBuildFiles.find((file) => file.startsWith(bundle.name)) : `${bundle.name}.bundle.${bundle.ext}`;
+        metadata[`_${bundle.name}`] = bundleFileName;
+    });
 
     fs.writeFileSync(path.join(__dirname, TEMPLATE_DIST, "bundling.global.json"), JSON.stringify(metadata));
 
-    done();
+    if(done) {
+        done();
+    }
 }
 
 const webpackBuild = (dev = false) => {
@@ -68,9 +80,8 @@ const webpackBuild = (dev = false) => {
 }
 
 let buildProd;
-
 exports.generateBundlingGlobalMetadata = generateBundlingGlobalMetadata;
 exports.createTemplate = createTemplate;
 exports.webpackBuildProd = buildProd = () => webpackBuild();
 exports.build = gulp.series(cleanup, buildPackageStatics, createTemplate, this.webpackBuildProd, generateBundlingGlobalMetadata);
-exports['build-watch'] = gulp.series(cleanup, addWatchers);
+exports['build-watch'] = gulp.series(cleanup, buildPackageStatics, createTemplate, addWatchers);

@@ -30,11 +30,10 @@ $(() => {
         services: Array<RenderingService> = [affixService, navbarService, articleService, tocService];
     services.forEach(service => service.render());
 
-    setTimeout(() => {
-        let igViewer = IgViewer.getInstance(),
-            platformMeta: JQuery<HTMLElement>,
-            codeService: CodeService,
-            platform: string;
+    let igViewer = IgViewer.getInstance(),
+        platformMeta: JQuery<HTMLElement>,
+        codeService: CodeService,
+        platform: string;
 
         initNavigation();
         igViewer.adjustTopLinkPos();
@@ -51,6 +50,5 @@ $(() => {
             codeService = new XplatCodeService(platform);
         }
         codeService.init();
-    });
 
 })
