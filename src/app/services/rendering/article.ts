@@ -2,7 +2,8 @@ import util from "../utils";
 import { RenderingService, HTMLHighlightedCodeElement } from "../../types";;
 import anchors from 'anchor-js';
 import hljs from "highlight.js";
-import type { IgniteUIPlatform, IThemingData} from '../../types';
+import type { IgniteUIPlatform} from '../../types';
+import { onSampleIframeContentLoaded, onXPlatSampleIframeContentLoaded } from "../../handlers/iframe-load";
 export class ArticleRenderingService extends RenderingService {
 
     constructor() {
@@ -201,31 +202,9 @@ export class ArticleRenderingService extends RenderingService {
     
           if (i === 0){
             if (platform === "angular" ){
-              iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => {
-                let _iframe = event.target;
-                _iframe.parentElement!.classList.remove("loading");
-                if (!$(_iframe).hasClass("no-theming")) {
-            
-                    let theme = window.sessionStorage.getItem(util.isIE ? "theme" : "themeStyle")!;
-                    let targetOrigin = document.body.getAttribute("data-demos-base-url")!;
-                    let data: IThemingData = { origin: window.location.origin };
-                    if (util.isIE) {
-                        data.theme = theme;
-                    } else {
-                        data.themeStyle = theme;
-                    }
-                    var themingWidget = $('igniteui-theming-widget') as any;
-                    if (themingWidget.length > 0) {
-                        data.themeName = themingWidget[0].theme.globalTheme;
-                        _iframe.contentWindow!.postMessage(data, targetOrigin);
-                    }
-                }
-              });
+              iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => onSampleIframeContentLoaded(event.target));
             }else {
-                iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => {
-                    let _iframe = event.target;
-                    _iframe.parentElement!.classList.remove("loading");    
-                });
+              iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => onXPlatSampleIframeContentLoaded(event.target));
             }
             
             iframe.attr("src", iframeSrc);

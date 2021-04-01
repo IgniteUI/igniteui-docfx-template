@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'development',
   entry: './src/app/docfx.ts',
+  devtool: 'inline-source-map',
   externals: {
     jquery: 'jQuery'
   },
@@ -22,7 +23,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
@@ -36,11 +37,17 @@ module.exports = {
             }
           },
           {
-            loader: "css-loader"
+            loader: "css-loader",
+            options: {
+              sourceMap: false,
+            }
           },
           'resolve-url-loader',
           {
-            loader: "sass-loader"
+            loader: "sass-loader",
+            options: {
+              sourceMap: false
+            }
           }
         ],
       },
