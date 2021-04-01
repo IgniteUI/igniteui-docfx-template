@@ -14,10 +14,7 @@ full license information.}}
     {{#_platform}}<meta property="docfx:platform" content="{{_platform}}">{{/_platform}}
     <meta property="docfx:title" content="{{_navBarTitle}}">
     <meta property="docfx:link" content="{{_navBarTitleHref}}">
-    <meta property="docfx:tocrel" content="{{_tocRel}}"> {{#_noindex}}
-    <meta name="searchOption" content="noindex">{{/_noindex}} {{#_enableSearch}}
-    <meta property="docfx:rel" content="{{_rel}}">{{/_enableSearch}} {{#_enableNewTab}}
-    <meta property="docfx:newtab" content="true">{{/_enableNewTab}}
+    <meta property="docfx:tocrel" content="{{_tocRel}}"> 
     {{#_canonicalLink}}<link rel="canonical" href="{{_currentBaseUrl}}components/{{_canonicalLink}}"/>{{/_canonicalLink}}
     {{^_canonicalLink}}<link rel="canonical" href="{{_currentBaseUrl}}{{_path}}" />{{/_canonicalLink}}
     <link rel="alternate" href="{{_ENBaseUrl}}{{_path}}" hreflang="en" />
@@ -35,8 +32,9 @@ full license information.}}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://infragistics.com/css/navigation.css">
     <link rel="stylesheet" href="https://infragistics.com/css/footer.css">
-    <link rel="stylesheet" href="{{_rel}}bundles/styles-bundle.min.css?checksum={{_stylesBundleFileName}}">
-    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/theming-widget/{environment:themingWidgetVersion}/igniteui-theming-widget.js?t=?t={{_timestamp}}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{_rel}}bundles/{{_styles}}">
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/theming-widget/{environment:themingWidgetVersion}/igniteui-theming-widget.js?t={{_timestamp}}"></script>
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
