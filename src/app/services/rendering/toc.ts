@@ -8,6 +8,10 @@ import { RenderingService,
         IListNode,
         TOCHeaderElement } from "../../types";;
 import { ResizingService } from "../resizing";
+import { ArticleRenderingService } from "./article";
+import { AffixRenderingService } from "./affix";
+import { CodeService } from "../code-view/base-code-service";
+import { Router } from "../router";
 
 export class TocRenderingService extends RenderingService implements ResizableObservable {
 
@@ -15,7 +19,11 @@ export class TocRenderingService extends RenderingService implements ResizableOb
     public $element: JQuery<HTMLElement>;
     public dimensionToObserve: DimensionType = 'height';
 
-    constructor(private resizingService: ResizingService) {
+    constructor(private resizingService: ResizingService, 
+                private articleRenderer: ArticleRenderingService,
+                private affixRenderer: AffixRenderingService,
+                private router: Router,
+                private codeViewService?: CodeService) {
         super();
     }
 
@@ -73,7 +81,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         }
     }
 
-    private renderBreadcrumb() {
+    public renderBreadcrumb() {
         let breadcrumb: IListNode[] = [];
         $<HTMLLIElement>("#toc li.active").each((i: number, e: HTMLLIElement) => {
 
@@ -105,6 +113,14 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             });
         return top;
     }
+    private getActiveAnchor(element: JQuery<HTMLElement>): JQuery<HTMLAnchorElement> {
+        if(element.is("[href]")) {
+            return element! as JQuery<HTMLAnchorElement>;
+        }
+
+        let activeAnchor = <JQuery<HTMLAnchorElement>>element.parent()!;    
+        return activeAnchor!;
+    }
     private getActiveAnchorID(element: JQuery<HTMLAnchorElement>): string {
 
         let id = "";
@@ -125,11 +141,20 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         });
 
         $<HTMLAnchorElement>(".toc .nav > li > a").on('click', (e) => {
-            const offsetTop = this.getActiveAnchorTopOffset($(e.target));
-            const id = this.getActiveAnchorID($(e.target));
-            const activeElement: IActiveTocElement = { id: id, top: offsetTop };
+            e.preventDefault();
+            $("#toc a.active").removeClass(this.active);
+            $("#toc li").removeClass(this.active);
 
-            sessionStorage.setItem('active-element', JSON.stringify(activeElement));
+            let $a = this.getActiveAnchor($(e.target));
+            $a.addClass(this.active);
+            $a.closest("li").addClass(this.active).addClass(this.expanded);
+            this.router.navigateTo($a.attr("href")!, true,  () => {
+                $(window).scrollTop(0);
+                this.articleRenderer.render();
+                this.affixRenderer.render();
+                this.codeViewService?.init();
+                this.renderBreadcrumb()
+            })
         });
 
         $<HTMLAnchorElement>(".toc .nav > li > .expand-stub + a:not([href])").on('click', (e) => {

@@ -49,6 +49,9 @@ export class AngularCodeService extends CodeService {
                 $standaloneliveEditingButtons.css("display", "none");
             }
         }
+
+        this.demosUrls.clear();
+        this.sharedFileContent = {};
     }
 
     private renderFooters(codeViewsData: ISampleData[]) {
