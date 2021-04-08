@@ -34,6 +34,24 @@
   font-weight: 500;
 }
 
+// TODO create animation for for collapse/expand
+//.toc .nav {
+//	transition: visibility 275ms, opacity 275ms, max-height 280ms;
+//	transition-timing-function: ease-in-out;
+//}
+//
+//.toc .nav .nav {
+//	visibility: hidden;
+//	max-height: 0;
+//	opacity: 0;
+//}
+//
+//.toc .in .nav {
+//	visibility: visible;
+//	max-height: 10000px;
+//	opacity: 1;
+//}
+
 .toc .nav > li > a.sidetoc-expand {
   position: absolute;
   top: 0;
@@ -147,7 +165,10 @@
 .sidenav { 
   background-color: #eff1f2;
   margin-right: -15px;
-    border-right: 1px solid #dedede;
+	border-right: 1px solid #dedede;
+	animation: fadeIn;
+	animation-duration: 1s;
+
   &__header {
     padding: 24px 0 0 16px !important;
     position: relative;
