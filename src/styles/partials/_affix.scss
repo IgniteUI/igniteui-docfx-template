@@ -6,6 +6,10 @@
     top: 127px;
     font-size: 13px;
     z-index: 2;
+
+		animation: fadeIn;
+		animation-duration: 1s;
+
     &.shiftup {
         bottom: 70px;
     }
