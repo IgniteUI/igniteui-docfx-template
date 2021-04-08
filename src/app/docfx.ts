@@ -31,7 +31,7 @@ $(() => {
             services: Array<RenderingService> = [affixService, navbarService, articleService, tocService];
         
         services.forEach(service => service.render());
-        router.connect($("#_content"), () => {
+        router.connect($("#_article-wrapper"), () => {
                 articleService.render();
                 affixService.render();
                 codeService?.init();

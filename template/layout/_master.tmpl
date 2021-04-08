@@ -23,13 +23,12 @@ full license information.}} {{!include(/^bundles/.*/)}} {{!include(/^assets/.*/)
                 {{^_disableToc}} {{>partials/toc}} {{/_disableToc}}
             </div>
 
-            <div class="article-container col-lg-8 col-md-9 col-sm-12">
+            <div class="article-container col-lg-8 col-md-9 col-sm-12" id="_article-wrapper">
                 <article class="content wrap" id="_content" data-uid="{{uid}}">
                     {{!body}}
-                </article>
-                {{#_gitHubBtnLbl}} 
-                <div>{{>partials/github}}</div>
+                {{#_gitHubBtnLbl}}<div>{{>partials/github}}</div>
                  {{/_gitHubBtnLbl}}
+                </article>
             </div>
 
             <div class="hidden-md docfx-affix">
