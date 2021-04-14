@@ -3,16 +3,17 @@ import { RenderingService, HTMLHighlightedCodeElement } from "../../types";;
 import anchors from 'anchor-js';
 import hljs from "highlight.js";
 import type { IgniteUIPlatform} from '../../types';
-import { onSampleIframeContentLoaded, onXPlatSampleIframeContentLoaded } from "../../handlers/iframe-load";
+import { onSampleIframeContentLoaded, onXPlatSampleIframeContentLoaded } from "../../handlers";
+import { Router } from "../router";;
 export class ArticleRenderingService extends RenderingService {
 
-    constructor() {
+    constructor(private router: Router) {
         super();
     }
 
     public render() {
         this.addExternalLinkIcons();
-        this.removeHTMLExtensionFromInternalAnchors();
+        this.configureInternalNavigation();
         this.addGtmButtons();
         this.highlight();
         this.renderTables();
@@ -24,6 +25,7 @@ export class ArticleRenderingService extends RenderingService {
         this.renderGithubBtn();
         this.addCtaBanners();
         this.instantiateCodeViews();
+        this.instantiateAccordions();
         util.copyCode(".hljs-code-copy");
 
     }
@@ -42,17 +44,46 @@ export class ArticleRenderingService extends RenderingService {
             })
     }
 
-    private removeHTMLExtensionFromInternalAnchors() {
-        let absPath = util.getAbsolutePath(window.location.pathname);
-        if (absPath.indexOf('.html') === -1) {
-            $('.article-container a:not([href^="http"])')
-                .each(function () {
-                    let anchorHref = $(this).attr('href');
-                    if (anchorHref) {
-                        $(this).attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
-                    }
-                });
-        }
+    // Removes the html extension of the anchors and adds event listeners for internal routing
+    private configureInternalNavigation() {
+        $('.article-container a:not([href^="http"])')
+        .each( (index, anchor) => {
+            let $anchor = $(anchor).is("a") ? $(anchor) : $(anchor).closest("a");
+            let anchorHref = $anchor.attr('href');
+
+            $anchor.on('click', (e) => {
+                e.preventDefault();
+        
+                $("#toc a.active").closest("li").addClass("active");
+                if($anchor.attr("href")?.startsWith("#")) {
+                    util.scroll($anchor.attr("href"));
+                } else {
+                    let scrollToTop = $anchor.prop("hash") ? undefined : 0;
+                    this.router.navigateTo($anchor.attr("href")!, true, scrollToTop, () => {
+                        $(".sidetoc").scrollTop(0);
+    
+                        let top = 0;
+                        $("#toc a.active").parents("li").
+                            each((i, e) => {
+                                $(e).addClass(this.expanded);
+                                top += $(e).position().top;
+                            });
+                        top = top - 50;
+                        console.log(top);
+                        console.log($("#toc a.active").offset()?.top)
+                        $(".sidetoc").scrollTop(top);
+
+                        if(util.hasLocationHash()) {
+                            util.scroll(location.hash, false);
+                        }
+                    });
+                }
+            });
+
+            if (!util.isLocalhost && anchorHref) {
+                $anchor.attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
+            }
+        });
     }
 
     private addGtmButtons() {
@@ -225,7 +256,7 @@ export class ArticleRenderingService extends RenderingService {
     
     private addCtaBanners() {
         let productLink = $("meta[property='docfx:link']").attr("content")!,
-            path = $("[data-docfx-rel]").attr("data-docfx-rel") ?? "./",
+            path = $("meta[name=base]").attr("content"),
             platform = $("meta[property='docfx:platform']").attr("content"),
             imgTag = $('<img>');
     
@@ -248,12 +279,35 @@ export class ArticleRenderingService extends RenderingService {
     }
 
     private anchorJs() {
-        $(".anchorjs-link").on("click", (evt) => util.scrollAnimation(evt));
+        $(".anchorjs-link").on("click", (evt) => util.scroll($(evt?.target)?.attr("href")!));
     }
 
     private renderGithubBtn(){
         let $button = $(".github-btn-wrapper");
         let shouldShowGithubButton = window.location.pathname.search(RegExp("\\/\\b(\\w*grid\\w*)\\b\\/")) === -1
         if ($button.length && shouldShowGithubButton) $button.show();
+    }
+
+    // Only for elements with class faqs-accordion-content inside a parent with id faqs-accordion-wrapper""
+    private instantiateAccordions() {
+        if($("#faqs-accordion-wrapper").length) {
+            let accContentd = $(".faqs-accordion-content");
+
+            accContentd.on("click", (e: JQuery.Event & {target: HTMLElement}) => {
+                let el;
+                if(!$(e.target).is(".faqs-accordion-content")) {
+                  el =  $(e.target).closest(".faqs-accordion-content");
+                } else {
+                  el = $(e.target);
+                }
+                el.toggleClass("active");
+                let panel = el.find(".faqs-accordion-panel")[0];
+                if(panel.style.maxHeight) {
+                    (panel.style.maxHeight as any) = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
     }
 }

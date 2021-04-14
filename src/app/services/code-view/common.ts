@@ -1,4 +1,6 @@
 import { AngularCodeService, CodeService, XplatCodeService } from ".";
+import { XHRService } from '../jqXHR-tasks';
+
 
 export function createCodeService(): CodeService | undefined {
     let $platformMeta: JQuery<HTMLElement>, platform: string, codeService: CodeService | undefined;
@@ -9,7 +11,7 @@ export function createCodeService(): CodeService | undefined {
     }
     platform = $platformMeta.attr("content")!;
     if (platform === "angular") {
-        codeService = new AngularCodeService();
+        codeService = new AngularCodeService(XHRService.getInstance());
     } else {
         codeService = new XplatCodeService(platform);
     }

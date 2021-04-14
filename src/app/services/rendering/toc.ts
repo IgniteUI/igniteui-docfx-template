@@ -1,16 +1,15 @@
 import util from "../utils";;
-import { RenderingService,
-        ResizableObservable,
-        DimensionType,
-        DimensionChangeType,
-        StoredActiveElement,
-        IActiveTocElement,
-        IListNode,
-        TOCHeaderElement } from "../../types";;
+import {
+    RenderingService,
+    ResizableObservable,
+    DimensionType,
+    DimensionChangeType,
+    StoredActiveElement,
+    IActiveTocElement,
+    IListNode,
+    TOCHeaderElement
+} from "../../types";;
 import { ResizingService } from "../resizing";
-import { ArticleRenderingService } from "./article";
-import { AffixRenderingService } from "./affix";
-import { CodeService } from "../code-view/base-code-service";
 import { Router } from "../router";
 
 export class TocRenderingService extends RenderingService implements ResizableObservable {
@@ -19,11 +18,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
     public $element: JQuery<HTMLElement>;
     public dimensionToObserve: DimensionType = 'height';
 
-    constructor(private resizingService: ResizingService, 
-                private articleRenderer: ArticleRenderingService,
-                private affixRenderer: AffixRenderingService,
-                private router: Router,
-                private codeViewService?: CodeService) {
+    constructor(private resizingService: ResizingService, private router: Router) {
         super();
     }
 
@@ -102,6 +97,22 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         $("#breadcrumb").html(html);
     }
 
+    public setActive($anchor?: JQuery<HTMLElement>) {
+        $("#toc a.active").removeClass(this.active);
+        $("#toc li").removeClass(this.active);
+        let $anchorToActivate: JQuery<HTMLAnchorElement>;
+        if ($anchor) {
+            $anchorToActivate = this.isAnchor($anchor) ? $anchor : this.getActiveAnchor($anchor);
+
+        } else {
+            let currentHref = util.getAbsolutePath(window.location.pathname);
+            $anchorToActivate = $<HTMLAnchorElement>("#sidetoc a[href]").
+                filter((index, element) => util.getAbsolutePath(element.href) === currentHref);
+        }
+        $anchorToActivate!.addClass(this.active);
+        $anchorToActivate!.closest("li").addClass(this.active).addClass(this.expanded);
+    }
+
     private getActiveAnchorTopOffset(element: JQuery<HTMLAnchorElement>, expandParents = false): number {
         let top = 0;
         $(element.parents("li").get().reverse())
@@ -113,14 +124,16 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             });
         return top;
     }
+
     private getActiveAnchor(element: JQuery<HTMLElement>): JQuery<HTMLAnchorElement> {
-        if(element.is("[href]")) {
+        if (this.isAnchor(element)) {
             return element! as JQuery<HTMLAnchorElement>;
         }
 
-        let activeAnchor = <JQuery<HTMLAnchorElement>>element.parent()!;    
+        let activeAnchor = <JQuery<HTMLAnchorElement>>element.parent()!;
         return activeAnchor!;
     }
+
     private getActiveAnchorID(element: JQuery<HTMLAnchorElement>): string {
 
         let id = "";
@@ -142,19 +155,10 @@ export class TocRenderingService extends RenderingService implements ResizableOb
 
         $<HTMLAnchorElement>(".toc .nav > li > a").on('click', (e) => {
             e.preventDefault();
-            $("#toc a.active").removeClass(this.active);
-            $("#toc li").removeClass(this.active);
-
             let $a = this.getActiveAnchor($(e.target));
-            $a.addClass(this.active);
-            $a.closest("li").addClass(this.active).addClass(this.expanded);
-            this.router.navigateTo($a.attr("href")!, true,  () => {
-                $(window).scrollTop(0);
-                this.articleRenderer.render();
-                this.affixRenderer.render();
-                this.codeViewService?.init();
-                this.renderBreadcrumb()
-            })
+            if($a.is(".active")) return;
+            this.setActive($a);
+            this.router.navigateTo($a.attr("href")!, true)
         });
 
         $<HTMLAnchorElement>(".toc .nav > li > .expand-stub + a:not([href])").on('click', (e) => {
@@ -314,7 +318,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
                 .each((i, e) => {
                     let href = $(e)?.attr("href")!;
 
-                    if (currentHref.indexOf('.html') === -1) {
+                    if (!util.isLocalhost) {
                         href = href.replace('.html', '')
                     }
 
@@ -332,5 +336,9 @@ export class TocRenderingService extends RenderingService implements ResizableOb
 
             this.renderSidebar();
         });
+    }
+
+    private isAnchor($element: JQuery<HTMLElement>): $element is JQuery<HTMLAnchorElement> {
+        return $element.is("[href]")
     }
 }
