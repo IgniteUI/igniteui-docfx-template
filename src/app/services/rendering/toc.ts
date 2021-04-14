@@ -95,6 +95,13 @@ export class TocRenderingService extends RenderingService implements ResizableOb
 
         let html = util?.formList(breadcrumb, "breadcrumb")!;
         $("#breadcrumb").html(html);
+        $("#breadcrumb a").on('click', (e) => {
+            e.preventDefault();
+            let $a = this.getActiveAnchor($(e.target));
+            if($a.parent().is(":last-child")) return;
+            this.setActive($a);
+            this.router.navigateTo($a.attr("href")!, true)
+        });
     }
 
     public setActive($anchor?: JQuery<HTMLElement>) {

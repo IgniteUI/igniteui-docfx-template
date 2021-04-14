@@ -35,7 +35,12 @@ export class AffixRenderingService extends RenderingService implements Resizable
       this.$element = $("#affix");
       this.initialDimension = $("#affix").height()!;
       this.resizingService.observeElement(this);
-      $<HTMLAnchorElement>(".bs-docs-sidenav a").on("click", (evt) => util.scroll($(evt?.target)?.attr("href")!));
+      $<HTMLAnchorElement>(".bs-docs-sidenav a").on("click", (evt) => {
+        evt.preventDefault();
+        util.scroll($(evt?.target)?.attr("href")!);
+        if($(evt?.target)?.attr("href")! !== location.hash) 
+          history.pushState({scrollPosition: $(window).scrollTop()}, "", $(evt?.target)?.attr("href")!);
+      });
     }
   }
 
