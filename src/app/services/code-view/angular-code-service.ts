@@ -7,7 +7,7 @@ export class AngularCodeService extends CodeService {
 
     protected samplesOrder = ['modules', 'ts', 'html', 'scss'];
     protected codeViewLiveEditingButtonClickHandler = util.isLocalhost ? this.createPostApiFormFromCodeView() : this.onAngularGithubProjectButtonClicked();
-    private stackBlitzApiUrl = "https://run.stackblitz.com/api/angular/v1";
+    private stackBlitzApiUrl = "https://stackblitz.com/run";
     private codesandboxApiUrl = "https://codesandbox.io/api/v1/sandboxes/define";
     private sharedFileName = "shared.json";
     private assetsFolder = "/assets/";
@@ -252,7 +252,7 @@ export class AngularCodeService extends CodeService {
         for (let i = 0; i < data.files.length; i++) {
             let fileInput = $("<input />", {
                 type: "hidden",
-                name: "files[" + data.files[i].path + "]",
+                name: "project[files][" + data.files[i].path + "]",
                 value: data.files[i].content
             });
 
@@ -264,7 +264,7 @@ export class AngularCodeService extends CodeService {
             for (let i = 0; i < data.tags.length; i++) {
                 let tagInput = $("<input />", {
                     type: "hidden",
-                    name: "tags[" + i + "]",
+                    name: "project[tags][" + i + "]",
                     value: data.tags[i]
                 });
 
@@ -276,7 +276,7 @@ export class AngularCodeService extends CodeService {
         if (data.description) {
             let descriptionInput = $("<input />", {
                 type: "hidden",
-                name: "description",
+                name: "project[description]",
                 value: data.description
             });
 
@@ -286,11 +286,18 @@ export class AngularCodeService extends CodeService {
         // dependencies
         let dependenciesInput = $("<input />", {
             type: "hidden",
-            name: "dependencies",
+            name: "project[dependencies]",
             value: data.dependencies
         });
 
+        let templateInput  = $("<input />", {
+            type: "hidden",
+            name: "project[template]",
+            value: "angular-cli"
+        });
+
         dependenciesInput.appendTo(form);
+        templateInput.appendTo(form);
         return form;
     }
 
