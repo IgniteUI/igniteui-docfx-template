@@ -4,8 +4,6 @@ import {
     ResizableObservable,
     DimensionType,
     DimensionChangeType,
-    StoredActiveElement,
-    IActiveTocElement,
     IListNode,
     TOCHeaderElement
 } from "../../types";;
@@ -49,29 +47,8 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             this.$element = $(".sidetoc");
             this.initialDimension = $(".sidetoc").height()!;
             this.resizingService.observeElement(<ResizableObservable>this);
-            let top = 0;
-            const activeTopicId = this.getActiveAnchorID($("#toc a.active"));
-            let storedActiveElement: StoredActiveElement = sessionStorage.getItem('active-element');
-            if (storedActiveElement && activeTopicId === (storedActiveElement = (JSON.parse(storedActiveElement as string)) as IActiveTocElement).id) {
-                const prevTopOffset = storedActiveElement.top;
-                const currentOffsetTop = this.getActiveAnchorTopOffset($("#toc a.active"), true);
-                const scrollAmount = (currentOffsetTop - prevTopOffset);
-                top = scrollAmount;
-            } else {
-                $($("#toc a.active").
-                    parents("li").get().reverse()).
-                    each((i, e) => {
-                        $(e).addClass(this.expanded);
-                        top += $(e).position().top;
-                    });
-                top = top - 50;
-            }
-            sessionStorage.removeItem('active-element');
-
             $("#toc a.active").closest("li").addClass("active");
-
-            $(".sidetoc").scrollTop(top);
-
+            this.scrollToActive();
             this.renderBreadcrumb();
         }
     }
@@ -98,7 +75,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         $("#breadcrumb a").on('click', (e) => {
             e.preventDefault();
             let $a = this.getActiveAnchor($(e.target));
-            if($a.parent().is(":last-child")) return;
+            if ($a.parent().is(":last-child")) return;
             this.setActive($a);
             this.router.navigateTo($a.attr("href")!, true)
         });
@@ -118,18 +95,28 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         }
         $anchorToActivate!.addClass(this.active);
         $anchorToActivate!.closest("li").addClass(this.active).addClass(this.expanded);
+
+        if ($("#toc_filter_input").val()) {
+            $("#toc_filter_input").val("");
+            this.clearFilter();
+            this.scrollToActive(0);
+        }
     }
 
-    private getActiveAnchorTopOffset(element: JQuery<HTMLAnchorElement>, expandParents = false): number {
-        let top = 0;
-        $(element.parents("li").get().reverse())
-            .each((i, e) => {
-                if (expandParents) {
+    private scrollToActive(amount?: number) {
+        if(amount) {
+            $(".sidetoc").scrollTop(amount);
+        } else {
+            let top = 0;
+            $($("#toc a.active").
+                parents("li").get().reverse()).
+                each((i, e) => {
                     $(e).addClass(this.expanded);
-                }
-                top += $(e).position().top;
-            });
-        return top;
+                    top += $(e).position().top;
+                });
+            top = top - 50;
+            $(".sidetoc").scrollTop(top);
+        }
     }
 
     private getActiveAnchor(element: JQuery<HTMLElement>): JQuery<HTMLAnchorElement> {
@@ -141,16 +128,15 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         return activeAnchor!;
     }
 
-    private getActiveAnchorID(element: JQuery<HTMLAnchorElement>): string {
+    private clearFilter() {
+        $("#toc li")
+            .removeClass(this.filtered)
+            .removeClass(this.hide)
+            .removeClass(this.expanded);
 
-        let id = "";
-        const parentListItems = element.parents("li").get();
-        $(parentListItems.reverse())
-            .each(function (i, e) {
-                const listItemTopicName = $($(e).find("a > span.topic-name")[0]).text().trim();
-                id += i === parentListItems.length - 1 ? listItemTopicName : listItemTopicName + "~"
-            });
-        return id;
+        $("#toc li > a.active")
+            .parents("li")
+            .addClass(this.expanded);
     }
 
     private registerTocEvents() {
@@ -163,13 +149,14 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         $<HTMLAnchorElement>(".toc .nav > li > a").on('click', (e) => {
             e.preventDefault();
             let $a = this.getActiveAnchor($(e.target));
-            if($a.is(".active")) return;
+
+            if ($a.is(":not([href])")) {
+                $a.parent().toggleClass(this.expanded);
+                return;
+            } else if ($a.is(".active")) return;
+
             this.setActive($a);
             this.router.navigateTo($a.attr("href")!, true)
-        });
-
-        $<HTMLAnchorElement>(".toc .nav > li > .expand-stub + a:not([href])").on('click', (e) => {
-            $(e.target).closest('li').toggleClass(this.expanded)
         });
 
         $("#toc_filter_input").on("input", (e: any) => {
@@ -177,15 +164,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             let val = e.target?.value! as string;
             if (val === "") {
                 // Clear 'filtered' class
-                $("#toc li")
-                    .removeClass(this.filtered)
-                    .removeClass(this.hide)
-                    .removeClass(this.expanded);
-
-                $("#toc li > a.active")
-                    .parents("li")
-                    .addClass(this.expanded);
-
+                this.clearFilter();
                 return;
             }
 

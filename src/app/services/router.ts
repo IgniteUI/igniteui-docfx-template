@@ -2,7 +2,7 @@ import { XHRService } from "./jqXHR-tasks";
 import { debounceTime} from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 import util from './utils';
-
+import meta from './meta';
 export class Router {
 
     private static instance: Router;
@@ -77,9 +77,15 @@ export class Router {
             );
         }
 
-        this._targetEle.load(`${target} #_content`, async (e) => {
-            await this.defaultHandler(scrollPosition ?? 0);
-            if (cb) cb();
+        this._targetEle.load(`${target} #_content`, async (data) => {
+            if(data) {
+                setTimeout(() => {
+                    let parsedDOM = $("<div>").append($.parseHTML(data));
+                    meta.configureMetadata(parsedDOM);
+                });
+                await this.defaultHandler(scrollPosition ?? 0);
+                if (cb) cb();
+            }
         });
     }
 }
