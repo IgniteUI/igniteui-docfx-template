@@ -3,14 +3,14 @@
     vertical-align: middle;
 }
 
-.docs-search > .search-query {
+.docs-search>.search-query {
     font-size: 14px;
     border: 0;
     width: 120%;
     color: #555;
 }
 
-.docs-search > .search-query:focus {
+.docs-search>.search-query:focus {
     outline: 0;
 }
 
@@ -19,6 +19,7 @@
     display: table;
     width: 100%;
 }
+
 j .search-results.ng-hide {
     display: none;
 }
@@ -54,9 +55,9 @@ j .search-results.ng-hide {
     box-shadow: 0 0 10px #111;
 }
 
-#search {
-    display: none;
-}
+// #search {
+//     display: none;
+// }
 
 /* Search results display*/
 #search-results {
@@ -69,7 +70,7 @@ j .search-results.ng-hide {
     display: none;
 }
 
-#search-results > .search-list {
+#search-results .search-list {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
@@ -81,4 +82,14 @@ j .search-results.ng-hide {
 
 #search-results .sr-items {
     font-size: 24px;
+    margin-bottom: 25px;
+
+    .item-href {
+        font-size: 14px;
+        color: #093;
+    }
+
+    .item-brief {
+        font-size: 13px;
+    }
 }

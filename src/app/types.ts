@@ -130,12 +130,43 @@ export interface IHeadEl {
     attributeSelectorValue?: string
 }
 
+interface TwbsPaginationOptions {
+    totalPages: number,
+    startPage: number,
+    visiblePages: number,
+    initiateStartPageClick: boolean,
+    hideOnlyOnePage: boolean,
+    href: boolean,
+    pageVariable: string,
+    totalPagesVariable: string,
+    page: Function,
+    first: string,
+    prev: string,
+    next: string,
+    last: string,
+    loop: boolean,
+    beforePageClick: Function,
+    onPageClick: Function,
+    paginationClass: string,
+    nextClass: string,
+    prevClass: string,
+    lastClass: string,
+    firstClass: string,
+    pageClass: string,
+    activeClass: string,
+    disabledClass: string,
+    anchorClass: string,
+}
+
 declare global {
     interface JQuery {
         codeView(): JQuery;
         codeView(options: ICodeViewOptions): JQuery;
         codeView(methodName: 'createTabsWithCodeViews', filesData: ICodeViewFilesData[]): void;
         codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string): void;
+        collapse(action: string): void;
+        twbsPagination(options: Partial<TwbsPaginationOptions>): void
+        mark(word: string): void;
     }
 
     class igNavigation {

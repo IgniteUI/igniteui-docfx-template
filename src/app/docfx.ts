@@ -2,6 +2,9 @@ import '../styles/main.scss';
 import 'babel-polyfill';
 import 'bootstrap';
 import 'jquery-ui';
+import "mark.js/dist/jquery.mark.min.js";
+import "js-url";
+import "twbs-pagination";
 import "lazysizes";
 import { RenderingService } from './types';
 import {
@@ -23,6 +26,7 @@ import { ResizingService } from './services/resizing';
 import { initNavigation } from './services/navigation';
 import { Router } from './services/router';
 import util from './services/utils';
+import {enableSearch} from './services/search/lunr-client';
 
 $(() => {
         $.widget("custom.codeView", new CodeView())
@@ -34,7 +38,7 @@ $(() => {
                 affixService = new AffixRenderingService(resizingService),
                 tocService = new TocRenderingService(resizingService, router),
                 services: Array<RenderingService> = [navbarService, tocService, affixService, articleService];
-
+        enableSearch();
         services.forEach(service => service.render());
         router.connect($("#_article-wrapper"), (scrollPosition?: number) => {
                 return new Promise<number | undefined>((resolve) => {
