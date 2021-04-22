@@ -1,11 +1,12 @@
-import utils from "../utils";
+import SearchWorker from 'worker-loader!./lunr-search';
 
-let worker: Worker;
+let worker: SearchWorker;
+
 export function enableSearch() {
     let query: string;
     let base = $("meta[name='base']").attr("content");
     try {
-      worker = new Worker(location.origin + `${base}/searchWorker.js`);
+      worker = new SearchWorker();
       if (!worker && !window.Worker) {
         // localSearch();
       } else {

@@ -10,14 +10,14 @@ module.exports = {
     jquery: 'jQuery'
   },
   output: {
-    filename: '[name].bundle.[contenthash].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist/template/bundles')
   },
 
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles.bundle.[contenthash].css' })
+    new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' })
   ],
   target: ['web', 'es5'],
   module: {
