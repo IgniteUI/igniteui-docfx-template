@@ -210,6 +210,9 @@ export class AngularCodeService extends CodeService {
             codeService.isButtonClickInProgress = true;
             let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
             let sampleContent = codeService.sampleFilesContentByUrl[sampleFileUrl];
+            if(sampleContent.addTsConfig) {
+                codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
+            }
             let formData = {
                 dependencies: sampleContent.sampleDependencies,
                 files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
@@ -295,6 +298,8 @@ export class AngularCodeService extends CodeService {
             name: "project[template]",
             value: "angular-cli"
         });
+
+
 
         dependenciesInput.appendTo(form);
         templateInput.appendTo(form);
