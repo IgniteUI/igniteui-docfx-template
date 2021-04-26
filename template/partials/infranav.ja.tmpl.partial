@@ -67,6 +67,7 @@
 		                            </li>
 		                            <li>
                                         <div class="navigation__sub-menu-header">Web向け</div>
+                                        <a class="deemphasize" title="Indigo.Design App Builder" href="products/indigo-design/app-builder">Indigo.Design App Builder <strong>(新規)</strong></a>
                                         <a class="deemphasize" href="/products/ignite-ui">Ignite UI</a>
                                         <a class="deemphasize small-pad-left" href="/products/ignite-ui-angular">Ignite UI for Angular</a>
                                         <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-core">Ignite UI for ASP.NET Core</a>
@@ -76,7 +77,6 @@
                                         <a class="deemphasize small-pad-left" href="/products/ignite-ui-react">Ignite UI for React</a>
                                         <a class="deemphasize small-pad-left" href="/products/ignite-ui-web-components">Ignite UI for Web Components</a>
                                         <a class="deemphasize" href="/products/aspnet">Ultimate UI for ASP.NET Web Forms</a>
-                                        <a class="deemphasize hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
                                     </li>
 		                            <li>
 			                            <div class="navigation__sub-menu-header">デスクトップ向け</div>
@@ -89,6 +89,11 @@
                                         <a href="/products/xamarin">Ultimate UI for Xamarin</a>
 			                            <div class="navigation__sub-menu-header">プロトタイピング</div>
                                         <a class="hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
+                                    </li>
+                                    <li>
+			                            <div class="navigation__sub-menu-header">Design to Code</div>
+                                        <a class="hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
+                                        <a class="hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design/app-builder">Indigo.Design App Builder <strong>(New)</strong></a>
                                     </li>
 	                            </ul>
                             </li>
