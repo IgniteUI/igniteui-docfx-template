@@ -45,11 +45,11 @@ export class ArticleRenderingService extends RenderingService {
     private removeHTMLExtensionFromInternalAnchors() {
         let absPath = util.getAbsolutePath(window.location.pathname);
         if (absPath.indexOf('.html') === -1) {
-            $('.article-container a:not([href^="http"])')
+            $('.article-container a[href*=".html"]:not([href^="http"])')
                 .each(function () {
                     let anchorHref = $(this).attr('href');
                     if (anchorHref) {
-                        $(this).attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
+                        $(this).attr('href', anchorHref.replace(".html", ""));
                     }
                 });
         }
