@@ -87,7 +87,7 @@ export class ArticleRenderingService extends RenderingService {
     }
 
     private addGtmButtons() {
-        if ($(".sample-container").length && !$(".sample-container:first + p>a.trackCTA").length) {
+        if ($("code-view").length && !$("code-view:first + p>a.trackCTA").length) {
             const languageVersion: string = $('html')[0].lang;
             const productTitle: string = $("meta[property='docfx:title']")!.attr("content")!;
             let productLink: string = $("meta[property='docfx:link']")!.attr("content")!;
@@ -98,7 +98,7 @@ export class ArticleRenderingService extends RenderingService {
                 productLink += "/download";
             }
 
-            const sample = $(".sample-container").first();
+            const codeView = $("code-view").first();
             let paragraph: JQuery<HTMLParagraphElement>;
             if (languageVersion === 'ja') {
                 paragraph = $<HTMLParagraphElement>('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text(`このサンプルが気に入りましたか? 完全な ${productTitle}ツールキットにアクセスして、すばやく独自のアプリの作成を開始します。`);
@@ -110,7 +110,7 @@ export class ArticleRenderingService extends RenderingService {
                 link.text(" Download it for free.").appendTo(paragraph);
             }
 
-            sample.after(paragraph);
+            codeView.after(paragraph);
         }
     }
 
