@@ -1,4 +1,3 @@
-import '../styles/main.scss';
 import 'babel-polyfill';
 import 'bootstrap';
 import 'jquery-ui';

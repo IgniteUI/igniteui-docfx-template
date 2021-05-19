@@ -5,7 +5,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/app/docfx.ts',
+  entry: {
+    main: './src/app/docfx.ts',
+    style: './src/styles/slingshot/main.scss'
+  },
   devtool: 'inline-source-map',
   externals: {
     jquery: 'jQuery'
@@ -46,7 +49,10 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              sourceMap: false
+              sourceMap: false,
+              sassOptions: {
+                includePaths: [path.resolve(__dirname, './src/styles/ignite-ui')]
+              }
             }
           }
         ],
