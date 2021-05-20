@@ -159,7 +159,7 @@ export class AngularCodeService extends CodeService {
         const codeService = this;
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             let codeViewFiles: ICodeViewFilesData[], url: string;
-            const expliciteditor = $codeView.attr('expliciteditor');
+            const expliciteditor = $codeView.attr('explicitEditor');
             const files: ICodeViewFilesData[] = data.sampleFiles;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
             url = this.url;
