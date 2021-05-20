@@ -159,6 +159,7 @@ export class AngularCodeService extends CodeService {
         const codeService = this;
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             let codeViewFiles: ICodeViewFilesData[], url: string;
+            const expliciteditor = $codeView.attr('expliciteditor');
             const files: ICodeViewFilesData[] = data.sampleFiles;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
             url = this.url;
@@ -169,7 +170,7 @@ export class AngularCodeService extends CodeService {
                                     return codeService.samplesOrder.indexOf(a.fileHeader) - codeService.samplesOrder.indexOf(b.fileHeader);
                                  });
             $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
-            $codeView.codeView("renderFooter", codeService.codeViewLiveEditingButtonClickHandler);
+            $codeView.codeView("renderFooter", codeService.codeViewLiveEditingButtonClickHandler, expliciteditor);
         }
     }
 
