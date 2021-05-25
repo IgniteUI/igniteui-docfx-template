@@ -13,7 +13,7 @@ export class AngularCodeService extends CodeService {
     private sharedFileName = "shared.json";
     private assetsFolder = "/assets/";
     private demoFilesFolderUrlPath = this.assetsFolder + "samples/";
-    private assetsRegex = new RegExp("\/?assets\/", "g");
+    private assetsRegex = new RegExp(/([\.]{0,2}\/)*assets\//g);
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
