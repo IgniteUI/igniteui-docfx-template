@@ -1,7 +1,7 @@
 import { IHeadEl } from "../types";
 
 class MetadataService {
-    private _fixedMetaNames = ["platform", "title", "link"];
+    private _fixedMetaNames = ["platform", "title", "link", "data-docfx-rel"];
     private _fixedLinkRels = ["canonical", "alternate"];
     private _optionalMetaNames = ["description", "keywords"];
 
@@ -26,7 +26,6 @@ class MetadataService {
     public configureMetadata(dom: JQuery<HTMLElement>) {
         this.changeFixed(dom);
         this.checkOptionals(dom);
-        this.checkStyleSheets(dom);
     }
 
     private changeFixed(dom: JQuery<HTMLElement>) {
@@ -56,7 +55,8 @@ class MetadataService {
         });
     }
 
-    private checkStyleSheets(dom: JQuery<HTMLElement>) {
+    //Logic for removing/adding stylesheets for a page, not used for now, but we will keep it in case some day this is required
+   /* private checkStyleSheets(dom: JQuery<HTMLElement>) {
         let documentStyleSheets = $<HTMLLinkElement>("head link[rel='stylesheet']");
         let targetedStyleSheets = dom.find<HTMLLinkElement>("link[rel='stylesheet']");
 
@@ -84,6 +84,7 @@ class MetadataService {
 
         }
     }
+    */
 }
 
 const meta = new MetadataService();

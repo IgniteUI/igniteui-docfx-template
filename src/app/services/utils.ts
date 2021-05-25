@@ -23,7 +23,7 @@ class UtilityService {
         // Use anchor to normalize href
         let anchor: HTMLAnchorElement = $<HTMLAnchorElement>(`<a href="${href}"></a>`)[0];
         // Ignore protocal, remove search and query
-        return anchor.host + anchor.pathname;
+        return anchor.pathname;
     }
 
     public isRelativePath(href: string) {
@@ -187,8 +187,11 @@ class UtilityService {
             pageName.includes("zoomslider") ;
     }
 
-    public isOnIndexPage(): boolean{
-    return window.location.pathname === $("meta[name=base]").attr("content")!;
+    public isOnIndexPage(route?: string): boolean{
+        let baseDir = $("meta[name=base-dir]").attr("content")!
+        if(route) 
+            return this.getAbsolutePath(route) === this.getAbsolutePath(baseDir)
+        return window.location.pathname === this.getAbsolutePath(baseDir);
     }
 }
 

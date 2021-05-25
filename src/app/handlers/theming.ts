@@ -28,14 +28,6 @@ export function showHideThemingWidget(iframesLength: number) {
 }
 
 export function attachThemingHandler() {
-    let sampleIframes = document.querySelectorAll("iframe");
-    if ($(".themes-container").length !== 0 && sampleIframes.length !== 0 &&
-        (!util.isDvPage() || !util.isIE)) {
-        $(".themes-container").css('display', 'inline-flex');
-    } else {
-        return;
-    }
-
     if (util.isIE) {
         $('.theme-select-wrapper').css('display', 'inline-flex');
         $('.theme-select-wrapper').removeClass('theme-wrapper-hide');
@@ -64,7 +56,7 @@ export function attachThemingHandler() {
         if (themingWidget) {
             themingWidget.on('themeChange', (event: JQuery.TriggeredEvent) => {
                 window.sessionStorage.setItem('themeStyle', (event.originalEvent! as any).detail);
-                sampleIframes = document.querySelectorAll("iframe");
+                let sampleIframes = document.querySelectorAll("iframe");
                 sampleIframes.forEach((element) => {
                     if (!$(element).hasClass("no-theming") && (!$(element).hasClass("lazyload") || $(element).hasClass("lazyloaded"))) {
                         let src = element.src || element.dataset.src;

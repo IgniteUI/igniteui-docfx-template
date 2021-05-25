@@ -7,7 +7,7 @@ export function attachLazyLoadHandler() {
             let targetOrigin = document.body.getAttribute("data-demos-base-url")!;
             let theme = window.sessionStorage.getItem(util.isIE ? "theme" : "themeStyle")!;
             let data: IThemingData = { origin: window.location.origin };
-            data.themeName =  $('igniteui-theming-widget').length > 0 ?  ($('igniteui-theming-widget') as any)[0].theme.globalTheme: null;
+            data.themeName =  $('igniteui-theming-widget').is(":visible") ?  ($('igniteui-theming-widget') as any)[0].theme.globalTheme : null;
             if (util.isIE) {
                 data.theme = theme;
             } else {

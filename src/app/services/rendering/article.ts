@@ -217,37 +217,37 @@ export class ArticleRenderingService extends RenderingService {
 
         let views = $("code-view");
         for (let i = 0; i < views.length; i++) {
-          let currentView = views[i];
-          let style = $(currentView).attr("style")!;
-          let iframeSrc = $(currentView).attr("iframe-src")!;
-          let alt = $(currentView).attr("alt");
+          const currentView = views[i];
+          const style = $(currentView).attr("style")!;
+          const iframeSrc = $(currentView).attr("iframe-src")!;
+          const alt = $(currentView).attr("alt");
+          const themable = $(currentView).is("[no-theming]") ? true : false;
 
           $(currentView).removeAttr("style");
-    
+
           let sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content loading");
           let iframe = $<HTMLIFrameElement>('<iframe>', {
             id: 'sample-iframe-id-' +  i,
             frameborder: 0,
             seamless: ""
           }).width("100%").height("100%");
-    
+
           if (i === 0){
             if (platform === "angular" ){
               iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => onSampleIframeContentLoaded(event.target));
             }else {
               iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => onXPlatSampleIframeContentLoaded(event.target));
             }
-            
+
             iframe.attr("src", iframeSrc);
           }else {
             iframe.attr("class","lazyload");
             iframe.attr("data-src", iframeSrc);
           }
-    
-          if (alt){
-            iframe.attr("alt", alt)
-          }
-    
+
+          if (alt) iframe.attr("alt", alt);
+          if (themable) iframe.addClass("no-theming");
+
           iframe.appendTo(sampleContainer);
           sampleContainer.appendTo(currentView);
           $(currentView).codeView({iframeId : i});
@@ -256,16 +256,16 @@ export class ArticleRenderingService extends RenderingService {
     
     private addCtaBanners() {
         let productLink = $("meta[property='docfx:link']").attr("content")!,
-            path = $("meta[name=base]").attr("content"),
+            relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
             platform = $("meta[property='docfx:platform']").attr("content"),
             imgTag = $('<img>');
     
     
         if (productLink.includes("indigo")) {
           productLink = "https://cloud.indigo.design";
-          $(imgTag).attr("src", path + "images/marketing/indigo-design-cta-banner-2.png");
+          $(imgTag).attr("src", relPpath + "images/marketing/indigo-design-cta-banner-2.png");
         } else {
-          $(imgTag).attr("src", path + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png");
+          $(imgTag).attr("src", relPpath + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png");
           productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
         }
     

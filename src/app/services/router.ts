@@ -55,13 +55,14 @@ export class Router {
     }
 
     public navigateTo(route: string, push = true, scrollPosition?: number, cb?: () => void) {
-
+        let replace = false;
         if (!this.xhrService.isEmpty()) this.xhrService.abortTasks();
 
         if (!route) return;
 
-        if (util.isOnIndexPage()) {
+        if (util.isOnIndexPage(route)) {
             route = $("meta[name=index]").attr("content")!;
+            replace = true;
         }
 
         console.log("Navigate to " + route);
@@ -77,12 +78,18 @@ export class Router {
             );
         }
 
+        if(replace) {
+            window.history.replaceState(
+                { scrollPosition: 0 },
+                "",
+                target
+            );
+        }
+
         this._targetEle.load(`${target} #_content`, async (data) => {
             if(data) {
-                setTimeout(() => {
-                    let parsedDOM = $("<div>").append($.parseHTML(data));
-                    meta.configureMetadata(parsedDOM);
-                });
+                let parsedDOM = $("<div>").append($.parseHTML(data));
+                meta.configureMetadata(parsedDOM);
                 await this.defaultHandler(scrollPosition ?? 0);
                 if (cb) cb();
             }

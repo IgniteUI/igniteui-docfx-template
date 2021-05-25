@@ -46,7 +46,7 @@ export class NavbarRenderingService extends RenderingService {
                 navrel = navbarPath.substr(0, index + 1);
             }
             $("#navbar>ul").addClass("navbar-nav");
-            let currentAbsPath = util.getAbsolutePath(window.location.pathname);
+            let currentAbsPath = util.toAbsoluteURL(window.location.pathname);
             // set active item
             $("#navbar").find<HTMLAnchorElement>("a[href]").each((i, e) => {
                 let href = $(e).attr("href")!;
@@ -58,13 +58,13 @@ export class NavbarRenderingService extends RenderingService {
                     if (originalHref) {
                         originalHref = navrel + originalHref;
                         if (
-                            util.getDirectory(util.getAbsolutePath(originalHref)) ===
-                            util.getDirectory(util.getAbsolutePath(tocPath))
+                            util.getDirectory(util.toAbsoluteURL(originalHref)) ===
+                            util.getDirectory(util.toAbsoluteURL(tocPath))
                         ) {
                             isActive = true;
                         }
                     } else {
-                        if (util.getAbsolutePath(href) === currentAbsPath) {
+                        if (util.toAbsoluteURL(href) === currentAbsPath) {
                             isActive = true;
                         }
                     }
