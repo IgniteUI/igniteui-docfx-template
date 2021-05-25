@@ -40,9 +40,9 @@ export class XplatCodeService extends CodeService {
                 let samplesBaseUrl = $codeView.attr(this.demosBaseUrlAttrName)!;
                 let sampleUrl = $codeView.attr(this.sampleUrlAttrName)!;
                 if (!this.demosUrls.has(samplesBaseUrl)) {
-                    this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, codeView: $codeView }]);
+                    this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, element: $codeView }]);
                 } else {
-                    this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, codeView: $codeView });
+                    this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, element: $codeView });
                 }
             });
 
@@ -59,7 +59,7 @@ export class XplatCodeService extends CodeService {
     private getSamplesContent(samplesBaseUrl: string, data: ISampleData[]) {
         for (const sampleData of data) {
             let sampleFileMedata = this.getSampleMetadataUrl(samplesBaseUrl, sampleData.url);
-            let $codeView = sampleData.codeView;
+            let $codeView = sampleData.element;
             $.ajax({
                 url: sampleFileMedata,
                 type: "GET",

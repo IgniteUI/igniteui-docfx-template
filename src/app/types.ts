@@ -127,7 +127,7 @@ export interface IPageInfoPath {
 
 export interface ISampleData {
     url: string,
-    codeView: JQuery<HTMLElement>
+    element: JQuery<HTMLElement>
 }
 
 declare global {
