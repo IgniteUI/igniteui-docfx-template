@@ -7,7 +7,8 @@ module.exports = {
   mode: 'development',
   entry: {
     main: './src/app/docfx.ts',
-    style: './src/styles/slingshot/main.scss'
+    igniteui: './src/styles/ignite-ui/main.scss',
+    slingshot: './src/styles/slingshot/main.scss'
   },
   devtool: 'inline-source-map',
   externals: {
@@ -20,7 +21,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles.bundle.css' }),
+    new MiniCssExtractPlugin({ filename: '[name].bundle.css' }),
   ],
   target: ['web', 'es5'],
   module: {
@@ -49,10 +50,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              sourceMap: false,
-              sassOptions: {
-                includePaths: [path.resolve(__dirname, './src/styles/ignite-ui')]
-              }
+              sourceMap: false
             }
           }
         ],

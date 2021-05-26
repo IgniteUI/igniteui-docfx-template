@@ -44,14 +44,14 @@ const generateBundlingGlobalMetadata = (done, dev=false) => {
         bundlesToObserve = [{name:"vendor", ext: "js"}, 
                             {name:"main", ext: "js"},
                             {name:"runtime", ext: "js"},
-                            {name:"styles", ext: "css"}] 
+                            {name:"igniteui", ext: "css"},
+                            {name:"slingshot", ext: "css"}] 
     if(!dev) {
         outputBuildFiles = fs.readdirSync(path.join(__dirname, WEBPACK_BUILD_DIST));
     }
     metadata["_timestamp"] = new Date().getTime();
     bundlesToObserve.forEach(bundle => {
-        
-        let bundleFileName = outputBuildFiles != null ? outputBuildFiles.find((file) => file.startsWith(bundle.name)) : `${bundle.name}.bundle.${bundle.ext}`;
+        let bundleFileName = outputBuildFiles != null ? outputBuildFiles.find((file) => file.startsWith(bundle.name) && file.endsWith(bundle.ext)) : `${bundle.name}.bundle.${bundle.ext}`;
         metadata[`_${bundle.name}`] = bundleFileName;
     });
 
