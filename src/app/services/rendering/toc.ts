@@ -89,9 +89,9 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             $anchorToActivate = this.isAnchor($anchor) ? $anchor : this.getActiveAnchor($anchor);
 
         } else {
-            let currentHref = util.getAbsolutePath(window.location.pathname);
+            let currentHref = util.toAbsoluteURL(window.location.pathname);
             $anchorToActivate = $<HTMLAnchorElement>("#sidetoc a[href]").
-                filter((index, element) => util.getAbsolutePath(element.href) === currentHref);
+                filter((index, element) => util.toAbsoluteURL(element.href) === currentHref);
         }
         $anchorToActivate!.addClass(this.active);
         $anchorToActivate!.closest("li").addClass(this.active).addClass(this.expanded);
@@ -291,14 +291,14 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         if (!tocPath) {
             return;
         }
-        tocPath = tocPath.replace(/\\/g, "/");
+        tocPath = util.toAbsoluteURL(tocPath.replace(/\\/g, "/"));
         $("#sidetoc").load(tocPath + " #sidetoggle > div", () => {
             let index = tocPath.lastIndexOf("/");
             let tocrel = "";
             if (index > -1) {
                 tocrel = tocPath.substr(0, index + 1);
             }
-            let currentHref = util.getAbsolutePath(window.location.pathname);
+            let currentHref = util.toAbsoluteURL(window.location.pathname);
             $("#sidetoc")
                 .find<HTMLAnchorElement>("a[href]")
                 .each((i, e) => {
@@ -309,11 +309,11 @@ export class TocRenderingService extends RenderingService implements ResizableOb
                     }
 
                     if (util.isRelativePath(href)) {
-                        href = tocrel + href;
+                        href = util.getAbsolutePath(tocrel + href);
                         $(e).attr("href", href);
                     }
 
-                    if (util.getAbsolutePath(e.href) === currentHref) {
+                    if (util.toAbsoluteURL(e.href) === currentHref) {
                         $(e).addClass(this.active);
                     }
 

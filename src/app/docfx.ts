@@ -37,8 +37,8 @@ $(() => {
                 articleService = new ArticleRenderingService(router),
                 affixService = new AffixRenderingService(resizingService),
                 tocService = new TocRenderingService(resizingService, router),
-                services: Array<RenderingService> = [navbarService, tocService, affixService, articleService];
-        enableSearch();
+                services: Array<RenderingService> = [navbarService, tocService];
+
         services.forEach(service => service.render());
         router.connect($("#_article-wrapper"), (scrollPosition?: number) => {
                 return new Promise<number | undefined>((resolve) => {
@@ -54,19 +54,32 @@ $(() => {
                         if (scrollPosition != null) {
                                 $(window).scrollTop(scrollPosition)
                         }
-                        showHideThemingWidget($("iframe").length)
+                        showHideThemingWidget($("iframe").length);
                 });
         });
 
         if (util.isOnIndexPage()) {
+                $("#_article-wrapper").removeClass("null-opacity");
                 router.navigateTo($("meta[name=index]").attr("content")!);
-        } else if (util.hasLocationHash()) {
-                setTimeout(() => util.scroll(location.hash), 500);
+        } else {
+                (async () => {
+                        await new Promise<void>((resolve) => {
+                                articleService.render();
+                                affixService.render();
+                                resolve();
+                        }).then(() => {
+                                $("#_article-wrapper").removeClass("null-opacity");
+                                if (util.hasLocationHash()) {
+                                        setTimeout(() => util.scroll(location.hash), 500);
+                                }
+                                codeService?.init();
+                        });
+                })();
         }
 
-        initNavigation();
+        showHideThemingWidget($("iframe").length);
         attachLazyLoadHandler();
         attachThemingHandler();
-        codeService?.init();
+        initNavigation();
 });
 

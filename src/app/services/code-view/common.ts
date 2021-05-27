@@ -9,11 +9,12 @@ export function createCodeService(): CodeService | undefined {
     if (!$platformMeta) {
         return undefined;
     }
+
     platform = $platformMeta.attr("content")!;
     if (platform === "angular") {
         codeService = new AngularCodeService(XHRService.getInstance());
     } else {
-        codeService = new XplatCodeService(platform);
+        codeService = new XplatCodeService(platform, XHRService.getInstance());
     }
 
     return codeService;

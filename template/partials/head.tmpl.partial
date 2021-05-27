@@ -7,16 +7,17 @@ full license information.}}
     <title>{{#title}}{{title}}{{/title}} {{^title}}{{>partials/title}}{{/title}}
     </title>
     <meta name="index" content="{{_initialPage}}.html">
-    <meta name="base" content="{environment:baseUrl}">
+    <meta name="base-dir" content="{environment:baseDir}">
+    <meta name="data-docfx-rel" content="{{_rel}}">
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="{{#title}}{{title}}{{/title}}{{^title}}{{>partials/title}}{{/title}} "> 
     {{#_description}} <meta name="description" content="{{_description}}">{{/_description}} 
     {{#_keywords}} <meta name="keywords" content="{{_keywords}}">{{/_keywords}}
-    <meta property="docfx:navrel" content="{environment:baseUrl}toc.html">
+    <meta property="docfx:navrel" content="{{_rel}}toc.html">
     {{#_platform}}<meta property="docfx:platform" content="{{_platform}}">{{/_platform}}
     <meta property="docfx:title" content="{{_navBarTitle}}">
     <meta property="docfx:link" content="{{_navBarTitleHref}}">
-    <meta property="docfx:tocrel" content="{environment:baseUrl}components/toc.html"> 
+    <meta property="docfx:tocrel" content="{{_rel}}{{_toc-dir}}/toc.html"> 
     {{#_canonicalLink}}<link rel="canonical" href="{{_currentBaseUrl}}components/{{_canonicalLink}}"/>{{/_canonicalLink}}
     {{^_canonicalLink}}<link rel="canonical" href="{{_currentBaseUrl}}{{_path}}" />{{/_canonicalLink}}
     <link rel="alternate" href="{{_ENBaseUrl}}{{_path}}" hreflang="en" />
@@ -35,7 +36,7 @@ full license information.}}
     <link rel="stylesheet" href="https://infragistics.com/css/navigation.css">
     <link rel="stylesheet" href="https://infragistics.com/css/footer.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="{environment:baseUrl}bundles/{{_styles}}">
+    <link rel="stylesheet" href="{{_rel}}bundles/{{_styles}}">
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
