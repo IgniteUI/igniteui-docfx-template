@@ -69,8 +69,6 @@ export class ArticleRenderingService extends RenderingService {
                                 top += $(e).position().top;
                             });
                         top = top - 50;
-                        console.log(top);
-                        console.log($("#toc a.active").offset()?.top)
                         $(".sidetoc").scrollTop(top);
 
                         if(util.hasLocationHash()) {

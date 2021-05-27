@@ -29,6 +29,7 @@ import util from './services/utils';
 import {enableSearch} from './services/search/lunr-client';
 
 $(() => {
+        enableSearch();
         $.widget("custom.codeView", new CodeView())
         let router = Router.getInstance(),
                 codeService = createCodeService(),
