@@ -1,0 +1,149 @@
+::selection {
+	color: $text-highlight-color;
+	background: $text-highlight;
+}
+
+html,
+.root {
+	font-size: 16px;
+	line-height: 24px;
+	-webkit-font-smoothing: antialiased;
+}
+
+body,
+.article {
+	font-family: $global-font-family;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	margin: auto;
+	color: $text-base;
+	overflow-x: hidden;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	color: $title-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-break {
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+h1 mark,
+h2 mark,
+h3 mark,
+h4 mark,
+h5 mark,
+h6 mark {
+	padding: 0;
+}
+
+h1,
+.h1 {
+	font-size: $h1-f-size;
+	font-weight: $h1-f-weight;
+	line-height: $h1-l-height;
+	margin-top: $h1-m-top;
+	margin-bottom: $h1-m-bottom;
+}
+
+h2,
+.h2 {
+	font-size: $h2-f-size;
+	font-weight: $h2-f-weight;
+	line-height: $h2-l-height;
+	margin-top: $h2-m-top;
+	margin-bottom: $h2-m-bottom;
+	position: relative;
+}
+
+h3,
+.h3 {
+	font-size: $h3-f-size;
+	font-weight: $h3-f-weight;
+	line-height: $h3-l-height;
+	margin-top: $h3-m-top;
+	margin-bottom: $h3-m-bottom;
+}
+
+h4,
+.h4 {
+	font-size: $h4-f-size;
+	font-weight: $h4-f-weight;
+	line-height: $h4-l-height;
+	margin-top: $h4-m-top;
+	margin-bottom: $h4-m-bottom;
+}
+
+h5,
+.h5 {
+	font-size: $h5-f-size;
+	font-weight: $h5-f-weight;
+	line-height: $h5-l-height;
+	margin-top: $h5-m-top;
+	margin-bottom: $h5-m-bottom;
+}
+
+p,
+ul,
+ol,
+pre,
+table,
+blockquote {
+	margin-top: $p-m-top;
+	margin-bottom: $p-m-bottom;
+	font-weight: $generic-font-weight;
+
+	&.highlight {
+		font-weight: 400;
+		color: #333;
+	}
+}
+
+p {
+	line-height: $p-l-height;
+}
+
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+hr,
+.hr {
+	border: 1px solid;
+	margin: -1px 0;
+}
+
+hr {
+	border-color: $divider-color;
+}
+
+sub,
+sup {
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}

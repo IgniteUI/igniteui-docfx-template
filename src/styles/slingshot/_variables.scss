@@ -1,26 +1,26 @@
-$primary-color: #09f;
-$info-color: #0375be;
-$warning-color: #fbb13c;
-$error-color: #f44336;
+$primary-color: #6988FF;
+$info-color: $primary-color;
+$warning-color: #F69E41;
+$error-color: #DE8080;
 $success-color: #00AE88;
 $note-color: #dcdcaa;
 
-$global-font-family: 'aktiv-grotesk', sans-serif;
-$generic-font-weight: 300;
+$global-radius: 8px;
 
-$global-radius: 0;
+$global-font-family: 'Roboto', sans-serif;
+$generic-font-weight: 400;
 
-$link-hover-color: #23527c;
+$link-hover-color: #4562cd;
 $button-hover: $link-hover-color;
 
 $text-base: #585858;
 $text-light: #fff;
 $text-dim-light: #ddd;
 $text-dark: #000;
-$title-color: $text-base;
+$title-color: $text-dark;
 
 $text-highlight-color: $text-dark;
-$text-highlight: $primary-color;
+$text-highlight: #B3D7FF;
 
 $border-color: #ddd;
 $border-color-dark: #333;
@@ -29,6 +29,7 @@ $divider-color: #ccc;
 $surface-light: #fff;
 $surface-dark: #111;
 $surface-disabled: #eee;
+
 
 $darkgray: #333;
 $midgray: #666;
@@ -44,13 +45,13 @@ $scrollbar-thumb-track--active: #333;
 $scrollbar-thumb-bg-cv: #f1f1f1;
 $scrollbar-thumb-track-cv: #888;
 $code-view-navbar-bg: #e5f4fe;
-$code-view-radius: 0;
-$code-view-font: 'Arial',  sans-serif;
-$hljs-variable: #BD63C5;
-$hljs-number: #B8D7A3;
-$hljs-string: #D69D85;
+$code-view-radius: $global-radius;
+$code-view-font: 'Roboto', sans-serif;
+$hljs-variable: #8B42BE;
+$hljs-number: #439b52;
+$hljs-string: $warning-color;
 $hljs-selector: $info-color;
-$hljs-comment: #57A64A;
+$hljs-comment: #888;
 $hljs-color: $text-light;
 
 $indigo: #3f51b5;
@@ -58,13 +59,13 @@ $footer-bg: #f8f8f8;
 
 // badge component
 $new-badge-color: $text-light;
-$new-badge-bg: #ff134a;
+$new-badge-bg: #ED4A99;
 $updated-badge-color: $text-light;
-$updated-badge-bg: #6a0dad;
-$badge-radius: 0;
-$badge-font-size: 9px;
-$badge-padding: 2px;
-$badge-font-weight: 400;
+$updated-badge-bg: $primary-color;
+$badge-radius: 4px;
+$badge-font-size: 12px;
+$badge-padding: 4px 6px;
+$badge-font-weight: 500;
 
 $byzantium: #731963;
 $main-padding: 124px;
@@ -76,58 +77,58 @@ $external-link-icon-padding: 18px;
 
 $pre-bg: $surface-dark;
 $pre-color: $text-light;
-$pre-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.80);
+$pre-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.20);
 
-$alert-radius: 0;
+$alert-radius: $global-radius;
 $icon-container-width: 72px;
-$alert-padding: 16px 16px 16px (16px + $icon-container-width);
+$alert-padding: 21px 17px 21px (17px + $icon-container-width);
 
-$link-alpha: .6;
+// Headings anchor link icon
+$link-alpha: 0;
 
-$affix-font-weight: 300;
+$affix-font-weight: 400;
 
 $alert-shadow:
 	0 1px 3px 0 rgba(0, 0, 0, 0.26),
 	0 1px 1px 0 rgba(0, 0, 0, 0.12),
-    0 2px 1px -1px rgba(0, 0, 0, 0.08);
+	0 2px 1px -1px rgba(0, 0, 0, 0.08);
 
-$hljs-copy-btn-radius: 0;
+$hljs-copy-btn-radius: 0 0 0 $global-radius;
 
 // Table
-$table-header-font-size: 16px;
-$table-first-col-weight: 400;
+$table-first-col-weight: 500;
 $table-header-font-size: 18px;
-$table-row-bg: #fff;
+$table-row-bg: #F9F9F9;
 $table-text-color: $text-base;
 $table-border-color: $border-color;
-$table-v-align: middle;
-$table-text-transform: initial;
-$table-th-border: none;
-$table-th-padding: .7rem 1rem;
-$table-td-padding: .7rem 1rem;
+$table-v-align: bottom;
+$table-text-transform: uppercase;
+$table-th-border: 1px solid $table-border-color;
+$table-th-padding: 1rem;
+$table-td-padding: 1.2rem;
 
 // Typography //
 
 // h1
-$h1-f-size: 2.625rem;
-$h1-f-weight: 300;
-$h1-l-height: 3rem;
-$h1-m-top: 1.5rem;
+$h1-f-size: 3rem;
+$h1-f-weight: 700;
+$h1-l-height: 1.2;
+$h1-m-top: 0;
 $h1-m-bottom: 1.5rem;
 
 // h2
-$h2-f-size: 2rem;
-$h2-f-weight: 300;
-$h2-l-height: 3rem;
-$h2-m-top: 2rem;
-$h2-m-bottom: 0;
+$h2-f-size: 2.5rem;
+$h2-f-weight: 700;
+$h2-l-height: 1.2;
+$h2-m-top: 0;
+$h2-m-bottom: .5rem;
 
 // h3
-$h3-f-size: 1rem;
-$h3-f-weight: initial;
-$h3-l-height: 1.5rem;
-$h3-m-top: 1.5rem;
-$h3-m-bottom: 0;
+$h3-f-size: 1.75rem;
+$h3-l-height: 1.2;
+$h3-f-weight: 700;
+$h3-m-top: 0;
+$h3-m-bottom: .5rem;
 
 // h4
 $h4-f-size: 1rem;
@@ -144,7 +145,6 @@ $h5-m-top: 1.5rem;
 $h5-m-bottom: 0;
 
 // Paragraph
-$p-l-height: 2rem;
-$p-m-bottom: 1.5rem;
+$p-l-height: 1.5rem;
+$p-m-bottom: 1rem;
 $p-m-top: 0;
-
