@@ -1,6 +1,9 @@
+import { fromEvent } from 'rxjs';
+import { debounceTime, map, tap } from 'rxjs/operators';
 import SearchWorker from 'worker-loader!./lunr-search';
 import { Router } from '../router';
 import util from '../utils';
+import { ISearchItem } from './types';
 
 const router = Router.getInstance();
 const base = $("meta[name='base-dir']").attr("content");
@@ -75,14 +78,18 @@ export function enableSearch() {
 function addSearchEvent() {
 
   $("body").on("searchEvent", () => {
-    $("#search-query").on("keypress", (e) => {
-      console.log(e);
-      return e.key !== "Enter";
-    });
-    $("#search-query").on("keyup", (e: JQuery.TriggeredEvent) => {
-      console.log(e);
-      query = $(e.target).val()! as string;
-      if (query.length < 3) {
+
+    const $searchInput = $("#search-query"),
+      $keyUp = fromEvent<JQuery.TriggeredEvent>($searchInput, "keyup");
+    $searchInput.off("keydown");
+    $searchInput.on("keypress", e => e.key !== "Enter");
+
+    $keyUp.pipe(
+      debounceTime(100),
+      map<JQuery.TriggeredEvent, string>(e => $(e.target).val()! as string),
+      tap(searchText => query = searchText)
+    ).subscribe(searchText => {
+      if (searchText.length < 3) {
         flipContents("show");
       } else {
         flipContents("hide");
@@ -91,8 +98,7 @@ function addSearchEvent() {
           'Search Results for "' + query + '"'
         );
       }
-    })
-    .off("keydown");
+    });
   });
 }
 
@@ -108,9 +114,10 @@ function flipContents(action: string) {
 }
 
 function extractContentBrief(content: string): string {
-  let briefOffset = 512;
-  let words = query.split(/\s+/g);
-  let queryIndex = content.indexOf(words[0]);
+  const briefOffset = 512,
+    words = query.split(/\s+/g),
+    queryIndex = content.indexOf(words[0]);
+
   if (queryIndex > briefOffset) {
     return (
       "..." +
@@ -124,69 +131,26 @@ function extractContentBrief(content: string): string {
   return "";
 }
 
-function handleSearchResults(hits: any[]) {
-  let numPerPage = 10;
-  $("#pagination").empty();
-  $("#pagination").removeData("twbs-pagination");
+function handleSearchResults(hits: ISearchItem[]) {
+  const numPerPage = 10,
+    $paginator = $("#pagination"),
+    $hitBloks = $("#search-results>.sr-items");
+  $paginator.empty();
+  $paginator.removeData("twbs-pagination");
+
   if (hits.length === 0) {
-    $("#search-results>.sr-items").html("<p>No results found</p>");
+    $hitBloks.html("<p>No results found</p>");
   } else {
     $("#pagination").twbsPagination({
       totalPages: Math.ceil(hits.length / numPerPage),
       visiblePages: 5,
-      onPageClick: (event: JQuery.TriggeredEvent, page: any) => {
+      onPageClick: (event: JQuery.TriggeredEvent, page: number) => {
         $(window).scrollTop(0);
-        let start = (page - 1) * numPerPage;
-        let curHits = hits.slice(start, start + numPerPage);
-        $("#search-results>.sr-items")
-          .empty()
-          .append(
-            curHits.map((hit) => {
-              let itemRawHref = location.origin + base + hit.href;
-              let itemHref = base + hit.href + "?q=" + query;
-              let itemTitle = hit.title;
-              let itemBrief = extractContentBrief(hit.keywords);
+        const start = (page - 1) * numPerPage,
+          curHits = hits.slice(start, start + numPerPage);
 
-              let itemNode = $("<div>").attr("class", "sr-item");
-              let itemTitleNode = $("<div>")
-                .attr("class", "item-title")
-                .append(
-                  $("<a>")
-                    .attr("href", itemHref)
-                    .attr("target", "_blank")
-                    .text(itemTitle)
-                    .on("click", (e: JQuery.TriggeredEvent) => {
-                      e.preventDefault();
-                      $("#toc a.active").closest("li").addClass("active");
-                      router.navigateTo($(e.target).attr("href")!, true, 0, () => {
-                        $("#search-query").val("");
-                        flipContents("show");
-                        $(".sidetoc").scrollTop(0);
-                        let top = 0;
-                        $("#toc a.active").parents("li").
-                          each((i, e) => {
-                            $(e).addClass("in");
-                            top += $(e).position().top;
-                          });
-                        top -= 50;
-                        $(".sidetoc").scrollTop(top);
-                        util.highlightKeywords();
-                      });
-                    })
-                );
-              let itemHrefNode = $("<div>")
-                .attr("class", "item-href")
-                .text(itemRawHref);
-              let itemBriefNode = $("<div>")
-                .attr("class", "item-brief")
-                .text(itemBrief);
-              itemNode
-                .append(itemTitleNode)
-                .append(itemHrefNode)
-                .append(itemBriefNode);
-              return itemNode;
-            })
-          );
+        $hitBloks.empty().append(curHits.map(createHitBlock));
+
         query.split(/\s+/).forEach((word) => {
           if (word !== "") {
             $("#search-results>.sr-items *").mark(word);
@@ -197,10 +161,59 @@ function handleSearchResults(hits: any[]) {
   }
 }
 
+const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
+  const itemRawHref = location.origin + base + hit.href,
+    itemHref = base + hit.href + "?q=" + query,
+    itemBrief = extractContentBrief(hit.keywords),
+    $itemHrefNode = $("<div>").attr("class", "item-href").text(itemRawHref),
+    $itemBriefNode = $("<div>").attr("class", "item-brief").text(itemBrief),
+    itemTitle = hit.title,
+    $hitBlock = $("<div>").attr("class", "sr-item"),
+    $itemTitleNode = $("<div>").attr("class", "item-title"),
+    $hitAnchor = $("<a>");
+
+  $hitAnchor.attr("href", itemHref)
+    .attr("target", "_blank")
+    .text(itemTitle);
+
+  $hitAnchor.on("click", (e: JQuery.TriggeredEvent) => {
+    e.preventDefault();
+
+    router.navigateTo($(e.target).attr("href")!, true, undefined, () => {
+      let top = 0;
+
+      $("#search-query").val("");
+      flipContents("show");
+      
+      $(".sidetoc").scrollTop(0);
+
+      $($("#toc a.active").
+        parents("li").get().reverse()).
+        each((i, e) => {
+          $(e).addClass("in");
+          top += $(e).position().top;
+        });
+      top = top - 50;
+      $(".sidetoc").scrollTop(top);
+
+      util.highlightKeywords();
+    });
+  });
+
+  $itemTitleNode.append($hitAnchor);
+
+  $hitBlock
+    .append($itemTitleNode)
+    .append($itemHrefNode)
+    .append($itemBriefNode);
+
+  return $hitBlock;
+}
+
 function webWorkerSearch() {
   console.log("using Web Worker");
   let baseAbs = util.toAbsoluteURL($("meta[name=data-docfx-rel]").attr("content")!),
-      indexReady: JQuery.Deferred<any>;
+    indexReady: JQuery.Deferred<any>;
   worker.postMessage({ basePath: baseAbs });
 
   indexReady = $.Deferred();

@@ -1,11 +1,6 @@
 //@ts-ignore
 import lunr from 'lunr';
-
-interface ISearchItem {
-  href: string,
-  title: string,
-  keywords: string
-}
+import type {ISearchItem} from './types'
 
 interface ILunr {
   index?: lunr.Index;

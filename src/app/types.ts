@@ -9,6 +9,11 @@ type Merge<T, TT> = {
 } & TT;
 
 export type HTMLHighlightedCodeElement = Merge<HTMLElement, IHighlighted>;
+
+export interface IScrollPosition{
+    toc: number;
+    article: number
+}
 export interface ICodeViewFilesData {
     isMain: boolean;
     path: string;
