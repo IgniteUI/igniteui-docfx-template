@@ -2,6 +2,7 @@ import { CodeService } from "./base-code-service";
 import util from '../utils';
 import { ICodeViewFilesData, ISampleData } from "../../types";
 import { compressToBase64 } from 'lz-string';
+import { XHRService } from "../jqXHR-tasks";
 
 export class AngularCodeService extends CodeService {
 
@@ -12,10 +13,14 @@ export class AngularCodeService extends CodeService {
     private sharedFileName = "shared.json";
     private assetsFolder = "/assets/";
     private demoFilesFolderUrlPath = this.assetsFolder + "samples/";
-    private assetsRegex = new RegExp("\/?assets\/", "g");
+    private assetsRegex = new RegExp(/([\.]{0,2}\/)*assets\//g);
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
+
+    constructor(private xhrService: XHRService) {
+        super();
+    }
 
     public init(): void {
         let $codeViewElements = $("code-view");
@@ -49,6 +54,9 @@ export class AngularCodeService extends CodeService {
                 $standaloneliveEditingButtons.css("display", "none");
             }
         }
+
+        this.demosUrls.clear();
+        this.sharedFileContent = {};
     }
 
     private renderFooters(codeViewsData: ISampleData[]) {
@@ -62,23 +70,26 @@ export class AngularCodeService extends CodeService {
         let metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
-        $.get(metaFileUrl).done((response) => {
+        let metaFileFetch = $.get(metaFileUrl).done((response) => {
             this.demosTimeStamp = response.generationTimeStamp;
             this.getAngularFiles(samplesBaseUrl, data, this.demosTimeStamp);
         });
+        this.xhrService.pushTask(metaFileFetch);
     }
 
     //Fetch angular samples files
     private getAngularFiles(samplesBaseUrl: string, data: ISampleData[], timeStamp: number) {
         let sharedFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + this.sharedFileName;
         sharedFileUrl = this.addTimeStamp(sharedFileUrl, timeStamp);
-        $.get(sharedFileUrl, this.angularSharedFilePostProcess(samplesBaseUrl, () => {
+        let sharedFileFetch = $.get(sharedFileUrl, this.angularSharedFilePostProcess(samplesBaseUrl, () => {
             for (const sampleData of data) {
                 let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
                 let $codeView = sampleData.codeView;
-                $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView))
+                let sampleMetadataFetch = $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView));
+                this.xhrService.pushTask(sampleMetadataFetch)
             }
-        }));
+        }))
+        this.xhrService.pushTask(sharedFileFetch);
     }
 
     private getAngularGitHubSampleUrl(editor: string, sampleUrl: string, branch: string) {
@@ -140,19 +151,21 @@ export class AngularCodeService extends CodeService {
         let metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
-        $.get(metaFileUrl)
-            .done((response: any) => {
-                this.demosTimeStamp = response.generationTimeStamp;
-                for (const sampleData of data) {
-                    let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
-                    let $codeView = sampleData.codeView;
-                    $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView))
-                }
-            })
-            .fail(() => {
-                err();
-                throw new Error('Error on fetching sample files!');
-            });
+        let metaFileFetch = $.get(metaFileUrl)
+        .done((response: any) => {
+            this.demosTimeStamp = response.generationTimeStamp;
+            for (const sampleData of data) {
+                let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
+                let $codeView = sampleData.codeView;
+                let sampleMetadataFetch = $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView));
+                this.xhrService.pushTask(sampleMetadataFetch);
+            }
+        })
+        .fail(() => {
+            err();
+            throw new Error('Error on fetching sample files!');
+        })
+        this.xhrService.pushTask(metaFileFetch);
     }
 
     private angularSampleFilePostProcess(demosBaseUrl: string, cb: (url: string) => string, $codeView: JQuery<HTMLElement>) {

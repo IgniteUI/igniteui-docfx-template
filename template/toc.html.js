@@ -16,7 +16,6 @@ exports.transform = function (model) {
   transformItem(model, 1);
   if (model.items && model.items.length > 0) model.leaf = false;
   model.title = "Table of Content";
-  model._disableToc = true;
 
   if (extension && extension.postTransform) {
     model = extension.postTransform(model);
