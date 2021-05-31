@@ -1,5 +1,10 @@
-{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for
-full license information.}} {{!include(/^bundles/.*/)}} {{!include(/^assets/.*/)}} {{!include(/^i18n/.*/)}} {{!include(search-stopwords.json)}}
+{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}} 
+{{!include(/^bundles/.*/)}}
+{{!include(/^assets/.*/)}}
+{{!include(/^i18n/.*/)}}
+{{!include(search-stopwords.json)}}
+
+
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html lang="{{_appLang}}">
@@ -18,6 +23,11 @@ full license information.}} {{!include(/^bundles/.*/)}} {{!include(/^assets/.*/)
 
     <div id="main" role="main" class="container-fluid">
         <div class="row body-content docfx-content {{#_isReveal}} row-reveal {{/_isReveal}}">
+            {{#_enableSearch}}
+                <div class="container body-content">
+                    {{>partials/searchResults}}
+                </div>
+            {{/_enableSearch}}
 
             <div class="sidenav-container col-lg-2 col-md-2">
                 {{^_disableToc}} {{>partials/toc}} {{/_disableToc}}
