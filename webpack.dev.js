@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'development',
   entry: './src/app/docfx.ts',
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   externals: {
     jquery: 'jQuery'
   },
@@ -17,7 +17,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles.css' }),
+    new MiniCssExtractPlugin({ filename: 'styles.css' })
   ],
   target: ['web', 'es5'],
   module: {

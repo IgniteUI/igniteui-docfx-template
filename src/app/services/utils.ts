@@ -193,6 +193,19 @@ class UtilityService {
             return this.getAbsolutePath(route) === this.getAbsolutePath(baseDir)
         return window.location.pathname === this.getAbsolutePath(baseDir);
     }
+
+    public highlightKeywords() {
+        let q = url("?q");
+        if (q != null) {
+          let keywords = q.split("%20");
+          keywords.forEach((keyword) => {
+            if (keyword !== "") {
+              $(".data-searchable *").mark(keyword);
+              $("article *").mark(keyword);
+            }
+          });
+        }
+      }
 }
 
 const util: UtilityService = new UtilityService();

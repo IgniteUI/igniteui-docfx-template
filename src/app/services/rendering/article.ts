@@ -68,7 +68,8 @@ export class ArticleRenderingService extends RenderingService {
                                 $(e).addClass(this.expanded);
                                 top += $(e).position().top;
                             });
-                        top = top - 50;
+                        top -= 50;
+
                         $(".sidetoc").scrollTop(top);
 
                         if(util.hasLocationHash()) {
