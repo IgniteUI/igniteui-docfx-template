@@ -2,6 +2,21 @@
 @import 'variables';
 @import '../shared/global';
 
+.themes-container {
+	display: none !important;
+}
+
+.responsive-img,
+.article-container img {
+	box-shadow: none !important;
+	border-radius: $global-radius;
+	margin-bottom: 16px;
+}
+
+.sample-container {
+	margin-bottom: 20px;
+}
+
 .ss-collapse {
 	.nav {
 		> li:not(.nav__cta) {
@@ -94,6 +109,7 @@
 
 .breadcrumb {
 	margin: 0 0 16px 0;
+
 	li {
 		&:last-child {
 			a {
@@ -108,28 +124,23 @@
 	border-radius: 0 $header-search-radius $header-search-radius 0;
 	border: 1px solid $border-color;
 	border-left: 0;
-	width: 450px;
+	width: 100%;
 	height: 40px;
 	padding-left: 0;
-
-	@media (max-width: 1000px) {
-		width: 100%;
-		max-width: 340px;
-	}
 
 	&:focus {
 		box-shadow: none;
 	}
 }
 
+
 .ss-search {
+	width: 420px;
+
 	@media (max-width: 768px) {
-		position: absolute;
-		top: 22px;
-		left: 120px;
-		right: 0;
-		width: 180px;
-		margin: 0 auto;
+		max-width: 100%;
+		width: calc(100% - 32px);
+		margin: 16px auto 0;
 	}
 }
 

@@ -39,6 +39,9 @@ $header-btn-border-color: $primary-color;
 $header-btn-hover-border-color: $primary-color;
 $header-search-radius: $global-radius;
 $header-btn-box-shadow: none;
+$header-btn-text-transform: uppercase;
+$header-btn-font-weight: bold;
+$header-btn-font-size: inherit;
 
 // Breadcrumb
 $breadcrumb-color: $text-dim-light;
@@ -98,6 +101,7 @@ $side-nav-push: $main-padding + $filter-height;
 
 $external-link-icon: 'open_in_new';
 $external-link-icon-padding: 18px;
+$external-font-weight: inherit;
 
 $pre-bg: $surface-dark;
 $pre-color: $text-light;
@@ -106,6 +110,7 @@ $pre-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.80);
 $alert-radius: 0;
 $icon-container-width: 72px;
 $alert-padding: 16px 16px 16px (16px + $icon-container-width);
+$alert-margin: 48px 0;
 
 $link-alpha: .6;
 
@@ -117,6 +122,8 @@ $alert-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26),
 
 $hljs-copy-btn-radius: 0;
 
+$anchorjs-link-size: inherit;
+
 // Table
 $table-header-font-size: 16px;
 $table-first-col-weight: 400;
@@ -124,7 +131,6 @@ $table-header-font-size: 18px;
 $table-row-bg: #fff;
 $table-text-color: $text-base;
 $table-border-color: $border-color;
-$table-v-align: middle;
 $table-text-transform: initial;
 $table-th-border: none;
 $table-th-padding: .7rem 1rem;
@@ -166,6 +172,13 @@ $h5-f-weight: initial;
 $h5-l-height: 1.5rem;
 $h5-m-top: 1.5rem;
 $h5-m-bottom: 0;
+
+// h6
+$h6-f-size: 1rem;
+$h6-f-weight: 400;
+$h6-l-height: 1.5rem;
+$h6-m-top: 0rem;
+$h6-m-bottom: .5rem;
 
 // Paragraph
 $p-l-height: 2rem;

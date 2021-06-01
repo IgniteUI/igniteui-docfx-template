@@ -40,6 +40,9 @@ $header-btn-border-color: $accent-color;
 $header-btn-hover-border-color: #4bc560;
 $header-search-radius: $global-radius;
 $header-btn-box-shadow: 0 0 0 .2rem rgba(75,197,96,.5);
+$header-btn-text-transform: initial;
+$header-btn-font-weight: 700;
+$header-btn-font-size: 14px;
 
 // Breadcrumb
 $breadcrumb-color: $text-dark;
@@ -72,8 +75,8 @@ $scrollbar-thumb-track-cv: #888;
 $code-view-navbar-bg: #e5f4fe;
 $code-view-radius: $global-radius;
 $code-view-font: 'Roboto', sans-serif;
-$hljs-variable: #8B42BE;
-$hljs-number: #439b52;
+$hljs-variable: #C699E5;
+$hljs-number: #4ac55f;
 $hljs-string: $warning-color;
 $hljs-selector: $info-color;
 $hljs-comment: #888;
@@ -99,6 +102,7 @@ $side-nav-push: $main-padding + $filter-height;
 
 $external-link-icon: 'open_in_new';
 $external-link-icon-padding: 18px;
+$external-font-weight: 700;
 
 $pre-bg: $surface-dark;
 $pre-color: $text-light;
@@ -107,6 +111,9 @@ $pre-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.20);
 $alert-radius: $global-radius;
 $icon-container-width: 72px;
 $alert-padding: 21px 17px 21px (17px + $icon-container-width);
+$alert-margin: 20px 0;
+
+$anchorjs-link-size: 24px;
 
 // Headings anchor link icon
 $link-alpha: 0;
@@ -126,7 +133,6 @@ $table-header-font-size: 18px;
 $table-row-bg: #F9F9F9;
 $table-text-color: $text-base;
 $table-border-color: $border-color;
-$table-v-align: bottom;
 $table-text-transform: uppercase;
 $table-th-border: 1px solid $table-border-color;
 $table-th-padding: 1rem;
@@ -168,6 +174,13 @@ $h5-f-weight: initial;
 $h5-l-height: 1.5rem;
 $h5-m-top: 1.5rem;
 $h5-m-bottom: 0;
+
+// h6
+$h6-f-size: 1rem;
+$h6-f-weight: 400;
+$h6-l-height: 1.5rem;
+$h6-m-top: 0rem;
+$h6-m-bottom: .5rem;
 
 // Paragraph
 $p-l-height: 1.5rem;

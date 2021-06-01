@@ -27,6 +27,12 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
 	color: $title-color;
+	position: relative;
+	display: inline-block;
+
+	&:empty {
+		display: none;
+	}
 }
 
 h1,
@@ -93,6 +99,15 @@ h5,
 	line-height: $h5-l-height;
 	margin-top: $h5-m-top;
 	margin-bottom: $h5-m-bottom;
+}
+
+h5,
+.h5 {
+	font-size: $h6-f-size;
+	font-weight: $h6-f-weight;
+	line-height: $h6-l-height;
+	margin-top: $h6-m-top;
+	margin-bottom: $h6-m-bottom;
 }
 
 p,

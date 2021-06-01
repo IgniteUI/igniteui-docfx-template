@@ -28,10 +28,13 @@
 .expand-stub {
 	position: absolute;
 	top: 0;
-	left: 0;
-	padding: 6px 16px;
+	left: 10px;
+	padding: 6px;
 	color: $primary-color;
 	font-weight: 500;
+	display: flex;
+	align-items: center;
+	height: 30px;
 }
 
 .toc .nav > li > a.sidetoc-expand {
@@ -180,7 +183,7 @@
 			}
 
 			a:not(.sidenav__header) {
-				padding: 6px 0 0;
+				padding: 3px 0 3px 0;
 				margin-left: 28px;
 			}
 		}
@@ -198,24 +201,24 @@
 			}
 
 			> a {
-				color: #000;
+				color: $text-dark;
 				font-weight: 500;
 			}
 
 			> a:hover {
-				color: #585858;
+				color: $link-hover-color;
 			}
 		}
 
 		li.new {
 
 			a.new:not(.sidenav__header) {
-				padding: 6px 45px 0 0;
+				padding: 3px 45px 3px 0;
 				margin-left: 28px;
 			}
 
 			a.updated:not(.sidenav__header) {
-				padding: 6px 75px 0 0;
+				padding: 3px 75px 3px 0;
 				margin-left: 28px;
 			}
 
