@@ -56,7 +56,6 @@ table a {
 		padding: $table-th-padding !important;
 		text-align: left !important;
 		border: none !important;
-		vertical-align: bottom !important;
 	}
 
 	tbody tr td {
@@ -64,7 +63,6 @@ table a {
 		font-size: 14px;
 		text-align: left !important;
 		border: none !important;
-		vertical-align: $table-v-align !important;
 
 		&:first-of-type {
 			font-weight: $table-first-col-weight;

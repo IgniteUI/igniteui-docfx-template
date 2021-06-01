@@ -67,8 +67,9 @@
 			& > a {
 				color: $header-btn-color;
 				background-color: $header-btn-bg;
-				text-transform: uppercase;
-				font-weight: bold;
+				text-transform: $header-btn-text-transform;
+				font-weight: $header-btn-font-weight;
+				font-size: $header-btn-font-size;
 				margin-left: 10px;
 				padding: 0.5em 1.5em;
 				border: 1px solid $header-btn-border-color;

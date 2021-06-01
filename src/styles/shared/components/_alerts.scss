@@ -5,7 +5,7 @@
 	border: 1px solid $info-color;
 	border-radius: $alert-radius;
 	padding: $alert-padding;
-	margin: 48px 0;
+	margin: $alert-margin;
 
 	&::before {
 		position: absolute;

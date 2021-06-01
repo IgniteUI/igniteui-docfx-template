@@ -2,7 +2,19 @@
 	position: absolute;
 	color: transparentize($primary-color, $link-alpha);
 	font-family: 'Material Icons';
-	padding-top: 0.1em;
+	padding: 0 .2em;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 100%;
+	font-size: $anchorjs-link-size;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+
 
 	&:hover {
 		color: $link-hover-color;
@@ -22,3 +34,5 @@
 		color: $link-hover-color;
 	}
 }
+
+
