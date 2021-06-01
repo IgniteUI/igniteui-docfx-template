@@ -19,8 +19,14 @@ exports.transform = function (model) {
     model._path = model._path.slice(0, model._path.lastIndexOf('.html'));
   }
 
-  var theme = "_" + (model._docfxTheme ? model._docfxTheme : defaultTheme);
-  model._globalStyle = model[theme];
+  var theme = "";
+  if(model._docfxTheme != null){
+    theme = model._docfxTheme;
+  } else {
+    theme = defaultTheme;
+  }
+  model[theme + "Theme"] = true;
+  model._globalStyle = model["_" + theme];
 
   model._isLangEn = true;
   model._isLangJa = false;
