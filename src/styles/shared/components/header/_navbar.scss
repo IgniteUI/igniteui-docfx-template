@@ -21,15 +21,24 @@
 .navbar-wrapper {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	height: 85px;
 }
 
 .navbar-brand {
 	display: flex;
 	align-items: center;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: $global-font-family;
 	color: $text-light;
 	font-size: 18px;
 	padding: 0;
+}
+
+.navbar-header {
+	&::after,
+	&::before {
+		display: none;
+	}
 }
 
 .navbar {
@@ -56,17 +65,27 @@
 		li.nav__cta {
 
 			& > a {
-				color: $text-light;
-				background-color: $primary-color;
+				color: $header-btn-color;
+				background-color: $header-btn-bg;
 				text-transform: uppercase;
 				font-weight: bold;
 				margin-left: 10px;
 				padding: 0.5em 1.5em;
-				border: 1px solid $primary-color;
+				border: 1px solid $header-btn-border-color;
+				border-radius: $header-btn-radius;
+				transition: all 250ms ease-in-out;
+				white-space: nowrap;
 
+				&:focus,
 				&:hover {
-					color: $primary-color;
-					background-color: transparent;
+					color: $header-btn-hover-color;
+					background-color: $header-btn-hover-bg;
+					border-color: $header-btn-hover-border-color;
+				}
+
+				&:focus {
+					box-shadow: $header-btn-box-shadow;
+					outline: none;
 				}
 
 				@media screen and (max-width: 767px) {

@@ -1,23 +1,51 @@
+// Palette
 $primary-color: #09f;
 $info-color: #0375be;
 $warning-color: #fbb13c;
 $error-color: #f44336;
-$success-color: #00AE88;
+$success-color: #00ae88;
 $note-color: #dcdcaa;
 
+// Grays
+$darkgray: #333;
+$midgray: #666;
+$lightgray: #f1f1f1;
+
+// Font
 $global-font-family: 'aktiv-grotesk', sans-serif;
 $generic-font-weight: 300;
 
 $global-radius: 0;
 
-$link-hover-color: #23527c;
-$button-hover: $link-hover-color;
-
+// Text
 $text-base: #585858;
 $text-light: #fff;
 $text-dim-light: #ddd;
 $text-dark: #000;
 $title-color: $text-base;
+
+// Link
+$link-hover-color: #23527c;
+$button-hover: $link-hover-color;
+
+// Header
+$header-bg: #222;
+$header-btn-bg: $primary-color;
+$header-btn-color: $text-light;
+$header-btn-hover-color: $primary-color;
+$header-btn-hover-bg: transparent;
+$header-btn-radius: 0;
+$header-btn-border-color: $primary-color;
+$header-btn-hover-border-color: $primary-color;
+$header-search-radius: $global-radius;
+$header-btn-box-shadow: none;
+
+// Breadcrumb
+$breadcrumb-color: $text-dim-light;
+$breadcrumb-link-color: $text-dim-light;
+$breadcrumb-link-hover-color: $text-light;
+$breadcrumb-font-size: .8rem;
+$breadcrumb-font-weight: 400;
 
 $text-highlight-color: $text-dark;
 $text-highlight: $primary-color;
@@ -28,11 +56,8 @@ $divider-color: #ccc;
 
 $surface-light: #fff;
 $surface-dark: #111;
+$surface-mid: $darkgray;
 $surface-disabled: #eee;
-
-$darkgray: #333;
-$midgray: #666;
-$lightgray: #f1f1f1;
 
 $scrollbar-thumb-bg: #eee;
 $scrollbar-thumb-bg--hover: #fff;
@@ -45,12 +70,12 @@ $scrollbar-thumb-bg-cv: #f1f1f1;
 $scrollbar-thumb-track-cv: #888;
 $code-view-navbar-bg: #e5f4fe;
 $code-view-radius: 0;
-$code-view-font: 'Arial',  sans-serif;
-$hljs-variable: #BD63C5;
-$hljs-number: #B8D7A3;
-$hljs-string: #D69D85;
+$code-view-font: 'Arial', sans-serif;
+$hljs-variable: #bd63c5;
+$hljs-number: #b8d7a3;
+$hljs-string: #d69d85;
 $hljs-selector: $info-color;
-$hljs-comment: #57A64A;
+$hljs-comment: #57a64a;
 $hljs-color: $text-light;
 
 $indigo: #3f51b5;
@@ -86,10 +111,9 @@ $link-alpha: .6;
 
 $affix-font-weight: 300;
 
-$alert-shadow:
-	0 1px 3px 0 rgba(0, 0, 0, 0.26),
-	0 1px 1px 0 rgba(0, 0, 0, 0.12),
-    0 2px 1px -1px rgba(0, 0, 0, 0.08);
+$alert-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26),
+0 1px 1px 0 rgba(0, 0, 0, 0.12),
+0 2px 1px -1px rgba(0, 0, 0, 0.08);
 
 $hljs-copy-btn-radius: 0;
 
@@ -147,4 +171,3 @@ $h5-m-bottom: 0;
 $p-l-height: 2rem;
 $p-m-bottom: 1.5rem;
 $p-m-top: 0;
-

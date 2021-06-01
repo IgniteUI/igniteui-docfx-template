@@ -1,23 +1,52 @@
+// Palette
 $primary-color: #6988FF;
+$accent-color: #4AC55F;
 $info-color: $primary-color;
 $warning-color: #F69E41;
 $error-color: #DE8080;
 $success-color: #00AE88;
 $note-color: #dcdcaa;
 
-$global-radius: 8px;
+// Grays
+$darkgray: #333;
+$midgray: #666;
+$lightgray: #f1f1f1;
 
+// Font
 $global-font-family: 'Roboto', sans-serif;
 $generic-font-weight: 400;
 
-$link-hover-color: #4562cd;
-$button-hover: $link-hover-color;
+$global-radius: 8px;
 
+// Text
 $text-base: #585858;
 $text-light: #fff;
 $text-dim-light: #ddd;
 $text-dark: #000;
 $title-color: $text-dark;
+
+// Link
+$link-hover-color: #4562cd;
+$button-hover: $link-hover-color;
+
+// Header
+$header-bg: #20216E;
+$header-btn-bg: $accent-color;
+$header-btn-color: $text-light;
+$header-btn-hover-color: $text-light;
+$header-btn-hover-bg: #40a852;
+$header-btn-radius: 20px;
+$header-btn-border-color: $accent-color;
+$header-btn-hover-border-color: #4bc560;
+$header-search-radius: $global-radius;
+$header-btn-box-shadow: 0 0 0 .2rem rgba(75,197,96,.5);
+
+// Breadcrumb
+$breadcrumb-color: $text-dark;
+$breadcrumb-link-color: $primary-color;
+$breadcrumb-link-hover-color: $link-hover-color;
+$breadcrumb-font-size:  16px;
+$breadcrumb-font-weight: 400;
 
 $text-highlight-color: $text-dark;
 $text-highlight: #B3D7FF;
@@ -28,12 +57,8 @@ $divider-color: #ccc;
 
 $surface-light: #fff;
 $surface-dark: #111;
+$surface-mid: $darkgray;
 $surface-disabled: #eee;
-
-
-$darkgray: #333;
-$midgray: #666;
-$lightgray: #f1f1f1;
 
 $scrollbar-thumb-bg: #eee;
 $scrollbar-thumb-bg--hover: #fff;

@@ -1,7 +1,3 @@
-@import 'navbar';
-@import 'breadcrumb';
-@import 'autocollapse';
-
 header {
 	position: fixed;
 	top: 0;
@@ -33,4 +29,9 @@ header .navbar {
 
 .fixed_header {
 	background-color: $surface-light;
+}
+
+.navbar-inverse {
+	background: $header-bg;
+	min-height: 86px;
 }

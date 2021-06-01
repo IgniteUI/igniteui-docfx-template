@@ -1,18 +1,18 @@
 .breadcrumb {
-	margin: 0;
-	padding: 4px;
+	padding: 4px 0;
 	background-color: transparent;
-	color: $text-dim-light;
+	color: $breadcrumb-color;
 	white-space: nowrap;
-	font-size: .8rem;
+	font-size: $breadcrumb-font-size;
 	align-self: center;
+	font-weight: $breadcrumb-font-weight;
 
 	a {
-		color: inherit;
+		color: $breadcrumb-link-color;
 
 		&:hover,
 		&:focus {
-			color: $text-light;
+			color: $breadcrumb-link-hover-color;
 		}
 	}
 }
@@ -23,12 +23,13 @@
 
 .breadcrumb:before {
 	content: '\00a0- ';
-	color: $text-light;
+	color: $breadcrumb-color;
 	font-size: 1rem;
 }
 
 .breadcrumb > li + li:before {
 	content: '\00a0/';
+	color: $breadcrumb-color;
 }
 
 .breadcrumb {
