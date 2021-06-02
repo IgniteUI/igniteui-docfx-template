@@ -1,54 +1,35 @@
-{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}} 
-{{!include(/^bundles/.*/)}}
-{{!include(/^assets/.*/)}}
-{{!include(/^i18n/.*/)}}
-{{!include(search-stopwords.json)}}
-
-
+{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for
+full license information.}} 
+{{!include(/^bundles/.*/)}} {{!include(/^assets/.*/)}} {{!include(/^i18n/.*/)}} {{!include(search-stopwords.json)}}
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html lang="{{_appLang}}">
 {{>partials/head}}
 
 <body data-spy="scroll" data-target="#affix" data-nav-base-url="{environment:infragisticsBaseUrl}" data-demos-base-url="{{_demosBaseUrlVar}}"
-    data-lang="{{_language}}" data-theme="{{_productThemeName}}" data-docfx-rel="{{_rel}}" data-timestamp="{{_timestamp}}">
+    data-lang="{{_language}}" data-theme="{{_productThemeName}}" data-timestamp="{{_timestamp}}">
 	<!-- Google Tag Manager (noscript) -->
 	<noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id={environment:GTMContainerId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
 	<!-- End Google Tag Manager (noscript) -->
     <header>
-        {{#slingshotTheme}}
-            {{^_disableNavbar}} {{>partials/slingshot/navbar}} {{/_disableNavbar}}
-        {{/slingshotTheme}}
-
-        {{#igniteuiTheme}}
-            {{^_disableNavbar}} {{>partials/navbar}} {{/_disableNavbar}}
-        {{/igniteuiTheme}}
+        {{^_disableNavbar}} {{>partials/navbar}} {{/_disableNavbar}}
     </header>
 
-    <div id="main" role="main" class="{{#slingshotTheme}}ss-main{{/slingshotTheme}} container-fluid">
+    <div id="main" role="main" class="container-fluid">
         <div class="row body-content docfx-content {{#_isReveal}} row-reveal {{/_isReveal}}">
-            {{#_enableSearch}}
-                <div class="container body-content">
-                    {{>partials/searchResults}}
-                </div>
-            {{/_enableSearch}}
 
             <div class="sidenav-container col-lg-2 col-md-2">
-                {{^_disableToc}} {{>partials/toc}} {{/_disableToc}}
+                {{>partials/toc}}
             </div>
 
-            <div class="article-container col-lg-8 col-md-9 col-sm-12">
-                {{#slingshotTheme}}
-                    {{^_disableBreadcrumb}} {{>partials/breadcrumb}} {{/_disableBreadcrumb}}
-                {{/slingshotTheme}}
+            <div class="article-container null-opacity col-lg-8 col-md-9 col-sm-12" id="_article-wrapper">
                 <article class="content wrap" id="_content" data-uid="{{uid}}">
                     {{!body}}
-                </article>
-                {{#_gitHubBtnLbl}} 
-                <div>{{>partials/github}}</div>
+                {{#_gitHubBtnLbl}}<div>{{>partials/github}}</div>
                  {{/_gitHubBtnLbl}}
+                </article>
             </div>
 
             <div class="hidden-md docfx-affix">
@@ -59,6 +40,10 @@
 
     </div>
     {{^_disableFooter}} {{>partials/footer}} {{/_disableFooter}} {{>partials/scripts}}
+</body>
+
+</html>
+ {{/_disableFooter}} {{>partials/scripts}}
 </body>
 
 </html>

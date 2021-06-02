@@ -1,7 +1,5 @@
 export type IgniteUIPlatform = "angular" | "react" | "web-components" | "blazor";
 
-export type StoredActiveElement = string | IActiveTocElement | null;
-
 export type DimensionChangeType = 'increase' | 'decrease';
 
 export type DimensionType = 'height' | 'width';
@@ -81,11 +79,6 @@ export interface IHighlighted {
     }
 }
 
-export interface IActiveTocElement {
-    id: string;
-    top: number
-}
-
 export interface ResizableObservable {
     readonly $element: JQuery<HTMLElement>;
     initialDimension: number;
@@ -128,6 +121,13 @@ export interface IPageInfoPath {
 export interface ISampleData {
     url: string,
     codeView: JQuery<HTMLElement>
+}
+
+export interface IHeadEl {
+    tag: string;
+    attributeSelector: string,
+    valueSelector: string,
+    attributeSelectorValue?: string
 }
 
 declare global {

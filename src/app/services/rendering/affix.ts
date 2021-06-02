@@ -30,28 +30,17 @@ export class AffixRenderingService extends RenderingService implements Resizable
     let hierarchy = this.getHierarchy();
 
     if (hierarchy.length > 0) {
-      let html =
-        '<h5 data-localize="sideaffix.title" class="sifeaffix__title"></h5>';
-      html += util.formList(hierarchy, "nav", "bs-docs-sidenav");
+      let html = util.formList(hierarchy, "nav", "bs-docs-sidenav")!;
       $("#affix").empty().append(html);
       this.$element = $("#affix");
       this.initialDimension = $("#affix").height()!;
       this.resizingService.observeElement(this);
-      $("#affix").on("activate.bs.scrollspy", (e) => {
-        if (e.target) {
-          if ($(e.target).find("li.active").length > 0) {
-            return;
-          }
-          let top = $(e.target).position().top;
-          $(e.target).parents("li").each( (i, e) => {
-              top += $(e).position().top;
-            });
-          let container = $<HTMLUListElement>("#affix > ul");
-          let height = container.height()!;
-          container.scrollTop(container.scrollTop()! + top - height / 2);
-        }
+      $<HTMLAnchorElement>(".bs-docs-sidenav a").on("click", (evt) => {
+        evt.preventDefault();
+        util.scroll($(evt?.target)?.attr("href")!);
+        if($(evt?.target)?.attr("href")! !== location.hash) 
+          history.pushState({scrollPosition: $(window).scrollTop()}, "", $(evt?.target)?.attr("href")!);
       });
-      $<HTMLAnchorElement>(".bs-docs-sidenav a").on("click", (evt) => util.scrollAnimation(evt));
     }
   }
 
