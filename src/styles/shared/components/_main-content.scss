@@ -46,10 +46,3 @@
 		line-height: normal;
 	}
 }
-
-code {
-	font-family: $code-view-font;
-	border-radius: $badge-radius;
-	background: fade-out($primary-color, .9);
-	color: $primary-color;
-}
