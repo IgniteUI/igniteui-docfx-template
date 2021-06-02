@@ -4,9 +4,20 @@ export type DimensionChangeType = 'increase' | 'decrease';
 
 export type DimensionType = 'height' | 'width';
 
+export type HistoryStateAction = "push" | "replace" | "none";
+
 type Merge<T, TT> = {
     [K in keyof T]: T[K]
 } & TT;
+
+export type NavigationHandler = (adjustTocScrollPosition: boolean, scrollPosition?: number) => Promise<void>;
+
+export interface INavigationOptions {
+    stateAction: HistoryStateAction,
+    adjustTocScrollPosition?: boolean
+    scrollPosition?: number,
+    navigationPostProcess?: () => void
+}
 
 export type HTMLHighlightedCodeElement = Merge<HTMLElement, IHighlighted>;
 

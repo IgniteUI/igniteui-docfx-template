@@ -1,6 +1,7 @@
 import { fromEvent } from 'rxjs';
 import { debounceTime, map, tap } from 'rxjs/operators';
 import SearchWorker from 'worker-loader!./lunr-search';
+import { INavigationOptions } from '../../types';
 import { Router } from '../router';
 import util from '../utils';
 import { ISearchItem } from './types';
@@ -9,6 +10,14 @@ const router = Router.getInstance();
 const base = $("meta[name='base-dir']").attr("content");
 let worker: SearchWorker;
 let query: string;
+let navigationOptions: INavigationOptions = {
+  stateAction: "push",
+  navigationPostProcess: () => {
+    $("#search-query").val("");
+    flipContents("show");
+    util.highlightKeywords();
+  }
+}
 
 export function enableSearch() {
 
@@ -179,25 +188,7 @@ const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
   $hitAnchor.on("click", (e: JQuery.TriggeredEvent) => {
     e.preventDefault();
 
-    router.navigateTo($(e.target).attr("href")!, true, undefined, () => {
-      let top = 0;
-
-      $("#search-query").val("");
-      flipContents("show");
-      
-      $(".sidetoc").scrollTop(0);
-
-      $($("#toc a.active").
-        parents("li").get().reverse()).
-        each((i, e) => {
-          $(e).addClass("in");
-          top += $(e).position().top;
-        });
-      top = top - 50;
-      $(".sidetoc").scrollTop(top);
-
-      util.highlightKeywords();
-    });
+    router.navigateTo($(e.target).attr("href")!, navigationOptions);
   });
 
   $itemTitleNode.append($hitAnchor);
