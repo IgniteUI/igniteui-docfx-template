@@ -3,7 +3,6 @@ import 'babel-polyfill';
 import 'bootstrap';
 import 'jquery-ui';
 import "mark.js/dist/jquery.mark.min.js";
-import "js-url";
 import "twbs-pagination";
 import "lazysizes";
 import { RenderingService } from './types';
