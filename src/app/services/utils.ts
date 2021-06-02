@@ -194,8 +194,8 @@ class UtilityService {
         return window.location.pathname === this.getAbsolutePath(baseDir);
     }
 
-    public highlightKeywords() {
-        let q = url("?q");
+    public highlightKeywords(query: string) {
+        let q = query;
         if (q != null) {
           let keywords = q.split("%20");
           keywords.forEach((keyword) => {

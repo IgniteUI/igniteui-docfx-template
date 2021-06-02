@@ -8,6 +8,10 @@ html, body {
 	margin: 0;
 }
 
+mark {
+	pointer-events: none;
+}
+
 .inheritance {
 	.level0 {
 		&:before {

@@ -15,7 +15,8 @@ let navigationOptions: INavigationOptions = {
   navigationPostProcess: () => {
     $("#search-query").val("");
     flipContents("show");
-    util.highlightKeywords();
+    $(".sidenav").css("visibility", "visible");
+    util.highlightKeywords(query);
   }
 }
 
@@ -29,7 +30,6 @@ export function enableSearch() {
       webWorkerSearch();
     }
 
-    util.highlightKeywords();
     addSearchEvent();
   } catch (e) {
     console.error(e);
@@ -111,13 +111,13 @@ function addSearchEvent() {
   });
 }
 
-function flipContents(action: string) {
+function flipContents(action: string, specificSelector = "") {
   if (action === "show") {
-    $(".hide-when-search").show();
+    $(".hide-when-search" + specificSelector).show();
     $(window).scrollTop(0);
     $("#search-results").hide();
   } else {
-    $(".hide-when-search").hide();
+    $(".hide-when-search" + specificSelector).hide();
     $("#search-results").show();
   }
 }
@@ -172,7 +172,7 @@ function handleSearchResults(hits: ISearchItem[]) {
 
 const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
   const itemRawHref = location.origin + base + hit.href,
-    itemHref = base + hit.href + "?q=" + query,
+    itemHref = base + hit.href,
     itemBrief = extractContentBrief(hit.keywords),
     $itemHrefNode = $("<div>").attr("class", "item-href").text(itemRawHref),
     $itemBriefNode = $("<div>").attr("class", "item-brief").text(itemBrief),
@@ -187,6 +187,8 @@ const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
 
   $hitAnchor.on("click", (e: JQuery.TriggeredEvent) => {
     e.preventDefault();
+    flipContents("show", ".sidenav");
+    $(".sidenav").css("visibility", "hidden");
 
     router.navigateTo($(e.target).attr("href")!, navigationOptions);
   });
