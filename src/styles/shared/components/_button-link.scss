@@ -5,6 +5,18 @@ a > code {
 	cursor: pointer;
 }
 
+a > code {
+	background: fade-out($primary-color, .9);
+	cursor: pointer;
+}
+
+code {
+	font-family: $code-view-font;
+	border-radius: $badge-radius;
+	background: fade-out($text-dark, .95);
+	color: $darkgray;
+}
+
 button:hover,
 button:focus,
 a:hover,
