@@ -12,7 +12,7 @@ class UtilityService {
         ));
     public isIE = !((window as any).ActiveXObject) && "ActiveXObject" in window;
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
-    private offset: number;
+    public offset: number;
     constructor() {
         this.offset = $('.navbar').first().height()!;
         $("body").data("offset", this.offset + 50);
