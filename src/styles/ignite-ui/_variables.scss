@@ -24,6 +24,12 @@ $text-dim-light: #ddd;
 $text-dark: #000;
 $title-color: $text-base;
 
+// Surface colors
+$surface-light: #fff;
+$surface-dark: #111;
+$surface-mid: $darkgray;
+$surface-disabled: #eee;
+
 // Link
 $link-hover-color: #23527c;
 $button-hover: $link-hover-color;
@@ -49,19 +55,18 @@ $breadcrumb-link-color: $text-dim-light;
 $breadcrumb-link-hover-color: $text-light;
 $breadcrumb-font-size: .8rem;
 $breadcrumb-font-weight: 400;
+$breadcrumb-margin: 0;
 
+// Text highlight
 $text-highlight-color: $text-dark;
 $text-highlight: $primary-color;
 
+// Borders
 $border-color: #ddd;
 $border-color-dark: #333;
 $divider-color: #ccc;
 
-$surface-light: #fff;
-$surface-dark: #111;
-$surface-mid: $darkgray;
-$surface-disabled: #eee;
-
+// Scrollbars
 $scrollbar-thumb-bg: #eee;
 $scrollbar-thumb-bg--hover: #fff;
 $scrollbar-thumb-border: #fff;
@@ -83,6 +88,8 @@ $hljs-color: $text-light;
 
 $indigo: #3f51b5;
 $footer-bg: #f8f8f8;
+
+$navbar-height: auto;
 
 // badge component
 $new-badge-color: $text-light;
