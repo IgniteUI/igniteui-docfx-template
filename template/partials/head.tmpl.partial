@@ -7,7 +7,6 @@ full license information.}}
     <title>{{#title}}{{title}}{{/title}} {{^title}}{{>partials/title}}{{/title}}
     </title>
     <meta name="index" content="{{_initialPage}}.html">
-    <meta name="base-dir" content="{environment:baseDir}">
     <meta name="data-docfx-rel" content="{{_rel}}">
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="{{#title}}{{title}}{{/title}}{{^title}}{{>partials/title}}{{/title}} "> 

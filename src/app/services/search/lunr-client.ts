@@ -7,7 +7,6 @@ import util from '../utils';
 import { ISearchItem } from './types';
 
 const router = Router.getInstance();
-const base = $("meta[name='base-dir']").attr("content");
 let worker: SearchWorker;
 let query: string;
 let navigationOptions: INavigationOptions = {
@@ -171,8 +170,8 @@ function handleSearchResults(hits: ISearchItem[]) {
 }
 
 const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
-  const itemRawHref = location.origin + base + hit.href,
-    itemHref = base + hit.href,
+  const itemRawHref = location.origin + util.baseDir + hit.href,
+    itemHref = util.baseDir + hit.href,
     itemBrief = extractContentBrief(hit.keywords),
     $itemHrefNode = $("<div>").attr("class", "item-href").text(itemRawHref),
     $itemBriefNode = $("<div>").attr("class", "item-brief").text(itemBrief),
@@ -205,9 +204,8 @@ const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
 
 function webWorkerSearch() {
   console.log("using Web Worker");
-  let baseAbs = util.toAbsoluteURL($("meta[name=data-docfx-rel]").attr("content")!),
-    indexReady: JQuery.Deferred<any>;
-  worker.postMessage({ basePath: baseAbs });
+  let indexReady: JQuery.Deferred<any>;
+  worker.postMessage({ basePath: util.baseDir });
 
   indexReady = $.Deferred();
 
