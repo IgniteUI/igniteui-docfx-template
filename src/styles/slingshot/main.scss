@@ -2,12 +2,42 @@
 @import 'variables';
 @import '../shared/global';
 
+
+.alert-info,
+.alert-warning,
+.alert-danger, {
+	&::before {
+		content: '';
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+}
+
+.alert-info {
+	&::before {
+		background-image: url(../../assets/static/alert_icon1.svg);
+	}
+}
+
+.alert-warning {
+	&::before {
+		background-image: url(../../assets/static/alert_icon2.svg);
+	}
+}
+
+.alert-danger {
+	&::before {
+		background-image: url(../../assets/static/alert_icon1.svg);
+	}
+}
+
+
 .themes-container {
 	display: none !important;
 }
 
 .responsive-img,
-.article-container img {
+.article-container > img {
 	box-shadow: none !important;
 	border-radius: $global-radius;
 	margin-bottom: 16px;

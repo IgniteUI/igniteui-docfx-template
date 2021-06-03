@@ -28,7 +28,10 @@ h5, .h5,
 h6, .h6 {
 	color: $title-color;
 	position: relative;
-	display: inline-block;
+
+	a {
+		display: inline;
+	}
 
 	&:empty {
 		display: none;
@@ -101,8 +104,8 @@ h5,
 	margin-bottom: $h5-m-bottom;
 }
 
-h5,
-.h5 {
+h6,
+.h6 {
 	font-size: $h6-f-size;
 	font-weight: $h6-f-weight;
 	line-height: $h6-l-height;
