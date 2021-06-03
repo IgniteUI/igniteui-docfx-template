@@ -146,6 +146,7 @@ export interface IHeadEl {
     attributeSelectorValue?: string
 }
 
+// More information about the twbs pagination options - https://josecebe.github.io/twbs-pagination/
 interface TwbsPaginationOptions {
     totalPages: number,
     startPage: number,
@@ -174,6 +175,32 @@ interface TwbsPaginationOptions {
     anchorClass: string,
 }
 
+
+//More information about the mark.js options - https://markjs.io/
+interface IMarkJsOptions{
+  element?: string,
+  className?: string,
+  exclude?: string[],
+  iframes?: boolean,
+  iframesTimeout?: number,
+  separateWordSearch?: boolean,
+  diacritics?: boolean,
+  synonyms?: {[key: string]: string},
+  accuracy?: 'partially' | 'exactly' | 'complementary' ,
+  acrossElements?: boolean,
+  caseSensitive?: boolean,
+  ignoreJoiners?: boolean,
+  ignoreGroups?: number,
+  ignorePunctuation?: string[],
+  wildcards?: 'disabled' | 'enabled' | 'withSpaces',
+  each?: () => {},
+  noMatch?: () => {},
+  filter?: () => true,
+  done?: () => {},
+  debug?: boolean,
+  log?: typeof console.log
+}
+
 declare global {
     interface JQuery {
         codeView(): JQuery;
@@ -182,7 +209,7 @@ declare global {
         codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string): void;
         collapse(action: string): void;
         twbsPagination(options: Partial<TwbsPaginationOptions>): void
-        mark(word: string): void;
+        mark(word: string, options?: IMarkJsOptions ): void;
     }
 
     class igNavigation {

@@ -4,7 +4,7 @@ import SearchWorker from 'worker-loader!./lunr-search';
 import { INavigationOptions } from '../../types';
 import { Router } from '../router';
 import util from '../utils';
-import { ISearchItem } from './types';
+import { ILunr, ISearchItem } from './types';
 
 const router = Router.getInstance();
 let worker: SearchWorker;
@@ -24,63 +24,15 @@ export function enableSearch() {
   try {
     worker = new SearchWorker();
     if (!worker && !window.Worker) {
-      // localSearch();
+      localSearch();
     } else {
-      webWorkerSearch();
+       webWorkerSearch();
     }
 
     addSearchEvent();
   } catch (e) {
     console.error(e);
   }
-
-  // // Search factory
-  // function localSearch() {
-  //   console.log("using local search");
-  //   let lunrIndex = lunr(function () {
-  //     this.ref("href");
-  //     this.field("title", {
-  //       boost: 50
-  //     });
-  //     this.field("keywords", {
-  //       boost: 20
-  //     });
-  //   });
-  //   lunr.tokenizer.seperator = /[\s\-\.]+/;
-  //   let searchData = {};
-  //   let searchDataRequest = new XMLHttpRequest();
-
-  //   let indexPath = relHref + "index.json";
-  //   if (indexPath) {
-  //     searchDataRequest.open("GET", indexPath);
-  //     searchDataRequest.onload = function () {
-  //       if (this.status != 200) {
-  //         return;
-  //       }
-  //       searchData = JSON.parse(this.responseText);
-  //       for (let prop in searchData) {
-  //         if (searchData.hasOwnProperty(prop)) {
-  //           lunrIndex.add(searchData[prop]);
-  //         }
-  //       }
-  //     };
-  //     searchDataRequest.send();
-  //   }
-
-  //   $("body").bind("queryReady", function () {
-  //     let hits = lunrIndex.search(query);
-  //     let results = [];
-  //     hits.forEach(function (hit) {
-  //       let item = searchData[hit.ref];
-  //       results.push({
-  //         href: item.href,
-  //         title: item.title,
-  //         keywords: item.keywords
-  //       });
-  //     });
-  //     handleSearchResults(results);
-  //   });
-  // }
 }
 
 function addSearchEvent() {
@@ -143,8 +95,8 @@ function handleSearchResults(hits: ISearchItem[]) {
   const numPerPage = 10,
     $paginator = $("#pagination"),
     $hitBloks = $("#search-results>.sr-items");
-  $paginator.empty();
-  $paginator.removeData("twbs-pagination");
+    $paginator.empty();
+    $paginator.removeData("twbs-pagination");
 
   if (hits.length === 0) {
     $hitBloks.html("<p>No results found</p>");
@@ -161,7 +113,7 @@ function handleSearchResults(hits: ISearchItem[]) {
 
         query.split(/\s+/).forEach((word) => {
           if (word !== "") {
-            $("#search-results>.sr-items *").mark(word);
+            $("#search-results>.sr-items *").mark(word, {className: 'markedjs-item'});
           }
         });
       }
@@ -186,10 +138,17 @@ const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
 
   $hitAnchor.on("click", (e: JQuery.TriggeredEvent) => {
     e.preventDefault();
+    const $target = $(e.target);
+    let locationHref: string;
+    if($target.is(".markedjs-item")){
+      locationHref = $target.parent("a").attr("href")!;
+    } else {
+      locationHref = $(e.target).attr("href")!;
+    }
     flipContents("show", ".sidenav");
     $(".sidenav").css("visibility", "hidden");
 
-    router.navigateTo($(e.target).attr("href")!, navigationOptions);
+    router.navigateTo(locationHref, navigationOptions);
   });
 
   $itemTitleNode.append($hitAnchor);
@@ -200,6 +159,48 @@ const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
     .append($itemBriefNode);
 
   return $hitBlock;
+}
+
+function localSearch() {
+  console.log("Using local search");
+  const lunrInstance: ILunr = { index: undefined, data: {} };
+  const indexPath = `${util.baseDir}index.json`;
+
+  if (indexPath) {
+    $.get(indexPath).done(data => {
+      lunrInstance.data = JSON.parse(data);
+      import("lunr").then(lunrModule => {
+        const lunr = lunrModule.default;
+        lunr.tokenizer(/[\s\-\.]+/);
+
+        lunrInstance.index = lunr(function () {
+          this.ref("href");
+          this.field("title", { boost: 20 });
+          this.field("keywords", { boost: 50 });
+
+          for (let prop in lunrInstance.data) {
+            if (lunrInstance.data.hasOwnProperty(prop)) {
+              this.add(lunrInstance.data[prop]);
+            }
+          }
+        });
+
+        $("body").on("queryReady", () => {
+          let hits = lunrInstance.index?.search(query);
+          let results: ISearchItem[] = [];
+          hits?.forEach((hit) => {
+            let item = lunrInstance.data[hit.ref];
+            results.push({
+              href: item.href,
+              title: item.title,
+              keywords: item.keywords
+            });
+          });
+          handleSearchResults(results);
+        });
+      });
+    })
+  }
 }
 
 function webWorkerSearch() {

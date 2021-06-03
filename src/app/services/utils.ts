@@ -203,8 +203,8 @@ class UtilityService {
           let keywords = q.split("%20");
           keywords.forEach((keyword) => {
             if (keyword !== "") {
-              $(".data-searchable *").mark(keyword);
-              $("article *").mark(keyword);
+              $(".data-searchable *").mark(keyword, {className: 'markedjs-item'});
+              $("article *").mark(keyword, {className: 'markedjs-item'});
             }
           });
         }

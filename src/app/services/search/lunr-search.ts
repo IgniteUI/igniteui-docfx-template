@@ -1,15 +1,6 @@
 //@ts-ignore
 import lunr from 'lunr';
-import type {ISearchItem} from './types'
-
-interface ILunr {
-  index?: lunr.Index;
-  data: ISearchData
-}
-
-interface ISearchData {
-  [ref: string]: ISearchItem
-}
+import type {ILunr, ISearchData, ISearchItem} from './types'
 
 const ctx: Worker = self as any;
 const lunrInstance: ILunr = {index: undefined, data: {}};
@@ -72,8 +63,8 @@ function buildIndex() {
     lunrInstance.index = lunr(function () {
       this.pipeline.remove(lunr.stopWordFilter);
       this.ref('href');
-      this.field('title', { boost: 50 });
-      this.field('keywords', { boost: 20 });
+      this.field('title', { boost: 20 });
+      this.field('keywords', { boost: 50 });
 
       for (let prop in lunrInstance.data) {
         if (lunrInstance.data.hasOwnProperty(prop)) {
