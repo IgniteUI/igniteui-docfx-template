@@ -35,7 +35,7 @@ full license information.}}
                 <span class="icon-bar"></span>
             </button>
         </div>
-
+        {{#_enableSearch}}
         <div class="collapse navbar-collapse navbar-flex" id="navbar">
             <form class="navbar-form navbar-right" role="search" id="search">
                 <div class="form-group">
@@ -43,6 +43,7 @@ full license information.}}
                 </div>
             </form>
         </div>
+        {{/_enableSearch}}
 
     </div>
 </nav>  
