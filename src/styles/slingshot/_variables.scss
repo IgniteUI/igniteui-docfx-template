@@ -1,11 +1,13 @@
 // Palette
+//$primary-color: #20216E;
 $primary-color: #6988FF;
-$accent-color: #4AC55F;
 $info-color: $primary-color;
 $warning-color: #F69E41;
 $error-color: #DE8080;
 $success-color: #00AE88;
 $note-color: #dcdcaa;
+$accent-1-color: #4AC55F;
+$accent-2-color: #ED4A99;
 
 // Grays
 $darkgray: #333;
@@ -37,12 +39,12 @@ $button-hover: $link-hover-color;
 
 // Header
 $header-bg: #20216E;
-$header-btn-bg: $accent-color;
+$header-btn-bg: $accent-1-color;
 $header-btn-color: $text-light;
 $header-btn-hover-color: $text-light;
 $header-btn-hover-bg: #40a852;
 $header-btn-radius: 20px;
-$header-btn-border-color: $accent-color;
+$header-btn-border-color: $accent-1-color;
 $header-btn-hover-border-color: #4bc560;
 $header-search-radius: $global-radius;
 $header-btn-box-shadow: 0 0 0 .2rem rgba(75,197,96,.5);
@@ -94,7 +96,7 @@ $navbar-height: 85px;
 
 // badge component
 $new-badge-color: $text-light;
-$new-badge-bg: #ED4A99;
+$new-badge-bg: $accent-2-color;
 $updated-badge-color: $text-light;
 $updated-badge-bg: $primary-color;
 $badge-radius: 4px;
@@ -119,8 +121,6 @@ $alert-radius: $global-radius;
 $icon-container-width: 72px;
 $alert-padding: 21px 17px 21px (17px + $icon-container-width);
 $alert-margin: 20px 0;
-
-$anchorjs-link-size: 24px;
 
 // Headings anchor link icon
 $link-alpha: 0;
@@ -159,35 +159,35 @@ $h2-f-size: 2.5rem;
 $h2-f-weight: 700;
 $h2-l-height: 1.2;
 $h2-m-top: 0;
-$h2-m-bottom: .5rem;
+$h2-m-bottom: 1.5rem;
 
 // h3
 $h3-f-size: 1.75rem;
 $h3-l-height: 1.2;
 $h3-f-weight: 700;
 $h3-m-top: 0;
-$h3-m-bottom: .5rem;
+$h3-m-bottom: 1.5rem;
 
 // h4
-$h4-f-size: 1rem;
-$h4-f-weight: initial;
+$h4-f-size: 1.25rem;
+$h4-f-weight: 400;
 $h4-l-height: 1.5rem;
-$h4-m-top: 1.5rem;
-$h4-m-bottom: 0;
+$h4-m-top: 0;
+$h4-m-bottom: 1.5rem;
 
 // h5
-$h5-f-size: 1rem;
-$h5-f-weight: initial;
+$h5-f-size: 1.125rem;
+$h5-f-weight: 400;
 $h5-l-height: 1.5rem;
-$h5-m-top: 1.5rem;
-$h5-m-bottom: 0;
+$h5-m-top: 0;
+$h5-m-bottom: 1.5rem;
 
 // h6
 $h6-f-size: 1rem;
 $h6-f-weight: 400;
 $h6-l-height: 1.5rem;
 $h6-m-top: 0rem;
-$h6-m-bottom: .5rem;
+$h6-m-bottom: 1.5rem;
 
 // Paragraph
 $p-l-height: 1.5rem;

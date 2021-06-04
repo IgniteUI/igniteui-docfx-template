@@ -5,6 +5,8 @@ $warning-color: #fbb13c;
 $error-color: #f44336;
 $success-color: #00ae88;
 $note-color: #dcdcaa;
+$accent-1-color: #ff134a;
+$accent-2-color: #6a0dad;
 
 // Grays
 $darkgray: #333;
@@ -43,7 +45,7 @@ $header-btn-hover-bg: transparent;
 $header-btn-radius: 0;
 $header-btn-border-color: $primary-color;
 $header-btn-hover-border-color: $primary-color;
-$header-search-radius: $global-radius;
+$header-search-radius: 0;
 $header-btn-box-shadow: none;
 $header-btn-text-transform: uppercase;
 $header-btn-font-weight: bold;
@@ -93,9 +95,9 @@ $navbar-height: auto;
 
 // badge component
 $new-badge-color: $text-light;
-$new-badge-bg: #ff134a;
+$new-badge-bg: $accent-1-color;
 $updated-badge-color: $text-light;
-$updated-badge-bg: #6a0dad;
+$updated-badge-bg: $accent-2-color;
 $badge-radius: 0;
 $badge-font-size: 9px;
 $badge-padding: 2px;
@@ -128,8 +130,6 @@ $alert-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26),
 0 2px 1px -1px rgba(0, 0, 0, 0.08);
 
 $hljs-copy-btn-radius: 0;
-
-$anchorjs-link-size: inherit;
 
 // Table
 $table-header-font-size: 16px;

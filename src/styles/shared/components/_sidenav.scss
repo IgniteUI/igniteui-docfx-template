@@ -229,31 +229,9 @@
 			.new__badge,
 			.updated__badge {
 				position: absolute;
-				display: inline-flex;
-				justify-content: center;
-				align-items: center;
 				top: 55%;
 				right: 5px;
 				transform: translateY(-50%);
-				line-height: 10px;
-				user-select: none;
-				padding: $badge-padding;
-			}
-
-			.new__badge {
-				border-radius: $badge-radius;
-				color: $new-badge-color;
-				background: $new-badge-bg;
-				font-size: $badge-font-size;
-				font-weight: $badge-font-weight;
-			}
-
-			.updated__badge {
-				border-radius: $badge-radius;
-				color: $updated-badge-color;
-				background: $updated-badge-bg;
-				font-size: $badge-font-size;
-				font-weight: $badge-font-weight;
 			}
 		}
 
@@ -298,8 +276,40 @@
 			pointer-events: none;
 		}
 	}
-
 }
+
+
+.new__badge,
+.updated__badge {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	line-height: 10px;
+	user-select: none;
+	padding: $badge-padding;
+	border-radius: $badge-radius;
+	font-size: $badge-font-size;
+	font-weight: $badge-font-weight;
+}
+
+.new__badge {
+	color: $new-badge-color;
+	background: $new-badge-bg;
+}
+
+.updated__badge {
+	color: $updated-badge-color;
+	background: $updated-badge-bg;
+}
+
+.new__badge {
+	border-radius: $badge-radius;
+	color: $new-badge-color;
+	background: $new-badge-bg;
+	font-size: $badge-font-size;
+	font-weight: $badge-font-weight;
+}
+
 
 .sidenav-container {
 	position: fixed;
