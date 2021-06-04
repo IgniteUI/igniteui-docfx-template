@@ -65,6 +65,10 @@ export class Router {
 
         if (!route) return;
 
+        if(!util.isLocalhost && route.endsWith(".html")) {
+            route =  route.replace(".html", "");
+        }
+
         if (util.isOnIndexPage(route)) {
             route = $("meta[name=index]").attr("content")!;
             options.stateAction = "replace";
