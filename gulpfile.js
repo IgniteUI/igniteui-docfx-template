@@ -43,6 +43,7 @@ const generateBundlingGlobalMetadata = (done, dev=false) => {
         outputBuildFiles = undefined,
         bundlesToObserve = [{name:"vendor", ext: "js"}, 
                             {name:"main", ext: "js"},
+                            {name:"lunr-search", ext: "js"},
                             {name:"runtime", ext: "js"},
                             {name:"styles", ext: "css"}] 
     if(!dev) {
@@ -51,7 +52,7 @@ const generateBundlingGlobalMetadata = (done, dev=false) => {
     metadata["_timestamp"] = new Date().getTime();
     bundlesToObserve.forEach(bundle => {
         
-        let bundleFileName = outputBuildFiles != null ? outputBuildFiles.find((file) => file.startsWith(bundle.name)) : `${bundle.name}.bundle.${bundle.ext}`;
+        let bundleFileName = outputBuildFiles != null ? outputBuildFiles.find((file) => file.startsWith(bundle.name) && file.endsWith(bundle.ext)) : `${bundle.name}.${bundle.ext}`;
         metadata[`_${bundle.name}`] = bundleFileName;
     });
 

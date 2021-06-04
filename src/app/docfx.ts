@@ -2,6 +2,8 @@ import '../styles/main.scss';
 import 'babel-polyfill';
 import 'bootstrap';
 import 'jquery-ui';
+import "mark.js/dist/jquery.mark.min.js";
+import "twbs-pagination";
 import "lazysizes";
 import { RenderingService } from './types';
 import {
@@ -23,8 +25,10 @@ import { ResizingService } from './services/resizing';
 import { initNavigation } from './services/navigation';
 import { Router } from './services/router';
 import util from './services/utils';
+import {enableSearch} from './services/search/lunr-client';
 
 $(() => {
+        enableSearch();
         $.widget("custom.codeView", new CodeView())
         let router = Router.getInstance(),
                 codeService = createCodeService(),
@@ -36,12 +40,14 @@ $(() => {
                 services: Array<RenderingService> = [navbarService, tocService];
 
         services.forEach(service => service.render());
-        router.connect($("#_article-wrapper"), (scrollPosition?: number) => {
+        router.connect($("#_article-wrapper"), (adjustTocScrollPosition: boolean, scrollPosition?: number) => {
                 return new Promise<number | undefined>((resolve) => {
                         codeService?.init();
                         articleService.render();
                         affixService.render();
-                        tocService.setActive();
+                        if(adjustTocScrollPosition) {
+                                tocService.setActive();
+                        }
                         tocService.renderBreadcrumb();
                         resizingService.resetObservables();
                         resolve(scrollPosition);

@@ -6,18 +6,18 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'development',
   entry: './src/app/docfx.ts',
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   externals: {
     jquery: 'jQuery'
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, './dist/template/bundles')
   },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles.bundle.css' }),
+    new MiniCssExtractPlugin({ filename: 'styles.css' })
   ],
   target: ['web', 'es5'],
   module: {
@@ -26,6 +26,12 @@ module.exports = {
         test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.worker\.js$/,
+        use: { 
+          loader: "worker-loader"
+         },
       },
       {
         test: /.(sa|sc|c)ss$/,

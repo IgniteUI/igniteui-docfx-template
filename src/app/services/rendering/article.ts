@@ -1,11 +1,20 @@
 import util from "../utils";
-import { RenderingService, HTMLHighlightedCodeElement } from "../../types";;
+import { RenderingService, HTMLHighlightedCodeElement, INavigationOptions } from "../../types";;
 import anchors from 'anchor-js';
 import hljs from "highlight.js";
 import type { IgniteUIPlatform} from '../../types';
 import { onSampleIframeContentLoaded, onXPlatSampleIframeContentLoaded } from "../../handlers";
 import { Router } from "../router";;
 export class ArticleRenderingService extends RenderingService {
+
+    private navigationOptions: INavigationOptions = {
+        stateAction: "push",
+        navigationPostProcess: () => {
+            if(util.hasLocationHash()) {
+                util.scroll(location.hash, false);
+            }
+        }
+    }
 
     constructor(private router: Router) {
         super();
@@ -57,31 +66,16 @@ export class ArticleRenderingService extends RenderingService {
                 $("#toc a.active").closest("li").addClass("active");
                 if($anchor.attr("href")?.startsWith("#")) {
                     util.scroll($anchor.attr("href"));
+                    if($anchor.attr("href") !== location.hash) 
+                    history.pushState({scrollPosition: $(window).scrollTop()}, "", $anchor.attr("href"));
                 } else {
-                    let scrollToTop = $anchor.prop("hash") ? undefined : 0;
-                    this.router.navigateTo($anchor.attr("href")!, true, scrollToTop, () => {
-                        $(".sidetoc").scrollTop(0);
-    
-                        let top = 0;
-                        $("#toc a.active").parents("li").
-                            each((i, e) => {
-                                $(e).addClass(this.expanded);
-                                top += $(e).position().top;
-                            });
-                        top = top - 50;
-                        console.log(top);
-                        console.log($("#toc a.active").offset()?.top)
-                        $(".sidetoc").scrollTop(top);
-
-                        if(util.hasLocationHash()) {
-                            util.scroll(location.hash, false);
-                        }
-                    });
+                    this.router.navigateTo($anchor.attr("href")!, this.navigationOptions);
+                    
                 }
             });
 
             if (!util.isLocalhost && anchorHref) {
-                $anchor.attr('href', anchorHref.slice(0, anchorHref.lastIndexOf('.html')));
+                $anchor.attr('href', anchorHref.replace(".html", ""));
             }
         });
     }
@@ -279,7 +273,12 @@ export class ArticleRenderingService extends RenderingService {
     }
 
     private anchorJs() {
-        $(".anchorjs-link").on("click", (evt) => util.scroll($(evt?.target)?.attr("href")!));
+        $(".anchorjs-link").on("click", (evt) => {
+            evt.preventDefault();
+            util.scroll($(evt?.target)?.attr("href")!);
+            if($(evt?.target)?.attr("href")! !== location.hash) 
+                history.pushState({scrollPosition: $(window).scrollTop()}, "", $(evt?.target)?.attr("href")!);
+        });
     }
 
     private renderGithubBtn(){

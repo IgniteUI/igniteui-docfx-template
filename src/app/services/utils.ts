@@ -12,11 +12,15 @@ class UtilityService {
         ));
     public isIE = !((window as any).ActiveXObject) && "ActiveXObject" in window;
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
+    public baseDir: string;
     private offset: number;
+
     constructor() {
         this.offset = $('.navbar').first().height()!;
         $("body").data("offset", this.offset + 50);
         this.refreshHash();
+        let baseRel = $("meta[name=data-docfx-rel]").attr("content")!;
+        this.baseDir=this.getAbsolutePath(baseRel);
     }
 
     public getAbsolutePath(href: string) {
@@ -188,11 +192,23 @@ class UtilityService {
     }
 
     public isOnIndexPage(route?: string): boolean{
-        let baseDir = $("meta[name=base-dir]").attr("content")!
         if(route) 
-            return this.getAbsolutePath(route) === this.getAbsolutePath(baseDir)
-        return window.location.pathname === this.getAbsolutePath(baseDir);
+            return this.getAbsolutePath(route) === this.baseDir;
+        return window.location.pathname === this.baseDir;
     }
+
+    public highlightKeywords(query: string) {
+        let q = query;
+        if (q != null) {
+          let keywords = q.split("%20");
+          keywords.forEach((keyword) => {
+            if (keyword !== "") {
+              $(".data-searchable *").mark(keyword, {className: 'markedjs-item'});
+              $("article *").mark(keyword, {className: 'markedjs-item'});
+            }
+          });
+        }
+      }
 }
 
 const util: UtilityService = new UtilityService();
