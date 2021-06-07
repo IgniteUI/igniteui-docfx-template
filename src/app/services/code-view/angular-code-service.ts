@@ -27,6 +27,10 @@ export class AngularCodeService extends CodeService {
         let $codeViewElements = $("code-view");
         let $standaloneliveEditingButtons = $("button[data-sample-src]");
 
+        if ($standaloneliveEditingButtons.length > 0){
+            this.genetareStandaloneButtonsApp($standaloneliveEditingButtons);
+        }
+
         if ($codeViewElements.length > 0) {
 
             $.each($codeViewElements, (index, element) => {
@@ -49,13 +53,6 @@ export class AngularCodeService extends CodeService {
                     this.getAngularSampleFiles(baseUrl, codeViewsData, () => this.renderFooters(codeViewsData));
                 }
             }
-            if (!(util.isIE || util.isEdge)) {
-                $standaloneliveEditingButtons.on('click', this.onAngularGithubProjectStandaloneButtonClicked());
-            } else {
-                $standaloneliveEditingButtons.css("display", "none");
-            }
-        } else if ($standaloneliveEditingButtons.length > 0) {
-            this.genetareStandaloneButtonsApp($standaloneliveEditingButtons);
         }
     }
 
