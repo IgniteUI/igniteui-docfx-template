@@ -1,4 +1,5 @@
 import { ICodeViewFilesData, ISampleData } from "../../types";
+import { XHRService } from "../jqXHR-tasks";
 import { CodeService } from "./base-code-service";
 
 export class XplatCodeService extends CodeService {
@@ -9,7 +10,7 @@ export class XplatCodeService extends CodeService {
     private githubSourceAttrName: string;
 
     
-    constructor(private xplat: string) {
+    constructor(private xplat: string, private xhrService: XHRService) {
         super();
         this.xplat = this.xplat === "web-components" ? "wc" : this.xplat;
         this.samplesCodeBasePath = this.xplat === "wc" ? "/assets/code-viewer/" : "/code-viewer/";
@@ -52,6 +53,8 @@ export class XplatCodeService extends CodeService {
                 let codeViewsData = this.demosUrls.get(baseUrl)!;
                 this.getSamplesContent(baseUrl, codeViewsData);
             }
+
+            this.demosUrls.clear();
         }
     }
 
@@ -60,14 +63,15 @@ export class XplatCodeService extends CodeService {
         for (const sampleData of data) {
             let sampleFileMedata = this.getSampleMetadataUrl(samplesBaseUrl, sampleData.url);
             let $codeView = sampleData.element;
-            $.ajax({
-                url: sampleFileMedata,
-                type: "GET",
-                crossDomain: true,
-                dataType: "json",
-                success: (data: any) => this.sampleFilePostProcess(data, $codeView),
-                error: () => this.sampleFilesFetchErrorHandler($codeView)
-            })
+            let metaFileFetch = $.get({
+                                    url: sampleFileMedata,
+                                    type: "GET",
+                                    crossDomain: true,
+                                    dataType: "json",
+                                    success: (data: any) => this.sampleFilePostProcess(data, $codeView),
+                                    error: () => this.sampleFilesFetchErrorHandler($codeView)
+                                });
+            this.xhrService.pushTask(metaFileFetch);
         }
     }
 

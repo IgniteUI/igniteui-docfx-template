@@ -2,54 +2,86 @@ import '../styles/main.scss';
 import 'babel-polyfill';
 import 'bootstrap';
 import 'jquery-ui';
+import "mark.js/dist/jquery.mark.min.js";
+import "twbs-pagination";
 import "lazysizes";
 import { RenderingService } from './types';
-import { CodeView } from './services/code-view/code-view';
 import {
-        AffixRenderingService, 
+        CodeView,
+        createCodeService
+} from './services/code-view';
+import {
+        AffixRenderingService,
         ArticleRenderingService,
         NavbarRenderingService,
         TocRenderingService
-    } from './services/rendering/index';
-import { IgViewer } from './services/igViewer.common';
+} from './services/rendering/index';
+import {
+        attachLazyLoadHandler,
+        attachThemingHandler,
+        showHideThemingWidget
+} from './handlers';
 import { ResizingService } from './services/resizing';
-import { attachLazyLoadHandler } from './handlers/lazyload';
-import { attachThemingHandler } from './handlers/theming';
 import { initNavigation } from './services/navigation';
-import { CodeService } from './services/code-view/base-code-service';
-import { AngularCodeService } from './services/code-view/angular-code-service';
-import { XplatCodeService } from './services/code-view/xplat-code-service';
+import { Router } from './services/router';
+import util from './services/utils';
+import {enableSearch} from './services/search/lunr-client';
 
 $(() => {
-    $.widget("custom.codeView", new CodeView())
-    let navbarService = new NavbarRenderingService(),
-        resizingService = new ResizingService(),
-        tocService = new TocRenderingService(resizingService),
-        affixService = new AffixRenderingService(resizingService),
-        articleService = new ArticleRenderingService(),
-        services: Array<RenderingService> = [affixService, navbarService, articleService, tocService];
-    services.forEach(service => service.render());
+        enableSearch();
+        $.widget("custom.codeView", new CodeView())
+        let router = Router.getInstance(),
+                codeService = createCodeService(),
+                navbarService = new NavbarRenderingService(),
+                resizingService = new ResizingService(),
+                articleService = new ArticleRenderingService(router),
+                affixService = new AffixRenderingService(resizingService),
+                tocService = new TocRenderingService(resizingService, router),
+                services: Array<RenderingService> = [navbarService, tocService];
 
-    let igViewer = IgViewer.getInstance(),
-        platformMeta: JQuery<HTMLElement>,
-        codeService: CodeService,
-        platform: string;
+        services.forEach(service => service.render());
+        router.connect($("#_article-wrapper"), (adjustTocScrollPosition: boolean, scrollPosition?: number) => {
+                return new Promise<number | undefined>((resolve) => {
+                        codeService?.init();
+                        articleService.render();
+                        affixService.render();
+                        if(adjustTocScrollPosition) {
+                                tocService.setActive();
+                        }
+                        tocService.renderBreadcrumb();
+                        resizingService.resetObservables();
+                        resolve(scrollPosition);
 
-        initNavigation();
-        igViewer.adjustTopLinkPos();
+                }).then((scrollPosition) => {
+                        if (scrollPosition != null) {
+                                $(window).scrollTop(scrollPosition)
+                        }
+                        showHideThemingWidget($("iframe").length);
+                });
+        });
+
+        if (util.isOnIndexPage()) {
+                $("#_article-wrapper").removeClass("null-opacity");
+                router.navigateTo($("meta[name=index]").attr("content")!);
+        } else {
+                (async () => {
+                        await new Promise<void>((resolve) => {
+                                articleService.render();
+                                affixService.render();
+                                resolve();
+                        }).then(() => {
+                                $("#_article-wrapper").removeClass("null-opacity");
+                                if (util.hasLocationHash()) {
+                                        setTimeout(() => util.scroll(location.hash), 500);
+                                }
+                                codeService?.init();
+                        });
+                })();
+        }
+
+        showHideThemingWidget($("iframe").length);
         attachLazyLoadHandler();
         attachThemingHandler();
-        platformMeta = $("meta[property='docfx:platform']");
-        if (!platformMeta) {
-            return;
-        }
-        platform = platformMeta.attr("content")!;
-        if (platform === "angular") {
-            codeService = new AngularCodeService();
-        } else {
-            codeService = new XplatCodeService(platform);
-        }
-        codeService.init();
-
+        initNavigation();
 });
 

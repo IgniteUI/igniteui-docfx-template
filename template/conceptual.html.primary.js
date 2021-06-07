@@ -22,6 +22,7 @@ exports.transform = function (model) {
   model._isLangEn = true;
   model._isLangJa = false;
   model._isLangKr = false;
+  model._rel = model._rel || './';
   model._appLang = "en";
   if (model._language) {
     if (model._language === "ja") {
