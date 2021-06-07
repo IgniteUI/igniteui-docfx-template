@@ -13,14 +13,14 @@ class UtilityService {
     public isIE = !((window as any).ActiveXObject) && "ActiveXObject" in window;
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
     public baseDir: string;
-    private offset: number;
+    public offset: number;
 
     constructor() {
         this.offset = $('.navbar').first().height()!;
         $("body").data("offset", this.offset + 50);
         this.refreshHash();
         let baseRel = $("meta[name=data-docfx-rel]").attr("content")!;
-        this.baseDir=this.getAbsolutePath(baseRel);
+        this.baseDir = this.getAbsolutePath(baseRel);
     }
 
     public getAbsolutePath(href: string) {

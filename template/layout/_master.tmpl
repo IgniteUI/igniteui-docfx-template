@@ -37,19 +37,21 @@
                 {{>partials/toc}}
             </div>
 
-            <div class="article-container null-opacity col-lg-8 col-md-9 col-sm-12" id="_article-wrapper">
+            <div class="article-container null-opacity col-lg-8 col-md-9 col-sm-12 hide-when-search resizable-content" id="_article-content-wrapper">
                 {{#slingshotTheme}}
                     {{^_disableBreadcrumb}} {{>partials/breadcrumb}} {{/_disableBreadcrumb}}
                 {{/slingshotTheme}}
-
-                <article class="content wrap" id="_content" data-uid="{{uid}}">
+                <div id="_article-wrapper">
+                    <article class="content wrap" id="_content" data-uid="{{uid}}">
                     {{!body}}
-                {{#_gitHubBtnLbl}}<div>{{>partials/github}}</div>
-                 {{/_gitHubBtnLbl}}
-                </article>
+                    {{#_gitHubBtnLbl}}
+                        <div>{{>partials/github}}</div>
+                    {{/_gitHubBtnLbl}}
+                    </article>
+                </div>
             </div>
 
-            <div class="hidden-md docfx-affix">
+            <div class="hidden-md docfx-affix hide-when-search">
                 {{^_disableAffix}} {{>partials/affix}} {{/_disableAffix}}
             </div>
 

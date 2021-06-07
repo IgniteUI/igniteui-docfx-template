@@ -60,7 +60,7 @@ $(() => {
         });
 
         if (util.isOnIndexPage()) {
-                $("#_article-wrapper").removeClass("null-opacity");
+                $("#_article-content-wrapper").removeClass("null-opacity");
                 router.navigateTo($("meta[name=index]").attr("content")!);
         } else {
                 (async () => {
@@ -69,7 +69,7 @@ $(() => {
                                 affixService.render();
                                 resolve();
                         }).then(() => {
-                                $("#_article-wrapper").removeClass("null-opacity");
+                                $("#_article-content-wrapper").removeClass("null-opacity");
                                 if (util.hasLocationHash()) {
                                         setTimeout(() => util.scroll(location.hash), 500);
                                 }

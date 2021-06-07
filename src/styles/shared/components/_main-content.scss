@@ -3,6 +3,15 @@
 	margin-bottom: 115px;
 }
 
+.null-opacity{
+    opacity: 0;
+}
+
+#_content {
+	animation: fadeIn;
+	animation-duration: 500ms;
+}
+
 .article.grid-right {
 	margin-left: 280px;
 }

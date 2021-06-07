@@ -31,7 +31,6 @@
 }
 
 .search-results-container .search-results-group {
-	//padding-top: 50px !important;
 	padding: 50px 10px 10px 10px;
 }
 
@@ -55,14 +54,10 @@
 	box-shadow: 0 0 10px $surface-dark;
 }
 
-// #search {
-// 	display: none;
-// }
-
 /* Search results display*/
 #search-results {
 	max-width: 960px !important;
-	margin: 120px auto 115px;
+	margin: 50px auto 115px;
 	line-height: 1.8;
 	display: none;
 }
@@ -70,7 +65,7 @@
 #search-results > .search-list {
 	text-align: center;
 	font-size: 2.5rem;
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 }
 
 #search-results p {
@@ -79,4 +74,14 @@
 
 #search-results .sr-items {
 	font-size: 24px;
+	margin-bottom: 25px;
+
+	.item-href {
+		font-size: 14px;
+		color: #093;
+	}
+
+	.item-brief {
+		font-size: 13px;
+	}
 }
