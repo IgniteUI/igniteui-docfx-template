@@ -21,7 +21,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' })
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })
   ],
   target: ['web', 'es5'],
   module: {
