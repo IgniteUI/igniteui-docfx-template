@@ -16,11 +16,13 @@ export function onSampleIframeContentLoaded(target: HTMLIFrameElement) {
         }
         var themingWidget = $('igniteui-theming-widget') as any;
         if (themingWidget.length > 0) {
-            data.themeName = themingWidget[0].theme.globalTheme;
-            _iframe.contentWindow!.postMessage(data, targetOrigin);
+            if (!util.isLocalhost) {
+                data.themeName = themingWidget[0].theme.globalTheme;
+                _iframe.contentWindow!.postMessage(data, targetOrigin);
+            }
         }
     }
-  }
+}
 
 export function onXPlatSampleIframeContentLoaded (target: HTMLIFrameElement) {
     target.parentElement!.classList.remove("loading");
