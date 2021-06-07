@@ -3,6 +3,7 @@ import { debounceTime} from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 import util from './utils';
 import meta from './meta';
+import { INavigationOptions, NavigationHandler } from "../types";
 export class Router {
 
     private static instance: Router;
@@ -16,7 +17,7 @@ export class Router {
     private currentPage: string;
     private _targetEle: JQuery<HTMLElement>;
     private _baseUrl = $("base").attr("href");
-    private defaultHandler: (scrollPosition?: number) => Promise<void>;
+    private defaultHandler: NavigationHandler;
 
     constructor(private xhrService = XHRService.getInstance()) {
         if ('scrollRestoration' in history) {
@@ -30,7 +31,7 @@ export class Router {
         this.currentPage = util.toAbsoluteURL(location.pathname);
     }
 
-    public connect(targetEle: JQuery<HTMLElement>, navigationHandler: () => Promise<void>) {
+    public connect(targetEle: JQuery<HTMLElement>, navigationHandler: NavigationHandler) {
         this._targetEle = targetEle;
         this.defaultHandler = navigationHandler;
         let currentPathName = window.location.pathname.substring(this._baseUrl?.length! - 1);
@@ -42,27 +43,35 @@ export class Router {
             .pipe(
                 debounceTime(150),
             ).subscribe((e) => {
+                let options: INavigationOptions = {
+                    stateAction: 'none'
+                }
+
                 let isCurrentPage = this.currentPage === util.toAbsoluteURL(location.pathname);
-                if (isCurrentPage) 
+                if (isCurrentPage) {
                     util.scroll(util.hasLocationHash() ? location.hash : undefined);
-                else if (util.hasLocationHash()) 
-                    this.navigateTo(location.pathname, false, undefined, () => setTimeout(() => util.scroll(location.hash, false)));
-                else if (e.state?.scrollPosition != null) 
-                    this.navigateTo(location.pathname, false, e.state?.scrollPosition);
-                else 
-                    this.navigateTo(location.pathname, false);
+                    return;
+                }
+                if (util.hasLocationHash())
+                    options.navigationPostProcess = () => setTimeout(() => util.scroll(location.hash, false));
+                else if (e.state?.scrollPosition != null)
+                    options.scrollPosition = e.state?.scrollPosition;
+                this.navigateTo(location.pathname, options);
             });
     }
 
-    public navigateTo(route: string, push = true, scrollPosition?: number, cb?: () => void) {
-        let replace = false;
+    public navigateTo(route: string, options: INavigationOptions = {stateAction: "push"}) {
         if (!this.xhrService.isEmpty()) this.xhrService.abortTasks();
 
         if (!route) return;
 
+        if(!util.isLocalhost && route.endsWith(".html")) {
+            route =  route.replace(".html", "");
+        }
+
         if (util.isOnIndexPage(route)) {
             route = $("meta[name=index]").attr("content")!;
-            replace = true;
+            options.stateAction = "replace";
         }
 
         console.log("Navigate to " + route);
@@ -70,7 +79,7 @@ export class Router {
         let target = util.isRelativePath(route) ? util.toAbsoluteURL(route) : route;
         this.currentPage = target;
 
-        if (push) {
+        if (options.stateAction === 'push') {
             window.history.pushState(
                 { scrollPosition: 0 },
                 "",
@@ -78,7 +87,7 @@ export class Router {
             );
         }
 
-        if(replace) {
+        if(options.stateAction === 'replace') {
             window.history.replaceState(
                 { scrollPosition: 0 },
                 "",
@@ -90,8 +99,10 @@ export class Router {
             if(data) {
                 let parsedDOM = $("<div>").append($.parseHTML(data));
                 meta.configureMetadata(parsedDOM);
-                await this.defaultHandler(scrollPosition ?? 0);
-                if (cb) cb();
+                await this.defaultHandler(options.adjustTocScrollPosition ?? true,  options.scrollPosition ?? 0);
+                
+                if(options.navigationPostProcess)
+                    options.navigationPostProcess();
             }
         });
     }

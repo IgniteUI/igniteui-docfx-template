@@ -10,18 +10,18 @@ module.exports = {
     igniteui: './src/styles/ignite-ui/main.scss',
     slingshot: './src/styles/slingshot/main.scss'
   },
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   externals: {
     jquery: 'jQuery'
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, './dist/template/bundles')
   },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: '[name].bundle.css' }),
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
   ],
   target: ['web', 'es5'],
   module: {
@@ -30,6 +30,12 @@ module.exports = {
         test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.worker\.js$/,
+        use: { 
+          loader: "worker-loader"
+         },
       },
       {
         test: /.(sa|sc|c)ss$/,

@@ -14,14 +14,14 @@ module.exports = {
     jquery: 'jQuery'
   },
   output: {
-    filename: '[name].bundle.[contenthash].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist/template/bundles')
   },
 
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: '[name].bundle.[contenthash].css' })
+    new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' })
   ],
   target: ['web', 'es5'],
   module: {
@@ -30,6 +30,12 @@ module.exports = {
         test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.worker\.js$/,
+        use: { 
+          loader: "worker-loader"
+         },
       },
       {
         test: /.(sa|sc|c)ss$/,

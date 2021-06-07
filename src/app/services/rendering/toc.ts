@@ -76,12 +76,11 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             e.preventDefault();
             let $a = this.getActiveAnchor($(e.target));
             if ($a.parent().is(":last-child")) return;
-            this.setActive($a);
-            this.router.navigateTo($a.attr("href")!, true)
+            this.router.navigateTo($a.attr("href")!);
         });
     }
 
-    public setActive($anchor?: JQuery<HTMLElement>) {
+    public setActive($anchor?: JQuery<HTMLElement>, shouldScroll = true) {
         $("#toc a.active").removeClass(this.active);
         $("#toc li").removeClass(this.active);
         let $anchorToActivate: JQuery<HTMLAnchorElement>;
@@ -95,6 +94,12 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         }
         $anchorToActivate!.addClass(this.active);
         $anchorToActivate!.closest("li").addClass(this.active).addClass(this.expanded);
+
+        if(shouldScroll) {
+            $(".sidetoc").scrollTop(0);
+            this.scrollToActive();
+        }
+
 
         if ($("#toc_filter_input").val()) {
             $("#toc_filter_input").val("");
@@ -155,8 +160,8 @@ export class TocRenderingService extends RenderingService implements ResizableOb
                 return;
             } else if ($a.is(".active")) return;
 
-            this.setActive($a);
-            this.router.navigateTo($a.attr("href")!, true)
+            this.setActive($a, false);
+            this.router.navigateTo($a.attr("href")!, {stateAction: "push", adjustTocScrollPosition: false})
         });
 
         $("#toc_filter_input").on("input", (e: any) => {

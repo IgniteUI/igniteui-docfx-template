@@ -4,11 +4,27 @@ export type DimensionChangeType = 'increase' | 'decrease';
 
 export type DimensionType = 'height' | 'width';
 
+export type HistoryStateAction = "push" | "replace" | "none";
+
 type Merge<T, TT> = {
     [K in keyof T]: T[K]
 } & TT;
 
+export type NavigationHandler = (adjustTocScrollPosition: boolean, scrollPosition?: number) => Promise<void>;
+
+export interface INavigationOptions {
+    stateAction: HistoryStateAction,
+    adjustTocScrollPosition?: boolean
+    scrollPosition?: number,
+    navigationPostProcess?: () => void
+}
+
 export type HTMLHighlightedCodeElement = Merge<HTMLElement, IHighlighted>;
+
+export interface IScrollPosition{
+    toc: number;
+    article: number
+}
 export interface ICodeViewFilesData {
     isMain: boolean;
     path: string;
@@ -130,12 +146,70 @@ export interface IHeadEl {
     attributeSelectorValue?: string
 }
 
+// More information about the twbs pagination options - https://josecebe.github.io/twbs-pagination/
+interface TwbsPaginationOptions {
+    totalPages: number,
+    startPage: number,
+    visiblePages: number,
+    initiateStartPageClick: boolean,
+    hideOnlyOnePage: boolean,
+    href: boolean,
+    pageVariable: string,
+    totalPagesVariable: string,
+    page: Function,
+    first: string,
+    prev: string,
+    next: string,
+    last: string,
+    loop: boolean,
+    beforePageClick: Function,
+    onPageClick: Function,
+    paginationClass: string,
+    nextClass: string,
+    prevClass: string,
+    lastClass: string,
+    firstClass: string,
+    pageClass: string,
+    activeClass: string,
+    disabledClass: string,
+    anchorClass: string,
+}
+
+
+//More information about the mark.js options - https://markjs.io/
+interface IMarkJsOptions{
+  element?: string,
+  className?: string,
+  exclude?: string[],
+  iframes?: boolean,
+  iframesTimeout?: number,
+  separateWordSearch?: boolean,
+  diacritics?: boolean,
+  synonyms?: {[key: string]: string},
+  accuracy?: 'partially' | 'exactly' | 'complementary' ,
+  acrossElements?: boolean,
+  caseSensitive?: boolean,
+  ignoreJoiners?: boolean,
+  ignoreGroups?: number,
+  ignorePunctuation?: string[],
+  wildcards?: 'disabled' | 'enabled' | 'withSpaces',
+  each?: () => {},
+  noMatch?: () => {},
+  filter?: () => true,
+  done?: () => {},
+  debug?: boolean,
+  log?: typeof console.log
+}
+
 declare global {
     interface JQuery {
         codeView(): JQuery;
         codeView(options: ICodeViewOptions): JQuery;
         codeView(methodName: 'createTabsWithCodeViews', filesData: ICodeViewFilesData[]): void;
         codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string): void;
+        collapse(action: string): void;
+        twbsPagination(options: Partial<TwbsPaginationOptions>): void
+        mark(word: string, options?: IMarkJsOptions ): void;
     }
 
     class igNavigation {
