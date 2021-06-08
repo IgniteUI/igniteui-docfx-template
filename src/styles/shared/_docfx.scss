@@ -168,9 +168,9 @@ svg {
 	color: $midgray;
 
 	&:hover {
-		background-color: $primary-color;
+		background-color: $secondary-1-color;
 		color: white;
-		border-color: $primary-color;
+		border-color: $secondary-1-color;
 	}
 }
 
@@ -280,7 +280,7 @@ svg {
 
 	&:hover {
 		background-color: #cbe9fc;
-		color: $primary-color;
+		color: $secondary-1-color;
 	}
 
 	&:before {

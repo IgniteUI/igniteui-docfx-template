@@ -1,24 +1,23 @@
 // Palette
-//$primary-color: #20216E;
-$primary-color: #6988FF;
-$info-color: $primary-color;
+$primary-color: #20226f;
+$info-color: #6988FF;
 $warning-color: #F69E41;
 $error-color: #DE8080;
 $success-color: #00AE88;
 $note-color: #dcdcaa;
-$accent-1-color: #4AC55F;
-$accent-2-color: #ED4A99;
-
-// Grays
-$darkgray: #333;
-$midgray: #666;
-$lightgray: #f1f1f1;
+$secondary-1-color: #4AC55F;
+$secondary-2-color: #3f4b89;
+$accent-color: #ED4A99;
 
 // Font
 $global-font-family: 'Roboto', sans-serif;
 $generic-font-weight: 400;
-
 $global-radius: 8px;
+
+// Grays
+$darkgray: #333;
+$midgray: #666;
+$lightgray: #e9ebf3;
 
 // Text
 $text-base: #585858;
@@ -34,17 +33,18 @@ $surface-mid: $darkgray;
 $surface-disabled: #eee;
 
 // Link
+$link-color: #6988FF;
 $link-hover-color: #4562cd;
 $button-hover: $link-hover-color;
 
 // Header
-$header-bg: #20216E;
-$header-btn-bg: $accent-1-color;
+$header-bg: $primary-color;
+$header-btn-bg: $secondary-1-color;
 $header-btn-color: $text-light;
 $header-btn-hover-color: $text-light;
 $header-btn-hover-bg: #40a852;
 $header-btn-radius: 20px;
-$header-btn-border-color: $accent-1-color;
+$header-btn-border-color: $secondary-1-color;
 $header-btn-hover-border-color: #4bc560;
 $header-search-radius: $global-radius;
 $header-btn-box-shadow: 0 0 0 .2rem rgba(75,197,96,.5);
@@ -54,8 +54,9 @@ $header-btn-font-size: 14px;
 
 // Breadcrumb
 $breadcrumb-color: $text-dark;
-$breadcrumb-link-color: $primary-color;
+$breadcrumb-link-color: $link-color;
 $breadcrumb-link-hover-color: $link-hover-color;
+$breadcrumb-current-color: $text-dark;
 $breadcrumb-font-size:  16px;
 $breadcrumb-font-weight: 400;
 $breadcrumb-margin: 0 0 20px 0;
@@ -79,8 +80,9 @@ $scrollbar-thumb-track--active: #333;
 // Code view
 $scrollbar-thumb-bg-cv: #f1f1f1;
 $scrollbar-thumb-track-cv: #888;
-$code-view-navbar-bg: #e5f4fe;
+$code-view-navbar-bg: #f0f3ff;
 $code-view-radius: $global-radius;
+$code-view-active-color: $primary-color;
 $code-view-font: 'Roboto', sans-serif;
 $hljs-variable: #C699E5;
 $hljs-number: #4ac55f;
@@ -91,14 +93,18 @@ $hljs-color: $text-light;
 
 $indigo: #3f51b5;
 $footer-bg: #f8f8f8;
-
 $navbar-height: 85px;
+
+// Toc
+$toc-active-color: $text-dark;
+$toc-hover-color: $link-color;
+$toc-color: $text-base;
 
 // badge component
 $new-badge-color: $text-light;
-$new-badge-bg: $accent-2-color;
+$new-badge-bg: $accent-color;
 $updated-badge-color: $text-light;
-$updated-badge-bg: $primary-color;
+$updated-badge-bg: $info-color;
 $badge-radius: 4px;
 $badge-font-size: 12px;
 $badge-padding: 4px 6px;

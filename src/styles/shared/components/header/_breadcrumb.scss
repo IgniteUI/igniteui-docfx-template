@@ -16,6 +16,15 @@
 			color: $breadcrumb-link-hover-color;
 		}
 	}
+
+	li {
+		&:last-child {
+			a {
+				color: $breadcrumb-current-color;
+				pointer-events: none;
+			}
+		}
+	}
 }
 
 #breadcrumb {

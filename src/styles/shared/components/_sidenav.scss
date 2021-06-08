@@ -30,7 +30,7 @@
 	top: 0;
 	left: 10px;
 	padding: 6px;
-	color: $primary-color;
+	color: $link-color;
 	font-weight: 500;
 	display: flex;
 	align-items: center;
@@ -44,7 +44,7 @@
 }
 
 .toc .nav > li > a {
-	color: #585858;
+	color: $toc-color;
 	display: block;
 	position: relative;
 	padding: 0;
@@ -52,18 +52,18 @@
 
 .toc .nav > li > a:hover,
 .toc .nav > li > a:focus {
-	color: $primary-color;
+	color: $toc-hover-color;
 	background: none;
 	text-decoration: inherit;
 }
 
 .toc .nav > li.active > a {
-	color: #337ab7;
+	color: $toc-active-color;
 }
 
 .toc .nav > li.active > a:hover,
 .toc .nav > li.active > a:focus {
-	color: #23527c;
+	color: $toc-hover-color;
 }
 
 .toc .nav > li > .expand-stub {
@@ -96,10 +96,6 @@
 	font-size: 12px;
 }
 
-// .toc ul li {
-//   font-weight: bold;
-// }
-
 .toc-toggle {
 	display: none;
 }
@@ -123,8 +119,8 @@
 
 .toc-filter {
 	height: $filter-height;
-	background: #fff;
-	color: #666;
+	background: $surface-light;
+	color: $text-base;
 	padding: 5px;
 	position: relative;
 	margin: 0 5px 0 5px;
@@ -132,7 +128,7 @@
 
 .toc-filter > input {
 	border: 0;
-	color: #666;
+	color: $text-base;
 	padding-left: 20px;
 	width: 100%;
 }
@@ -150,7 +146,7 @@
 .sidenav {
 	background-color: #eff1f2;
 	margin-right: -15px;
-	border-right: 1px solid #dedede;
+	border-right: 1px solid $border-color;
 
 	&__header {
 		padding: 24px 0 0 16px !important;
@@ -178,7 +174,7 @@
 
 			a {
 				display: flex;
-				color: #585858;
+				color: $text-base;
 				font-weight: normal;
 			}
 
@@ -201,12 +197,12 @@
 			}
 
 			> a {
-				color: $text-dark;
+				color: $toc-active-color;
 				font-weight: 500;
 			}
 
 			> a:hover {
-				color: $link-hover-color;
+				color: $toc-hover-color;
 			}
 		}
 
@@ -246,7 +242,7 @@
 				}
 
 				a:hover {
-					color: $primary-color;
+					color: $toc-hover-color;
 				}
 
 				&.new {
@@ -279,38 +275,6 @@
 }
 
 
-.new__badge,
-.updated__badge {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	line-height: 10px;
-	user-select: none;
-	padding: $badge-padding;
-	border-radius: $badge-radius;
-	font-size: $badge-font-size;
-	font-weight: $badge-font-weight;
-}
-
-.new__badge {
-	color: $new-badge-color;
-	background: $new-badge-bg;
-}
-
-.updated__badge {
-	color: $updated-badge-color;
-	background: $updated-badge-bg;
-}
-
-.new__badge {
-	border-radius: $badge-radius;
-	color: $new-badge-color;
-	background: $new-badge-bg;
-	font-size: $badge-font-size;
-	font-weight: $badge-font-weight;
-}
-
-
 .sidenav-container {
 	position: fixed;
 }
@@ -327,7 +291,7 @@
 
 	&:focus,
 	&:hover {
-		color: $primary-color;
+		color: $secondary-1-color;
 	}
 }
 
@@ -349,7 +313,7 @@
 	}
 
 	.filter-icon {
-		color: $primary-color;
+		color: $text-base;
 		font-size: 14px;
 		top: 50%;
 		left: 0;

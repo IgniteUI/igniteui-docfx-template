@@ -81,7 +81,7 @@
 
 	&:hover {
 		background: none;
-		color: $primary-color;
+		color: $link-color;
 
 		&::before {
 			background-color: rgba(0, 0, 0, .38);
@@ -102,7 +102,7 @@
 		top: 6px;
 		bottom: 6px;
 		left: 0;
-		background-color: $primary-color;
+		background-color: $link-color;
 	}
 }
 
@@ -116,7 +116,7 @@
 		top: 10px;
 		bottom: 6px;
 		left: 0;
-		background-color: $primary-color;
+		background-color: $link-color;
 	}
 }
 
@@ -139,7 +139,7 @@
 
 	&.active:hover a,
 	&.active a {
-		color: $primary-color;
+		color: $link-color;
 		font-weight: 400;
 	}
 

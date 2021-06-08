@@ -31,7 +31,6 @@
 	}
 }
 
-
 .themes-container {
 	display: none !important;
 }
@@ -135,15 +134,6 @@
 
 .breadcrumb {
 	margin: 0 0 16px 0;
-
-	li {
-		&:last-child {
-			a {
-				color: $text-dark;
-				pointer-events: none;
-			}
-		}
-	}
 }
 
 #autocollapse .form-control {

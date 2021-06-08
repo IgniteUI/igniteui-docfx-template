@@ -1,11 +1,13 @@
 .anchorjs-link {
+	$an-link-f-size: 24px;
 	position: absolute;
-	color: transparentize($primary-color, $link-alpha);
+	color: transparentize($link-color, $link-alpha);
 	font-family: 'Material Icons';
 	padding: 0 .2em;
 	height: 100%;
-	top: calc(50% - 14px);
+	top: calc(50% - (#{$an-link-f-size}/2));
 	font-size: 24px;
+	line-height: normal;
 	display: inline;
 
 	@media (max-width: 768px) {

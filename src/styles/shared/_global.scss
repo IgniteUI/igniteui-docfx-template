@@ -55,6 +55,7 @@ $sg-items-gap: 8px;
 			color: $primary-color;
 		}
 	}
+
 	&--info{
 		background: $info-color;
 
@@ -65,6 +66,7 @@ $sg-items-gap: 8px;
 			color: $info-color;
 		}
 	}
+
 	&--success{
 		background: $success-color;
 
@@ -75,6 +77,7 @@ $sg-items-gap: 8px;
 			color: $success-color;
 		}
 	}
+
 	&--warning{
 		background: $warning-color;
 
@@ -85,6 +88,7 @@ $sg-items-gap: 8px;
 			color: $warning-color;
 		}
 	}
+
 	&--error{
 		background: $error-color;
 
@@ -96,25 +100,36 @@ $sg-items-gap: 8px;
 		}
 	}
 
-	&--accent-1{
-		background: $accent-1-color;
+	&--secondary-1 {
+		background: $secondary-1-color;
 
 		span {
 			&::after {
-				content: '#{$accent-1-color}';
+				content: '#{$secondary-1-color}';
 			}
-			color: $accent-1-color;
+			color: $secondary-1-color;
 		}
 	}
 
-	&--accent-2 {
-		background: $accent-2-color;
+	&--secondary-2 {
+		background: $secondary-2-color;
 
 		span {
 			&::after {
-				content: '#{$accent-2-color}';
+				content: '#{$secondary-2-color}';
 			}
-			color: $accent-2-color;
+			color: $secondary-2-color;
+		}
+	}
+
+	&--accent {
+		background: $accent-color;
+
+		span {
+			&::after {
+				content: '#{$accent-color}';
+			}
+			color: $accent-color;
 		}
 	}
 }

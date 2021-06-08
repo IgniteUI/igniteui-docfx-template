@@ -97,11 +97,11 @@
 
 			&.nav__cta--secondary > a {
 				background-color: transparent;
-				color: $primary-color;
+				color: $secondary-1-color;
 
 				&:hover {
 					color: $text-light;
-					background-color: $primary-color;
+					background-color: $secondary-1-color;
 				}
 			}
 		}

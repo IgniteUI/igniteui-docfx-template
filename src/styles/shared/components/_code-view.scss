@@ -99,13 +99,13 @@ code-view {
 			border-radius: 0 0 $code-view-radius 0;
 
 			&:hover {
-				border-color: $primary-color;
-				color: $primary-color
+				border-color: $secondary-1-color;
+				color: $secondary-1-color
 			}
 
 			&--active {
-				border-color: $primary-color;
-				color: $primary-color
+				border-color: $secondary-1-color;
+				color: $secondary-1-color
 			}
 		}
 
@@ -146,18 +146,18 @@ code-view {
 		cursor: pointer;
 
 		&:hover {
-			color: $primary-color;
+			color: $secondary-1-color;
 		}
 
 		&--active {
 			@extend .code-view-tab;
 			background-color: $surface-light;
-			color: $primary-color;
+			color: $code-view-active-color;
 
 			&::after {
 				content: '';
 				height: 2.5px;
-				background: $primary-color;
+				background: $code-view-active-color;
 				position: absolute;
 				left: 0;
 				right: 0;

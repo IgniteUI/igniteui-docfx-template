@@ -1,13 +1,17 @@
 button,
 a,
 a > code {
-	color: $primary-color;
+	color: $link-color;
 	cursor: pointer;
 }
 
 a > code {
-	background: fade-out($primary-color, .9);
+	background: fade-out($link-color, .9);
 	cursor: pointer;
+
+	&:hover {
+		color: $link-hover-color;
+	}
 }
 
 code {
@@ -49,7 +53,7 @@ a.disable:hover {
 	color: $text-light;
 	border: 0;
 	text-transform: uppercase;
-	background: $primary-color;
+	background: $secondary-1-color;
 	padding: 8px 16px;
 	margin: 24px 0;
 	outline-style: none;
@@ -91,7 +95,7 @@ a.disable:hover {
 		0 3px 14px 2px rgba(0, 0, 0, 0.08);
 	}
 
-	background: $primary-color;
+	background: $secondary-1-color;
 
 	&::before {
 		content: '';
@@ -141,9 +145,14 @@ a.disable:hover {
 	position: relative;
 
 	a {
-		color: $primary-color;
+		color: $link-color;
 		display: flex;
 		align-items: center;
+
+		&:hover,
+		&:focus {
+			color: $link-hover-color;
+		}
 	}
 
 	img {
