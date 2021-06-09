@@ -17,6 +17,7 @@ export class AngularCodeService extends CodeService {
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
+    private localDemosUrls : number = 0;
 
     constructor(private xhrService: XHRService) {
         super();
@@ -33,6 +34,7 @@ export class AngularCodeService extends CodeService {
                 let samplesBaseUrl = $codeView.attr(this.demosBaseUrlAttrName)!;
                 let sampleUrl = $codeView.attr(this.sampleUrlAttrName)!;
                 if (!this.demosUrls.has(samplesBaseUrl)) {
+                    this.localDemosUrls++;
                     this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, codeView: $codeView }]);
                 } else {
                     this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, codeView: $codeView });
@@ -189,9 +191,16 @@ export class AngularCodeService extends CodeService {
     private angularSharedFilePostProcess(demosBaseUrl: string, cb?: () => void) {
         const codeService = this;
         return function (this: JQuery.UrlAjaxSettings, data: any) {
-            const files = data.files;
-            codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
-            codeService.sharedFileContent = data;
+            if (util.isLocalhost && codeService.localDemosUrls > 1){
+                const files = data.files;
+                codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
+                codeService.sharedFileContent[demosBaseUrl] = data;
+            }else {
+                const files = data.files;
+                codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
+                codeService.sharedFileContent = data;
+            }
+            
 
             if (cb) {
                 cb();
@@ -226,11 +235,24 @@ export class AngularCodeService extends CodeService {
             if(sampleContent.addTsConfig) {
                 codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
             }
-            let formData = {
-                dependencies: sampleContent.sampleDependencies,
-                files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
-                devDependencies: codeService.sharedFileContent.devDependencies
+
+            let formData = {};
+
+            if(util.isLocalhost && codeService.localDemosUrls > 1){
+                const key :any = $codeView[0].dataset["demosBaseUrl"];
+                formData = {
+                    dependencies: sampleContent.sampleDependencies,
+                    files: codeService.sharedFileContent[key].files.concat(sampleContent.sampleFiles),
+                    devDependencies: codeService.sharedFileContent.devDependencies
+                }
+            }else {
+                formData = {
+                    dependencies: sampleContent.sampleDependencies,
+                    files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
+                    devDependencies: codeService.sharedFileContent.devDependencies
+                }
             }
+
             let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
                 codeService.createCodesandboxForm(formData);
             form.appendTo($("body"));
