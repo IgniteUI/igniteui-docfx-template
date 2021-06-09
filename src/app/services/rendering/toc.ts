@@ -309,7 +309,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
                 .each((i, e) => {
                     let href = $(e)?.attr("href")!;
 
-                    if (!util.isLocalhost) {
+                    if (util.removeHTMLExtensionFromUrl) {
                         href = href.replace('.html', '')
                     }
 

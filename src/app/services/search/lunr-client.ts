@@ -153,6 +153,9 @@ const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
 
   $itemTitleNode.append($hitAnchor);
 
+  if(util.removeHTMLExtensionFromUrl) {
+    $itemBriefNode.text($itemBriefNode.text().replace(".html", ""));
+  }
   $hitBlock
     .append($itemTitleNode)
     .append($itemHrefNode)

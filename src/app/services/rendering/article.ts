@@ -74,7 +74,7 @@ export class ArticleRenderingService extends RenderingService {
                 }
             });
 
-            if (!util.isLocalhost && anchorHref) {
+            if (util.removeHTMLExtensionFromUrl && anchorHref) {
                 $anchor.attr('href', anchorHref.replace(".html", ""));
             }
         });
