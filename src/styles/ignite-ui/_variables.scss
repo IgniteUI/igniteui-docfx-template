@@ -93,12 +93,19 @@ $hljs-color: $text-light;
 
 $indigo: #3f51b5;
 $footer-bg: #f8f8f8;
+
+// Side nav
+$main-padding: 124px;
+$filter-height: 36px;
+$side-nav-push: $main-padding + $filter-height;
+
 $navbar-height: auto;
 
 // Toc
 $toc-active-color: $text-dark;
 $toc-hover-color: $link-color;
 $toc-color: $text-base;
+$toc-bg-color: #eff1f2;
 
 // badge component
 $new-badge-color: $text-light;
@@ -111,9 +118,6 @@ $badge-padding: 2px;
 $badge-font-weight: 400;
 
 $byzantium: #731963;
-$main-padding: 124px;
-$filter-height: 36px;
-$side-nav-push: $main-padding + $filter-height;
 
 $external-link-icon: 'open_in_new';
 $external-link-icon-padding: 18px;

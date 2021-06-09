@@ -1,5 +1,5 @@
 .toc {
-	background-color: #eff1f2 !important;
+	background-color: $toc-bg-color !important;
 	overflow: hidden;
 	padding-bottom: 30px;
 }
@@ -144,7 +144,7 @@
 }
 
 .sidenav {
-	background-color: #eff1f2;
+	background-color: $toc-bg-color;
 	margin-right: -15px;
 	border-right: 1px solid $border-color;
 
@@ -185,7 +185,7 @@
 		}
 
 		li.active {
-			background-color: #f1f1f1;
+			background-color: $toc-bg-color;
 
 			&::before {
 				position: absolute;
@@ -225,7 +225,7 @@
 			.new__badge,
 			.updated__badge {
 				position: absolute;
-				top: 55%;
+				top: 50%;
 				right: 5px;
 				transform: translateY(-50%);
 			}
@@ -299,9 +299,10 @@
 	margin-left: -15px;
 	overflow-x: hidden;
 	overflow-y: auto;
-	background-color: #eff1f2;
+	background-color: $toc-bg-color;
 	height: calc(100vh - #{$side-nav-push});
 	z-index: 1;
+	border-top: 1px solid $border-color;
 }
 
 .toc-filter {
