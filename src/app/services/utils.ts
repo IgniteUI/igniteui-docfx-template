@@ -22,7 +22,7 @@ class UtilityService {
         this.refreshHash();
         let baseRel = $("meta[name=data-docfx-rel]").attr("content")!;
         this.baseDir=this.getAbsolutePath(baseRel);
-        this.removeHTMLExtensionFromUrl = $("meta[name=isRedirected]")[0] != null;
+        this.removeHTMLExtensionFromUrl = !this.isLocalhost && $("meta[name=isRedirected]")[0] != null;
     }
 
     public getAbsolutePath(href: string) {
