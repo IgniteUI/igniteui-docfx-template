@@ -65,7 +65,7 @@ export class Router {
 
         if (!route) return;
 
-        if(!util.isLocalhost && route.endsWith(".html")) {
+        if(util.removeHTMLExtensionFromUrl) {
             route =  route.replace(".html", "");
         }
 
