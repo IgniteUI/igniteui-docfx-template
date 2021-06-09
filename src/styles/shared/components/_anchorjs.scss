@@ -49,7 +49,7 @@ h2, .h2 {
 h3, .h3 {
 	.anchorjs-link {
 		&::after{
-			top: -1px;
+			top: 1px;
 		}
 	}
 }

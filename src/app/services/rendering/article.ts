@@ -265,11 +265,11 @@ export class ArticleRenderingService extends RenderingService {
     
         if ($(".article-container h2")[2]) {
           let thirdHeader = $(".article-container h2")[2], divTag = $('<div>');
-          $(imgTag).css({ "width": "100%", "display": "block", "margin": "auto", "cursor": "pointer" });
+          divTag.addClass('dfx-seo-banner')
           $(imgTag).on('click', () => window.location.href = productLink);
           $(divTag).append(imgTag);
           $(thirdHeader).before(divTag);
-        } 
+        }
     }
 
     private anchorJs() {
