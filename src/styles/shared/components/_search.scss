@@ -7,7 +7,7 @@
 	font-size: 14px;
 	border: 0;
 	width: 120%;
-	color: #555;
+	color: $text-base;
 }
 
 .docs-search > .search-query:focus {
@@ -26,7 +26,7 @@
 
 .search-results-container {
 	padding-bottom: 1em;
-	border-top: 1px solid #111;
+	border-top: 1px solid $border-color;
 	background: rgba(25, 25, 25, 0.5);
 }
 
@@ -37,14 +37,14 @@
 .search-results-group-heading {
 	font-family: $global-font-family;
 	padding-left: 10px;
-	color: $text-light;
+	color: $title-color;
 }
 
 .search-close {
 	position: absolute;
 	left: 50%;
 	margin-left: -100px;
-	color: $text-light;
+	color: $text-base;
 	text-align: center;
 	padding: 5px;
 	background: $surface-mid;
@@ -57,31 +57,37 @@
 /* Search results display*/
 #search-results {
 	max-width: 960px !important;
-	margin: 50px auto 115px;
-	line-height: 1.8;
+	margin: 50px auto 16px;
 	display: none;
 }
 
 #search-results > .search-list {
 	text-align: center;
-	font-size: 2.5rem;
-	margin-bottom: 25px;
+	font-size: $h1-f-size;
+	font-weight: $h1-f-weight;
+	line-height: $h1-l-height;
+	margin-top: $h1-m-top;
+	margin-bottom: $h1-m-bottom;
+	color: $text-dark;
 }
 
 #search-results p {
 	text-align: center;
 }
 
-#search-results .sr-items {
-	font-size: 24px;
-	margin-bottom: 25px;
+.item-title {
+	font-size: $h3-f-size;
+	font-weight: $h3-f-weight;
+	line-height: $h3-l-height;
+	margin-top: $h3-m-top;
+	margin-bottom: $h3-m-bottom / 3;
+}
 
-	.item-href {
-		font-size: 14px;
-		color: #093;
-	}
+.item-href {
+	color: #999;
+	margin-bottom: 8px;
+}
 
-	.item-brief {
-		font-size: 13px;
-	}
+.sr-item {
+	margin-bottom: 24px;
 }
