@@ -99,6 +99,13 @@ export class Router {
             if(data) {
                 let parsedDOM = $("<div>").append($.parseHTML(data));
                 meta.configureMetadata(parsedDOM);
+                
+                (window as any).dataLayer.push({
+                    'event': 'trackSPAPageview',
+                    'pagePath': location.pathname,
+                    'pageTitle': window.document.title
+                });
+
                 await this.defaultHandler(options.adjustTocScrollPosition ?? true,  options.scrollPosition ?? 0);
                 
                 if(options.navigationPostProcess)
