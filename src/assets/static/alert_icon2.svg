@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="20px" viewBox="0 0 23 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>alert_icon2</title>
+    <g id="Eddy's-Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="alert_icon2" transform="translate(1.000000, 1.000000)" stroke="#FFFFFF">
+            <g id="alert-triangle-(1)-copy" transform="translate(0.000000, -0.000000)">
+                <path d="M8.73801895,0.962744005 L0.268018949,15.102744 C-0.0873394236,15.7181436 -0.0894611177,16.4758909 0.262445469,17.0932709 C0.614352055,17.7106509 1.26743097,18.0949338 1.97801895,18.102744 L18.9180189,18.102744 C19.6286069,18.0949338 20.2816858,17.7106509 20.6335924,17.0932709 C20.985499,16.4758909 20.9833773,15.7181436 20.6280189,15.102744 L12.1580189,0.962744005 C11.7954533,0.365025325 11.1471051,0 10.4480189,0 C9.74893277,0 9.10058461,0.365025325 8.73801895,0.962744005 Z" id="Path"></path>
+                <line x1="10.4480189" y1="6.102744" x2="10.4480189" y2="10.102744" id="Path"></line>
+                <line x1="10.4480189" y1="14.102744" x2="10.4580189" y2="14.102744" id="Path"></line>
+            </g>
+        </g>
+    </g>
+</svg>

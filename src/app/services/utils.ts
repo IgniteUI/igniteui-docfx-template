@@ -13,8 +13,8 @@ class UtilityService {
     public isIE = !((window as any).ActiveXObject) && "ActiveXObject" in window;
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
     public baseDir: string;
+    public offset: number;
     public removeHTMLExtensionFromUrl: boolean;
-    private offset: number;
 
     constructor() {
         this.offset = $('.navbar').first().height()!;
