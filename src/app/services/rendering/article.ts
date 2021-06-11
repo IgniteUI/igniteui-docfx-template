@@ -253,7 +253,8 @@ export class ArticleRenderingService extends RenderingService {
             relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
             platform = $("meta[property='docfx:platform']").attr("content"),
             imgTag = $('<img>');
-    
+        
+        if(productLink.toLocaleLowerCase().includes("slingshot")) return;
     
         if (productLink.includes("indigo")) {
           productLink = "https://cloud.indigo.design";
