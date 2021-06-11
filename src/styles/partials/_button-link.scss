@@ -39,7 +39,7 @@ a.disable:hover {
   padding: 8px 16px;
   margin: 24px 0;
   outline-style: none;
-  transition: all 0.25s ease-out; 
+  transition: all 0.25s ease-out;
 
   &:hover,
   &:focus {
@@ -110,7 +110,20 @@ background: $darkgray;
 }
 }
 
-
+.github-repo-btn {
+  @extend .stackblitz-btn;
+  width: 9rem;
+  // background: rgb(24, 109, 246);
+  background: $darkgray;
+  &::before {
+    background-image: url("../assets/images/github.svg");
+  }
+  &[disabled] {
+    &::before {
+    background-image: url("../assets/images/github.svg");
+    }
+  }
+}
 
 .github-btn {
 

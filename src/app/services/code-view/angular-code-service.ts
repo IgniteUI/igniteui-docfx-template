@@ -68,7 +68,7 @@ export class AngularCodeService extends CodeService {
     //Create a post API form after fetching samples files
     private generateLiveEditingAngularApp(samplesBaseUrl: string, data: ISampleData[]) {
         let metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
-        // prevent caching 
+        // prevent caching
         metaFileUrl += "?t=" + new Date().getTime();
         let metaFileFetch = $.get(metaFileUrl).done((response) => {
             this.demosTimeStamp = response.generationTimeStamp;
@@ -93,8 +93,17 @@ export class AngularCodeService extends CodeService {
     }
 
     private getAngularGitHubSampleUrl(editor: string, sampleUrl: string, branch: string) {
-        if (editor === "stackblitz") return `https://stackblitz.com/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}`;
-        return `https://codesandbox.io/s/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}?fontsize=14&hidenavigation=1&theme=dark&view=preview`
+        // if (editor === "stackblitz") return `https://stackblitz.com/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}`;
+        // return `https://codesandbox.io/s/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}?fontsize=14&hidenavigation=1&theme=dark&view=preview`
+        const path = this.getGithubPath(sampleUrl, branch, "angular");
+        if (editor === "stackblitz")
+            return "https://stackblitz.com/github/" + path;
+        else
+            return "https://codesandbox.io/s/github/" + path + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+    }
+
+    protected getGithubPath(sampleUrl: string, branch: string, platform: string): string {
+        return `igniteui-live-editing-samples/tree/${branch}/${sampleUrl}`;
     }
 
     private getGitHubSampleUrl(demosBaseUrl: string, sampleUrl: string) {
@@ -149,7 +158,7 @@ export class AngularCodeService extends CodeService {
 
     private getAngularSampleFiles(samplesBaseUrl: string, data: ISampleData[], err: () => void) {
         let metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
-        // prevent caching 
+        // prevent caching
         metaFileUrl += "?t=" + new Date().getTime();
         let metaFileFetch = $.get(metaFileUrl)
         .done((response: any) => {

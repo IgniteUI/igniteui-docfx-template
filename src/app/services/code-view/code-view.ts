@@ -3,7 +3,7 @@ import hljs from "highlight.js";
 import util from '../utils';
 
 export class CodeView implements ICodeViewEvents, ICodeViewMembers {
-   
+
     public options: ICodeViewOptions;
 
     public css: Readonly<ICodeViewCSS> = {
@@ -43,26 +43,26 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
         $sampleContainer.wrap($codeViewsContainer)
           .attr('id', 'code-view-' + this.options.iframeId + '-' + 'example-tab-content')
           .addClass(this.css.tabContent);
-  
+
         $codeViewsContainer = $sampleContainer.parent();
-  
+
         $exampleTab = $("<div>", {
           class: this.css.tab + "--active",
           text: "EXAMPLE"
         }).attr('tab-content-id', 'code-view-' + this.options.iframeId + '-' + 'example-tab-content');
         $exampleTab.on("click", this._codeViewTabClick.bind(this));
-  
+
         //Add initial selected tab for the Example view
         $navbar.prepend($exampleTab);
-  
+
         //Create fullscreen button and add it to the code view navbar
         $fullscreenButton = $((util.isIE ? "<span class='fs-button-container' style='width: 35px'><i class='material-icons code-view-fullscreen'>open_in_full</i></span>" : "<span class='fs-button-container' title='Expand to fullscreen'></span>"));
         $fullscreenButton.on('click', function () { window.open($iframe.attr("src") || $iframe.attr("data-src")) });
         $fullscreenButton.appendTo($navbar);
-  
+
         //Render the code view widget
         $(this.element).prepend($navbar);
-  
+
         this._elements = {
           $navbar: $navbar,
           $codeViewsContainer: $codeViewsContainer,
@@ -71,7 +71,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
           $footer: $footer
         }
     }
-  
+
     _codeViewTabClick(event: any): void {
         let $tab: JQuery<EventTarget> = $((event as MouseEvent).target!);
         let tabActiveClass = `${this.css.tab}--active`;
@@ -86,7 +86,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
           this._elements.$activeView.css('display', 'block');
         }
     }
-  
+
     createTabsWithCodeViews(filesData: ICodeViewFilesData[]): void {
       if (!filesData || filesData.length === 0) {
         return;
@@ -101,9 +101,9 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
       this.options.files = _filesData;
       let headers = _filesData.map(f => f.fileHeader);
 
-      
+
       _filesData.forEach(f => {
-    
+
         let language;
 
         switch (f.fileExtension) {
@@ -121,7 +121,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
             break;
         }
 
-        let $tab:JQuery<HTMLElement>, 
+        let $tab:JQuery<HTMLElement>,
             $tabView:JQuery<HTMLElement>,
             $code:JQuery<HTMLElement>,
             $codeWrapper:JQuery<HTMLElement>,
@@ -167,7 +167,8 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
       util.copyCode(".cv-hljs-code-copy", "COPY CODE");
     }
 
-    renderFooter(liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string): void {
+    renderFooter(liveEditingButtonsClickHandler:  ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string,
+                 openGitRepoButtonsClickHandler?: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void): void {
       let $footerContainer = $('<div class="editing-buttons-container"></div>');
       if (!(util.isIE || util.isEdge)) {
 
@@ -203,7 +204,16 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
           return;
         }
 
+        if (openGitRepoButtonsClickHandler) {
+          let $githubRepoButton = $<HTMLButtonElement>("<button>", {class: "github-repo-btn"});
+          $githubRepoButton.text(`Github Repository`);
+          $githubRepoButton.css("font-weight", 500);
+          $githubRepoButton.on("click", () => openGitRepoButtonsClickHandler($githubRepoButton, $(this.element)))
 
+          $footerContainer.append('<span class="editing-label" style="margin-left: 1rem"> Open: </span>').
+          append($githubRepoButton).
+          appendTo(this._elements.$footer);
+        }
       } else {
         $footerContainer.append($("<span>", { class: 'open-new-browser-label' }))
           .css("font-weight", 500)
@@ -212,4 +222,4 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
       }
       $(this.element).append(this._elements.$footer);
     }
-} 
+}

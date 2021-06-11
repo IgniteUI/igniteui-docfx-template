@@ -206,7 +206,8 @@ declare global {
         codeView(): JQuery;
         codeView(options: ICodeViewOptions): JQuery;
         codeView(methodName: 'createTabsWithCodeViews', filesData: ICodeViewFilesData[]): void;
-        codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string): void;
+        codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler:  ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string,
+                                             openGitRepoButtonsClickHandler?: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void): void;
         collapse(action: string): void;
         twbsPagination(options: Partial<TwbsPaginationOptions>): void
         mark(word: string, options?: IMarkJsOptions ): void;

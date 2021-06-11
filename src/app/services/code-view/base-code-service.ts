@@ -11,6 +11,7 @@ export abstract class CodeService {
 
     protected abstract samplesOrder: string[];
     protected abstract codeViewLiveEditingButtonClickHandler?($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>): void;
+    protected abstract getGithubPath?(sampleUrl: string, branch: string, platform: string): string;
 
     public abstract init(): void;
 }

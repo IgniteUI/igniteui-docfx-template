@@ -4,17 +4,17 @@ import { CodeService } from "./base-code-service";
 
 export class XplatCodeService extends CodeService {
     protected samplesOrder: string[];
-    
+
     private enableLiveEditing: boolean;
     private samplesCodeBasePath: string;
     private githubSourceAttrName: string;
 
-    
+
     constructor(private xplat: string, private xhrService: XHRService) {
         super();
         this.xplat = this.xplat === "web-components" ? "wc" : this.xplat;
         this.samplesCodeBasePath = this.xplat === "wc" ? "/assets/code-viewer/" : "/code-viewer/";
-    
+
         switch (this.xplat) {
             case "react":
             case "wc":
@@ -22,7 +22,7 @@ export class XplatCodeService extends CodeService {
                 this.githubSourceAttrName = "github-src";
                 this.enableLiveEditing = true;
             break;
-    
+
             case "blazor":
                 this.samplesOrder = ['razor', 'cs', 'js', 'css'];
                 this.enableLiveEditing = false;
@@ -58,7 +58,7 @@ export class XplatCodeService extends CodeService {
         }
     }
 
-    
+
     private getSamplesContent(samplesBaseUrl: string, data: ISampleData[]) {
         for (const sampleData of data) {
             let sampleFileMedata = this.getSampleMetadataUrl(samplesBaseUrl, sampleData.url);
@@ -84,17 +84,17 @@ export class XplatCodeService extends CodeService {
                             });
         $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
         if(this.enableLiveEditing && $codeView.is(`[${this.githubSourceAttrName}]`)) {
-            $codeView.codeView("renderFooter", this.codeViewLiveEditingButtonClickHandler!, "csb");
+            $codeView.codeView("renderFooter", this.codeViewLiveEditingButtonClickHandler!, "csb", this.onGithubRepoButtonClickHandler!);
         }
     }
 
     private sampleFilesFetchErrorHandler($codeView: JQuery<HTMLElement>) {
         if(this.enableLiveEditing && $codeView.is("[" + this.githubSourceAttrName + "]")) {
-            $codeView.codeView("renderFooter", this.codeViewLiveEditingButtonClickHandler!, "csb");
+            $codeView.codeView("renderFooter", this.codeViewLiveEditingButtonClickHandler!, "csb", this.onGithubRepoButtonClickHandler!);
         }
         throw new Error('Error on fetching sample files!');
     }
-    
+
     private getSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string): string {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
         let demoJsonPath = demosBaseUrl + this.samplesCodeBasePath + demoFileMetadataName + ".json";
@@ -120,7 +120,37 @@ export class XplatCodeService extends CodeService {
     protected codeViewLiveEditingButtonClickHandler? = this.onGithubProjectButtonClicked!();
 
     private getGithubSampleUrl?(editor: string, sampleUrl: string, branch: string) {
-        if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch + "/samples/" + sampleUrl;
-        return "https://codesandbox.io/s/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch + "/samples/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+        // if (editor === "stackblitz") return "https://stackblitz.com/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch + "/samples/" + sampleUrl;
+        // return "https://codesandbox.io/s/github/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", this.xplat) + branch + "/samples/" + sampleUrl + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+        const path = this.getGithubPath(sampleUrl, branch, this.xplat);
+        if (editor === "stackblitz")
+            return "https://stackblitz.com/github/" + path;
+        else
+            return "https://codesandbox.io/s/github/" + path + "?fontsize=14&hidenavigation=1&theme=dark&view=preview"
     }
+
+    protected getGithubPath(sampleUrl: string, branch: string, platform: string): string {
+        return "/IgniteUI/igniteui-$plat$-examples/tree/".replace("$plat$", platform) + branch + "/samples/" + sampleUrl;
+    }
+
+    private onGithubRepoButtonClicked?() {
+        const codeService = this;
+        return ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => {
+            if (codeService.isButtonClickInProgress) {
+                return;
+            }
+            codeService.isButtonClickInProgress = true;
+            let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
+            let sampleFileUrl = $codeView.attr(codeService.githubSourceAttrName)!;
+            let branch = demosBaseUrl.includes("staging.infragistics.com") ? "vnext" : "master";
+            // e.g. https://github.com/IgniteUI/igniteui-blazor-examples/tree/vnext/samples/charts/category-chart/annotations
+            let githubUrl = "https://github.com" + this.getGithubPath(sampleFileUrl, branch, this.xplat);
+            console.log("CV opening: " + githubUrl);
+            window.open(githubUrl, '_blank');
+            codeService.isButtonClickInProgress = false;
+        }
+    }
+
+    protected onGithubRepoButtonClickHandler? = this.onGithubRepoButtonClicked!();
+
 }

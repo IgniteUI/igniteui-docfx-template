@@ -184,7 +184,7 @@
         display: inline-flex;
         padding: .2rem .4rem;
         margin: 0 0 0 .2rem;
-        width: 100px;
+        width: 120px;
         font-size: .7rem;
         padding: .2rem .4rem;
         font-weight: 400;
@@ -199,5 +199,8 @@
 
     .codesandbox-btn {
         width: 120px;
+    }
+    .github-repo-btn {
+        width: 9rem;
     }
 }
