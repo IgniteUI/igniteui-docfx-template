@@ -1,0 +1,186 @@
+button,
+a,
+a > code {
+	color: $link-color;
+	cursor: pointer;
+}
+
+a > code {
+	background: fade-out($link-color, .9);
+	cursor: pointer;
+
+	&:hover {
+		color: $link-hover-color;
+	}
+}
+
+code {
+	border-radius: $badge-radius;
+	background: fade-out($text-dark, .95);
+	color: $darkgray;
+}
+
+button:hover,
+button:focus,
+a:hover,
+a:focus {
+	color: $button-hover;
+	text-decoration: none;
+}
+
+a.disable,
+a.disable:hover {
+	text-decoration: none;
+	cursor: default;
+	color: $text-dark;
+}
+
+/* additional spacing fixes */
+.btn + .btn {
+	margin-left: 10px;
+}
+
+.btn.pull-right {
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
+.cta-btn {
+	display: inline-flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 400;
+	color: $text-light;
+	border: 0;
+	text-transform: uppercase;
+	background: $secondary-1-color;
+	padding: 8px 16px;
+	margin: 24px 0;
+	outline-style: none;
+	transition: all 0.25s ease-out;
+
+	&:hover,
+	&:focus {
+		color: rgba($text-light, 20%);
+		box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26),
+		0 8px 10px 1px rgba(0, 0, 0, 0.12),
+		0 3px 14px 2px rgba(0, 0, 0, 0.08);
+	}
+
+	&[disabled] {
+		color: rgba(0, 0, 0, 0.28);
+		background: #eee;
+		box-shadow: none;
+	}
+}
+
+.stackblitz-btn {
+	display: inline-flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 400;
+	color: $text-light;
+	border: 0;
+	text-transform: uppercase;
+	padding: 8px 16px;
+	margin: 24px 0;
+	outline-style: none;
+	transition: all 0.25s ease-out;
+
+	&:hover,
+	&:focus {
+		color: rgba($text-light, 80%);
+		box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26),
+		0 8px 10px 1px rgba(0, 0, 0, 0.12),
+		0 3px 14px 2px rgba(0, 0, 0, 0.08);
+	}
+
+	background: $secondary-1-color;
+
+	&::before {
+		content: '';
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		margin-right: 8px;
+		background-image: url('../../assets/images/stackblitz-logo.svg');
+		background-size: 100%;
+		background-repeat: no-repeat;
+	}
+
+	&[disabled] {
+		color: rgba(0, 0, 0, 0.28);
+		background: $surface-disabled;
+		box-shadow: none;
+
+		&::before {
+			background-image: url('../../assets/images/stackblitz-logo-dark.svg');
+		}
+	}
+}
+
+.codesandbox-btn {
+	@extend .stackblitz-btn;
+	background: $darkgray;
+
+	&::before {
+		background-image: url('../../assets/images/code-sandbox-seeklogo.com.svg');
+	}
+
+	&[disabled] {
+		&::before {
+			background-image: url('../../assets/images/code-sandbox-seeklogo.com.svg');
+		}
+	}
+}
+
+
+.github-repo-btn {
+	@extend .stackblitz-btn;
+	width: 9rem;
+	// background: rgb(24, 109, 246);
+	background: $darkgray;
+	&::before {
+	  background-image: url("../../assets/images/github.svg");
+	}
+	&[disabled] {
+	  &::before {
+	  background-image: url("../../assets/images/github.svg");
+	  }
+	}
+}
+
+
+.github-btn {
+	padding: 10px 0;
+	font-size: 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-start;
+	color: $darkgray;
+	position: relative;
+
+	a {
+		color: $link-color;
+		display: flex;
+		align-items: center;
+
+		&:hover,
+		&:focus {
+			color: $link-hover-color;
+		}
+	}
+
+	img {
+		width: 24px;
+		height: 24px;
+		margin: 0 4px;
+	}
+}
+
+.dash-separator {
+	margin: 20px 0;
+	height: 1px;
+	width: 100%;
+	border: 1px dashed $divider-color;
+}
