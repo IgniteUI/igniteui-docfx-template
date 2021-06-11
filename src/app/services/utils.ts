@@ -14,13 +14,15 @@ class UtilityService {
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
     public baseDir: string;
     public offset: number;
+    public removeHTMLExtensionFromUrl: boolean;
 
     constructor() {
         this.offset = $('.navbar').first().height()!;
         $("body").data("offset", this.offset + 50);
         this.refreshHash();
         let baseRel = $("meta[name=data-docfx-rel]").attr("content")!;
-        this.baseDir = this.getAbsolutePath(baseRel);
+        this.baseDir=this.getAbsolutePath(baseRel);
+        this.removeHTMLExtensionFromUrl = !this.isLocalhost && $("meta[name=isRedirected]")[0] != null;
     }
 
     public getAbsolutePath(href: string) {

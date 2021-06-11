@@ -6,6 +6,9 @@ full license information.}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{{#title}}{{title}}{{/title}} {{^title}}{{>partials/title}}{{/title}}
     </title>
+    {{#_useRedirects}} 
+    <meta name="isRedirected">
+    {{/_useRedirects}}
     <meta name="index" content="{{_initialPage}}.html">
     <meta name="data-docfx-rel" content="{{_rel}}">
     <meta name="viewport" content="width=device-width">
@@ -41,6 +44,13 @@ full license information.}}
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','{environment:GTMContainerId}');</script>
+	})(window,document,'script','dataLayer','{environment:GTMContainerId}');
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'event': 'trackSPAPageview',
+        'pagePath': location.pathname,
+        'pageTitle': document.title
+    });
+    </script>
 	<!-- End Google Tag Manager -->
 </head>
