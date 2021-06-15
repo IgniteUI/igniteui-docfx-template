@@ -5,7 +5,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: './src/app/docfx.ts',
+  entry: {
+    main: './src/app/docfx.ts',
+    igniteui: './src/styles/ignite-ui/main.scss',
+    slingshot: './src/styles/slingshot/main.scss'
+  },
   externals: {
     jquery: 'jQuery'
   },
@@ -17,7 +21,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' })
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })
   ],
   target: ['web', 'es5'],
   module: {

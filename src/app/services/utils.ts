@@ -13,7 +13,8 @@ class UtilityService {
     public isIE = !((window as any).ActiveXObject) && "ActiveXObject" in window;
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
     public baseDir: string;
-    private offset: number;
+    public offset: number;
+    public removeHTMLExtensionFromUrl: boolean;
 
     constructor() {
         this.offset = $('.navbar').first().height()!;
@@ -21,6 +22,7 @@ class UtilityService {
         this.refreshHash();
         let baseRel = $("meta[name=data-docfx-rel]").attr("content")!;
         this.baseDir=this.getAbsolutePath(baseRel);
+        this.removeHTMLExtensionFromUrl = !this.isLocalhost && $("meta[name=isRedirected]")[0] != null;
     }
 
     public getAbsolutePath(href: string) {
