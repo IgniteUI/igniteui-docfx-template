@@ -1,6 +1,6 @@
 import { CodeService } from "./base-code-service";
 import util from '../utils';
-import { ICodeViewFilesData, ISampleData } from "../../types";
+import { ExplicitEditor, ICodeViewFilesData, ISampleData } from "../../types";
 import { compressToBase64 } from 'lz-string';
 import { XHRService } from "../jqXHR-tasks";
 
@@ -175,9 +175,9 @@ export class AngularCodeService extends CodeService {
             
             /**
              * Selects the explicit editor for the code view and supports "csb" and "stackblitz" as values.
-             * <code-view explicitEditor="csb"</code-view>
+             * <code-view explicit-editor="csb"</code-view>
              */
-            const expliciteditor = $codeView.attr('explicitEditor');
+            const expliciteditor: ExplicitEditor = $codeView.attr('explicit-editor') as ExplicitEditor;
 
             const files: ICodeViewFilesData[] = data.sampleFiles;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
