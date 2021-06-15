@@ -5,19 +5,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: './src/app/docfx.ts',
+  entry: {
+    main: './src/app/docfx.ts',
+    igniteui: './src/styles/ignite-ui/main.scss',
+    slingshot: './src/styles/slingshot/main.scss'
+  },
   externals: {
     jquery: 'jQuery'
   },
   output: {
-    filename: '[name].bundle.[contenthash].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist/template/bundles')
   },
 
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles.bundle.[contenthash].css' })
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })
   ],
   target: ['web', 'es5'],
   module: {
@@ -26,6 +30,12 @@ module.exports = {
         test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.worker\.js$/,
+        use: { 
+          loader: "worker-loader"
+         },
       },
       {
         test: /.(sa|sc|c)ss$/,

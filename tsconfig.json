@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "ES2015",
-    "lib": ["DOM", "ES2015"],
+    "module": "es2020",
+    "lib": ["DOM", "ES2015", "WebWorker"],
     "sourceMap": true,
     "rootDir": "./src/app",
     "downlevelIteration": true,

@@ -1,4 +1,3 @@
-import { IgViewer } from "../services/igViewer.common";
 import { IThemingData } from "../types";
 import util from '../services/utils';
 
@@ -8,15 +7,27 @@ export function closeContainer() {
       }
 }
 
-export function attachThemingHandler() {
-    let sampleIframes = document.querySelectorAll("iframe");
-    if ($(".themes-container").length !== 0 && sampleIframes.length !== 0 &&
-        (!IgViewer.getInstance().isDvPage() || !util.isIE)) {
+export function showHideThemingWidget(iframesLength: number) {
+    if ($(".themes-container").length !== 0 && iframesLength !== 0 && (!util.isDvPage() || !util.isIE)) {
         $(".themes-container").css('display', 'inline-flex');
     } else {
+        $(".themes-container").css('display', 'none');
         return;
     }
 
+    if (util.isIE) {
+        $('.theme-select-wrapper').css('display', 'inline-flex');
+        $('.theme-select-wrapper').removeClass('theme-wrapper-hide');
+        let currentTheme = window.sessionStorage.getItem("theme");
+        if (currentTheme) {
+            let item = $(".theme-item").filter(`[data-theme=${currentTheme}]`)[0];
+            handleThemeSelection(currentTheme, item);
+        }
+
+    } else $('.theme-widget-wrapper').removeClass('theme-wrapper-hide');
+}
+
+export function attachThemingHandler() {
     if (util.isIE) {
         $('.theme-select-wrapper').css('display', 'inline-flex');
         $('.theme-select-wrapper').removeClass('theme-wrapper-hide');
@@ -45,6 +56,7 @@ export function attachThemingHandler() {
         if (themingWidget) {
             themingWidget.on('themeChange', (event: JQuery.TriggeredEvent) => {
                 window.sessionStorage.setItem('themeStyle', (event.originalEvent! as any).detail);
+                let sampleIframes = document.querySelectorAll("iframe");
                 sampleIframes.forEach((element) => {
                     if (!$(element).hasClass("no-theming") && (!$(element).hasClass("lazyload") || $(element).hasClass("lazyloaded"))) {
                         let src = element.src || element.dataset.src;
@@ -105,4 +117,3 @@ function selectTheme(el: HTMLElement) {
     }
     el.classList.add("theme-item--active");
 }
-
