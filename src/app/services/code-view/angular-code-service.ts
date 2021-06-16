@@ -26,60 +26,34 @@ export class AngularCodeService extends CodeService {
     public init(): void {
         let $codeViewElements = $("code-view");
         let $standaloneliveEditingButtons = $("button[data-sample-src]");
+        let $liveEditingElements = $codeViewElements.add($standaloneliveEditingButtons);
 
-        if ($standaloneliveEditingButtons.length > 0){
-            this.genetareStandaloneButtonsApp($standaloneliveEditingButtons);
-        }
+        if ($liveEditingElements.length > 0){
+            $.each($liveEditingElements, (index, element) => {
+                let sampleUrl;
+                let $liveEditingElement = $(element);
+                element.nodeName === 'CODE-VIEW' ? sampleUrl = $liveEditingElement.attr(this.sampleUrlAttrName)! : sampleUrl = $liveEditingElement.attr(this.buttonSampleSourceAttrName)!;
+                let samplesBaseUrl = $liveEditingElement.attr(this.demosBaseUrlAttrName)!;
 
-        if ($codeViewElements.length > 0) {
-
-            $.each($codeViewElements, (index, element) => {
-                let $codeView = $(element);
-                let samplesBaseUrl = $codeView.attr(this.demosBaseUrlAttrName)!;
-                let sampleUrl = $codeView.attr(this.sampleUrlAttrName)!;
                 if (!this.demosUrls.has(samplesBaseUrl)) {
-                    this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, element: $codeView }]);
+                    this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, element: $liveEditingElement }]);
                 } else {
-                    this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, element: $codeView });
+                    this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, element: $liveEditingElement });
                 }
             });
-
             let allDemosBaseUrls = this.demosUrls.keys();
+
             for (const baseUrl of allDemosBaseUrls) {
-                let codeViewsData = this.demosUrls.get(baseUrl)!;
-                if (util.isLocalhost) {
-                    this.generateLiveEditingAngularApp(baseUrl, codeViewsData);
-                } else {
-                    this.getAngularSampleFiles(baseUrl, codeViewsData, () => this.renderFooters(codeViewsData));
-                }
+                let liveEditingData = this.demosUrls.get(baseUrl)!;
+                this.generateLiveEditingAngularApp(baseUrl, liveEditingData);
             }
-        }
-    }
-
-    private genetareStandaloneButtonsApp($buttons: any) {
-        if (!(util.isIE || util.isEdge)) {
-            $.each($buttons, (index, element) => {
-                let $button = $(element);
-                let samplesBaseUrl = $button.attr(this.demosBaseUrlAttrName)!;
-                let sampleUrl = $button.attr(this.buttonSampleSourceAttrName)!;
-                if (!this.demosUrls.has(samplesBaseUrl)) {
-                    this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, element: $button }]);
-                } else {
-                    this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, element: $button });
-                }
-            });
-
-            let allDemosBaseUrls = this.demosUrls.keys();
-            for (const baseUrl of allDemosBaseUrls) {
-                let buttonsData = this.demosUrls.get(baseUrl)!;
-                this.generateLiveEditingAngularApp(baseUrl, buttonsData);
+            if ((util.isIE || util.isEdge)) {
+                $standaloneliveEditingButtons.css("display", "none");
             }
-        } else {
-            $buttons.css("display", "none");
-        }
 
-        this.demosUrls.clear();
-        this.sharedFileContent = {};
+            this.demosUrls.clear();
+            this.sharedFileContent = {};
+        }
     }
 
     private renderFooters(codeViewsData: ISampleData[]) {
@@ -240,7 +214,8 @@ export class AngularCodeService extends CodeService {
         return demoFileMetadataPath;
     }
 
-    private createButtonForm(sampleContent: { [url: string]: any }, codeService: any, $button: JQuery<HTMLButtonElement>) {
+    private createButtonForm(sampleContent: { [url: string]: any }, $button: JQuery<HTMLButtonElement>) {
+        const codeService = this;
         if (sampleContent.addTsConfig) {
             codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
         }
@@ -266,7 +241,7 @@ export class AngularCodeService extends CodeService {
             codeService.isButtonClickInProgress = true;
             let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
             let sampleContent = codeService.sampleFilesContentByUrl[sampleFileUrl];
-            codeService.createButtonForm(sampleContent, codeService, $button)
+            codeService.createButtonForm(sampleContent, $button)
         }
     }
 
@@ -280,7 +255,7 @@ export class AngularCodeService extends CodeService {
             let $button = $(this);
             let sampleFileUrl = codeService.getAngularSampleMetadataUrl($button.attr(codeService.demosBaseUrlAttrName)!, $button.attr(codeService.buttonSampleSourceAttrName)!);
             let sampleContent = codeService.sampleFilesContentByUrl[sampleFileUrl];
-            codeService.createButtonForm(sampleContent, codeService, $button)
+            codeService.createButtonForm(sampleContent, $button)
         }
     }
 
