@@ -17,7 +17,6 @@ export class AngularCodeService extends CodeService {
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
-    private demosUrlsSize : number;
 
     constructor(private xhrService: XHRService) {
         super();
@@ -41,7 +40,6 @@ export class AngularCodeService extends CodeService {
             });
 
             let allDemosBaseUrls = this.demosUrls.keys();
-            this.demosUrlsSize = this.demosUrls.size;
             for (const baseUrl of allDemosBaseUrls) {
                 let codeViewsData = this.demosUrls.get(baseUrl)!;
                 if (util.isLocalhost) {
@@ -193,12 +191,7 @@ export class AngularCodeService extends CodeService {
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             const files = data.files;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
-
-            if (util.isLocalhost && codeService.demosUrlsSize > 1){
-                codeService.sharedFileContent[demosBaseUrl] = data;
-            }else {
-                codeService.sharedFileContent = data;
-            }
+            codeService.sharedFileContent[demosBaseUrl] = data;
             
 
             if (cb) {
@@ -235,21 +228,11 @@ export class AngularCodeService extends CodeService {
                 codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
             }
 
-            let formData = {};
-
-            if(util.isLocalhost && codeService.demosUrlsSize > 1){
-                const key= $codeView.attr(this.demosBaseUrlAttrName)!;
-                formData = {
+            const key= $codeView.attr(this.demosBaseUrlAttrName)!;
+            let formData = {
                     dependencies: sampleContent.sampleDependencies,
                     files: codeService.sharedFileContent[key].files.concat(sampleContent.sampleFiles),
                     devDependencies: codeService.sharedFileContent.devDependencies
-                }
-            }else {
-                formData = {
-                    dependencies: sampleContent.sampleDependencies,
-                    files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
-                    devDependencies: codeService.sharedFileContent.devDependencies
-                }
             }
 
             let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
