@@ -17,7 +17,7 @@ export class AngularCodeService extends CodeService {
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
-    private localDemosUrls : number = 0;
+    private demosUrlsSize : number;
 
     constructor(private xhrService: XHRService) {
         super();
@@ -34,7 +34,6 @@ export class AngularCodeService extends CodeService {
                 let samplesBaseUrl = $codeView.attr(this.demosBaseUrlAttrName)!;
                 let sampleUrl = $codeView.attr(this.sampleUrlAttrName)!;
                 if (!this.demosUrls.has(samplesBaseUrl)) {
-                    this.localDemosUrls++;
                     this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, codeView: $codeView }]);
                 } else {
                     this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, codeView: $codeView });
@@ -42,6 +41,7 @@ export class AngularCodeService extends CodeService {
             });
 
             let allDemosBaseUrls = this.demosUrls.keys();
+            this.demosUrlsSize = this.demosUrls.size;
             for (const baseUrl of allDemosBaseUrls) {
                 let codeViewsData = this.demosUrls.get(baseUrl)!;
                 if (util.isLocalhost) {
@@ -191,13 +191,12 @@ export class AngularCodeService extends CodeService {
     private angularSharedFilePostProcess(demosBaseUrl: string, cb?: () => void) {
         const codeService = this;
         return function (this: JQuery.UrlAjaxSettings, data: any) {
-            if (util.isLocalhost && codeService.localDemosUrls > 1){
-                const files = data.files;
-                codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
+            const files = data.files;
+            codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
+
+            if (util.isLocalhost && codeService.demosUrlsSize > 1){
                 codeService.sharedFileContent[demosBaseUrl] = data;
             }else {
-                const files = data.files;
-                codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
                 codeService.sharedFileContent = data;
             }
             
@@ -238,8 +237,8 @@ export class AngularCodeService extends CodeService {
 
             let formData = {};
 
-            if(util.isLocalhost && codeService.localDemosUrls > 1){
-                const key :any = $codeView[0].dataset["demosBaseUrl"];
+            if(util.isLocalhost && codeService.demosUrlsSize > 1){
+                const key= $codeView.attr(this.demosBaseUrlAttrName)!;
                 formData = {
                     dependencies: sampleContent.sampleDependencies,
                     files: codeService.sharedFileContent[key].files.concat(sampleContent.sampleFiles),
