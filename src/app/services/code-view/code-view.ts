@@ -1,4 +1,4 @@
-import { ICodeViewCSS, ICodeViewElements, ICodeViewEvents, ICodeViewFilesData, ICodeViewMembers, ICodeViewOptions } from '../../types';
+import { ExplicitEditor, ICodeViewCSS, ICodeViewElements, ICodeViewEvents, ICodeViewFilesData, ICodeViewMembers, ICodeViewOptions } from '../../types';
 import hljs from "highlight.js";
 import util from '../utils';
 
@@ -167,7 +167,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
       util.copyCode(".cv-hljs-code-copy", "COPY CODE");
     }
 
-    renderFooter(liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string): void {
+    renderFooter(liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: ExplicitEditor): void {
       let $footerContainer = $('<div class="editing-buttons-container"></div>');
       if (!(util.isIE || util.isEdge)) {
 
