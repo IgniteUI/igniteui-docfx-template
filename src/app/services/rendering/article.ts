@@ -74,7 +74,7 @@ export class ArticleRenderingService extends RenderingService {
                 }
             });
 
-            if (!util.isLocalhost && anchorHref) {
+            if (util.removeHTMLExtensionFromUrl && anchorHref) {
                 $anchor.attr('href', anchorHref.replace(".html", ""));
             }
         });
@@ -253,7 +253,8 @@ export class ArticleRenderingService extends RenderingService {
             relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
             platform = $("meta[property='docfx:platform']").attr("content"),
             imgTag = $('<img>');
-    
+        
+        if(productLink.toLocaleLowerCase().includes("slingshot")) return;
     
         if (productLink.includes("indigo")) {
           productLink = "https://cloud.indigo.design";
@@ -265,11 +266,11 @@ export class ArticleRenderingService extends RenderingService {
     
         if ($(".article-container h2")[2]) {
           let thirdHeader = $(".article-container h2")[2], divTag = $('<div>');
-          $(imgTag).css({ "width": "100%", "display": "block", "margin": "auto", "cursor": "pointer" });
+          divTag.addClass('dfx-seo-banner')
           $(imgTag).on('click', () => window.location.href = productLink);
           $(divTag).append(imgTag);
           $(thirdHeader).before(divTag);
-        } 
+        }
     }
 
     private anchorJs() {

@@ -1,0 +1,93 @@
+.docs-search {
+	background: white;
+	vertical-align: middle;
+}
+
+.docs-search > .search-query {
+	font-size: 14px;
+	border: 0;
+	width: 120%;
+	color: $text-base;
+}
+
+.docs-search > .search-query:focus {
+	outline: 0;
+}
+
+.search-results-frame {
+	clear: both;
+	display: table;
+	width: 100%;
+}
+
+.search-results.ng-hide {
+	display: none;
+}
+
+.search-results-container {
+	padding-bottom: 1em;
+	border-top: 1px solid $border-color;
+	background: rgba(25, 25, 25, 0.5);
+}
+
+.search-results-container .search-results-group {
+	padding: 50px 10px 10px 10px;
+}
+
+.search-results-group-heading {
+	font-family: $global-font-family;
+	padding-left: 10px;
+	color: $title-color;
+}
+
+.search-close {
+	position: absolute;
+	left: 50%;
+	margin-left: -100px;
+	color: $text-base;
+	text-align: center;
+	padding: 5px;
+	background: $surface-mid;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	width: 200px;
+	box-shadow: 0 0 10px $surface-dark;
+}
+
+/* Search results display*/
+#search-results {
+	max-width: 960px !important;
+	margin: 50px auto 16px;
+	display: none;
+}
+
+#search-results > .search-list {
+	text-align: center;
+	font-size: $h1-f-size;
+	font-weight: $h1-f-weight;
+	line-height: $h1-l-height;
+	margin-top: $h1-m-top;
+	margin-bottom: $h1-m-bottom;
+	color: $text-dark;
+}
+
+#search-results p {
+	text-align: center;
+}
+
+.item-title {
+	font-size: $h3-f-size;
+	font-weight: $h3-f-weight;
+	line-height: $h3-l-height;
+	margin-top: $h3-m-top;
+	margin-bottom: $h3-m-bottom / 3;
+}
+
+.item-href {
+	color: #999;
+	margin-bottom: 8px;
+}
+
+.sr-item {
+	margin-bottom: 24px;
+}

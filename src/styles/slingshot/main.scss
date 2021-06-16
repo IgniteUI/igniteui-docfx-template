@@ -1,0 +1,198 @@
+@import '~highlight.js/scss/vs2015.scss';
+@import 'variables';
+@import '../shared/global';
+
+
+.alert-info,
+.alert-warning,
+.alert-danger, {
+	&::before {
+		content: '';
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+}
+
+.alert-info {
+	&::before {
+		background-image: url(../../assets/static/alert_icon1.svg);
+	}
+}
+
+.alert-warning {
+	&::before {
+		background-image: url(../../assets/static/alert_icon2.svg);
+	}
+}
+
+.alert-danger {
+	&::before {
+		background-image: url(../../assets/static/alert_icon1.svg);
+	}
+}
+
+.themes-container {
+	display: none !important;
+}
+
+.responsive-img,
+.article-container > img {
+	box-shadow: none !important;
+	border-radius: $global-radius;
+	margin-bottom: 16px;
+}
+
+.sample-container {
+	margin-bottom: 20px;
+}
+
+.ss-collapse {
+	.nav {
+		> li:not(.nav__cta) {
+			a {
+				font-size: 16px;
+				color: $text-light;
+				position: relative;
+				padding: 4px 8px;
+
+				@media (min-width: 768px) {
+					margin-right: 28px;
+				}
+
+				&::before {
+					content: '';
+					position: absolute;
+					height: 2px;
+					bottom: -2px;
+					left: 0;
+					width: 0;
+					background: $text-light;
+					transition: width 250ms ease-in-out;
+				}
+
+				&:focus {
+					outline: none;
+				}
+
+				&:focus,
+				&:hover {
+					&::before {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}
+
+.ss-collapse,
+.ss-container {
+	@media (min-width: 768px) {
+		display: flex;
+		align-items: center;
+	}
+}
+
+
+.ss-navbar {
+	display: flex;
+}
+
+.ss-collapse {
+	padding: 0;
+}
+
+.navbar,
+.container-fluid {
+	&:before,
+	&:after {
+		display: none !important;
+	}
+}
+
+.ss-container {
+	justify-content: space-between;
+	width: 100%;
+}
+
+.ss-logo {
+	width: 200px;
+
+	@media (max-width: 768px) {
+
+		width: 160px;
+	}
+}
+
+.breadcrumb:before {
+	display: none;
+}
+
+.breadcrumb > li + li:before {
+	font-weight: bold;
+}
+
+.breadcrumb {
+	margin: 0 0 16px 0;
+}
+
+#autocollapse .form-control {
+	border-radius: 0 $header-search-radius $header-search-radius 0;
+	border: 1px solid $border-color;
+	border-left: 0;
+	width: 100%;
+	height: 40px;
+	padding-left: 0;
+
+	&:focus {
+		box-shadow: none;
+	}
+}
+
+
+.ss-search {
+	width: 420px;
+
+	@media (max-width: 768px) {
+		max-width: 100%;
+		width: calc(100% - 32px);
+		margin: 16px auto 0;
+	}
+}
+
+.navbar-toggle {
+	margin: 0;
+}
+
+.navbar-inverse .navbar-toggle {
+	border: 0;
+
+	&:hover,
+	&:focus {
+		background: transparent;
+		outline: initial;
+	}
+}
+
+.navbar-toggle .icon-bar {
+	width: 30px;
+	height: 4px;
+	border-radius: 3px;
+
+	+ .icon-bar {
+		margin-top: 5px;
+	}
+}
+
+.input-group-addon {
+	color: $text-dark;
+	background: $surface-light;
+	border-radius: $header-search-radius 0 0 $header-search-radius;
+
+	> svg {
+		margin-bottom: -8px;
+		margin-right: -6px;
+		width: 24px;
+		height: 24px;
+	}
+}
