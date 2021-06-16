@@ -5,10 +5,21 @@ import { INavigationOptions } from '../../types';
 import { Router } from '../router';
 import util from '../utils';
 import { ILunr, ISearchItem } from './types';
-
+/**
+ * Here we are in the client side context of the search, which sends messages to web worker (if the browser supports web workers)
+ */
 const router = Router.getInstance();
+/**
+ * Defining the search web worker
+ */
 let worker: SearchWorker;
+/**
+ * Defining the search query
+ */
 let query: string;
+/**
+ * The navigation options, which will be provided when a the link of a search result is triggered
+ */
 let navigationOptions: INavigationOptions = {
   stateAction: "push",
   navigationPostProcess: () => {
@@ -19,6 +30,10 @@ let navigationOptions: INavigationOptions = {
   }
 }
 
+/**
+ * The starting point of the search.
+ * If the browser does not support web worker then the search will be handled by the main thread
+ */
 export function enableSearch() {
 
   try {
@@ -37,6 +52,11 @@ export function enableSearch() {
 
 function addSearchEvent() {
 
+  /**
+   * Attaching the searhc event.
+   * On search event the TOC, Article and affix are hidden.
+   * The search event is triggered when there are at least 3 characters in the search query
+   */
   $("body").on("searchEvent", () => {
 
     const $searchInput = $("#search-query"),
@@ -62,6 +82,11 @@ function addSearchEvent() {
   });
 }
 
+/**
+ * Toggling the TOC, Article and Affix
+ * @param action 
+ * @param specificSelector 
+ */
 function flipContents(action: string, specificSelector = "") {
   if (action === "show") {
     $(".hide-when-search" + specificSelector).show();
@@ -73,6 +98,11 @@ function flipContents(action: string, specificSelector = "") {
   }
 }
 
+/**
+ * When a search result is returned, a piece of the content, where the search text is contained is rendered
+ * @param content - the search result content
+ * @returns 
+ */
 function extractContentBrief(content: string): string {
   const briefOffset = 512,
     words = query.split(/\s+/g),
@@ -91,6 +121,11 @@ function extractContentBrief(content: string): string {
   return "";
 }
 
+/**
+ * Handler for search results. 
+ * Here are all of the search results rendered in the site, contained by a paginator
+ * @param hits -  the search results returned from the search process
+ */
 function handleSearchResults(hits: ISearchItem[]) {
   const numPerPage = 10,
     $paginator = $("#pagination"),
@@ -121,6 +156,11 @@ function handleSearchResults(hits: ISearchItem[]) {
   }
 }
 
+/**
+ * Creates a search results element with, containing the Title, href and part of the hit topic
+ * @param hit - a search result
+ * @returns 
+ */
 const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
   const itemRawHref = location.origin + util.baseDir + hit.href,
     itemHref = util.baseDir + hit.href,
@@ -165,6 +205,9 @@ const createHitBlock = (hit: ISearchItem): JQuery<HTMLElement> => {
   return $hitBlock;
 }
 
+/**
+ * Creates a lunr instance in the main thread to handle the search
+ */
 function localSearch() {
   console.log("Using local search");
   const lunrInstance: ILunr = { index: undefined, data: {} };
@@ -207,9 +250,15 @@ function localSearch() {
   }
 }
 
+/**
+ * Instantiates the web worker to handle the search
+ */
 function webWorkerSearch() {
   console.log("using Web Worker");
   let indexReady: JQuery.Deferred<any>;
+  /**
+   * When the search worker is instantiated a message is send to the web worker with the base path of the docfx site
+   */
   worker.postMessage({ basePath: util.baseDir });
 
   indexReady = $.Deferred();

@@ -1,3 +1,9 @@
+/**
+ * A singleton, whose purpose is to store all requests and if necessary to abort them.
+ * The need for this service is that after a navigation occurs and there are requests, which are not finished
+ * there could be unpredicted behavior after these requests are done, 
+ * because the handlers for these requestes will be executed in the context of the new page and not the one from which they are invoked
+ */
 export class XHRService {
     private static instance: XHRService;
     public static getInstance(): XHRService {

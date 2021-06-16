@@ -4,6 +4,9 @@ var slash = require('slash');
 var { spawn } = require('child_process');
 var del = require('del');
 var preconfigs = require('./preconfig.json');
+/**
+ * This is the build process of a docfx instance 
+ */
 
 let getPath = p => {
     return slash(path.isAbsolute(p) ? p : path.join(process.cwd(), p));

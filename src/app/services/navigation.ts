@@ -1,5 +1,8 @@
 import util from './utils';
 
+/**
+ * Function for rendering the global navigation of the docfx site.
+ */
 export function initNavigation() {
 
     if (util.isLocalhost) {

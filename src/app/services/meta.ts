@@ -1,10 +1,26 @@
 import { IHeadEl } from "../types";
 
+/**
+ * A singleton for page metadata replacement. 
+ * After a navigation occurs the metadata of the page must be replaced with the metadata coming from the newly requested page.
+ */
 class MetadataService {
+
+    /**
+     * The fixed meta names are mandatory for replacement
+     */
     private _fixedMetaNames = ["platform", "title", "link", "data-docfx-rel"];
+    /**
+     * The fixed link rels are mandatory for replacement
+     */
     private _fixedLinkRels = ["canonical", "alternate"];
+
+    /**
+     * Optional meta names are basically meta tags, that do not occur in every html page in the docfx site
+     */
     private _optionalMetaNames = ["description", "keywords"];
 
+    /** We create a one big selector for search and replace */
     public fixedElementsSelector: string;
     public optionalHeadElements: IHeadEl[];
 
@@ -23,11 +39,18 @@ class MetadataService {
         });
     }
 
+    /**
+     * The function, which handles the whole metadata replacement
+     * @param dom - the newly requested html page
+     */
     public configureMetadata(dom: JQuery<HTMLElement>) {
         this.changeFixed(dom);
         this.checkOptionals(dom);
     }
 
+    /**
+     * The function, which replaces the mandatory head elements
+     */
     private changeFixed(dom: JQuery<HTMLElement>) {
         $("head title").replaceWith(dom.find("title:first"));
         dom.find(this.fixedElementsSelector).each((index, element) => {
@@ -43,6 +66,9 @@ class MetadataService {
         });
     }
 
+    /**
+     * The function, which replaces the optional head elements
+     */
     private checkOptionals(dom: JQuery<HTMLElement>) {
         this.optionalHeadElements.forEach(hEl => {
             let selector = `${hEl.tag}[${hEl.attributeSelector}=${hEl.attributeSelectorValue}]`;
