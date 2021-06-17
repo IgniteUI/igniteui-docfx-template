@@ -10,29 +10,57 @@ import {
 import { ResizingService } from "../resizing";
 import { Router } from "../router";
 
+/**
+ * Rendering service for the TOC element, also a resizable observable
+ */
 export class TocRenderingService extends RenderingService implements ResizableObservable {
 
+    /**
+     * `ResizableObservable` prop
+     */
     public initialDimension: number;
+    
+    /**
+     * `ResizableObservable` prop
+     */
     public $element: JQuery<HTMLElement>;
+    
+    /**
+     * `ResizableObservable` prop
+     */
     public dimensionToObserve: DimensionType = 'height';
 
     constructor(private resizingService: ResizingService, private router: Router) {
         super();
     }
 
+    /**
+     * ResizableObservable `reset` function
+     */
     public reset() {
         this.initialDimension = document.body.clientHeight - (util.offset + 36);
     }
 
+    /**
+     * ResizableObservable `handleChange` function
+     */
     public handleChange(changeType: DimensionChangeType, newValue: number) {
         changeType === 'decrease' ? this.$element[this.dimensionToObserve](this.initialDimension - newValue) :
             this.$element[this.dimensionToObserve](this.initialDimension + newValue);
     }
 
+    /**
+     * RenderingService `render` function
+     */
     public render() {
         this.renderSidebar();
     }
 
+    /**
+     * The main rendering function for the TOC. 
+     * The TOC html is fetched from the url pointed in the meta[property="docfx:tocrel"] tag.
+     * This function will be triggered perpetually until the TOC is fetched.
+     */
     private renderSidebar() {
         let sidetoggle = $(".sidetoggle.collapse")[0];
         $(window).resize(() => {
@@ -53,6 +81,9 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         }
     }
 
+    /**
+     * Renders the breadcrumb
+     */
     public renderBreadcrumb() {
         let breadcrumb: IListNode[] = [];
         $<HTMLLIElement>("#toc li.active").each((i: number, e: HTMLLIElement) => {
@@ -80,6 +111,12 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         });
     }
 
+    /**
+     * Sets the active TOC element. By default this function will trigger scroll on the `.sidetoc` element.
+     * For now there is only one case, in which the TOC will not scroll to the active element, which is on click on an element in the TOC. 
+     * @param $anchor - the anchor element, whose <li> parent will be set to active
+     * @param shouldScroll - indicates whether the TOC should scroll to the active element
+     */
     public setActive($anchor?: JQuery<HTMLElement>, shouldScroll = true) {
         $("#toc a.active").removeClass(this.active);
         $("#toc li").removeClass(this.active);
@@ -108,6 +145,10 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         }
     }
 
+    /**
+     * Scrolls to the active element of the TOC
+     * @param amount - the scroll position to which the TOC should scroll
+     */
     private scrollToActive(amount?: number) {
         if(amount) {
             $(".sidetoc").scrollTop(amount);
@@ -124,6 +165,11 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         }
     }
 
+    /**
+     * Returns the active anchor. This is mainly used when the click target is the child element of the active anchor.
+     * @param element - the TOC clicked target
+     * @returns the active anchor
+     */
     private getActiveAnchor(element: JQuery<HTMLElement>): JQuery<HTMLAnchorElement> {
         if (this.isAnchor(element)) {
             return element! as JQuery<HTMLAnchorElement>;
@@ -133,6 +179,9 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         return activeAnchor!;
     }
 
+    /**
+     * Clears the filter input.
+     */
     private clearFilter() {
         $("#toc li")
             .removeClass(this.filtered)
@@ -144,6 +193,9 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             .addClass(this.expanded);
     }
 
+    /**
+     * Registers the expansion, route navigation (anchor click handler) and filtering event handlers 
+     */
     private registerTocEvents() {
         $(".toc .nav > li > .expand-stub").click((e) => {
             $(e.target)
@@ -229,6 +281,12 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         });
     }
 
+    /**
+     * The core filtering function
+     * @param anchorValue - the title of the anchor
+     * @param inputText - the filter input text
+     * @returns whether the input text is contained in the anchor title
+     */
     private filterNavItem(anchorValue: string, inputText?: string) {
         if (!inputText) return true;
         if (anchorValue.toLowerCase().indexOf(inputText.toLowerCase()) > -1) return true;
