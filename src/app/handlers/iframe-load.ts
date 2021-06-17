@@ -20,7 +20,7 @@ export function onSampleIframeContentLoaded(target: HTMLIFrameElement) {
             _iframe.contentWindow!.postMessage(data, targetOrigin);
         }
     }
-  }
+}
 
 export function onXPlatSampleIframeContentLoaded (target: HTMLIFrameElement) {
     target.parentElement!.classList.remove("loading");

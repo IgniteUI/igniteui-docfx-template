@@ -15,6 +15,9 @@ export type DimensionType = 'height' | 'width';
  */
 export type HistoryStateAction = "push" | "replace" | "none";
 
+export type ExplicitEditor = "csb" | "stackblitz";
+
+
 /**
  * Merge two types into one
  */
@@ -123,7 +126,7 @@ export interface ICodeViewEvents {
     _create(): void;
     _codeViewTabClick(event: MouseEvent): void;
     createTabsWithCodeViews(filesData: ICodeViewFilesData[]): void;
-    renderFooter(liveEditingButtonsClickHandler: Function, explicitEditor?: string): void;
+    renderFooter(liveEditingButtonsClickHandler: Function, explicitEditor?: ExplicitEditor): void;
 }
 
 /**
@@ -287,7 +290,7 @@ declare global {
         codeView(): JQuery;
         codeView(options: ICodeViewOptions): JQuery;
         codeView(methodName: 'createTabsWithCodeViews', filesData: ICodeViewFilesData[]): void;
-        codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: string): void;
+        codeView(methodName: 'renderFooter', liveEditingButtonsClickHandler: ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => void, explicitEditor?: ExplicitEditor): void;
         collapse(action: string): void;
         twbsPagination(options: Partial<TwbsPaginationOptions>): void
         mark(word: string, options?: IMarkJsOptions ): void;
