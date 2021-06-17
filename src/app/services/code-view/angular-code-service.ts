@@ -199,7 +199,8 @@ export class AngularCodeService extends CodeService {
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             const files = data.files;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
-            codeService.sharedFileContent = data;
+            codeService.sharedFileContent[demosBaseUrl] = data;
+            
 
             if (cb) {
                 cb();
@@ -248,7 +249,23 @@ export class AngularCodeService extends CodeService {
             codeService.isButtonClickInProgress = true;
             let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
             let sampleContent = codeService.sampleFilesContentByUrl[sampleFileUrl];
-            codeService.createButtonForm(sampleContent, $button)
+            if(sampleContent.addTsConfig) {
+                codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
+            }
+
+            const key= $codeView.attr(this.demosBaseUrlAttrName)!;
+            let formData = {
+                    dependencies: sampleContent.sampleDependencies,
+                    files: codeService.sharedFileContent[key].files.concat(sampleContent.sampleFiles),
+                    devDependencies: codeService.sharedFileContent.devDependencies
+            }
+
+            let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
+                codeService.createCodesandboxForm(formData);
+            form.appendTo($("body"));
+            form.submit();
+            form.remove();
+            codeService.isButtonClickInProgress = false;
         }
     }
 
