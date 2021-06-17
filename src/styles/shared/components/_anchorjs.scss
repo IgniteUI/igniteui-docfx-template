@@ -1,0 +1,59 @@
+$a-l-icon-size: 24px;
+.anchorjs-link {
+	color: transparentize($link-color, $link-alpha);
+	font-family: 'Material Icons';
+	padding: 0 !important;
+	font-size: $a-l-icon-size;
+	width: $a-l-icon-size;
+	height: $a-l-icon-size;
+	line-height: inherit;
+	position: relative;
+	margin-left: 0.375em;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+
+
+	&:hover {
+		color: $link-hover-color;
+	}
+
+	&::after {
+		content: 'link';
+		text-transform: none;
+		letter-spacing: normal;
+		word-wrap: normal;
+		white-space: nowrap;
+		direction: ltr;
+		position: absolute;
+		top: -4px;
+		left: 0;
+		width: $a-l-icon-size;
+		height: $a-l-icon-size;
+	}
+
+	&:focus {
+		color: $link-hover-color;
+	}
+}
+
+h2, .h2 {
+	.anchorjs-link {
+		&::after{
+			top: -4px;
+		}
+	}
+}
+
+h3, .h3 {
+	.anchorjs-link {
+		&::after{
+			top: 1px;
+		}
+	}
+}
+
+
+
+

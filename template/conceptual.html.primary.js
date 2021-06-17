@@ -2,7 +2,7 @@
 
 var common = require('./common.js');
 var extension = require('./conceptual.extension.js')
-
+var defaultTheme = "igniteui";
 exports.transform = function (model) {
   if (extension && extension.preTransform) {
     model = extension.preTransform(model);
@@ -15,13 +15,23 @@ exports.transform = function (model) {
     model = extension.postTransform(model);
   }
   
-  // We support English (default), Japanese and Korean. 
   if(model._path){
     model._path = model._path.slice(0, model._path.lastIndexOf('.html'));
   }
+
+  var theme = "";
+  if(model._docfxTheme != null){
+    theme = model._docfxTheme;
+  } else {
+    theme = defaultTheme;
+  }
+  model[theme + "Theme"] = true;
+  model._globalStyle = model["_" + theme];
+
   model._isLangEn = true;
   model._isLangJa = false;
   model._isLangKr = false;
+  model._rel = model._rel || './';
   model._appLang = "en";
   if (model._language) {
     if (model._language === "ja") {

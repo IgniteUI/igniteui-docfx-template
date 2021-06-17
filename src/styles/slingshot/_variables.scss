@@ -1,0 +1,205 @@
+// Palette
+$primary-color: #20226f;
+$info-color: #6988FF;
+$warning-color: #F69E41;
+$error-color: #DE8080;
+$success-color: #00AE88;
+$note-color: #dcdcaa;
+$secondary-1-color: #4AC55F;
+$secondary-2-color: #3f4b89;
+$accent-color: #ED4A99;
+
+// Font
+$global-font-family: 'Roboto', sans-serif;
+$generic-font-weight: 400;
+$global-radius: 8px;
+
+// Grays
+$darkgray: #333;
+$midgray: #666;
+$lightgray: #e9ebf3;
+
+// Text
+$text-base: #585858;
+$text-light: #fff;
+$text-dim-light: #ddd;
+$text-dark: #000;
+$title-color: $text-dark;
+
+// Surface colors
+$surface-light: #fff;
+$surface-dark: #111;
+$surface-mid: $darkgray;
+$surface-disabled: #eee;
+
+// Link
+$link-color: #6988FF;
+$link-hover-color: #4562cd;
+$button-hover: $link-hover-color;
+
+// Header
+$header-bg: $primary-color;
+$header-btn-bg: $secondary-1-color;
+$header-btn-color: $text-light;
+$header-btn-hover-color: $text-light;
+$header-btn-hover-bg: #40a852;
+$header-btn-radius: 20px;
+$header-btn-border-color: $secondary-1-color;
+$header-btn-hover-border-color: #4bc560;
+$header-search-radius: $global-radius;
+$header-btn-box-shadow: 0 0 0 .2rem rgba(75,197,96,.5);
+$header-btn-text-transform: initial;
+$header-btn-font-weight: 700;
+$header-btn-font-size: 14px;
+
+// Breadcrumb
+$breadcrumb-color: $text-dark;
+$breadcrumb-link-color: $link-color;
+$breadcrumb-link-hover-color: $link-hover-color;
+$breadcrumb-current-color: $text-dark;
+$breadcrumb-font-size:  16px;
+$breadcrumb-font-weight: 400;
+$breadcrumb-margin: 0 0 20px 0;
+
+// Text highlight
+$text-highlight-color: $text-dark;
+$text-highlight: #B3D7FF;
+
+// Borders
+$border-color: #ddd;
+$border-color-dark: #333;
+$divider-color: #ccc;
+
+// Scrollbars
+$scrollbar-thumb-bg: #eee;
+$scrollbar-thumb-bg--hover: #fff;
+$scrollbar-thumb-border: #fff;
+$scrollbar-thumb-track: #666;
+$scrollbar-thumb-track--active: #333;
+
+// Code view
+$scrollbar-thumb-bg-cv: #f1f1f1;
+$scrollbar-thumb-track-cv: #888;
+$code-view-navbar-bg: #f0f3ff;
+$code-view-radius: $global-radius;
+$code-view-active-color: $primary-color;
+$code-view-font: 'Roboto', sans-serif;
+$hljs-variable: #C699E5;
+$hljs-number: #4ac55f;
+$hljs-string: $warning-color;
+$hljs-selector: $info-color;
+$hljs-comment: #888;
+$hljs-color: $text-light;
+
+$indigo: #3f51b5;
+$footer-bg: #f8f8f8;
+
+// Side nav
+$main-padding: 85px;
+$filter-height: 36px;
+$side-nav-push: $main-padding + $filter-height;
+
+$navbar-height: 85px;
+
+// Toc
+$toc-active-color: $text-dark;
+$toc-hover-color: $link-color;
+$toc-color: $text-base;
+$toc-bg-color: #ffffff;
+
+// badge component
+$new-badge-color: $text-light;
+$new-badge-bg: $accent-color;
+$updated-badge-color: $text-light;
+$updated-badge-bg: $info-color;
+$badge-radius: 4px;
+$badge-font-size: 12px;
+$badge-padding: 4px 6px;
+$badge-font-weight: 500;
+
+$byzantium: #731963;
+
+$external-link-icon: 'open_in_new';
+$external-link-icon-padding: 18px;
+$external-font-weight: 700;
+
+$pre-bg: $surface-dark;
+$pre-color: $text-light;
+$pre-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.20);
+
+$alert-radius: $global-radius;
+$icon-container-width: 72px;
+$alert-padding: 21px 17px 21px (17px + $icon-container-width);
+$alert-margin: 20px 0;
+
+// Headings anchor link icon
+$link-alpha: 0;
+
+$affix-font-weight: 400;
+
+$alert-shadow:
+	0 1px 3px 0 rgba(0, 0, 0, 0.26),
+	0 1px 1px 0 rgba(0, 0, 0, 0.12),
+	0 2px 1px -1px rgba(0, 0, 0, 0.08);
+
+$hljs-copy-btn-radius: 0 0 0 $global-radius;
+
+// Table
+$table-first-col-weight: 500;
+$table-header-font-size: 18px;
+$table-row-bg: #F9F9F9;
+$table-text-color: $text-base;
+$table-border-color: $border-color;
+$table-text-transform: uppercase;
+$table-th-border: 1px solid $table-border-color;
+$table-th-padding: 1rem;
+$table-td-padding: 1.2rem;
+
+// Typography //
+
+// h1
+$h1-f-size: 3rem;
+$h1-f-weight: 700;
+$h1-l-height: 1.2;
+$h1-m-top: 0;
+$h1-m-bottom: 1.5rem;
+
+// h2
+$h2-f-size: 2.5rem;
+$h2-f-weight: 700;
+$h2-l-height: 1.2;
+$h2-m-top: 0;
+$h2-m-bottom: 1.5rem;
+
+// h3
+$h3-f-size: 1.75rem;
+$h3-l-height: 1.2;
+$h3-f-weight: 700;
+$h3-m-top: 0;
+$h3-m-bottom: 1.5rem;
+
+// h4
+$h4-f-size: 1.25rem;
+$h4-f-weight: 400;
+$h4-l-height: 1.5rem;
+$h4-m-top: 0;
+$h4-m-bottom: 1.5rem;
+
+// h5
+$h5-f-size: 1.125rem;
+$h5-f-weight: 400;
+$h5-l-height: 1.5rem;
+$h5-m-top: 0;
+$h5-m-bottom: 1.5rem;
+
+// h6
+$h6-f-size: 1rem;
+$h6-f-weight: 400;
+$h6-l-height: 1.5rem;
+$h6-m-top: 0rem;
+$h6-m-bottom: 1.5rem;
+
+// Paragraph
+$p-l-height: 1.5rem;
+$p-m-bottom: 1rem;
+$p-m-top: 0;

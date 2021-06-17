@@ -1,164 +1,27 @@
 var fs = require("fs");
-var cleanCSS = require("gulp-clean-css");
-var concat = require("gulp-concat");
-var autoprefixer = require('gulp-autoprefixer');
-var uglify = require("gulp-uglify-es").default;
 var gulp = require("gulp");
 var path = require("path");
-var sass = require('gulp-dart-sass');
-var util = require("gulp-util");
-var saveLicense = require("uglify-save-license");
-var md5File = require('md5-file')
-var argv = require("yargs").argv;
+var del = require('del');
+const os = require('os');
 
-const SRC = "./src";
-const DOCFX_STYLES = `${SRC}/styles`;
-const TEMPLATE_STATIC = "./template/styles";
 const TEMPLATE_DIST = "/dist/template";
-const MODULES = `${SRC}/modules`;
-
+const WEBPACK_BUILD_DIST = `${TEMPLATE_DIST}/bundles/`;
 const packageStatics = ['package.json', 'README.md', 'index.js', 'preconfig.json'];
 
-const bundles = [
-    {
-        type: "JS",
-        name: "docfx-bundle.min.js",
-        files: [
-            `${TEMPLATE_STATIC}/docfx.vendor.js`,
-            `${MODULES}/jquery-ui-1.12.0.js`,
-            `${MODULES}/jquery-localize.js`,
-            `${SRC}/docfx.js`
-        ],
-        checksumMetadataKey: "_docFXBundleChecksum"
-    },
-    {
-        type: "JS",
-        name: "scripts-bundle.min.js",
-        files: [
-            `${SRC}/igviewer.common.js`,
-            `${SRC}/igviewer.renderingService.js`,
-            `${MODULES}/lz-string.js`,
-            `${MODULES}/resize-sensor.js`,
-            `${SRC}/nav-init.js`,
-            `${SRC}/code-view.js`,
-            `${SRC}/live-editing-handler.js`,
-            `${MODULES}/lazyload.js`,
-            `${MODULES}/lazysizes.js`,
-            `${SRC}/lazysizes-handler.js`,
-            `${SRC}/theming-handler.js`,
-            `${SRC}/sample-iframe-handler.js`
-        ],
-        checksumMetadataKey: "_scriptsBundleChecksum"
-    },
-    {
-        type: "CSS",
-        name: "styles-bundle.min.css",
-        files: [
-            `${TEMPLATE_STATIC}/docfx.vendor.css`,
-            `${TEMPLATE_STATIC}/docfx.css`,
-            `${TEMPLATE_STATIC}/css/main.css`
-        ],
-        checksumMetadataKey: "_stylesBundleFileName"
-    }
-];
 
-var md5HashMap = {};
-  
-const styles = () => {
-   return gulp.src(path.join(__dirname, `${DOCFX_STYLES}/main.scss`))
-            .pipe(sass().on('error', sass.logError))
-            .pipe(
-                autoprefixer({
-                    overrideBrowserslist: ['last 2 versions'],
-                    cascase: false
-                })
-            )
-            .pipe(gulp.dest(`${TEMPLATE_STATIC}/css`));
+const addWatchers = () => {
+
+    gulp.watch(['./template/**/*', './index.js', './preconfig.json', './src/app/**/*', './src/styles/**/*'],
+        gulp.series(buildPackageStatics, createTemplate, generateBundlingGlobalMetadata)
+    )
+
+    generateBundlingGlobalMetadata(null, true);
+
+    return webpackBuild(true);
 }
 
-// Generating hash per each file in the bundles based on its content.
-// It is used to generate a new bundle only if the content of a file is changed.
-const generateFileCheckSumMap = (done) => {
-    var allFiles = [];
-    bundles.forEach(bundle => {
-        allFiles = allFiles.concat(bundle.files);
-    });
-
-    allFiles.forEach(file => {
-        var filePath = path.join(__dirname, file);
-        var hash = md5File.sync(filePath);
-        md5HashMap[filePath] = hash;
-    });
-    done();
-}
-
-const generateBundlingGlobalMetadata = (done) => {
-    var metadata = {};
-    // for general cache invalidation purposes
-    metadata["_timestamp"] = new Date().getTime();
-    bundles.forEach(bundle => {
-        var filePath = path.join(__dirname, `${TEMPLATE_DIST}/bundles`, bundle.name);
-        metadata[bundle.checksumMetadataKey] = md5File.sync(filePath);        
-    });
-
-    fs.writeFileSync(path.join(__dirname, TEMPLATE_DIST, "bundling.global.json"), JSON.stringify(metadata));
-
-    done();
-}
-
-const bundleAndMinify = async (done) => {
-    var isDebugMode = argv.debugMode !== undefined && argv.debugMode.toLowerCase().trim() === "true";
-    var promises = [];
-    bundles.forEach(bundle => {
-        if (bundle.type === "JS") {
-            promises.push(bundleAndMinifyJS(bundle.files, bundle.name, `.${TEMPLATE_DIST}/bundles`, isDebugMode));
-        } else if (bundle.type === "CSS") {
-            promises.push(bundleAndMinifyCSS(bundle.files, bundle.name, `.${TEMPLATE_DIST}/bundles`, isDebugMode));
-        }   
-    });
-    return await Promise.all(promises).then(() => generateBundlingGlobalMetadata(done));
-}
-
-function bundleAndMinifyJS(files, fileName, outputFolder, isDebugMode) {
-    return new Promise(function(resolve, reject) {
-        gulp.src(files)
-            .pipe(concat(fileName))
-            .pipe(isDebugMode ? util.noop() : uglify({
-                output: {
-                    comments: saveLicense
-                }})
-                .on('error', util.log))
-            .pipe(gulp.dest(outputFolder))
-            .on('error', reject)
-            .on('end', resolve);
-    });
-}
-
-function bundleAndMinifyCSS(files, fileName, outputFolder, isDebugMode) {
-    return new Promise(function(resolve, reject) {
-        gulp.src(files)
-            .pipe(concat(fileName))
-            .pipe(isDebugMode ? util.noop() : cleanCSS()
-                .on('error', util.log))
-            .on('error', reject)
-            .pipe(gulp.dest(outputFolder))
-            .on('end', resolve);
-    });
-}
-
-const addWatcher = (done) => {
-    var allFiles = [];
-    bundles.forEach(bundle => {
-        allFiles = allFiles.concat(bundle.files);
-    });
-    gulp.watch(allFiles.concat(['./template/**/*', '!./template/styles/css', './index.js', './preconfig.json']), gulp.series(buildPackageStatics, bundleAndMinify)).on("change", function(file) {
-        var filePath = path.join(`${__dirname}\\${file}`);
-        var hash = md5File.sync(filePath);
-        if (md5HashMap[filePath] !== hash) {
-            md5HashMap[filePath] = hash;
-        }
-    });
-    done();
+const cleanup = () => {
+    return del(path.resolve(__dirname, "dist"));
 }
 
 const buildPackageStatics = () => {
@@ -166,17 +29,60 @@ const buildPackageStatics = () => {
 }
 
 const createTemplate = () => {
-    return gulp.src(['./src/**/*',
-                     './template/**/*',
-                     '!./template/styles/**',
-                     '!./src/modules',
-                     '!./src/**/*.js',
-                     '!./src/styles/**/**']).pipe(gulp.dest("dist/template"));
+    return gulp.src([
+        './src/**',
+        './template/**/*',
+        '!./src/app/**',
+        '!./src/styles/**',
+        '!./src/assets/images/**',
+    ]).pipe(gulp.dest("dist/template"));
 }
 
-exports.createTemplate = createTemplate;
-exports.styles = styles;
-exports.bundleAndMinify = bundleAndMinify;
-exports.build = gulp.series(buildPackageStatics, createTemplate, styles, bundleAndMinify);
-exports['build-watch'] = gulp.series(this.build, generateFileCheckSumMap, addWatcher);
+const generateBundlingGlobalMetadata = (done, dev=false) => {
+    let metadata = {}, 
+        outputBuildFiles = undefined,
+        bundlesToObserve = [{name:"vendor", ext: "js"}, 
+                            {name:"main", ext: "js"},
+                            {name:"lunr-search", ext: "js"},
+                            {name:"runtime", ext: "js"},
+                            {name:"igniteui", ext: "css"},
+                            {name:"slingshot", ext: "css"}] 
+    if(!dev) {
+        outputBuildFiles = fs.readdirSync(path.join(__dirname, WEBPACK_BUILD_DIST));
+    }
+    metadata["_timestamp"] = new Date().getTime();
+    bundlesToObserve.forEach(bundle => {
+        let bundleFileName = outputBuildFiles != null ? outputBuildFiles.find((file) => file.startsWith(bundle.name) && file.endsWith(bundle.ext)) : `${bundle.name}.${bundle.ext}`;
+        metadata[`_${bundle.name}`] = bundleFileName;
+    });
 
+    fs.writeFileSync(path.join(__dirname, TEMPLATE_DIST, "bundling.global.json"), JSON.stringify(metadata));
+
+    if(done) {
+        done();
+    }
+}
+
+const webpackBuild = (dev = false) => {
+    let config, commandArgs = [], watch = "--watch";
+
+    config = dev ? "webpack.dev.js" : 'webpack.prod.js';
+    commandArgs.push(config);
+    if (dev) {
+        commandArgs.push(watch)
+    }
+
+    return require('child_process').
+        spawn(
+            path.normalize(`./node_modules/.bin/webpack${/^win/.test(os.platform()) ? '.cmd' : ''}`),
+            ['--config'].concat(commandArgs),
+            { stdio: 'inherit' }
+        );
+}
+
+let buildProd;
+exports.generateBundlingGlobalMetadata = generateBundlingGlobalMetadata;
+exports.createTemplate = createTemplate;
+exports.webpackBuildProd = buildProd = () => webpackBuild();
+exports.build = gulp.series(cleanup, buildPackageStatics, createTemplate, this.webpackBuildProd, generateBundlingGlobalMetadata);
+exports['build-watch'] = gulp.series(cleanup, buildPackageStatics, createTemplate, addWatchers);
