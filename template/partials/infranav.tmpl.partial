@@ -116,7 +116,13 @@
                                     <li><a title="Reveal" href="https://revealbi.io/app" class="mchNoDecorate">Reveal App <span class="deemphasize">Empower everyone in your organization to use data to make smarter business decisions</span></a></li>
                                 </ul>
                             </li>
-                            <li><a title="Team Productivity" href="/products/shareplus-enterprise" class="mchNoDecorate">Team Productivity</a></li>
+                            <li>
+                                <a class="navigation__sub-menu mchNoDecorate" title="Team Productivity" href="http://slingshotapp.io">Team Productivity</a>
+                                <ul style="display: none;">
+                                    <li><a title="Slingshot" href="http://slingshotapp.io" class="mchNoDecorate">Slingshot <span class="deemphasize">Connect everyone you work with to data, project management, content and chats for better results.</span></a></li>
+                                    <li><a title="SharePlus" href="https://www.infragistics.com/products/shareplus-enterprise" class="mchNoDecorate">SharePlus <span class="deemphasize">Secure, instant access to content and data on the go – with or without connectivity.</span></a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a class="navigation__sub-menu mchNoDecorate" title="Learn and Support" href="/support"><span class="hidden-md">Learn &amp; Support</span><span class="visible-md hidden-lg hidden-sm hidden-xs hidden-xxs">Support</span></a>
                                 <ul style="display: none;">
