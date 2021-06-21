@@ -1,0 +1,12 @@
+<div id="footer-container">
+    {{{_appFooter}}}
+    {{^_appFooter}}
+    
+    {{#_isLangEn}} 
+        {{>partials/slingshot/slingshotfoot}}
+    {{/_isLangEn}} 
+    
+    {{#_isLangJa}}
+        {{>partials/slingshot/slingshotfoot.ja}}
+    {{/_isLangJa}}
+</div>
