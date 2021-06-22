@@ -30,7 +30,12 @@ full license information.}}
     <link rel="alternate" href="{{_KRBaseUrl}}{{_path}}" hreflang="ko-kr" /> {{/_hasKRLang}}
     <link rel="alternate" href="{{_ENBaseUrl}}{{_path}}" hreflang="x-default" />
     {{#_extraFont}} <link rel="stylesheet" href="{{_extraFont}}"> {{/_extraFont}}
-    <link rel="shortcut icon" href="https://infragistics.com/assets/favicon/favicon.ico">
+    {{#_appFaviconPath}}
+        <link rel="shortcut icon" href="{{{_appFaviconPath}}}">
+    {{/_appFaviconPath}}
+    {{^_appFaviconPath}}
+        <link rel="shortcut icon" href="https://infragistics.com/assets/favicon/favicon.ico">
+    {{/_appFaviconPath}}
     <link rel="stylesheet" href="https://infragistics.com/assets/modern/css/layout.css">
     <link rel="stylesheet" href="https://infragistics.com/assets/modern/css/animate-custom.css">
     <link rel="stylesheet" href="https://infragistics.com/assets/modern/css/fontello.css">
