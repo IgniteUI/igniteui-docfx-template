@@ -5,7 +5,7 @@
 @import 'components/index';
 @import 'animations';
 
-$sg-items-gap: 8px;
+$sg-items-gap: rem(8px);
 
 .sg-palette {
 	display: flex;
@@ -13,58 +13,6 @@ $sg-items-gap: 8px;
 	justify-content: center;
 	flex-wrap: wrap;
 	margin: 0 (-$sg-items-gap) 1.5rem;
-}
-
-.dfx-seo-banner {
-	margin: 20px auto;
-	cursor: pointer;
-	> img {
-		width: 100%;
-	}
-}
-
-.fancy-details {
-	details {
-		padding: 4px 8px;
-		margin-bottom: 4px;
-		border-radius: $global-radius;
-
-		> * {
-			margin-bottom: 4px;
-		}
-
-		summary {
-			border-radius: $global-radius;
-			cursor: pointer;
-
-			&::before {
-				content: '+';
-				color: $link-color;
-				margin-right: 4px;
-			}
-
-			&:focus,
-			&:hover {
-				color: $text-dark;
-
-				&::before {
-					color: $link-hover-color;
-				}
-			}
-		}
-
-		&[open] {
-			background: #f9f9f9;
-
-			summary {
-				color: $text-dark;
-
-				&::before {
-					content: '- ';
-				}
-			}
-		}
-	}
 }
 
 .sg-color-block {
@@ -209,3 +157,16 @@ $sg-items-gap: 8px;
 		margin: $sg-items-gap
 	}
 }
+
+.dfx-seo-banner {
+	margin: 20px auto;
+	cursor: pointer;
+	> img {
+		width: 100%;
+	}
+}
+
+.form-control {
+	border-radius: $header-search-radius;
+}
+

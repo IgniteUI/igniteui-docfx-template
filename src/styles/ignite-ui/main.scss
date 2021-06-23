@@ -1,4 +1,5 @@
 @import '~highlight.js/scss/vs2015.scss';
-@import 'variables';
+@import '../shared/mixins';
+@import '../slingshot/variables';
 @import '../shared/global';
 
