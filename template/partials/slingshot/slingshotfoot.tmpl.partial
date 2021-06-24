@@ -1,52 +1,70 @@
 
 	<footer id="footer" class="footer slingshot-footer">
-		<div class="border-curve-top position-relative">
-			<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1920 140" xml:space="preserve" style="enable-background:new 0 0 1920 140;" preserveAspectRatio="xMidYMin" class="ie-hide">
-				<path style="fill: #ffffff; stroke: #ffffff;" xmlns="http://www.w3.org/2000/svg" class="st0" d="M1920.7,124.3V-1H-0.8l-2,125.3c0,0,371.7-107.5,962.1-111.4C959.3,12.9,1365.6-4.7,1920.7,124.3L1920.7,124.3z  "></path>
-			</svg>
-			<div class="ie-visible pt-0"></div>
-		</div>
-		<div class="container">
-			<div class="footer__link-row row text-center text-xs-center text-sm-left text-md-left pt-4 m-auto justify-content-center">
-				<div class="col-xs-12 col-sm-12 col-md-3 text-center mb-5 mb-lg-0"> <img src="https://static.infragistics.com/marketing/slingshot/slingshot-icon.svg" alt="Slingshot Badge" role="presentation" width="60" height="60" class="lazyloaded" data-ll-status="loaded" data-was-processed="true">
-					<noscript><img src="https://static.infragistics.com/marketing/slingshot/slingshot-icon.svg" alt="Slingshot Badge" role="presentation" width="60" height="60"></noscript>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-2">
-					<h5 class="footer__title mt-3 mt-lg-0">Products</h5>
-					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
-						<li><a href="/why-slingshot">Why Slingshot?</a></li>
-						<li><a href="/working-with-google">Working with Google</a></li>
-						<li><a href="/working-with-office">Working with Office</a></li>
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-2">
-					<h5 class="footer__title mt-3 mt-lg-0">Solutions</h5>
-					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
-						<li><a href="/solutions/marketing">Marketing</a></li>
-						<li><a href="/solutions/hr">Human Resources</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-12 clearfix hidden-md hidden-lg"> </div>
-				<div class="col-xs-12 col-sm-6 col-md-2">
-					<h5 class="footer__title mt-3 mt-lg-0">Downloads</h5>
-					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
-						<li><a href="https://my.slingshotapp.io">Web</a></li>
-						<li><a href="https://apps.apple.com/us/app/id1457353858">iOS</a></li>
-						<li><a href="https://apps.apple.com/us/app/id1457353858">MacOS</a></li>
-						<li><a href="/download-desktop">Desktop</a></li>
-						<li><a href="https://play.google.com/store/apps/details?id=com.infragistics.slingshot">Android</a></li>
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-2">
-					<h5 class="footer__title mt-3 mt-lg-0">About Us</h5>
-					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
-						<li><a href="/about-us">About Us</a></li>
-						<li><a href="/about-us#connect">Contact Us</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
+        		<div class="border-curve-top position-relative">
+        			<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1920 140" xml:space="preserve" style="enable-background:new 0 0 1920 140;" preserveAspectRatio="xMidYMin" class="ie-hide">
+        				<path style="fill: #ffffff; stroke: #ffffff;" xmlns="http://www.w3.org/2000/svg" class="st0" d="M1920.7,124.3V-1H-0.8l-2,125.3c0,0,371.7-107.5,962.1-111.4C959.3,12.9,1365.6-4.7,1920.7,124.3L1920.7,124.3z  "></path>
+        			</svg>
+        			<div class="ie-visible pt-0"></div>
+        		</div>
+        		<div class="container">
+        			<div class="footer__link-row row text-center text-xs-center text-sm-left text-md-left pt-4 m-auto justify-content-center">
+        				<div class="col-xs-12 col-sm-12 col-md-3 text-center mb-5 mb-lg-0"> <img src="https://static.infragistics.com/marketing/slingshot/slingshot-icon.svg" alt="Slingshot Badge" role="presentation" width="60" height="60" class="lazyloaded" data-ll-status="loaded" data-was-processed="true">
+        					<noscript><img src="https://static.infragistics.com/marketing/slingshot/slingshot-icon.svg" alt="Slingshot Badge" role="presentation" width="60" height="60"></noscript>
+        				</div>
+        				<div class="col-xs-12 col-sm-6 col-md-2">
+        					<h5 class="footer__title mt-3 mt-lg-0">Products</h5>
+        					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
+<li><a href="/product-tour">Product Tour</a></li>
+        						<li><a href="/why-slingshot">Why Slingshot?</a></li>
+<li><a href="/security">Security</a></li>
+        						<li><a href="/working-with-google">Working with Google</a></li>
+        						<li><a href="/working-with-office">Working with Office</a></li>
+<li><a href="/pricing">Pricing</a></li>
+        					</ul>
+        				</div>
+        				<div class="col-xs-12 col-sm-6 col-md-2">
+        					<h5 class="footer__title mt-3 mt-lg-0">Solutions</h5>
+        					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
+        						<li><a href="/solutions/marketing">Marketing</a></li>
+<li><a href="/solutions/marketing/abm">ABM</a></li>
+<li><a href="/solutions/marketing/campaign-launch">Campaign Launch</a></li>
+<li><a href="/solutions/marketing/seo-management">SEO</a></li>
+<li><a href="/solutions/hr">Human Resources</a></li>
+<li><a href="/solutions/hr/employee-onboarding">Employee Onboarding</a></li>
+        					</ul>
+        				</div>
+        				<div class="col-sm-12 clearfix hidden-md hidden-lg"> </div>
+        				<div class="col-xs-12 col-sm-6 col-md-2">
+        					<h5 class="footer__title mt-3 mt-lg-0">Resources</h5>
+
+<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
+        						<li><a href="/learning-center">Learning Center</a></li>
+<li><a href="/blog">Blog</a></li>
+<li><a href="/whitepapers">Whitepapers</a></li>
+<li><a href="/webinars">Webinars</a></li>
+        					</ul>
+        				</div>
+        				<div class="col-xs-12 col-sm-6 col-md-2">
+        					<h5 class="footer__title mt-3 mt-lg-0">About Us</h5>
+        					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
+        						<li><a href="/about-us">About Us</a></li>
+        						<li><a href="/about-us#connect">Contact Us</a></li>
+        					</ul>
+
+<h5 class="footer__title mt-3 mt-lg-4" style="
+    margin-top: 2rem;
+">Downloads</h5>
+<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
+        						<li><a href="https://my.slingshotapp.io">Web</a></li>
+        						<li><a href="https://apps.apple.com/us/app/id1457353858">iOS</a></li>
+        						<li><a href="https://apps.apple.com/us/app/id1457353858">MacOS</a></li>
+        						<li><a href="/download-desktop">Desktop</a></li>
+        						<li><a href="https://play.google.com/store/apps/details?id=com.infragistics.slingshot">Android</a></li>
+        					</ul>
+        				</div>
+        			</div>
+        		</div>
+        	</footer>
 	<div class="footer footer-utils slingshot-footer">
 		<div class="container">
 			<div class="row align-items-center">
@@ -55,6 +73,7 @@
 						<li><a href="/privacy-policy">Privacy Policy</a></li>
 						<li><a href="/cookie-policy">Cookies</a></li>
 						<li><a href="/terms-of-use">Terms of Use</a></li>
+                        <li><a href="/license-agreement">License Agreement</a></li>
 					</ul>
 				</div>
 				<div class="footer-utils__apps col-12 col-md-7 col-lg-7 text-center text-lg-right">
