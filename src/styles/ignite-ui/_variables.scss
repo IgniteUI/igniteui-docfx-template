@@ -28,6 +28,7 @@ $lightgray: #f1f1f1;
 $text-base: #333;
 $text-light: #fff;
 $text-dim-light: #ddd;
+$black: #000;
 $text-dark: #222;
 $title-color: $text-base;
 
@@ -68,7 +69,7 @@ $breadcrumb-font-weight: 400;
 $breadcrumb-margin: 0;
 
 // Text highlight
-$text-highlight-color: $text-dark;
+$text-highlight-color: $black;
 $text-highlight: $secondary-1-color;
 
 // Borders

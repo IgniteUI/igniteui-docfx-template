@@ -32,23 +32,12 @@
 
 			&:focus,
 			&:hover {
-				color: $link-hover-color;
-
-				&::before {
-					color: $link-hover-color;
-				}
+				color: $link-color;
 			}
 		}
 
 		&[open] {
 			summary {
-				color: $link-color;
-
-				&:focus,
-				&:hover {
-					color: $link-hover-color;
-				}
-
 				&::before {
 					content: '- ';
 				}

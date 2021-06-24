@@ -28,7 +28,8 @@ $lightgray: #e9ebf3;
 $text-base: #585858;
 $text-light: #fff;
 $text-dim-light: #ddd;
-$text-dark: #000;
+$black: #000;
+$text-dark: $black;
 $title-color: $text-dark;
 
 // Surface colors
