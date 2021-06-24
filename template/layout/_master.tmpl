@@ -58,7 +58,16 @@
         </div>
 
     </div>
-    {{^_disableFooter}} {{>partials/footer}} {{/_disableFooter}} {{>partials/scripts}}
+
+    {{#slingshotTheme}}
+        {{^_disableFooter}} {{>partials/slingshot/footer}} {{/_disableFooter}}
+    {{/slingshotTheme}}
+
+    {{#igniteuiTheme}}
+        {{^_disableFooter}} {{>partials/footer}} {{/_disableFooter}}
+    {{/igniteuiTheme}}
+
+    {{>partials/scripts}}
 </body>
 
 </html>
