@@ -201,12 +201,12 @@
 			}
 
 			> a {
-				color: $toc-active-color;
-				font-weight: 500;
+				color: $toc-active-color !important;
+				font-weight: bold !important;
 			}
 
 			> a:hover {
-				color: $toc-hover-color;
+				color: $toc-hover-color !important;
 			}
 		}
 
