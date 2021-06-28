@@ -8,6 +8,7 @@ export class AngularCodeService extends CodeService {
 
     protected samplesOrder = ['modules', 'ts', 'html', 'scss'];
     protected codeViewLiveEditingButtonClickHandler = util.isLocalhost ? this.createPostApiFormFromCodeView() : this.onAngularGithubProjectButtonClicked();
+    protected standaloneButtonLiveEditingClickHandler = this.createPostApiFormFromStandaloneButton();
     private stackBlitzApiUrl = "https://stackblitz.com/run";
     private codesandboxApiUrl = "https://codesandbox.io/api/v1/sandboxes/define";
     private sharedFileName = "shared.json";
@@ -26,21 +27,22 @@ export class AngularCodeService extends CodeService {
         let $codeViewElements = $("code-view");
         let $standaloneliveEditingButtons = $("button[data-sample-src]");
 
-        if ($codeViewElements.length > 0) {
-
-            $.each($codeViewElements, (index, element) => {
-                let $codeView = $(element);
-                let samplesBaseUrl = $codeView.attr(this.demosBaseUrlAttrName)!;
-                let sampleUrl = $codeView.attr(this.sampleUrlAttrName)!;
-                if (!this.demosUrls.has(samplesBaseUrl)) {
-                    this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, codeView: $codeView }]);
-                } else {
-                    this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, codeView: $codeView });
+        if ($standaloneliveEditingButtons.length > 0) {
+            if (util.isLocalhost) {
+                this.getDemosBaseUrls($standaloneliveEditingButtons);
+                for (const baseUrl of this.demosUrls.keys()) {
+                    let data = this.demosUrls.get(baseUrl)!;
+                    this.generateLiveEditingAngularApp(baseUrl, data);
                 }
-            });
+            }else {
+                $standaloneliveEditingButtons.on('click', this.onAngularGithubProjectStandaloneButtonClicked());
+            }
+            this.clearLiveEditingData();
+        }
 
-            let allDemosBaseUrls = this.demosUrls.keys();
-            for (const baseUrl of allDemosBaseUrls) {
+        if ($codeViewElements.length > 0) {
+            this.getDemosBaseUrls($codeViewElements);
+            for (const baseUrl of this.demosUrls.keys()) {
                 let codeViewsData = this.demosUrls.get(baseUrl)!;
                 if (util.isLocalhost) {
                     this.generateLiveEditingAngularApp(baseUrl, codeViewsData);
@@ -48,15 +50,32 @@ export class AngularCodeService extends CodeService {
                     this.getAngularSampleFiles(baseUrl, codeViewsData, () => this.renderFooters(codeViewsData));
                 }
             }
-            if (!(util.isIE || util.isEdge)) {
-                $standaloneliveEditingButtons.on('click', this.onAngularGithubProjectStandaloneButtonClicked());
-            } else {
-                $standaloneliveEditingButtons.css("display", "none");
-            }
+            this.clearLiveEditingData();
         }
 
+        if ((util.isIE || util.isEdge)) {
+            $standaloneliveEditingButtons.css("display", "none");
+        }
+    }
+
+    private getDemosBaseUrls($elements: any) {
+        $.each($elements, (index, element) => {
+            let sampleUrl;
+            let $liveEditingElement = $(element);
+            let samplesBaseUrl = $liveEditingElement.attr(this.demosBaseUrlAttrName)!;
+            element.nodeName === 'CODE-VIEW' ? sampleUrl = $liveEditingElement.attr(this.sampleUrlAttrName)! : sampleUrl = $liveEditingElement.attr(this.buttonSampleSourceAttrName)!;
+            if (!this.demosUrls.has(samplesBaseUrl)) {
+                this.demosUrls.set(samplesBaseUrl, [{ url: sampleUrl, codeView: $liveEditingElement }]);
+            } else {
+                this.demosUrls.get(samplesBaseUrl)!.push({ url: sampleUrl, codeView: $liveEditingElement });
+            }
+        });
+    }
+
+    private clearLiveEditingData() {
         this.demosUrls.clear();
         this.sharedFileContent = {};
+        this.sampleFilesContentByUrl = {};
     }
 
     private renderFooters(codeViewsData: ISampleData[]) {
@@ -181,8 +200,12 @@ export class AngularCodeService extends CodeService {
                                  .sort((a: any, b: any) => {
                                     return codeService.samplesOrder.indexOf(a.fileHeader) - codeService.samplesOrder.indexOf(b.fileHeader);
                                  });
-            $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
-            $codeView.codeView("renderFooter", codeService.codeViewLiveEditingButtonClickHandler);
+            if ($codeView[0].nodeName === 'BUTTON') {
+                $codeView.on('click', codeService.standaloneButtonLiveEditingClickHandler);
+            }else {
+                $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
+                $codeView.codeView("renderFooter", codeService.codeViewLiveEditingButtonClickHandler);
+            }
         }
     }
 
@@ -213,31 +236,46 @@ export class AngularCodeService extends CodeService {
         return demoFileMetadataPath;
     }
 
+    private createPostApiFormFromStandaloneButton() {
+        const codeService = this;
+        return function (this: HTMLButtonElement) {
+            if (codeService.isButtonClickInProgress) {
+                return;
+            }
+            codeService.isButtonClickInProgress = true;
+            let $button = $(this);
+            let sampleFileUrl = codeService.getAngularSampleMetadataUrl($button.attr(codeService.demosBaseUrlAttrName)!, $button.attr(codeService.buttonSampleSourceAttrName)!);
+            codeService.createButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button)
+        }
+    }
+    
     private createPostApiFormFromCodeView() {
         const codeService = this;
-
         return ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => {
             if (codeService.isButtonClickInProgress) {
                 return;
             }
             codeService.isButtonClickInProgress = true;
             let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
-            let sampleContent = codeService.sampleFilesContentByUrl[sampleFileUrl];
-            if(sampleContent.addTsConfig) {
-                codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
-            }
-            let formData = {
-                dependencies: sampleContent.sampleDependencies,
-                files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
-                devDependencies: codeService.sharedFileContent.devDependencies
-            }
-            let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
-                codeService.createCodesandboxForm(formData);
-            form.appendTo($("body"));
-            form.submit();
-            form.remove();
-            codeService.isButtonClickInProgress = false;
+            this.createButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button);
         }
+    }
+
+    private createButtonForm(sampleContent: { [url: string]: any }, codeService: any, $button: JQuery<HTMLButtonElement>) {
+        if (sampleContent.addTsConfig) {
+            codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
+        }
+        let formData = {
+            dependencies: sampleContent.sampleDependencies,
+            files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
+            devDependencies: codeService.sharedFileContent.devDependencies
+        }
+        let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
+            codeService.createCodesandboxForm(formData);
+        form.appendTo($("body"));
+        form.submit();
+        form.remove();
+        codeService.isButtonClickInProgress = false;
     }
 
     private replaceRelativeAssetsUrls(files: ICodeViewFilesData[], demosBaseUrl: string) {
