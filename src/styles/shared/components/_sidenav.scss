@@ -1,24 +1,24 @@
 .toc {
 	background-color: $toc-bg-color !important;
 	overflow: hidden;
-	padding-bottom: 30px;
+	padding-bottom: rem(30px);
 }
 
 .sidetoc.shiftup {
-	bottom: 70px;
+	bottom: rem(70px);
 }
 
 .sidetoc-expand > .caret {
 	margin-left: 0;
-	margin-top: -2px;
+	margin-top: rem(-2px);
 }
 
 .sidetoc-expand > .caret-side {
-	border-left: 4px solid;
-	border-top: 4px solid transparent;
-	border-bottom: 4px solid transparent;
-	margin-left: 4px;
-	margin-top: -4px;
+	border-left: rem(4px) solid;
+	border-top: rem(4px) solid transparent;
+	border-bottom: rem(4px) solid transparent;
+	margin-left: rem(4px);
+	margin-top: rem(-4px);
 }
 
 .sidetoc-heading {
@@ -28,13 +28,14 @@
 .expand-stub {
 	position: absolute;
 	top: 0;
-	left: 10px;
-	padding: 6px;
-	color: $link-color;
-	font-weight: 500;
+	left: rem(10px);
+	padding: rem(6px);
+	color: $toc-expand-stub-color;
+	font-weight: 600;
 	display: flex;
 	align-items: center;
-	height: 30px;
+	height: rem(30px);
+	font-size: rem(16px);
 }
 
 .toc .nav > li > a.sidetoc-expand {
@@ -93,7 +94,7 @@
 }
 
 .toc ul {
-	font-size: 12px;
+	font-size: rem(12px);
 }
 
 .toc-toggle {
@@ -102,15 +103,15 @@
 
 .sidetoc-expand > .caret {
 	margin-left: 0;
-	margin-top: -2px;
+	margin-top: rem(-2px);
 }
 
 .sidetoc-expand > .caret-side {
-	border-left: 4px solid;
-	border-top: 4px solid transparent;
-	border-bottom: 4px solid transparent;
-	margin-left: 4px;
-	margin-top: -4px;
+	border-left: rem(4px) solid;
+	border-top: rem(4px) solid transparent;
+	border-bottom: rem(4px) solid transparent;
+	margin-left: rem(4px);
+	margin-top: rem(-4px);
 }
 
 .sidetoc-heading {
@@ -123,13 +124,13 @@
 	color: $text-base;
 	padding: 5px;
 	position: relative;
-	margin: 0 5px 0 5px;
+	margin: 0 rem(5px) 0 rem(5px);
 }
 
 .toc-filter > input {
 	border: 0;
 	color: $text-base;
-	padding-left: 20px;
+	padding-left: rem(20px);
 	width: 100%;
 }
 
@@ -139,19 +140,19 @@
 
 .toc-filter > .filter-icon {
 	position: absolute;
-	top: 10px;
-	left: 5px;
+	top: rem(10px);
+	left: rem(5px);
 }
 
 .sidenav {
 	background-color: $toc-bg-color;
-	margin-right: -15px;
+	margin-right: rem(-15px);
 	border-right: 1px solid $border-color;
 
 	&__header {
-		padding: 24px 0 0 16px !important;
+		padding: rem(24px) 0 0 rem(16px) !important;
 		position: relative;
-		font-size: 14px !important;
+		font-size: rem(14px) !important;
 		color: #000 !important;
 		font-weight: 500 !important;
 		text-transform: uppercase !important;
@@ -162,14 +163,17 @@
 	.nav {
 		li {
 			position: relative;
-			font-size: 13px;
+			font-size: $toc-font-size;
 			margin: 0;
+			user-select: none;
 
 			.topic-name {
 				max-width: 95%;
 				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
+				line-height: rem(16px);
+				// Intentionally remove the ellipsis after discussion with the designers
+				//text-overflow: ellipsis;
+				//white-space: nowrap;
 			}
 
 			a {
@@ -179,8 +183,8 @@
 			}
 
 			a:not(.sidenav__header) {
-				padding: 3px 0 3px 0;
-				margin-left: 28px;
+				padding: rem(7px) 0 rem(7px) 0;
+				margin-left: rem(30px);
 			}
 		}
 
@@ -190,32 +194,31 @@
 			&::before {
 				position: absolute;
 				content: '';
-				width: 2px;
+				width: rem(2px);
 				top: 0;
 				bottom: 0;
 				left: 0;
 			}
 
 			> a {
-				color: $toc-active-color;
-				font-weight: 500;
+				color: $toc-active-color !important;
+				font-weight: bold !important;
 			}
 
 			> a:hover {
-				color: $toc-hover-color;
+				color: $toc-hover-color !important;
 			}
 		}
 
 		li.new {
-
 			a.new:not(.sidenav__header) {
-				padding: 3px 45px 3px 0;
-				margin-left: 28px;
+				padding: rem(7px) rem(45px) rem(7px) 0;
+				margin-left: rem(30px);
 			}
 
 			a.updated:not(.sidenav__header) {
-				padding: 3px 75px 3px 0;
-				margin-left: 28px;
+				padding: rem(7px) rem(75px) rem(7px) 0;
+				margin-left: rem(30px);
 			}
 
 			> .new {
@@ -226,14 +229,14 @@
 			.updated__badge {
 				position: absolute;
 				top: 50%;
-				right: 5px;
+				right: rem(5px);
 				transform: translateY(-50%);
 			}
 		}
 
 		.nav {
 			margin: 0;
-			padding: 0 16px;
+			padding: 0 rem(16px);
 
 			li {
 				a {
@@ -247,15 +250,8 @@
 
 				&.new {
 					.new__badge, .updated__badge {
-						right: -11px;
+						right: rem(-11px);
 					}
-				}
-			}
-
-			&.level2 {
-				.in.active a.active {
-					color: #000 !important;
-					font-weight: 500 !important;
 				}
 			}
 		}
@@ -281,8 +277,8 @@
 
 .toc-toggle {
 	justify-content: center;
-	padding: 14px 0;
-	font-size: 14px;
+	padding: rem(14px) 0;
+	font-size: rem(14px);
 	font-weight: 500;
 	text-transform: uppercase;
 	color: #282828;
@@ -309,13 +305,13 @@
 	margin: 0;
 
 	#toc_filter_input {
-		font-size: 13px;
-		padding-left: 24px;
+		font-size: rem(13px);
+		padding-left: rem(24px);
 	}
 
 	.filter-icon {
-		color: $text-base;
-		font-size: 14px;
+		color: $filter-icon-color;
+		font-size: rem(14px);
 		top: 50%;
 		left: 0;
 		transform: translateY(-50%);
@@ -337,7 +333,7 @@
 
 	.sidenav {
 		padding: 0;
-		margin: 24px 0 !important;
+		margin: rem(24px) 0 !important;
 	}
 
 	.sidenav-container {

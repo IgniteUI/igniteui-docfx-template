@@ -1,10 +1,4 @@
 .table {
-	tbody {
-		tr:nth-child(odd) {
-			background: $table-row-bg;
-		}
-	}
-
 	thead {
 		tr {
 			border-bottom: $table-th-border;
@@ -12,6 +6,7 @@
 	}
 
 	th {
+		background: $table-header-background;
 		color: $text-base;
 		font-weight: 500;
 		text-transform: $table-text-transform;
@@ -20,7 +15,7 @@
 	tbody {
 		tr {
 			height: 48px;
-			border-bottom: 1px solid $table-border-color;
+			border-bottom: 1px solid $table-row-border-color;
 
 			&:last-of-type {
 				border-bottom: none;
@@ -30,6 +25,16 @@
 
 	th {
 		font-size: $table-header-font-size;
+	}
+
+	tr {
+		&:nth-child(even) {
+			background: $table-even-bg
+		}
+
+		&:nth-child(odd) {
+			background: $table-odd-bg
+		}
 	}
 }
 
@@ -69,3 +74,5 @@ table a {
 		}
 	}
 }
+
+

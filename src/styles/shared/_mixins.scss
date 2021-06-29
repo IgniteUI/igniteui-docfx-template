@@ -1,0 +1,13 @@
+
+/// Pixels to root relative values (rem).
+/// @param {number|string} $pixels - The pixel value to be converted.
+/// @param {number|string} $context [$browser-context] - The base context to convert against.
+@function rem($pixels, $context: $browser-context) {
+	@if (unitless($pixels)) {
+		$pixels: $pixels * 1px;
+	}
+	@if (unitless($context)) {
+		$context: $context * 1px;
+	}
+	@return ($pixels / $context) * 1rem;
+}
