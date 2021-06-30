@@ -32,12 +32,17 @@
 	}
 }
 
+a[href^="#"] {
+	text-decoration: $link-decoration;
+}
+
 .external-link {
 	display: inline-flex;
 	align-items: center;
 	position: relative;
 	padding-right: $external-link-icon-padding;
 	white-space: nowrap;
+	text-decoration: none !important;
 
 	&::after {
 		font-family: Material Icons;
@@ -46,9 +51,9 @@
 		margin-left: 2px;
 		min-width: 16px;
 		max-width: 16px;
-		overflow: hidden;
 		right: 0;
 		position: absolute;
+		overflow: visible;
 	}
 
 	&-parent {

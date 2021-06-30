@@ -3,20 +3,20 @@
 	background: $text-highlight;
 }
 
+body,
 html,
 .root {
-	font-size: 16px;
-	line-height: 24px;
+	font-family: $global-font-family;
+	font-size: $browser-context;
+	font-weight: $global-font-weight;
+	line-height: $global-line-height;
+	color: $text-base;
 	-webkit-font-smoothing: antialiased;
 }
 
 body,
 .article {
-	font-family: $global-font-family;
-	font-size: 1rem;
-	line-height: 1.5rem;
 	margin: auto;
-	color: $text-base;
 	overflow-x: hidden;
 }
 
@@ -38,12 +38,12 @@ h6, .h6 {
 	}
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
 .text-break {
 	word-wrap: break-word;
 	word-break: break-word;
@@ -119,13 +119,27 @@ ol,
 pre,
 table,
 blockquote {
-	margin-top: $p-m-top;
 	margin-bottom: $p-m-bottom;
-	font-weight: $generic-font-weight;
+	font-weight: $global-font-weight;
 
 	&.highlight {
-		font-weight: 400;
-		color: #333;
+		font-weight: $global-font-weight;
+		color: $darkgray;
+	}
+}
+
+blockquote {
+	border-left-color: $blockquotes-border-color;
+	font-style: $blockquotes-font-style;
+	font-size: inherit;
+
+	> h1, > .h1,
+	> h2, > .h2,
+	> h3, > .h3,
+	> h4, > .h4,
+	> h5, > .h5,
+	> h6, > .h6, {
+		margin-top: 0;
 	}
 }
 
@@ -139,6 +153,24 @@ ul ol,
 ol ul {
 	margin-top: 0;
 	margin-bottom: 0;
+}
+
+.content ul:not(.pagination) {
+	list-style: none;
+	position: relative;
+
+	li {
+		&::before {
+			content: "\2022";
+			color: $ul-bullet-color;
+			position: absolute;
+			font-weight: bold;
+			display: flex;
+			margin-left: -1em;
+			align-items: center;
+			justify-content: center;
+		}
+	}
 }
 
 hr,
