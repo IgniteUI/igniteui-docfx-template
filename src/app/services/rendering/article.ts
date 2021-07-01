@@ -94,13 +94,14 @@ export class ArticleRenderingService extends RenderingService {
 
             const codeView = $("code-view").first();
             let paragraph: JQuery<HTMLParagraphElement>;
+            const action = 'Download'
             if (languageVersion === 'ja') {
                 paragraph = $<HTMLParagraphElement>('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text(`このサンプルが気に入りましたか? 完全な ${productTitle}ツールキットにアクセスして、すばやく独自のアプリの作成を開始します。`);
-                const link = this.appendLinkAttributes(productTitle, productLink);
+                const link = this.appendLinkAttributes(action, productTitle, productLink);
                 link.text("無料でダウンロードできます。").appendTo(paragraph);
             } else {
                 paragraph = $<HTMLParagraphElement>('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text(`Like this sample? Get access to our complete ${productTitle} toolkit and start building your own apps in minutes.`);
-                const link = this.appendLinkAttributes(productTitle, productLink);
+                const link = this.appendLinkAttributes(action, productTitle, productLink);
                 link.text(" Download it for free.").appendTo(paragraph);
             }
 
@@ -108,7 +109,7 @@ export class ArticleRenderingService extends RenderingService {
         }
     }
 
-    private appendLinkAttributes(productTitle: string, productLink: string) {
+    private appendLinkAttributes(action: string, productTitle: string, productLink: string) {
         let link = $('<a>');
         link.attr('data-xd-ga-action', 'Download');
         link.attr('data-xd-ga-label', productTitle);
@@ -252,25 +253,42 @@ export class ArticleRenderingService extends RenderingService {
         let productLink = $("meta[property='docfx:link']").attr("content")!,
             relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
             platform = $("meta[property='docfx:platform']").attr("content"),
-            imgTag = $('<img>');
-        
+            productTitle = $("meta[property='docfx:title']")!.attr("content")!;
+        let imagePath = '';
+        const action = 'Download';
+
         if(productLink.toLocaleLowerCase().includes("slingshot")) return;
     
         if (productLink.includes("indigo")) {
-          productLink = "https://cloud.indigo.design";
-          $(imgTag).attr("src", relPpath + "images/marketing/indigo-design-cta-banner-2.png");
+            productLink = "https://cloud.indigo.design";
+            imagePath = relPpath + "images/marketing/indigo-design-cta-banner-2.png";
         } else {
-          $(imgTag).attr("src", relPpath + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png");
-          productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+            imagePath = relPpath + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png";
+            productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
         }
-    
-        if ($(".article-container h2")[2]) {
-          let thirdHeader = $(".article-container h2")[2], divTag = $('<div>');
-          divTag.addClass('dfx-seo-banner')
-          $(imgTag).on('click', () => window.location.href = productLink);
-          $(divTag).append(imgTag);
-          $(thirdHeader).before(divTag);
+
+        if (productLink.includes("angular") && $(".article-container h2")[2]){
+            const builderImagePath = "New banner path";
+            const indigoLink = 'link to builder sign in';
+            this.appendBanner(2, productLink, imagePath, 'Sign Up', 'Indigo.Design App Builder | CTA Banner');
+
+            if ($(".article-container h2")[3]){
+                this.appendBanner(3, productLink, imagePath, action, productTitle);
+            }
+        }else if($(".article-container h2")[2]){
+            this.appendBanner(2, productLink, imagePath, action, productTitle);
         }
+    }
+
+    private appendBanner(headerIndex: number, productLink: string, imagePath: string, action: string, label: string){
+        const header = $(".article-container h2")[headerIndex], divTag = $('<div>');
+        divTag.addClass('dfx-seo-banner');
+        const imgTag = $('<img>').css('width', '100%');
+        $(imgTag).attr("src", imagePath)
+        const link = this.appendLinkAttributes(action, label, productLink);
+        link.append(imgTag);
+        $(divTag).append(link);
+        $(header).before(divTag);
     }
 
     private anchorJs() {
