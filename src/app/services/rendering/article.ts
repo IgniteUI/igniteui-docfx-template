@@ -273,8 +273,8 @@ export class ArticleRenderingService extends RenderingService {
             const indigoLink = 'https://cloud.indigo.design/';
             this.appendBanner(2, indigoLink, builderImagePath, 'Sign Up', 'Indigo.Design App Builder | CTA Banner');
 
-            if ($(".article-container h2")[3]){
-                this.appendBanner(3, productLink, imagePath, action, productTitle);
+            if ($(".article-container h2")[4]){
+                this.appendBanner(4, productLink, imagePath, action, productTitle);
             }
         }else if($(".article-container h2")[2]){
             this.appendBanner(2, productLink, imagePath, action, productTitle);
