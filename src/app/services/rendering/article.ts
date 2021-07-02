@@ -111,7 +111,7 @@ export class ArticleRenderingService extends RenderingService {
 
     private appendLinkAttributes(action: string, productTitle: string, productLink: string) {
         let link = $('<a>');
-        link.attr('data-xd-ga-action', 'Download');
+        link.attr('data-xd-ga-action', action);
         link.attr('data-xd-ga-label', productTitle);
         link.attr({
             target: "_blank",
@@ -255,6 +255,7 @@ export class ArticleRenderingService extends RenderingService {
             platform = $("meta[property='docfx:platform']").attr("content"),
             productTitle = $("meta[property='docfx:title']")!.attr("content")!;
         let imagePath = '';
+        productTitle = productTitle + " | CTA Banner"
         const action = 'Download';
 
         if(productLink.toLocaleLowerCase().includes("slingshot")) return;
@@ -268,9 +269,9 @@ export class ArticleRenderingService extends RenderingService {
         }
 
         if (productLink.includes("angular") && $(".article-container h2")[2]){
-            const builderImagePath = "New banner path";
-            const indigoLink = 'link to builder sign in';
-            this.appendBanner(2, productLink, imagePath, 'Sign Up', 'Indigo.Design App Builder | CTA Banner');
+            const builderImagePath = relPpath + "images/marketing/indigo-design-app-builder-docfx.jpg";
+            const indigoLink = 'https://cloud.indigo.design/';
+            this.appendBanner(2, indigoLink, builderImagePath, 'Sign Up', 'Indigo.Design App Builder | CTA Banner');
 
             if ($(".article-container h2")[3]){
                 this.appendBanner(3, productLink, imagePath, action, productTitle);
