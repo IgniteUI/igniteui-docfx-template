@@ -12,3 +12,7 @@ export interface ILunr {
 export interface ISearchData {
     [ref: string]: ISearchItem
 }
+
+export type JPlunr = ILunr & {
+    multiLanguage: any
+}

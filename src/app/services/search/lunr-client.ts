@@ -54,9 +54,15 @@ function addSearchEvent() {
       } else {
         flipContents("hide");
         $("body").trigger("queryReady");
-        $("#search-results>.search-list").text(
-          'Search Results for "' + query + '"'
-        );
+        if ($('html')[0].lang === "ja"){
+          $("#search-results>.search-list").text(
+            'の検索結果 "' + query + '"'
+          );
+        }else {
+          $("#search-results>.search-list").text(
+            'Search Results for "' + query + '"'
+          );
+        }
       }
     });
   });
