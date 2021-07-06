@@ -56,7 +56,7 @@ function addSearchEvent() {
         $("body").trigger("queryReady");
         if ($('html')[0].lang === "ja"){
           $("#search-results>.search-list").text(
-            'の検索結果 "' + query + '"'
+            '"' + query + '" の検索結果'
           );
         }else {
           $("#search-results>.search-list").text(
@@ -105,7 +105,11 @@ function handleSearchResults(hits: ISearchItem[]) {
     $paginator.removeData("twbs-pagination");
 
   if (hits.length === 0) {
-    $hitBloks.html("<p>No results found</p>");
+    if ($('html')[0].lang === "ja") {
+      $hitBloks.html("<p>結果が見つかりませんでした</p>");
+    }else {
+      $hitBloks.html("<p>No results found</p>");
+    }
   } else {
     $("#pagination").twbsPagination({
       totalPages: Math.ceil(hits.length / numPerPage),
