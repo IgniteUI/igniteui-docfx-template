@@ -269,7 +269,7 @@ export class ArticleRenderingService extends RenderingService {
         }
 
         if (productLink.includes("angular") && $(".article-container h2")[2]){
-            const builderImagePath = relPpath + "images/marketing/indigo-design-app-builder-docfx.jpg";
+            const builderImagePath = relPpath + "images/marketing/indigo-design-app-builder-docfx.png";
             const indigoLink = 'https://cloud.indigo.design/';
             this.appendBanner(2, indigoLink, builderImagePath, 'Sign Up', 'Indigo.Design App Builder | CTA Banner');
 
