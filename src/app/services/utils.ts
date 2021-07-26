@@ -180,6 +180,11 @@ class UtilityService {
     }
 
     public isDvPage(): boolean {
+        let $platformMeta = $("meta[property='docfx:platform']");
+        let platform = $platformMeta.attr("content")!;
+        if(platform !== 'angular'){
+            return true;
+        }
         let parts = window.location.pathname.trim().split("/");
         var pageName = parts[parts.length - 1];
         return pageName.includes("chart") ||
