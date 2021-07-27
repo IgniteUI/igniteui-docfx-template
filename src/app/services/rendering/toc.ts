@@ -100,12 +100,6 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             this.scrollToActive();
         }
 
-
-        if ($("#toc_filter_input").val()) {
-            $("#toc_filter_input").val("");
-            this.clearFilter();
-            this.scrollToActive(0);
-        }
     }
 
     private scrollToActive(amount?: number) {
@@ -164,14 +158,23 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             this.router.navigateTo($a.attr("href")!, {stateAction: "push", adjustTocScrollPosition: false})
         });
 
+        $(".clear-icon").on("click", (e: any) => {
+            $("#toc_filter_input").val("");
+            $(".clear-icon").hide();
+            this.clearFilter();
+            this.scrollToActive();
+        })
+
         $("#toc_filter_input").on("input", (e: any) => {
 
             let val = e.target?.value! as string;
             if (val === "") {
+                $(".clear-icon").hide();
                 // Clear 'filtered' class
                 this.clearFilter();
                 return;
             }
+            $(".clear-icon").show();
 
             // Get leaf nodes
             $<HTMLAnchorElement>("#toc li>a")

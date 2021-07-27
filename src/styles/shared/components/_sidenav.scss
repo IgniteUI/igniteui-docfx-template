@@ -144,6 +144,12 @@
 	left: rem(5px);
 }
 
+.toc-filter > .clear-icon {
+	position: absolute;
+	top: rem(10px);
+	right: rem(5px);
+}
+
 .sidenav {
 	background-color: $toc-bg-color;
 	margin-right: rem(-15px);
@@ -307,6 +313,7 @@
 	#toc_filter_input {
 		font-size: rem(13px);
 		padding-left: rem(24px);
+		padding-right: 25px;
 	}
 
 	.filter-icon {
@@ -315,6 +322,17 @@
 		top: 50%;
 		left: 0;
 		transform: translateY(-50%);
+	}
+
+	.clear-icon {
+		position: absolute;
+		color: $filter-icon-color;
+		font-size: rem(16px);
+		top: 50%;
+		right: 8px;
+		transform: translateY(-50%);
+		cursor: pointer;
+		display: none;
 	}
 }
 
