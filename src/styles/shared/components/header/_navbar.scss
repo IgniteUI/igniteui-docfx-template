@@ -114,6 +114,16 @@
 		}
 	}
 
+	.form-group{
+		position: relative;
+	}
+
+	.form-control > .search-clear-icon {
+		position: absolute;
+		top: rem(10px);
+		right: rem(5px);
+	}
+
 
 	@media only screen and (min-width: 768px) {
 		.navbar-flex {
@@ -175,6 +185,21 @@
 	margin: 10px 10px 4px 10px;
 	padding: 8px;
 	border-radius: 0;
+}
+
+#search-query {
+	padding-right: 28px;
+}
+
+.search-clear-icon {
+	position: absolute;
+	color: $filter-icon-color;
+	font-size: rem(16px);
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	cursor: pointer;
+	display: none;
 }
 
 #hamburger2 {

@@ -30,9 +30,18 @@ export function enableSearch() {
     }
 
     addSearchEvent();
+    addClearSearchEvent();
   } catch (e) {
     console.error(e);
   }
+}
+
+function addClearSearchEvent() {
+  $(".search-clear-icon").on("click", () => {
+    $("#search-query").val("")
+    flipContents("show");
+    $(".search-clear-icon").hide();
+  })
 }
 
 function addSearchEvent() {
@@ -49,7 +58,11 @@ function addSearchEvent() {
       map<JQuery.TriggeredEvent, string>(e => $(e.target).val()! as string),
       tap(searchText => query = searchText)
     ).subscribe(searchText => {
+      $(".search-clear-icon").show();
       if (searchText.length < 3) {
+        if (searchText.length === 0){
+          $(".search-clear-icon").hide();
+        }
         flipContents("show");
       } else {
         flipContents("hide");
