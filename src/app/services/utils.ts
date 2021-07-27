@@ -180,6 +180,12 @@ class UtilityService {
     }
 
     public isDvPage(): boolean {
+        // The use of platform metadata is allowing proper products differentiation and based on the result to use handlers appropriately.
+        let $platformMeta = $("meta[property='docfx:platform']");
+        let platform = $platformMeta.attr("content")!;
+        if (platform !== 'angular'){
+            return true;
+        }
         let parts = window.location.pathname.trim().split("/");
         var pageName = parts[parts.length - 1];
         return pageName.includes("chart") ||
