@@ -54,11 +54,11 @@ function addSearchEvent() {
     $searchInput.on("keypress", e => e.key !== "Enter");
 
     $keyUp.pipe(
+      tap(()=> $(".search-clear-icon").show()),
       debounceTime(100),
       map<JQuery.TriggeredEvent, string>(e => $(e.target).val()! as string),
       tap(searchText => query = searchText)
     ).subscribe(searchText => {
-      $(".search-clear-icon").show();
       if (searchText.length < 3) {
         if (searchText.length === 0){
           $(".search-clear-icon").hide();
