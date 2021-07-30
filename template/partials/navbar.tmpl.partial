@@ -45,7 +45,7 @@ full license information.}}
                         {{#_isLangJa}}
                             <input type="text" class="form-control" id="search-query" placeholder="トピックで検索" autocomplete="off">
                         {{/_isLangJa}}
-                        <span class="glyphicon glyphicon-remove-circle search-clear-icon"></span>
+                        <span class="glyphicon glyphicon-remove-circle search-clear-icon" title="Clear search"></span>
                         </div>
                     </form>
                 {{/_enableSearch}}
