@@ -46,7 +46,6 @@ exports.buildDocfx = (options = {
     console.log(`Starting docfx build for: ${getPath(options.projectDir)}`);
 
     return spawn("docfx", ["build", `--warningsAsErrors`, `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('exit', (err) => {
-        // console.log('closing code: ' + err);
         if (err === 4294967295) {
             console.log(`\x1b[31m`, `------------------------------------------------------------------------------------`);
             console.log(`--------------------------- Bookmark/Hyperlink Errors -----------------------------`);
