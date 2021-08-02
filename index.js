@@ -44,11 +44,23 @@ exports.buildDocfx = (options = {
     );
 
     console.log(`Starting docfx build for: ${getPath(options.projectDir)}`);
-    console.log();
 
-    return spawn("docfx", ["build", `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('close', (err) => {
-        if (err) {
-            console.error(err);
+    return spawn("docfx", ["build", `--warningsAsErrors`, `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('exit', (err) => {
+        // console.log('closing code: ' + err);
+        if (err === 4294967295) {
+            console.log(`\x1b[31m`, `------------------------------------------------------------------------------------`);
+            console.log(`--------------------------- Bookmark/Hyperlink Errors -----------------------------`);
+            console.log(`-----------------------------------------------------------------------------------`);
+            console.log();
+            console.error(`              Build failed with bookmark warnings marked in yellow above!        `);
+            console.error(`These warnings indicate the specific topic and link that points to the code line.`);
+            console.log();
+            console.log(`-----------------------------------------------------------------------------------`);
+            console.log(`--------------------------- Error Code ` + err + ` ---------------------------------`);
+            console.log(`-----------------------------------------------------------------------------------`, `\x1b[0m`);
+            console.log();
+        } else {
+            console.log('Exiting code with Error: ' + err);
         }
     });
 }
