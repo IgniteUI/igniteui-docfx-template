@@ -37,7 +37,6 @@ exports.transform = function (model) {
     var currentChain = false;
     var collection = [];
     var topicHeader = null;
-
     for (var i = 0; i < items.length; i++) {
       if (items[i].header){
         if (items[i].sortable && !currentChain) {
@@ -81,7 +80,9 @@ exports.transform = function (model) {
         }
       }else {
         if (items[i].items.length > 1 && currentChain) {
-          sortItems(items[i])
+          if (items[i].sortable){
+            sortItems(items[i])
+          }
         }
         collection.push(items[i]);
       }

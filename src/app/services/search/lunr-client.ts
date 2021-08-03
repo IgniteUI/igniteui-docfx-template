@@ -14,6 +14,7 @@ let navigationOptions: INavigationOptions = {
   navigationPostProcess: () => {
     $("#search-query").val("");
     flipContents("show");
+    $(".search-clear-icon").hide();
     $(".sidenav").css("visibility", "visible");
     util.highlightKeywords(query);
   }
