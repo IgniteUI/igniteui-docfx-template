@@ -30,6 +30,7 @@ exports.buildDocfx = (options = {
     let docfxGlobalConfigPath = path.normalize(path.join(getPath(options.projectDir), 'global.json'));
     let globalConfigs = getEnvironmentVariables(docfxGlobalConfigPath);
     let environmentConfigs = getEnvironmentVariables(docfxPreconfigPath);
+    let applyWarnAsErr = ``;
     environmentConfigs.environment = options.environment || 'development';
 
     globalPreconfigs['variables'] = environmentConfigs[environmentConfigs.environment];
@@ -48,28 +49,28 @@ exports.buildDocfx = (options = {
     console.log(`Starting docfx build for: ${getPath(options.projectDir)}`);
 
     if (globalConfigs._useWarningsAsErrors) {
-        return spawn("docfx", ["build", `--warningsAsErrors`, `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('exit', (err) => {
-            if (err === 4294967295) {
-                console.log(`\x1b[31m`, `------------------------------------------------------------------------------------`);
-                console.log(`--------------------------- Bookmark/Hyperlink Errors -----------------------------`);
-                console.log(`-----------------------------------------------------------------------------------`);
-                console.log();
-                console.error(`              Build failed with bookmark warnings marked in yellow above!        `);
-                console.error(`These warnings indicate the specific topic and link that points to the code line.`);
-                console.log();
-                console.log(`-----------------------------------------------------------------------------------`);
-                console.log(`--------------------------- Error Code ` + err + ` ---------------------------------`);
-                console.log(`-----------------------------------------------------------------------------------`, `\x1b[0m`);
-                console.log();
-            } else {
-                console.log('Exiting code with Error: ' + err);
-            }
-        });
-    } else {
-        return spawn("docfx", ["build", `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('close', (err) => {
-            if (err) {
-                console.error(err);
-            } 
-        })   
+        applyWarnAsErr = `--warningsAsErrors`;
     }
+
+    return spawn("docfx", ["build", applyWarnAsErr, `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('exit', (err) => {
+        if (err === 4294967295) {
+            console.log(`\x1b[31m`, `------------------------------------------------------------------------------------`);
+            console.log(`--------------------------- Bookmark/Hyperlink Errors -----------------------------`);
+            console.log(`-----------------------------------------------------------------------------------`);
+            console.log();
+            console.error(`              Build failed with bookmark warnings marked in yellow above!        `);
+            console.error(`These warnings indicate the specific topic and link that points to the code line.`);
+            console.log();
+            console.log(`-----------------------------------------------------------------------------------`);
+            console.log(`--------------------------- Error Code ` + err + ` ---------------------------------`);
+            console.log(`-----------------------------------------------------------------------------------`, `\x1b[0m`);
+            console.log();
+        } else {
+            console.log('Exiting code with Error: ' + err);
+        }
+    }).on('close', (err) => {
+        if (err) {
+            console.error(err);
+        } 
+    });
 }
