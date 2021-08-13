@@ -1,5 +1,6 @@
 ## In this topic
  ### 1. [Manual testing of the docfx-template](#manual-testing)
+ ### 2. [Adding responsive containers](#responsive-containers)
 
 
 ## <a name='#manual-testing'>Test Plan:</a>
@@ -19,3 +20,6 @@
 **Notes:** 
 - npm link the docfx-template to docfx, run angular-samples and [igniteui-theming-widget-api](https://infragistics.visualstudio.com/Ignite%20UI%20Theming%20Tools/_git/igniteui-theming-widget-api)
 - both regular `app` and `app-lob` should be tested
+
+
+## <a name='#responsive-containers'>Responsive containers:</a>
