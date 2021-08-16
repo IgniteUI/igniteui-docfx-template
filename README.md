@@ -3,6 +3,8 @@
 # Ignite UI DocFX Template
 This is a [DocFX](https://github.com/dotnet/docfx) template which is used for [Ignite UI](https://github.com/igniteui) documentation websites.
 
+## Contributing
+Check out the [Contributing page](.github/CONTRIBUTING.md) for more.
 
 ## Setup
 To setup the project run:
