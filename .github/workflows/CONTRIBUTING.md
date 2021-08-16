@@ -23,3 +23,61 @@
 
 
 ## <a name='#responsive-containers'>Responsive containers:</a>
+To add  a single responsive embedded video use the following markup:
+```HTML
+    <section class="video-container">
+        <div class="video-container__item">
+            <iframe src=""></iframe>
+        </div>
+    </section>
+```
+
+To add a single responsive embedded video with a title use the following markup:
+```HTML
+    <section class="video-container">
+        <div>
+            <div class="video-container__item">
+                <iframe src=""></iframe>
+            </div>
+            <p>Video 1</p>
+        </div>
+    </section>
+```
+
+To add multiple responsive embedded videos use the following markup:
+```HTML
+    <section class="video-container">
+        <div>
+            <div class="video-container__item">
+                <iframe src=""></iframe>
+            </div>
+            <p>Video 1</p>
+        </div>
+        <div>
+            <div class="video-container__item">
+                <iframe src=""></iframe>
+            </div>
+            <p>Video 2</p>
+        </div>
+    </section>
+```
+
+If you want to change the aspect ratio of a video or set of videos you can do it by changing the --ratio variable value, keep in mind that the value should be in %.
+
+Change the radio for multiple videos
+```HTML
+    <section class="video-container" style="--ratio: 55%">
+        <div class="video-container__item">
+            <iframe src=""></iframe>
+        </div>
+    </section>
+```
+
+Change the ration for single video.
+```HTML
+    <section class="video-container">
+        <div class="video-container__item" style="--ratio: 40%">
+            <iframe src=""></iframe>
+        </div>
+    </section>
+```
