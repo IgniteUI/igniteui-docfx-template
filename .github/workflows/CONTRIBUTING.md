@@ -62,9 +62,9 @@ To add multiple responsive embedded videos use the following markup:
     </section>
 ```
 
-If you want to change the aspect ratio of a video or set of videos you can do it by changing the --ratio variable value, keep in mind that the value should be in %.
+If you want to change the aspect ratio of a video or set of videos you can do it by changing the --ratio variable, keep in mind that the value should be in %.
 
-Change the radio for multiple videos
+Change the ratio for multiple videos
 ```HTML
     <section class="video-container" style="--ratio: 55%">
         <div class="video-container__item">
@@ -73,7 +73,7 @@ Change the radio for multiple videos
     </section>
 ```
 
-Change the ration for single video.
+Change the ratio for single video.
 ```HTML
     <section class="video-container">
         <div class="video-container__item" style="--ratio: 40%">
