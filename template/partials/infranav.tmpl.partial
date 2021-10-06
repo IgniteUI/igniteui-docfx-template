@@ -112,8 +112,8 @@
                             <li class="">
                                 <a class="navigation__sub-menu mchNoDecorate" title="Business Intelligence" href="https://revealbi.io">Business Intelligence</a>
                                 <ul style="display: none;">
-                                    <li><a title="Reveal Embedded" href="https://revealbi.io" class="mchNoDecorate">Reveal Embedded <span class="deemphasize">Accelerate your time to market with powerful, beautiful dashboards into your apps</span></a></li>
-                                    <li><a title="Reveal" href="https://revealbi.io/app" class="mchNoDecorate">Reveal App <span class="deemphasize">Empower everyone in your organization to use data to make smarter business decisions</span></a></li>
+                                    <li><a title="Reveal" href="https://revealbi.io" class="mchNoDecorate">Reveal <span class="deemphasize">Easily embed beautiful data visualizations into your apps</span></a></li>
+                                    <li><a title="Slingshot" href="https://slingshotapp.io" class="mchNoDecorate">Slingshot <span class="deemphasize">Empower everyone in your organization to use data to make smarter business decisions</span></a></li>
                                 </ul>
                             </li>
                             <li>
