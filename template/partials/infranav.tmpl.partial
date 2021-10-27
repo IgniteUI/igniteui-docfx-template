@@ -59,27 +59,27 @@
 			                            <div class="navigation__sub-menu--left">
 				                            <div class="navigation__sub-menu--left-item">
 					                            <div class="navigation__sub-menu-header">Best Value Bundles</div>
-					                            <div class="emphasize"><a href="/products/ultimate"><span class="navigation__sub-menu-title">Infragistics Ultimate</span> <span class="navigation__sub-menu-price bgColor--ultimate">$1,099</span> <span class="deemphasize">The only complete UX/UI toolkit for building high performance, modern web, mobile and desktop applications.</span> </a></div>
+					                            <div class="emphasize"><a href="/products/ultimate"><span class="navigation__sub-menu-title">Infragistics Ultimate</span> <span class="navigation__sub-menu-price bgColor--ultimate">$1,495</span> <span class="deemphasize">The only complete UX/UI toolkit for building high performance, modern web, mobile and desktop applications.</span> </a></div>
 				                            </div>
 				                            <div class="navigation__sub-menu--left-item">
-					                            <div class="emphasize"><a href="/products/pro"><span class="navigation__sub-menu-title">Infragistics Professional</span> <span class="navigation__sub-menu-price bgColor--pro">$999</span> <span class="deemphasize">The comprehensive UI components library for web, mobile and desktop developers.</span> </a></div>
+					                            <div class="emphasize"><a href="/products/pro"><span class="navigation__sub-menu-title">Infragistics Professional</span> <span class="navigation__sub-menu-price bgColor--pro">$1,295</span> <span class="deemphasize">The comprehensive UI components library for web, mobile and desktop developers.</span> </a></div>
 				                            </div>
 				                            <div class="navigation__sub-menu--left-item hidden-sm hidden-xs hidden-xxs">
-					                            <div class="emphasize"><a href="/products/ignite-ui"><span class="navigation__sub-menu-title">Ignite UI</span> <span class="navigation__sub-menu-price bgColor--ignite">$849</span> <span class="deemphasize">A complete library of UI components for building modern, data-rich and responsive web apps.</span> </a></div>
+					                            <div class="emphasize"><a href="/products/ignite-ui"><span class="navigation__sub-menu-title">Ignite UI</span> <span class="navigation__sub-menu-price bgColor--ignite">$1,295</span> <span class="deemphasize">A complete library of UI components for building modern, data-rich and responsive web apps.</span> </a></div>
 				                            </div>
 			                            </div>
 		                            </li>
 		                            <li>
                                         <div class="navigation__sub-menu-header">Web</div>
-                                        <a class="deemphasize" title="Indigo.Design App Builder" href="products/indigo-design/app-builder">Indigo.Design App Builder <strong>(New)</strong></a>
+                                        <a class="deemphasize" title="App Builder" href="/products/app-builder">App Builder <strong>(New)</strong></a>
                                         <a class="deemphasize" href="/products/ignite-ui">Ignite UI</a>
-                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-angular">Ignite UI for Angular</a>
-                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-core">Ignite UI for ASP.NET Core</a>
-                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-mvc">Ignite UI for ASP.NET MVC</a>
-                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-blazor">Ignite UI for Blazor</a>
-                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-jquery">Ignite UI for jQuery</a>
-                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-react">Ignite UI for React</a>
-                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-web-components">Ignite UI for Web Components</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-angular">Angular</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-core">ASP.NET Core</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-mvc">ASP.NET MVC</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-blazor">Blazor</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-jquery">jQuery</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-react">React</a>
+                                        <a class="deemphasize small-pad-left" href="/products/ignite-ui-web-components">Web Components</a>
                                         <a class="deemphasize" href="/products/aspnet">Ultimate UI for ASP.NET Web Forms</a>
 		                            <li>
                                         <div class="navigation__sub-menu-header">Desktop</div>
@@ -94,7 +94,7 @@
 		                            <li>
 			                            <div class="navigation__sub-menu-header">Design to Code</div>
                                         <a class="hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
-                                        <a class="hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design/app-builder">Indigo.Design App Builder <strong>(New)</strong></a>
+                                        <a class="hidden-sm hidden-xs hidden-xxs" href="/products/app-builder">App Builder <strong>(New)</strong></a>
 			                            <div class="navigation__sub-menu-header">Automated Testing Tools</div>
                                         <a href="/products/test-automation-micro-focus-uft">Test automation for Micro Focus UFT: Windows Forms</a>
                                         <a href="/products/test-automation-micro-focus-uft">Test automation for Micro Focus UFT: WPF</a>
@@ -106,7 +106,7 @@
                                 <a class="navigation__sub-menu mchNoDecorate" title="UX" href="/products/indigo-design">UX</a>
                                 <ul style="display: none;">
                                     <li><a title="Indigo.Design" href="/products/indigo-design" class="mchNoDecorate">Indigo.Design <span class="deemphasize">A Unified Platform for Visual Design, UX Prototyping, Code Generation, and App Development</span></a></li>
-                                    <li><a title="Indigo.Design App Builder" href="/products/indigo-design/desktop" class="mchNoDecorate">Indigo.Design App Builder<span class="deemphasize">Cloud-based WYSIWYG Drag &amp; Drop Tool, Endless Theming options and Standards-Based Code Output</span></a></li>
+                                    <li><a title="App Builder" href="/products/app-builder" class="mchNoDecorate">App Builder<span class="deemphasize">Cloud-based WYSIWYG Drag &amp; Drop Tool, Endless Theming options and Standards-Based Code Output</span></a></li>
                                 </ul>
                             </li>
                             <li class="">
