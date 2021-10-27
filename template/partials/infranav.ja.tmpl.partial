@@ -105,9 +105,9 @@
                             </li>
                             <li><a href="https://www.revealbi.io/jp" class="mchNoDecorate">データ可視化</a></li>
                             <li>
-                                <a class="navigation__sub-menu mchNoDecorate" title="Team Productivity" href="http://slingshotapp.io">Team Productivity</a>
+                                <a class="navigation__sub-menu mchNoDecorate" title="Team Productivity" href="https://www.slingshotapp.io">Team Productivity</a>
                                 <ul style="display: none;">
-                                    <li><a title="Slingshot" href="http://slingshotapp.io" class="mchNoDecorate">Slingshot <span class="deemphasize">Connect everyone you work with to data, project management, content and chats for better results.</span></a></li>
+                                    <li><a title="Slingshot" href="https://www.slingshotapp.io" class="mchNoDecorate">Slingshot <span class="deemphasize">Connect everyone you work with to data, project management, content and chats for better results.</span></a></li>
                                 </ul>
                             </li>
                             <li><a data-id="12491" href="/consulting" class="mchNoDecorate">サービス</a></li>

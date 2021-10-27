@@ -110,16 +110,16 @@
                                 </ul>
                             </li>
                             <li class="">
-                                <a class="navigation__sub-menu mchNoDecorate" title="Business Intelligence" href="https://revealbi.io">Business Intelligence</a>
+                                <a class="navigation__sub-menu mchNoDecorate" title="Business Intelligence" href="https://www.revealbi.io">Business Intelligence</a>
                                 <ul style="display: none;">
-                                    <li><a title="Reveal" href="https://revealbi.io" class="mchNoDecorate">Reveal <span class="deemphasize">Easily embed beautiful data visualizations into your apps</span></a></li>
-                                    <li><a title="Slingshot" href="https://slingshotapp.io" class="mchNoDecorate">Slingshot <span class="deemphasize">Empower everyone in your organization to use data to make smarter business decisions</span></a></li>
+                                    <li><a title="Reveal" href="https://www.revealbi.io" class="mchNoDecorate">Reveal <span class="deemphasize">Easily embed beautiful data visualizations into your apps</span></a></li>
+                                    <li><a title="Slingshot" href="https://www.slingshotapp.io" class="mchNoDecorate">Slingshot <span class="deemphasize">Empower everyone in your organization to use data to make smarter business decisions</span></a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a class="navigation__sub-menu mchNoDecorate" title="Team Productivity" href="http://slingshotapp.io">Team Productivity</a>
+                                <a class="navigation__sub-menu mchNoDecorate" title="Team Productivity" href="https://www.slingshotapp.io">Team Productivity</a>
                                 <ul style="display: none;">
-                                    <li><a title="Slingshot" href="http://slingshotapp.io" class="mchNoDecorate">Slingshot <span class="deemphasize">Connect everyone you work with to data, project management, content and chats for better results.</span></a></li>
+                                    <li><a title="Slingshot" href="https://www.slingshotapp.io" class="mchNoDecorate">Slingshot <span class="deemphasize">Connect everyone you work with to data, project management, content and chats for better results.</span></a></li>
                                     <li><a title="SharePlus" href="https://www.infragistics.com/products/shareplus-enterprise" class="mchNoDecorate">SharePlus <span class="deemphasize">Secure, instant access to content and data on the go – with or without connectivity.</span></a></li>
                                 </ul>
                             </li>
