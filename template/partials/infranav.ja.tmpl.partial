@@ -67,7 +67,7 @@
 		                            </li>
 		                            <li>
                                         <div class="navigation__sub-menu-header">Web向け</div>
-                                        <a class="deemphasize" title="App Builder" href="/products/app-builder">App Builder <strong>(新規)</strong></a>
+                                        <a class="deemphasize" title="App Builder" href="/products/appbuilder">App Builder <strong>(新規)</strong></a>
                                         <a class="deemphasize" href="/products/ignite-ui">Ignite UI</a>
                                         <a class="deemphasize small-pad-left" href="/products/ignite-ui-angular">Angular</a>
                                         <a class="deemphasize small-pad-left" href="/products/ignite-ui-aspnet-core">ASP.NET Core</a>
@@ -93,14 +93,14 @@
                                     <li>
 			                            <div class="navigation__sub-menu-header">Design to Code</div>
                                         <a class="hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
-                                        <a class="hidden-sm hidden-xs hidden-xxs" href="/products/app-builder">App Builder <strong>(New)</strong></a>
+                                        <a class="hidden-sm hidden-xs hidden-xxs" href="/products/appbuilder">App Builder <strong>(New)</strong></a>
                                     </li>
 	                            </ul>
                             </li>
                             <li><a class="navigation__sub-menu mchNoDecorate" title="UX" href="/products/indigo-design">UX</a>
                                 <ul style="display: none;">
                                     <li><a title="Indigo.Design" href="/products/indigo-design" class="mchNoDecorate">Indigo.Design <span class="deemphasize">3ステップでデザインから画面コードを生成できるアプリケーションデザインプラットフォーム</span></a></li>
-                                    <li><a title="App Builder" href="/products/app-builder" class="mchNoDecorate">App Builder <span class="deemphasize">ドラッグアンドドロップで Web アプリケーションを構築できる ローコード WYSIWYGデザイナー</span></a></li>
+                                    <li><a title="App Builder" href="/products/appbuilder" class="mchNoDecorate">App Builder <span class="deemphasize">ドラッグアンドドロップで Web アプリケーションを構築できる ローコード WYSIWYGデザイナー</span></a></li>
                                 </ul>
                             </li>
                             <li><a href="https://www.revealbi.io/jp" class="mchNoDecorate">データ可視化</a></li>
