@@ -251,7 +251,7 @@ export class ArticleRenderingService extends RenderingService {
     private addCtaBanners() {
         let productLink = $("meta[property='docfx:link']").attr("content")!,
             relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
-            platform = $("meta[property='docfx:platform']").attr("content"),
+            platform = $("meta[property='docfx:platform']").attr("content") || '',
             imgTag = $('<img>');
         
         if(productLink.toLocaleLowerCase().includes("slingshot")) return;
