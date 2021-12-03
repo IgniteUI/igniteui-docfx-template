@@ -36,9 +36,89 @@ full license information.}}
             </button>
         </div>
         <div class="collapse navbar-collapse navbar-flex" id="navbar">
-                {{#_enableSearch}}
-                    <form class="navbar-form navbar-right" role="search" id="search">
-                        <div class="form-group">
+            <div class="navbar-frameworks" style="padding-top: 5px;">
+                {{#_isAngular}}
+                    <a class="platform" href="https://www.infragistics.com/products/appbuilder/help/getting-started" title="Ignite UI for AppBuilder Documentation">AppBuilder</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Blazor">Blazor</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="WC">WC</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="React">React</a>
+                    <a class="platform" href="https://www.igniteui.com/grid/overview" title="jQuery/.NET">jQuery/.NET</a>
+                {{/_isAngular}}
+                {{#_isAppBuilder}}
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Angular">Angular</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Blazor">Blazor</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="WC">WC</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="React">React</a>
+                    <a class="platform" href="https://www.igniteui.com/grid/overview" title="jQuery/.NET">jQuery/.NET</a>
+                {{/_isAppBuilder}}
+                {{#_isBlazor}}
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Ignite UI for Angular Documentation">Angular</a>
+                    <a class="platform" href="https://www.infragistics.com/products/appbuilder/help/getting-started" title="Ignite UI for AppBuilder Documentation">AppBuilder</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="Ignite UI for WebComponents Documentation">WC</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="Ignite UI for React Documentation">React</a>
+                    <a class="platform" href="https://www.igniteui.com/grid/overview" title="Ignite UI for jQuery/.NET Documentation">jQuery/.NET</a>
+                {{/_isBlazor}}
+                {{#_isReact}}
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Angular">Angular</a>
+                    <a class="platform" href="https://www.infragistics.com/products/appbuilder/help/getting-started" title="AppBuilder">AppBuilder</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Blazor">Blazor</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="WC">WC</a>
+                    <a class="platform" href="https://www.igniteui.com/grid/overview" title="jQuery/.NET">jQuery/.NET</a>
+                {{/_isReact}}
+                {{#_isWC}}
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Angular">Angular</a>
+                    <a class="platform" href="https://www.infragistics.com/products/appbuilder/help/getting-started" title="AppBuilder">AppBuilder</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Blazor">Blazor</a>
+                    <a class="platform" href="https://www.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="React">React</a>
+                    <a class="platform" href="https://www.igniteui.com/grid/overview" title="jQuery/.NET">jQuery/.NET</a>
+                {{/_isWC}}
+            </div>
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Framework
+                    <span class="glyphicon glyphicon-chevron-down" style="font-size: 0.7rem; top: 1.5px;"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {{#_isAngular}}
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/appbuilder/help/getting-started" title="Ignite UI for AppBuilder Documentation">AppBuilder</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Blazor">Blazor</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="WC">WC</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="React">React</a>
+                    <a class="dropdown-item" href="https://www.igniteui.com/grid/overview" title="jQuery/.NET">jQuery/.NET</a>
+                {{/_isAngular}}
+                {{#_isAppBuilder}}
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Angular">Angular</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Blazor">Blazor</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="WC">WC</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="React">React</a>
+                    <a class="dropdown-item" href="https://www.igniteui.com/grid/overview" title="jQuery/.NET">jQuery/.NET</a>
+                {{/_isAppBuilder}}
+                {{#_isBlazor}}
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Ignite UI for Angular Documentation">Angular</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/appbuilder/help/getting-started" title="Ignite UI for AppBuilder Documentation">AppBuilder</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="Ignite UI for WebComponents Documentation">WC</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="Ignite UI for React Documentation">React</a>
+                    <a class="dropdown-item" href="https://www.igniteui.com/grid/overview" title="Ignite UI for jQuery/.NET Documentation">jQuery/.NET</a>
+                {{/_isBlazor}}
+                {{#_isReact}}
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Angular">Angular</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/appbuilder/help/getting-started" title="AppBuilder">AppBuilder</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Blazor">Blazor</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="WC">WC</a>
+                    <a class="dropdown-item" href="https://www.igniteui.com/grid/overview" title="jQuery/.NET">jQuery/.NET</a>
+                {{/_isReact}}
+                {{#_isWC}}
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Angular">Angular</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/appbuilder/help/getting-started" title="AppBuilder">AppBuilder</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Blazor">Blazor</a>
+                    <a class="dropdown-item" href="https://www.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="React">React</a>
+                    <a class="dropdown-item" href="https://www.igniteui.com/grid/overview" title="jQuery/.NET">jQuery/.NET</a>
+                {{/_isWC}}
+                </div>
+            </div>
+            {{#_enableSearch}}
+                <form class="navbar-form navbar-right" role="search" id="search">
+                    <div class="form-group">
                         {{#_isLangEn}}
                             <input type="text" class="form-control" id="search-query" placeholder="Search in topics" autocomplete="off">
                         {{/_isLangEn}}
@@ -46,9 +126,9 @@ full license information.}}
                             <input type="text" class="form-control" id="search-query" placeholder="トピックで検索" autocomplete="off">
                         {{/_isLangJa}}
                         <span class="glyphicon glyphicon-remove-circle search-clear-icon" title="Clear search"></span>
-                        </div>
-                    </form>
-                {{/_enableSearch}}
+                    </div>
+                </form>
+            {{/_enableSearch}}
         </div>
 
     </div>
