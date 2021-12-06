@@ -36,6 +36,7 @@ full license information.}}
             </button>
         </div>
         <div class="collapse navbar-collapse navbar-flex" id="navbar">
+            {{#_isIgnite}}
             <div class="navbar-frameworks" style="padding-top: 5px;">
                 {{>partials/frameworks}}
             </div>
@@ -48,6 +49,7 @@ full license information.}}
                     {{>partials/frameworks}}
                 </div>
             </div>
+            {{/_isIgnite}}
             {{#_enableSearch}}
                 <form class="navbar-form navbar-right" role="search" id="search">
                     <div class="form-group">
