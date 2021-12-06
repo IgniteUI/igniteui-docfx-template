@@ -252,7 +252,7 @@ export class ArticleRenderingService extends RenderingService {
     private addCtaBanners() {
         let productLink = $("meta[property='docfx:link']").attr("content")!,
             relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
-            platform = $("meta[property='docfx:platform']").attr("content"),
+            platform = $("meta[property='docfx:platform']").attr("content") || '',
             productTitle = $("meta[property='docfx:title']")!.attr("content")!;
         let imagePath = '';
         productTitle = productTitle + " | CTA Banner"
