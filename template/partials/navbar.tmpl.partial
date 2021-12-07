@@ -37,7 +37,7 @@ full license information.}}
         </div>
         <div class="collapse navbar-collapse navbar-flex" id="navbar">
             {{#_isIgnite}}
-            <div class="navbar-frameworks" style="padding-top: 5px;">
+            <div class="navbar-frameworks">
                 {{>partials/frameworks}}
             </div>
             <div class="dropdown show">
