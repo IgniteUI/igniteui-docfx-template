@@ -49,7 +49,7 @@
 .navbar-frameworks a {
 	padding-right: 8px;
 	color: #9d9d9d; 
-	font-size: 1rem;
+	font-size: 0.875rem;
 	&:focus,
 	&:hover {
 		text-decoration: none;
@@ -61,7 +61,7 @@
 .dropdown-menu a {
 	display: block;
 	color: #333;
-	font-size: 1rem;
+	font-size: 0.825rem;
 	padding-bottom: 0.2rem;
 	padding-left: 1rem;
 	&:focus,
@@ -79,7 +79,7 @@
 .btn-secondary {
 	padding: 0px 8px 0px 0px !important;
 	color: #9d9d9d; 
-	font-size: 1rem;
+	font-size: 0.825rem;
 	&:focus,
 	&:hover {
 		text-decoration: none;
@@ -108,6 +108,9 @@
 	.navbar-frameworks {
 		display: flex;
 		justify-content: center;
+	}
+	.navbar-frameworks a{
+		font-size: 1rem !important;
 	}
 	.dropdown {
 		display: none !important;
