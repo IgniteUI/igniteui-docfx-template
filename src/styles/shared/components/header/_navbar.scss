@@ -57,7 +57,9 @@
 		background-color: transparent;
 	}
 }
-
+.dropdown-menu {
+	min-width: 9rem;
+}
 .dropdown-menu a {
 	display: block;
 	color: #333;
@@ -104,16 +106,23 @@
 	}
 }
 
-@media only screen and (max-width: 768px)  {
+@media only screen and (max-width: 767px)  {
 	.navbar-frameworks {
 		display: flex;
 		justify-content: center;
+		padding-top: 10px;
 	}
 	.navbar-frameworks a{
 		font-size: 1rem !important;
 	}
 	.dropdown {
 		display: none !important;
+	}
+}
+
+@media only screen and (max-width: 1279px) and (min-width: 960px) {
+	.navbar-frameworks a{
+		font-size: 0.825rem;
 	}
 }
 
