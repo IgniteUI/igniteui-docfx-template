@@ -190,8 +190,8 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
           $stackblitzB.on("click", () => liveEditingButtonsClickHandler($stackblitzB, $(this.element)));
 
           //Disable live editing buttons
-          // $csbB.prop("disabled", true );
-          // $stackblitzB.prop("disabled", true );
+          $csbB.prop("disabled", true );
+          //$stackblitzB.prop("disabled", true );
         } else if (explicitEditor === "stackblitz" || explicitEditor === "csb") {
           let $liveEditingButton = $<HTMLButtonElement>("<button>", {class: this.css[explicitEditor]});
           $liveEditingButton.text((this as any)[`_${explicitEditor}Text`]);
@@ -200,7 +200,6 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
           $footerContainer.append('<span class="editing-label">Edit in: </span>').
           append($liveEditingButton).
           appendTo(this._elements.$footer);
-          //check standalone button
           $liveEditingButton.on("click", () => liveEditingButtonsClickHandler($liveEditingButton, $(this.element)))
         } else {
           console.error(`We do not support an online editor with name: ${explicitEditor}`);
