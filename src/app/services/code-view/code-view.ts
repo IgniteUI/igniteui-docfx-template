@@ -1,6 +1,15 @@
 import { ExplicitEditor, ICodeViewCSS, ICodeViewElements, ICodeViewEvents, ICodeViewFilesData, ICodeViewMembers, ICodeViewOptions } from '../../types';
 import hljs from "highlight.js";
 import util from '../utils';
+import stackblitz from '@stackblitz/sdk';
+
+/**
+ * Type describing an in-memory file dictionary, representing a
+ * directory and its contents.
+ */
+type FileDictionary = {[path: string]: string};
+const PROJECT_TEMPLATE = 'node';
+const PROJECT_TAGS = ['angular', 'material', 'cdk', 'web', 'example'];
 
 export class CodeView implements ICodeViewEvents, ICodeViewMembers {
    
@@ -189,9 +198,26 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
           $csbB.on("click", () => liveEditingButtonsClickHandler($csbB, $(this.element)));
           $stackblitzB.on("click", () => liveEditingButtonsClickHandler($stackblitzB, $(this.element)));
 
-          //Disable live editing buttons
-          $csbB.prop("disabled", true );
-          $stackblitzB.prop("disabled", true );
+        //implementation with stackblitz sdk
+        //$stackblitzB.on("click", () => liveEditingButtonsClickHandler($stackblitzB, $(this.element)));
+        // use sdk open method here
+        const exampleMainFile = `src/app/index.html`;
+        const files: FileDictionary = {};
+        // $stackblitzB.on("click", (evt) => {
+        //   // evt.preventDefault();
+        //   // var url = 'www.google.com';
+        //   // window.open(url, '_blank');
+        //   this._openStackBlitz({
+        //     files,
+        //     title: `Infragistics Angular Components`,
+        //     description: `Auto-generated from: https://www.infragistics.com/products/ignite-ui-angular/angular`,
+        //     openFile: exampleMainFile,
+        //   });
+        // });
+
+        //Disable live editing buttons
+         // $csbB.prop("disabled", true );
+         // $stackblitzB.prop("disabled", true );
         } else if (explicitEditor === "stackblitz" || explicitEditor === "csb") {
           let $liveEditingButton = $<HTMLButtonElement>("<button>", {class: this.css[explicitEditor]});
           $liveEditingButton.text((this as any)[`_${explicitEditor}Text`]);
@@ -200,6 +226,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
           $footerContainer.append('<span class="editing-label">Edit in: </span>').
           append($liveEditingButton).
           appendTo(this._elements.$footer);
+          //check standalone button
           $liveEditingButton.on("click", () => liveEditingButtonsClickHandler($liveEditingButton, $(this.element)))
         } else {
           console.error(`We do not support an online editor with name: ${explicitEditor}`);
@@ -215,4 +242,17 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
       }
       $(this.element).append(this._elements.$footer);
     }
-} 
+  
+
+  // private _openStackBlitz({ title, description, openFile, files }: { title: string, description: string, openFile: string, files: FileDictionary }): void {
+  //   stackblitz.openProject({
+  //     title,
+  //     files,
+  //     description,
+  //     template: PROJECT_TEMPLATE,
+  //     tags: PROJECT_TAGS,
+  //   }, { openFile });
+  // }
+
+  
+}
