@@ -301,30 +301,12 @@ export class AngularCodeService extends CodeService {
         });
         //TODO Add the sample dependencies to package json and the dev dependencies too
         const exampleMainFile = `src/index.html`;
-        //get the files here or pass them
-        // Add check for button
-        // $button.on("click", (evt) => {
-        //     evt.preventDefault();
-        //     this._openStackBlitz({
-        //       files,
-        //       title: `Infragistics Angular Components`,
-        //       description: `Infragistics Angular Components`,
-        //       //description: `Auto-generated from: https://www.infragistics.com/products/ignite-ui-angular/angular`,
-        //       openFile: exampleMainFile,
-        //     });
-        //   });
-        // let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
-        //     codeService.createCodesandboxForm(formData);
         if ($button.hasClass(codeService.stkbButtonClass)){
-            $button.on("click", (evt) => {
-                evt.preventDefault();
-                this._openStackBlitz({
-                  files,
-                  title: `Infragistics Angular Components`,
-                  description: `Infragistics Angular Components`,
-                  //description: `Auto-generated from: https://www.infragistics.com/products/ignite-ui-angular/angular`,
-                  openFile: exampleMainFile,
-                });
+            this._openStackBlitz({
+                files,
+                title: `Infragistics Angular Components`,
+                description: `Auto-generated from: https://www.infragistics.com/products/ignite-ui-angular/angular`,
+                openFile: exampleMainFile,
               });
         } else {
                 let form = codeService.createCodesandboxForm(formData);
