@@ -331,10 +331,15 @@ export class AngularCodeService extends CodeService {
 
     private replaceRelativeAssetsUrls(files: ICodeViewFilesData[], demosBaseUrl: string) {
         let assetsUrl = demosBaseUrl + this.assetsFolder;
+        let productionAssetsUrl = "https://www.infragistics.com/angular-demos-lob/assets/";
+
         for (let i = 0; i < files.length; i++) {
-            if (files[i].hasRelativeAssetsUrls) {
-                files[i].content = files[i].content.replace(this.assetsRegex, assetsUrl);
+            if (files[i].content.match(this.assetsRegex)) {
+                files[i].content = files[i].content.replace(this.assetsRegex, productionAssetsUrl);
             }
+            // if (files[i].hasRelativeAssetsUrls) {
+            //     files[i].content = files[i].content.replace(this.assetsRegex, assetsUrl);
+            // }
         }
     }
 
