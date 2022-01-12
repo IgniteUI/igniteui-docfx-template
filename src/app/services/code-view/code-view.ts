@@ -191,7 +191,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
 
           //Disable live editing buttons
           $csbB.prop("disabled", true );
-          $stackblitzB.prop("disabled", true );
+          //$stackblitzB.prop("disabled", true );
         } else if (explicitEditor === "stackblitz" || explicitEditor === "csb") {
           let $liveEditingButton = $<HTMLButtonElement>("<button>", {class: this.css[explicitEditor]});
           $liveEditingButton.text((this as any)[`_${explicitEditor}Text`]);
@@ -215,4 +215,4 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
       }
       $(this.element).append(this._elements.$footer);
     }
-} 
+}

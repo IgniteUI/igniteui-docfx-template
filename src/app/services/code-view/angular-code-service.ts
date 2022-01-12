@@ -3,6 +3,11 @@ import util from '../utils';
 import { ExplicitEditor, ICodeViewFilesData, ISampleData } from "../../types";
 import { compressToBase64 } from 'lz-string';
 import { XHRService } from "../jqXHR-tasks";
+import stackblitz from '@stackblitz/sdk';
+
+type FileDictionary = {[path: string]: string};
+const PROJECT_TEMPLATE = 'node';
+const PROJECT_TAGS = ['angular', 'material', 'cdk', 'web', 'example'];
 
 export class AngularCodeService extends CodeService {
 
@@ -130,13 +135,17 @@ export class AngularCodeService extends CodeService {
             if (codeService.isButtonClickInProgress) {
                 return;
             }
-            codeService.isButtonClickInProgress = true;
-            let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
-            let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!);
-            let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
-            let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-            window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
-            codeService.isButtonClickInProgress = false;
+            if ($button.hasClass(codeService.stkbButtonClass)){
+                this.createPostApiFormFromCodeView()
+            } else {
+                codeService.isButtonClickInProgress = true;
+                let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
+                let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!);
+                let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
+                let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
+                window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
+                codeService.isButtonClickInProgress = false;
+            }
         }
     }
 
@@ -271,25 +280,66 @@ export class AngularCodeService extends CodeService {
         if (sampleContent.addTsConfig) {
             codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
         }
+        // Live editing pre WebContainers version
+        // let formData = {
+        //     dependencies: sampleContent.sampleDependencies,
+        //     files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
+        //     devDependencies: codeService.sharedFileContent.devDependencies
+        // }
+
+        // let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
+        //     codeService.createCodesandboxForm(formData);
+        // form.appendTo($("body"));
+        // form.submit();
+        // form.remove();
+        // codeService.isButtonClickInProgress = false;
+
+        // Live editing implementation with WebContainers
+        const files: FileDictionary = {};
+        let codesandboxSharedFiles = [];
+        if (!$button.hasClass(codeService.stkbButtonClass)) {
+            codesandboxSharedFiles = this.removeCodesandboxRedundantFiles(codeService.sharedFileContent.files)
+        }
         let formData = {
             dependencies: sampleContent.sampleDependencies,
-            files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
+            files: codesandboxSharedFiles.concat(sampleContent.sampleFiles),
             devDependencies: codeService.sharedFileContent.devDependencies
         }
-        let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
-            codeService.createCodesandboxForm(formData);
-        form.appendTo($("body"));
-        form.submit();
-        form.remove();
+
+        const projectFiles = codeService.sharedFileContent.files.concat(sampleContent.sampleFiles);
+        projectFiles.forEach((f: { path: string | number; content: any; }) => {
+            files[f.path] = f.content;
+        });
+        const exampleMainFile = `src/index.html`;
+        if ($button.hasClass(codeService.stkbButtonClass)){
+            this._openStackBlitz({
+                files,
+                title: `Infragistics Angular Components`,
+                description: `Auto-generated from: https://www.infragistics.com/products/ignite-ui-angular/angular`,
+                openFile: exampleMainFile,
+              });
+        } else {
+                let form = codeService.createCodesandboxForm(formData);
+                codeService.createCodesandboxForm(formData);
+                form.appendTo($("body"));
+                form.submit();
+                form.remove();
+        }
+        
         codeService.isButtonClickInProgress = false;
     }
 
     private replaceRelativeAssetsUrls(files: ICodeViewFilesData[], demosBaseUrl: string) {
         let assetsUrl = demosBaseUrl + this.assetsFolder;
+        let productionAssetsUrl = "https://www.infragistics.com/angular-demos-lob/assets/";
+
         for (let i = 0; i < files.length; i++) {
-            if (files[i].hasRelativeAssetsUrls) {
-                files[i].content = files[i].content.replace(this.assetsRegex, assetsUrl);
+            if (files[i].content.match(this.assetsRegex)) {
+                files[i].content = files[i].content.replace(this.assetsRegex, productionAssetsUrl);
             }
+            // if (files[i].hasRelativeAssetsUrls) {
+            //     files[i].content = files[i].content.replace(this.assetsRegex, assetsUrl);
+            // }
         }
     }
 
@@ -298,6 +348,27 @@ export class AngularCodeService extends CodeService {
             .replace(/\+/g, "-") // Convert '+' to '-'
             .replace(/\//g, "_") // Convert '/' to '_'
             .replace(/=+$/, ""); // Remove ending '='
+    }
+
+    private removeCodesandboxRedundantFiles(sharedFiles: any[]){
+        const webContainerFiles = ['tsconfig.json', 'tsconfig.app.json', 'package.json', '.stackblitzrc', 'src/environments/environment.ts', 'src/environments/environment.prod.ts']
+        const codesandboxFiles = [];
+        for (let i = 0; i < sharedFiles.length; i++) {
+            if (!webContainerFiles.includes(sharedFiles[i].path)){
+                codesandboxFiles.push(sharedFiles[i]);
+            }
+        }
+        return codesandboxFiles;
+    }
+
+    private _openStackBlitz({ title, description, openFile, files }: { title: string, description: string, openFile: string, files: FileDictionary }): void {
+        stackblitz.openProject({
+          title,
+          files,
+          description,
+          template: PROJECT_TEMPLATE,
+          tags: PROJECT_TAGS,
+        }, { openFile });
     }
 
     private createStackblitzForm(data: any) {

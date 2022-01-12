@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/IgniteUI/igniteui-docfx-template#readme",
   "dependencies": {
+    "@stackblitz/sdk": "^1.5.3",
     "anchor-js": "^4.3.0",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^3.3.7",
