@@ -12,7 +12,7 @@ const PROJECT_TAGS = ['angular', 'material', 'cdk', 'web', 'example'];
 export class AngularCodeService extends CodeService {
 
     protected samplesOrder = ['modules', 'ts', 'html', 'scss'];
-    protected codeViewLiveEditingButtonClickHandler = util.isLocalhost ? this.createPostApiFormFromCodeView() : this.onAngularGithubProjectButtonClicked();
+    protected codeViewLiveEditingButtonClickHandler = this.createPostApiFormFromCodeView();
     protected standaloneButtonLiveEditingClickHandler = this.createPostApiFormFromStandaloneButton();
     private stackBlitzApiUrl = "https://stackblitz.com/run";
     private codesandboxApiUrl = "https://codesandbox.io/api/v1/sandboxes/define";
@@ -49,11 +49,14 @@ export class AngularCodeService extends CodeService {
             this.getDemosBaseUrls($codeViewElements);
             for (const baseUrl of this.demosUrls.keys()) {
                 let codeViewsData = this.demosUrls.get(baseUrl)!;
-                if (util.isLocalhost) {
-                    this.generateLiveEditingAngularApp(baseUrl, codeViewsData);
-                } else {
-                    this.getAngularSampleFiles(baseUrl, codeViewsData, () => this.renderFooters(codeViewsData));
-                }
+                this.generateLiveEditingAngularApp(baseUrl, codeViewsData);
+
+                //POST API implementation
+                // if (util.isLocalhost) {
+                //     this.generateLiveEditingAngularApp(baseUrl, codeViewsData);
+                // } else {
+                //     this.getAngularSampleFiles(baseUrl, codeViewsData, () => this.renderFooters(codeViewsData));
+                // }
             }
             this.clearLiveEditingData();
         }
