@@ -248,7 +248,7 @@ export class ArticleRenderingService extends RenderingService {
           $(currentView).codeView({iframeId : i});
         }
       }
-    
+
     private addCtaBanners() {
         let productLink = $("meta[property='docfx:link']").attr("content")!,
             relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
@@ -256,25 +256,34 @@ export class ArticleRenderingService extends RenderingService {
             productTitle = $("meta[property='docfx:title']")!.attr("content")!;
         let imagePath = '';
         productTitle = productTitle + " | CTA Banner"
-        const action = 'Download';
+        let action = 'Download';
 
         if(productLink.toLocaleLowerCase().includes("slingshot")) return;
-    
+
         if (productLink.includes("indigo")) {
-            productLink = "https://cloud.indigo.design";
-            imagePath = relPpath + "images/marketing/indigo-design-cta-banner-2.png";
-        } else {
+            action = 'Learn More';
+            productLink = "https://www.infragistics.com/products/indigo-design";
+            imagePath = relPpath + "images/marketing/indigo-design-transofrm-sketch-xd.gif";
+        } else if (productLink.includes("appbuilder")) {
+            action = 'Learn More';
+            productLink = "https://www.infragistics.com/products/appbuilder";
+            imagePath = relPpath + "images/marketing/app-builder-wysiwyg.gif";
+        } else if (productLink.includes("web-components")) {
             imagePath = relPpath + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png";
+            productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+        } else {
+            imagePath = relPpath + "images/marketing/" + "ignite-ui-for-" + platform + ".gif";
             productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
         }
 
         if (productLink.includes("angular") && $(".article-container h2")[2]){
-            const builderImagePath = relPpath + "images/marketing/indigo-design-app-builder-docfx.png";
-            const indigoLink = 'https://cloud.indigo.design/';
-            this.appendBanner(2, indigoLink, builderImagePath, 'Sign Up', 'Indigo.Design App Builder | CTA Banner');
+            this.appendBanner(2, productLink, imagePath, action, productTitle);
 
             if ($(".article-container h2")[4]){
-                this.appendBanner(4, productLink, imagePath, action, productTitle);
+                const builderImagePath = relPpath + "images/marketing/app-builder-wysiwyg.gif";
+                const аppbuilderLink = 'https://www.infragistics.com/products/appbuilder';
+                action = 'Learn More';
+                this.appendBanner(4, аppbuilderLink, builderImagePath, action, 'App Builder | CTA Banner');
             }
         }else if($(".article-container h2")[2]){
             this.appendBanner(2, productLink, imagePath, action, productTitle);
