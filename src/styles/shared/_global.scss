@@ -159,6 +159,8 @@ $sg-items-gap: rem(8px);
 }
 
 .dfx-seo-banner {
+	display: flex;
+	justify-content: center;
 	margin: 20px auto;
 	cursor: pointer;
 	> img {
