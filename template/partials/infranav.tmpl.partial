@@ -95,6 +95,7 @@
 			                            <div class="navigation__sub-menu-header">Design to Code</div>
                                         <a class="hidden-sm hidden-xs hidden-xxs" href="/products/indigo-design">Indigo.Design</a>
                                         <a class="hidden-sm hidden-xs hidden-xxs" href="/products/appbuilder">App Builder <strong>(New)</strong></a>
+                                        <a class="hidden-sm hidden-xs hidden-xxs" href="/products/appbuilder/ui-toolkit">Design System & UI Kits</a>
 			                            <div class="navigation__sub-menu-header">Automated Testing Tools</div>
                                         <a href="/products/test-automation-micro-focus-uft">Test automation for Micro Focus UFT: Windows Forms</a>
                                         <a href="/products/test-automation-micro-focus-uft">Test automation for Micro Focus UFT: WPF</a>
