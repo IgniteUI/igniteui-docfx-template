@@ -285,7 +285,9 @@ export class ArticleRenderingService extends RenderingService {
                 action = 'Learn More';
                 this.appendBanner(4, аppbuilderLink, builderImagePath, action, 'App Builder | CTA Banner');
             }
-        }else if($(".article-container h2")[2]){
+        } else if(productLink.includes("blazor") || productLink.includes("react")){
+            this.appendBanner($(".article-container h2").length - 1, productLink, imagePath, action, productTitle);
+        } else if($(".article-container h2")[2]){
             this.appendBanner(2, productLink, imagePath, action, productTitle);
         }
     }
