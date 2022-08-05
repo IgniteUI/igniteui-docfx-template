@@ -17,6 +17,7 @@ export class AngularCodeService extends CodeService {
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
+    private dvSamplesPaths = ['gauges/', 'maps/', 'excel/', 'charts/'];
 
     constructor(private xhrService: XHRService) {
         super();
@@ -216,8 +217,9 @@ export class AngularCodeService extends CodeService {
 
     private getAngularSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string) {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
-        demoFileMetadataName = demoFileMetadataName.replace("/", "--");
-        let demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
+
+        let demoFileMetadataPath = this.checkForDvSample(demoFileMetadataName, demosBaseUrl);
+
         return demoFileMetadataPath;
     }
 
@@ -371,5 +373,26 @@ export class AngularCodeService extends CodeService {
 
         fileInput.appendTo(form)
         return form;
+    }
+
+    private checkForDvSample(demoFileMetadataName: string, demosBaseUrl: string): string {
+        let hasDvSample = false;
+        this.dvSamplesPaths.forEach(p => {
+            if (demoFileMetadataName.includes(p)) {
+                demoFileMetadataName = demoFileMetadataName.replace(p, "");
+                hasDvSample = true;
+            }
+        });
+
+        if (!hasDvSample) {
+            demoFileMetadataName = demoFileMetadataName.replace("/", "--");
+        }
+
+        let demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
+        if (hasDvSample) {
+            demoFileMetadataPath = demoFileMetadataPath.replace("samples", "code-viewer");
+        }
+
+        return demoFileMetadataPath;
     }
 }
