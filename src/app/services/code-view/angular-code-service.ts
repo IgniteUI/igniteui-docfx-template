@@ -219,7 +219,7 @@ export class AngularCodeService extends CodeService {
     private getAngularSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string) {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
 
-        let demoFileMetadataPath = this.checkForDvSample(demoFileMetadataName, demosBaseUrl);
+        let demoFileMetadataPath = this.getDemoFileSampleUrl(demoFileMetadataName, demosBaseUrl);
 
         return demoFileMetadataPath;
     }
@@ -376,7 +376,7 @@ export class AngularCodeService extends CodeService {
         return form;
     }
 
-    private checkForDvSample(demoFileMetadataName: string, demosBaseUrl: string): string {
+    private getDemoFileSampleUrl(demoFileMetadataName: string, demosBaseUrl: string): string {
         const hasDvSample = this.dvSamplesPaths.some(p => {
             if (demoFileMetadataName.includes(p)) {
                 demoFileMetadataName = demoFileMetadataName.replace(p, "");
