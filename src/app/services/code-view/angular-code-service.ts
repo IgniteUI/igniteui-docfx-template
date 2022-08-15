@@ -377,19 +377,15 @@ export class AngularCodeService extends CodeService {
     }
 
     private getDemoFileSampleUrl(demoFileMetadataName: string, demosBaseUrl: string): string {
-        const hasDvSample = this.dvSamplesPaths.some(p => {
-            if (demoFileMetadataName.includes(p)) {
-                demoFileMetadataName = demoFileMetadataName.replace(p, "");
-            }
-        })
+        const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
 
-        if (!hasDvSample) {
+        let demoFileMetadataPath = '';
+        if (dvSamplePath) {
+            demoFileMetadataName = demoFileMetadataName.replace(dvSamplePath, "");
+            demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
+        } else {
             demoFileMetadataName = demoFileMetadataName.replace("/", "--");
-        }
-
-        let demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
-        if (hasDvSample) {
-            demoFileMetadataPath = demoFileMetadataPath.replace(this.demoFilesFolderUrlPath, this.demoDVFilesFolderUrlPath);
+            demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
         }
 
         return demoFileMetadataPath;
