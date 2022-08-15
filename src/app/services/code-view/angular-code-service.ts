@@ -13,6 +13,7 @@ export class AngularCodeService extends CodeService {
     private sharedFileName = "shared.json";
     private assetsFolder = "/assets/";
     private demoFilesFolderUrlPath = this.assetsFolder + "samples/";
+    private demoDVFilesFolderUrlPath = this.assetsFolder + "code-viewer/";
     private assetsRegex = new RegExp(/([\.]{0,2}\/)*assets\//g);
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
@@ -376,13 +377,11 @@ export class AngularCodeService extends CodeService {
     }
 
     private checkForDvSample(demoFileMetadataName: string, demosBaseUrl: string): string {
-        let hasDvSample = false;
-        this.dvSamplesPaths.forEach(p => {
+        const hasDvSample = this.dvSamplesPaths.some(p => {
             if (demoFileMetadataName.includes(p)) {
                 demoFileMetadataName = demoFileMetadataName.replace(p, "");
-                hasDvSample = true;
             }
-        });
+        })
 
         if (!hasDvSample) {
             demoFileMetadataName = demoFileMetadataName.replace("/", "--");
@@ -390,7 +389,7 @@ export class AngularCodeService extends CodeService {
 
         let demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
         if (hasDvSample) {
-            demoFileMetadataPath = demoFileMetadataPath.replace("samples", "code-viewer");
+            demoFileMetadataPath = demoFileMetadataPath.replace(this.demoFilesFolderUrlPath, this.demoDVFilesFolderUrlPath);
         }
 
         return demoFileMetadataPath;
