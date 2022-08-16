@@ -13,10 +13,12 @@ export class AngularCodeService extends CodeService {
     private sharedFileName = "shared.json";
     private assetsFolder = "/assets/";
     private demoFilesFolderUrlPath = this.assetsFolder + "samples/";
+    private demoDVFilesFolderUrlPath = this.assetsFolder + "code-viewer/";
     private assetsRegex = new RegExp(/([\.]{0,2}\/)*assets\//g);
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
+    private dvSamplesPaths = ['gauges/', 'maps/', 'excel/', 'charts/'];
 
     constructor(private xhrService: XHRService) {
         super();
@@ -216,8 +218,18 @@ export class AngularCodeService extends CodeService {
 
     private getAngularSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string) {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
-        demoFileMetadataName = demoFileMetadataName.replace("/", "--");
-        let demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
+
+        const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
+
+        let demoFileMetadataPath = '';
+        if (dvSamplePath) {
+            demoFileMetadataName = demoFileMetadataName.replace(dvSamplePath, "");
+            demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
+        } else {
+            demoFileMetadataName = demoFileMetadataName.replace("/", "--");
+            demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
+        }
+
         return demoFileMetadataPath;
     }
 
@@ -372,4 +384,5 @@ export class AngularCodeService extends CodeService {
         fileInput.appendTo(form)
         return form;
     }
+
 }
