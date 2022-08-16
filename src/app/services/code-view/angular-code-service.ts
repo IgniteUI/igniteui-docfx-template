@@ -219,7 +219,16 @@ export class AngularCodeService extends CodeService {
     private getAngularSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string) {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
 
-        let demoFileMetadataPath = this.getDemoFileSampleUrl(demoFileMetadataName, demosBaseUrl);
+        const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
+
+        let demoFileMetadataPath = '';
+        if (dvSamplePath) {
+            demoFileMetadataName = demoFileMetadataName.replace(dvSamplePath, "");
+            demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
+        } else {
+            demoFileMetadataName = demoFileMetadataName.replace("/", "--");
+            demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
+        }
 
         return demoFileMetadataPath;
     }
@@ -376,18 +385,4 @@ export class AngularCodeService extends CodeService {
         return form;
     }
 
-    private getDemoFileSampleUrl(demoFileMetadataName: string, demosBaseUrl: string): string {
-        const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
-
-        let demoFileMetadataPath = '';
-        if (dvSamplePath) {
-            demoFileMetadataName = demoFileMetadataName.replace(dvSamplePath, "");
-            demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
-        } else {
-            demoFileMetadataName = demoFileMetadataName.replace("/", "--");
-            demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
-        }
-
-        return demoFileMetadataPath;
-    }
 }
