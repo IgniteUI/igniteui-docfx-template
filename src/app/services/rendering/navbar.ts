@@ -1,5 +1,7 @@
 import util from "../utils";
 import { RenderingService } from "../../types";
+import { ConstantsEn } from "../../../i18n/constants-en";
+import {ConstantsJP} from "../../../i18n/constants-jp";
 
 export class NavbarRenderingService extends RenderingService {
 
@@ -79,6 +81,7 @@ export class NavbarRenderingService extends RenderingService {
         });
     }
 
+
     public changeHelloBarContent(currentRoute: string) {
         let text = $('.ui-hello-bar__text');
         let button = $('#hello-bar_cta');
@@ -86,39 +89,41 @@ export class NavbarRenderingService extends RenderingService {
         let $platformMeta = $("meta[property='docfx:platform']");
         let platform = $platformMeta.attr("content")!;
 
-        let barText = 'Want the Fastest Angular Data Grid on the Market? We’ve Got It! Quickly Bind Data with Minimal Code Involved.';
-        let barButtonText = 'Get Started';
+        let currentLang = $('html')[0].lang;
+
+        let barText = currentLang === 'en' ? ConstantsEn.angularGrids.barText : ConstantsJP.angularGrids.barText;
+        let barButtonText = currentLang === 'en' ? ConstantsEn.angularGrids.barButtonText : ConstantsJP.angularGrids.barButtonText;
         let buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-angular/download';
-        let buttonXdGaLabelValue = 'Help_AngularGrids_Trial';
-        let buttonGaLabelValue = 'Hello bar – Help_AngularGrids_Trial';
+        let buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.angularGrids.buttonXdGaLabelValue : ConstantsJP.angularGrids.buttonXdGaLabelValue;
+        let buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.angularGrids.buttonGaLabelValue : ConstantsJP.angularGrids.buttonGaLabelValue;
 
         if (platform === 'appbuilder') {
-            barText = 'App Builder™ Includes a Full Design System with 60+ UI Controls and Code Generation for Angular & Blazor!';
-            barButtonText = 'Start Free Trial';
+            barText = currentLang === 'en' ? ConstantsEn.appbuilder.barText : ConstantsJP.appbuilder.barText;
+            barButtonText = currentLang === 'en' ? ConstantsEn.appbuilder.barButtonText : ConstantsJP.appbuilder.barButtonText;
             buttonHrefValue = 'https://appbuilder.indigo.design/'
-            buttonXdGaLabelValue = 'Help_ABTrial';
-            buttonGaLabelValue = 'Hello bar – Help_ABTrial';
+            buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.appbuilder.buttonXdGaLabelValue : ConstantsJP.appbuilder.buttonXdGaLabelValue;
+            buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.appbuilder.buttonGaLabelValue : ConstantsJP.appbuilder.buttonGaLabelValue;
 
         } else if (platform === 'blazor') {
             if (currentRoute.includes('charts')) {
-                barText = 'Create Charts & Dashboards for Your Modern C# Blazor Web and Mobile Apps with Over 65 High-Performing Charts & Graphs in Ignite UI!';
-                barButtonText = 'Try It Free';
+                barText = currentLang === 'en' ? ConstantsEn.blazorCharts.barText : ConstantsJP.blazorCharts.barText;
+                barButtonText = currentLang === 'en' ? ConstantsEn.blazorCharts.barButtonText : ConstantsJP.blazorCharts.barButtonText;
                 buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download'
-                buttonXdGaLabelValue = 'Help_BlazorCharts_Trial';
-                buttonGaLabelValue = 'Hello bar – Help_BlazorCharts_Trial';
+                buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.blazorCharts.buttonXdGaLabelValue : ConstantsJP.blazorCharts.buttonXdGaLabelValue;
+                buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.blazorCharts.buttonGaLabelValue : ConstantsJP.blazorCharts.buttonGaLabelValue;
             } else {
-                barText = 'Ignite UI for Blazor: Feature-Rich, Lightweight Tables & Data Grids to Modernize Your Apps!';
-                barButtonText = 'Start Free Trial';
+                barText = currentLang === 'en' ? ConstantsEn.blazorGrids.barText : ConstantsJP.blazorGrids.barText;
+                barButtonText = currentLang === 'en' ? ConstantsEn.blazorGrids.barButtonText : ConstantsJP.blazorGrids.barButtonText;
                 buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download'
-                buttonXdGaLabelValue = 'Help_BlazorGrids_Trial';
-                buttonGaLabelValue = 'Hello bar – Help_BlazorGrids_Trial';
+                buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.blazorGrids.buttonXdGaLabelValue : ConstantsJP.blazorGrids.buttonXdGaLabelValue;
+                buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.blazorGrids.buttonGaLabelValue : ConstantsJP.blazorGrids.buttonGaLabelValue;
             }
         } else if (platform === 'angular') {
             if (currentRoute.includes('charts')) {
-                barText = 'Ignite UI Angular Charts: Build Expressive Dashboards and Render Data Points with 65+ Real-Time Angular Charts.';
-                barButtonText = 'Start Free Trial';
-                buttonXdGaLabelValue = 'Help_AngularCharts_Trial';
-                buttonGaLabelValue = 'Hello bar – Help_AngularCharts_Trial';
+                barText = currentLang === 'en' ? ConstantsEn.angularCharts.barText : ConstantsJP.angularCharts.barText;
+                barButtonText = currentLang === 'en' ? ConstantsEn.angularCharts.barButtonText : ConstantsJP.angularCharts.barButtonText
+                buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.angularCharts.buttonXdGaLabelValue : ConstantsJP.angularCharts.buttonXdGaLabelValue
+                buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.angularCharts.buttonGaLabelValue : ConstantsJP.angularCharts.buttonGaLabelValue
             }
         }
 
