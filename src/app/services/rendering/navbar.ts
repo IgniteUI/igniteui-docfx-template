@@ -1,7 +1,7 @@
 import util from "../utils";
 import { RenderingService } from "../../types";
 import { ConstantsEn } from "../../../i18n/constants-en";
-import {ConstantsJP} from "../../../i18n/constants-jp";
+import { ConstantsJP } from "../../../i18n/constants-jp";
 
 export class NavbarRenderingService extends RenderingService {
 
@@ -11,8 +11,6 @@ export class NavbarRenderingService extends RenderingService {
 
     public render() {
         this.renderNavbar();
-        this.changeHelloBarContent(location.pathname);
-        this.attachCloseBtnEvent();
     }
 
     private renderNavbar() {
@@ -24,6 +22,12 @@ export class NavbarRenderingService extends RenderingService {
             $("#navbar ul a.active")
                 .parents("li")
                 .addClass(this.active);
+        }
+
+        let hellobar = $("#hello-bar")[0];
+        if (typeof hellobar !== "undefined") {
+            this.changeHelloBarContent(location.pathname);
+            this.attachHelloBarCloseBtnEvent();
         }
     }
 
@@ -134,9 +138,10 @@ export class NavbarRenderingService extends RenderingService {
         button.attr('data-xd-ga-label', buttonXdGaLabelValue);
     }
 
-    private attachCloseBtnEvent() {
+    private attachHelloBarCloseBtnEvent() {
         let anchor = $('#hello-bar-dismiss');
         let main = $('#main');
+        main.css('padding-top', '200px')
 
         let parent = $(anchor).parent() as unknown as JQuery<HTMLLIElement>;
         anchor.on('click', (e) => {

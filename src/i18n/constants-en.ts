@@ -31,7 +31,7 @@ export class ConstantsEn {
     }
 
     static blazorGrids = {
-        barText: 'Create Charts & Dashboards for Your Modern C# Blazor Web and Mobile Apps with Over 65 High-Performing Charts & Graphs in Ignite UI!',
+        barText: 'Ignite UI for Blazor: Feature-Rich, Lightweight Tables & Data Grids to Modernize Your Apps!',
         barButtonText: 'Try It Free',
         buttonXdGaLabelValue: 'Help_BlazorCharts_Trial',
         buttonGaLabelValue: 'Hello bar – Help_BlazorCharts_Trial'

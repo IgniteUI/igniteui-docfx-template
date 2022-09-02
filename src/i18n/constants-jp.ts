@@ -1,9 +1,10 @@
 export class ConstantsJP {
     static angularGrids = {
-        barText: '重要な情報重要な情報重要な情報重要な情報',
-        barButtonText: '重要な情報重要な情報重要な情報重要な情報',
-        buttonXdGaLabelValue: '重要な情報重要な情報重要な情報重要な情報',
-        buttonGaLabelValue: 'H重要な情報重要な情報重要な情報重要な情報'
+        barText: 'Want the Fastest Angular Data Grid on the Market? We’ve Got It! Quickly Bind Data with Minimal Code Involved.',
+        barButtonText: 'Get Started',
+        buttonXdGaLabelValue: 'Help_AngularGrids_Trial',
+        buttonGaLabelValue: 'Hello bar – Help_AngularGrids_Trial'
+
     }
 
     static angularCharts = {
@@ -15,10 +16,11 @@ export class ConstantsJP {
     }
 
     static appbuilder = {
-        barText: '重要な情報重要な情報重要な情報重要な情報',
-        barButtonText: '重要な情報重要な情報重要な情報重要な情報',
-        buttonXdGaLabelValue: '重要な情報重要な情報重要な情報重要な情報',
-        buttonGaLabelValue: '重要な情報重要な情報重要な情報重要な情報'
+        barText: 'App Builder™ Includes a Full Design System with 60+ UI Controls and Code Generation for Angular & Blazor!',
+        barButtonText: 'Start Free Trial',
+        buttonXdGaLabelValue: 'Help_ABTrial',
+        buttonGaLabelValue: 'Hello bar – Help_ABTrial'
+
     }
 
     static blazorCharts = {
@@ -30,9 +32,9 @@ export class ConstantsJP {
 
     static blazorGrids = {
         barText: 'Ignite UI for Blazor: Feature-Rich, Lightweight Tables & Data Grids to Modernize Your Apps!',
-        barButtonText: 'Start Free Trial',
-        buttonXdGaLabelValue: 'Help_BlazorGrids_Trial',
-        buttonGaLabelValue: 'Hello bar – Help_BlazorGrids_Trial'
+        barButtonText: 'Try It Free',
+        buttonXdGaLabelValue: 'Help_BlazorCharts_Trial',
+        buttonGaLabelValue: 'Hello bar – Help_BlazorCharts_Trial'
     }
 }
 

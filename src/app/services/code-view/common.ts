@@ -12,11 +12,6 @@ export function createCodeService(): CodeService | undefined {
 
     platform = $platformMeta.attr("content")!;
 
-    if (platform === 'react' || platform === 'web-components') {
-        let main = $('#main');
-        main.css('padding-top', '124px');
-    }
-
     if (platform === "angular") {
         codeService = new AngularCodeService(XHRService.getInstance());
     } else {
