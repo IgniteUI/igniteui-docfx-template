@@ -4,6 +4,7 @@ import { fromEvent } from 'rxjs';
 import util from './utils';
 import meta from './meta';
 import { INavigationOptions, NavigationHandler } from "../types";
+import { NavbarRenderingService } from "./rendering";
 export class Router {
 
     private static instance: Router;
@@ -18,6 +19,8 @@ export class Router {
     private _targetEle: JQuery<HTMLElement>;
     private _baseUrl = $("base").attr("href");
     private defaultHandler: NavigationHandler;
+    private navbarService = new NavbarRenderingService();
+
 
     constructor(private xhrService = XHRService.getInstance()) {
         if ('scrollRestoration' in history) {
@@ -64,6 +67,8 @@ export class Router {
         if (!this.xhrService.isEmpty()) this.xhrService.abortTasks();
 
         if (!route) return;
+
+        this.navbarService.changeHelloBarContent(route);
 
         if(util.removeHTMLExtensionFromUrl) {
             route =  route.replace(".html", "");

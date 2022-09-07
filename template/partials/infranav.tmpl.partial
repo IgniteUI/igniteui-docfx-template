@@ -1,3 +1,6 @@
+{{#_showHelloBar}}
+     {{>partials/helloBar}}
+{{/_showHelloBar}}
 <header id="header" class="globalnav" data-nav-auto-init="false" data-mega-menu="true">
     <div class="sticky-wrapper" style="height: 77px;">
         <div id="header-wrap" class="globalnav__container" data-default-height="175" data-sticky-height="175">

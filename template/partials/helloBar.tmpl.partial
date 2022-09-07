@@ -1,0 +1,4 @@
+<div id="hello-bar" class="bg--dark ui-hello-bar color--white bgColor--forest-green clearfix animated slideInDown" data-enabled="true" style="display: block;">
+        <div class="ui-hello-bar__text">Ignite UI Angular Charts: Build Expressive Dashboards and Render Data Points with 65+ Real-Time Angular Charts.</div>
+        <a id="hello-bar_cta" class="ui-btn ui-btn--xs gaEventTracker trackCTA mchNoDecorate ui-btn--secondary ui-btn--invert" rel="noopener" href=" https://www.infragistics.com/products/ignite-ui-angular/download" target="_blank" data-ga-category="Hellobar" data-ga-action="Click" data-ga-label="Hello bar – Help_AngularCharts_Trial" data-xd-ga-action="Hellobar" data-xd-ga-label="Help_AngularCharts_Trial" style="">Get Started</a> <button id="hello-bar-dismiss" class="ui-hellobar__dismiss font-size--xs emphasize">×</button>
+</div>

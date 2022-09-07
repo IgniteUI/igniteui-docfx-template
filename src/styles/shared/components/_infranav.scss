@@ -1,3 +1,83 @@
+.ui-hello-bar {
+	font-size: 0.875rem;
+	box-sizing: border-box;
+	top: 0;
+	padding: .5em;
+	text-align: center;
+	z-index: 11;
+	width: 100%;
+	position: relative;
+}
+
+.color--white {
+	color: #fff;
+}
+
+.bgColor--forest-green {
+	background-color: #309331;
+}
+
+.ui-hello-bar__text {
+	display: inline-block;
+	padding: 0 1.25em;
+	font-weight: bold;
+}
+
+.ui-hellobar__dismiss {
+	cursor: pointer;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	text-decoration: none;
+	text-align: center;
+	color: #FFF;
+	font-style: normal;
+	line-height: normal;
+	font-family: Arial,Baskerville,monospace;
+	background: transparent;
+	border: none;
+	font-size: 2em;
+	padding: 10px;
+	line-height: 0.6em;
+}
+
+.ui-btn.ui-btn--secondary, .ui-btn.ui-btn--secondary:visited {
+	border-color: #fff;
+}
+
+.ui-btn--xs {
+	font-size: 0.75rem;
+}
+
+.ui-btn {
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 0;
+	box-sizing: border-box;
+	display: inline-block;
+	font-size: 1rem;
+	font-weight: bold;
+	line-height: 1em;
+	margin: 5px 0;
+	padding: 0.75em 1.25em;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	text-transform: none;
+	-webkit-transition: all .4s;
+	transition: all .4s;
+
+	&:hover {
+		color: #0099ff !important;
+		background-color: #fff;
+	}
+}
+
+.ui-btn.ui-btn--invert.ui-btn--secondary {
+	color: #fff;
+}
+
 .globalnav {
 	.gsib_a {
 		padding: 0 8px;

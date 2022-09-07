@@ -11,6 +11,7 @@ export function createCodeService(): CodeService | undefined {
     }
 
     platform = $platformMeta.attr("content")!;
+
     if (platform === "angular") {
         codeService = new AngularCodeService(XHRService.getInstance());
     } else {
