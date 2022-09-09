@@ -24,7 +24,7 @@ export class NavbarRenderingService extends RenderingService {
                 .addClass(this.active);
         }
 
-        let hellobar = $("#hello-bar")[0];
+        let hellobar = $("#dynamic-hello-bar")[0];
         if (typeof hellobar !== "undefined") {
             this.changeHelloBarContent(location.pathname);
             this.attachHelloBarCloseBtnEvent();
