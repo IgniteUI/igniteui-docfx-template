@@ -16,7 +16,7 @@ export function initNavigation() {
             }
         }).done(function (data) {
             let nav = $(data);
-            nav.remove("#hello-bar");
+            nav.find("#hello-bar").remove();
             let header = nav.find('#header')[0].outerHTML;
             $('#header').replaceWith(header);
 
