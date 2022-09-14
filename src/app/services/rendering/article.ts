@@ -270,10 +270,10 @@ export class ArticleRenderingService extends RenderingService {
             imagePath = relPpath + "images/marketing/app-builder-wysiwyg.gif";
         } else if (productLink.includes("web-components")) {
             imagePath = relPpath + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png";
-            productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+            productLink = this.setBannerLink(productLink);
         } else {
             imagePath = relPpath + "images/marketing/" + "ignite-ui-for-" + platform + ".gif";
-            productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+            productLink = this.setBannerLink(productLink);
         }
 
         if (productLink.includes("angular") && $(".article-container h2")[2]){
@@ -339,5 +339,13 @@ export class ArticleRenderingService extends RenderingService {
                 }
             });
         }
+    }
+
+    private setBannerLink(productLink: string) {
+        const languageVersion: string = $('html')[0].lang;
+        if (languageVersion === 'en') {
+            productLink += productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+        }
+        return productLink;
     }
 }
