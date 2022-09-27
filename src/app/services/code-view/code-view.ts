@@ -1,5 +1,6 @@
 import { ExplicitEditor, ICodeViewCSS, ICodeViewElements, ICodeViewEvents, ICodeViewFilesData, ICodeViewMembers, ICodeViewOptions } from '../../types';
 import hljs from "highlight.js";
+import localization from '../localization';
 import util from '../utils';
 
 export class CodeView implements ICodeViewEvents, ICodeViewMembers {
@@ -147,7 +148,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
         $codeWrapper.append($code);
 
         let hljsLangName = $<HTMLElement>(`<span class="hljs-lang-name">${f.fileExtension}</span>`)
-        let copyCodeButton = $<HTMLButtonElement>('<button data-localize="hljs.copyCode" class="cv-hljs-code-copy hidden">COPY CODE</button>')
+        let copyCodeButton = $<HTMLButtonElement>(`<button class="cv-hljs-code-copy hidden">${localization.localize('hljs', 'copyCode')}</button>`)
         //Add copy code button
         $codeWrapper
           .append([
