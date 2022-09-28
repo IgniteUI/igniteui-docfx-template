@@ -1,7 +1,6 @@
 import util from "../utils";
 import { RenderingService } from "../../types";
-import { ConstantsEn } from "../../../i18n/constants-en";
-import { ConstantsJP } from "../../../i18n/constants-jp";
+import localization from '../localization';
 
 export class NavbarRenderingService extends RenderingService {
 
@@ -93,41 +92,38 @@ export class NavbarRenderingService extends RenderingService {
         let $platformMeta = $("meta[property='docfx:platform']");
         let platform = $platformMeta.attr("content")!;
 
-        let currentLang = $('html')[0].lang;
-
-        let barText = currentLang === 'en' ? ConstantsEn.angularGrids.barText : ConstantsJP.angularGrids.barText;
-        let barButtonText = currentLang === 'en' ? ConstantsEn.angularGrids.barButtonText : ConstantsJP.angularGrids.barButtonText;
+        let barText = localization.localize('angularGrids', 'barText');
+        let barButtonText = localization.localize('angularGrids', 'barButtonText');
         let buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-angular/download';
-        let buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.angularGrids.buttonXdGaLabelValue : ConstantsJP.angularGrids.buttonXdGaLabelValue;
-        let buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.angularGrids.buttonGaLabelValue : ConstantsJP.angularGrids.buttonGaLabelValue;
+        let buttonXdGaLabelValue = localization.localize('angularGrids', 'buttonXdGaLabelValue');
+        let buttonGaLabelValue = localization.localize('angularGrids', 'buttonGaLabelValue');
 
         if (platform === 'appbuilder') {
-            barText = currentLang === 'en' ? ConstantsEn.appbuilder.barText : ConstantsJP.appbuilder.barText;
-            barButtonText = currentLang === 'en' ? ConstantsEn.appbuilder.barButtonText : ConstantsJP.appbuilder.barButtonText;
-            buttonHrefValue = 'https://appbuilder.indigo.design/'
-            buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.appbuilder.buttonXdGaLabelValue : ConstantsJP.appbuilder.buttonXdGaLabelValue;
-            buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.appbuilder.buttonGaLabelValue : ConstantsJP.appbuilder.buttonGaLabelValue;
-
+            barText = localization.localize('appbuilder', 'barText');
+            barButtonText = localization.localize('appbuilder', 'barButtonText');
+            buttonHrefValue = 'https://appbuilder.indigo.design/';
+            buttonXdGaLabelValue = localization.localize('appbuilder', 'buttonXdGaLabelValue');
+            buttonGaLabelValue = localization.localize('appbuilder', 'buttonGaLabelValue');
         } else if (platform === 'blazor') {
             if (currentRoute.includes('charts')) {
-                barText = currentLang === 'en' ? ConstantsEn.blazorCharts.barText : ConstantsJP.blazorCharts.barText;
-                barButtonText = currentLang === 'en' ? ConstantsEn.blazorCharts.barButtonText : ConstantsJP.blazorCharts.barButtonText;
-                buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download'
-                buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.blazorCharts.buttonXdGaLabelValue : ConstantsJP.blazorCharts.buttonXdGaLabelValue;
-                buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.blazorCharts.buttonGaLabelValue : ConstantsJP.blazorCharts.buttonGaLabelValue;
+                barText = localization.localize('blazorCharts', 'barText');
+                barButtonText = localization.localize('blazorCharts', 'barButtonText');
+                buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download';
+                buttonXdGaLabelValue = localization.localize('blazorCharts', 'buttonXdGaLabelValue');
+                buttonGaLabelValue = localization.localize('blazorCharts', 'buttonGaLabelValue');
             } else {
-                barText = currentLang === 'en' ? ConstantsEn.blazorGrids.barText : ConstantsJP.blazorGrids.barText;
-                barButtonText = currentLang === 'en' ? ConstantsEn.blazorGrids.barButtonText : ConstantsJP.blazorGrids.barButtonText;
-                buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download'
-                buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.blazorGrids.buttonXdGaLabelValue : ConstantsJP.blazorGrids.buttonXdGaLabelValue;
-                buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.blazorGrids.buttonGaLabelValue : ConstantsJP.blazorGrids.buttonGaLabelValue;
+                barText = localization.localize('blazorGrids', 'barText');
+                barButtonText = localization.localize('blazorGrids', 'barButtonText');
+                buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download';
+                buttonXdGaLabelValue = localization.localize('blazorGrids', 'buttonXdGaLabelValue');
+                buttonGaLabelValue = localization.localize('blazorGrids', 'buttonGaLabelValue');
             }
         } else if (platform === 'angular') {
             if (currentRoute.includes('charts')) {
-                barText = currentLang === 'en' ? ConstantsEn.angularCharts.barText : ConstantsJP.angularCharts.barText;
-                barButtonText = currentLang === 'en' ? ConstantsEn.angularCharts.barButtonText : ConstantsJP.angularCharts.barButtonText
-                buttonXdGaLabelValue = currentLang === 'en' ? ConstantsEn.angularCharts.buttonXdGaLabelValue : ConstantsJP.angularCharts.buttonXdGaLabelValue
-                buttonGaLabelValue = currentLang === 'en' ? ConstantsEn.angularCharts.buttonGaLabelValue : ConstantsJP.angularCharts.buttonGaLabelValue
+                barText = localization.localize('angularCharts', 'barText');
+                barButtonText = localization.localize('angularCharts', 'barButtonText');
+                buttonXdGaLabelValue = localization.localize('angularCharts', 'buttonXdGaLabelValue');
+                buttonGaLabelValue = localization.localize('angularCharts', 'buttonGaLabelValue');
             }
         }
 
