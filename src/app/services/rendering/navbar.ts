@@ -137,7 +137,7 @@ export class NavbarRenderingService extends RenderingService {
     private attachHelloBarCloseBtnEvent() {
         let anchor = $('#hello-bar-dismiss');
         let main = $('#main');
-        main.css('padding-top', '200px')
+        main.css('padding-top', '180px')
 
         let parent = $(anchor).parent() as unknown as JQuery<HTMLLIElement>;
         anchor.on('click', (e) => {
