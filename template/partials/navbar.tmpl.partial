@@ -23,7 +23,7 @@ full license information.}}
     {{#_isLangKr}}
         {{>partials/infranav.kr}}
     {{/_isLangKr}}
-    <div class="container-fluid">
+    <div class="container-fluid wrap-content-m">
 
         <div class="navbar-header navbar-wrapper">
              {{>partials/logo}}
