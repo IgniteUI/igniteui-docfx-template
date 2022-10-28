@@ -24,7 +24,7 @@ To run the template in dev mode:
 ```
 npm run build:dev
 ```
-## Link template
+## Link and Debug
 
 In order to run the template locally, after it is build, it should be linked to the repo you want to use it.
 
