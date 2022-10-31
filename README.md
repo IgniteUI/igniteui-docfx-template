@@ -13,36 +13,31 @@ To setup the project run:
 npm install
 ```
 
-## Bundling and minification
-We provide bundling and minification for JS and CSS files in the template. To run bundling and minification execute:
+To build the project
 
 ```
-npm run bundle-and-minify
+npm run build
 ```
 
-To run the bundling and minification watcher execute:
-
-
-```
-npm run bundle-and-minify:watch
-```
-
-### Debugging
-To disable minification for debugging purposes run:
+To run the template in dev mode:
 
 ```
-npm run bundle-and-minify -- --debugMode=true
+npm run build:dev
 ```
+## Link and Debug
 
-or with watcher:
+In order to run the template locally, after it is build, it should be linked to the repo you want to use it.
 
-```
-npm run bundle-and-minify:watch -- --debugMode=true
-```
-
-### Browser Cache Invalidation
-The browser caching invalidation is implemented by appending a query string with the bundle checksum to each bundle URL. Each checksum is a MD5-sum of the content of the bundle. The checksums are generated along with the bundling and minification. They are located in the `bundling.global.json` file which is used as a global metadata by the docFX engine. `bundling.global.json` has an additional `timestamp` variable which is used to invalidate the browser caching for files which are included in the bundling and minification. If you want to generate just the `bundling.global.json`, run:
+Go to __dist/__ folder of the template and run:
 
 ```
-npm run generate-bundling-global-metadata
+npm link
 ```
+
+Then go to the repo which you want to use the template and run this command in the main folder:
+
+```
+npm link igniteui-docfx-template
+```
+
+After these steps are done, you can run your project and it will automatically use the template.
