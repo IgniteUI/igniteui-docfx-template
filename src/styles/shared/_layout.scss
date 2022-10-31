@@ -243,6 +243,15 @@ svg:hover path {
 	display: none;
 }
 
+
+@media (min-width: 770px) and (max-width: 1475px) {
+	.wrap-content-m {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	} 
+}
+
 @media (min-width: 992px) {
 	#main {
 		display: table;
