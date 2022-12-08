@@ -250,7 +250,8 @@ export class AngularCodeService extends CodeService {
     }
 
     private getAngularSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string) {
-        let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
+        let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "")
+                                            .replace(/\?[\w\W]+/, '');
 
         const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
 
