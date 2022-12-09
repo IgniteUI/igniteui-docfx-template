@@ -32,26 +32,30 @@ export class ResizingService {
         });
 
         $(window).on('resize', () => {
-            this.resizables.forEach(r => {
-                r.reset();
-            });
-            this.checkIfFooterIsVisible();
+            this.resetObservables()
         });
     }
 
     private setInitial(dimension: DimensionType) {
         this.resizables.forEach(r => {
-            r.$element[dimension](r.initialDimension);
-        })
+            r.$element.css(`${dimension}`, '');
+        });
+    }
+
+    public resetObservables() {
+        this.resizables.forEach(r => {
+            r.reset();
+        });
+        this.checkIfFooterIsVisible();
     }
 
     private checkIfFooterIsVisible() {
-        let $el = $('#footer-container'),
-            scrollTop = $(window).scrollTop()!,
-            scrollBot = scrollTop + $(window).height()!,
-            elTop = $el?.offset()!.top!,
-            elBottom = elTop + $el?.outerHeight()!,
-            visibleTop = elTop < scrollTop ? scrollTop : elTop,
+        let $el           = $('#footer-container'),
+            scrollTop     = $(window).scrollTop()!,
+            scrollBot     = scrollTop + $(window).height()!,
+            elTop         = $el?.offset()!.top!,
+            elBottom      = elTop + $el?.outerHeight()!,
+            visibleTop    = elTop < scrollTop ? scrollTop : elTop,
             visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
         if (visibleTop < visibleBottom) {
             this.decrease((visibleBottom - visibleTop));

@@ -1,13 +1,14 @@
 import util from "../utils";;
-import { RenderingService,
-        ResizableObservable,
-        DimensionType,
-        DimensionChangeType,
-        StoredActiveElement,
-        IActiveTocElement,
-        IListNode,
-        TOCHeaderElement } from "../../types";;
+import {
+    RenderingService,
+    ResizableObservable,
+    DimensionType,
+    DimensionChangeType,
+    IListNode,
+    TOCHeaderElement
+} from "../../types";;
 import { ResizingService } from "../resizing";
+import { Router } from "../router";
 
 export class TocRenderingService extends RenderingService implements ResizableObservable {
 
@@ -15,12 +16,12 @@ export class TocRenderingService extends RenderingService implements ResizableOb
     public $element: JQuery<HTMLElement>;
     public dimensionToObserve: DimensionType = 'height';
 
-    constructor(private resizingService: ResizingService) {
+    constructor(private resizingService: ResizingService, private router: Router) {
         super();
     }
 
     public reset() {
-        this.initialDimension = document.body.clientHeight - 160;
+        this.initialDimension = document.body.clientHeight - (util.offset + 36);
     }
 
     public handleChange(changeType: DimensionChangeType, newValue: number) {
@@ -46,34 +47,13 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             this.$element = $(".sidetoc");
             this.initialDimension = $(".sidetoc").height()!;
             this.resizingService.observeElement(<ResizableObservable>this);
-            let top = 0;
-            const activeTopicId = this.getActiveAnchorID($("#toc a.active"));
-            let storedActiveElement: StoredActiveElement = sessionStorage.getItem('active-element');
-            if (storedActiveElement && activeTopicId === (storedActiveElement = (JSON.parse(storedActiveElement as string)) as IActiveTocElement).id) {
-                const prevTopOffset = storedActiveElement.top;
-                const currentOffsetTop = this.getActiveAnchorTopOffset($("#toc a.active"), true);
-                const scrollAmount = (currentOffsetTop - prevTopOffset);
-                top = scrollAmount;
-            } else {
-                $($("#toc a.active").
-                    parents("li").get().reverse()).
-                    each((i, e) => {
-                        $(e).addClass(this.expanded);
-                        top += $(e).position().top;
-                    });
-                top = top - 50;
-            }
-            sessionStorage.removeItem('active-element');
-
             $("#toc a.active").closest("li").addClass("active");
-
-            $(".sidetoc").scrollTop(top);
-
+            this.scrollToActive();
             this.renderBreadcrumb();
         }
     }
 
-    private renderBreadcrumb() {
+    public renderBreadcrumb() {
         let breadcrumb: IListNode[] = [];
         $<HTMLLIElement>("#toc li.active").each((i: number, e: HTMLLIElement) => {
 
@@ -92,29 +72,76 @@ export class TocRenderingService extends RenderingService implements ResizableOb
 
         let html = util?.formList(breadcrumb, "breadcrumb")!;
         $("#breadcrumb").html(html);
+        $("#breadcrumb a").on('click', (e) => {
+            e.preventDefault();
+            let $a = this.getActiveAnchor($(e.target));
+            if ($a.parent().is(":last-child")) return;
+            this.router.navigateTo($a.attr("href")!);
+        });
     }
 
-    private getActiveAnchorTopOffset(element: JQuery<HTMLAnchorElement>, expandParents = false): number {
-        let top = 0;
-        $(element.parents("li").get().reverse())
-            .each((i, e) => {
-                if (expandParents) {
+    public setActive($anchor?: JQuery<HTMLElement>, shouldScroll = true) {
+        $("#toc a.active").removeClass(this.active);
+        $("#toc li").removeClass(this.active);
+        let $anchorToActivate: JQuery<HTMLAnchorElement>;
+        if ($anchor) {
+            $anchorToActivate = this.isAnchor($anchor) ? $anchor : this.getActiveAnchor($anchor);
+
+        } else {
+            let currentHref = util.toAbsoluteURL(window.location.pathname);
+            $anchorToActivate = $<HTMLAnchorElement>("#sidetoc a[href]").
+                filter((index, element) => util.toAbsoluteURL(element.href) === currentHref);
+        }
+        $anchorToActivate!.addClass(this.active);
+        $anchorToActivate!.closest("li").addClass(this.active).addClass(this.expanded);
+
+        if(shouldScroll) {
+            $(".sidetoc").scrollTop(0);
+            this.scrollToActive();
+        }
+
+
+        if ($("#toc_filter_input").val()) {
+            $("#toc_filter_input").val("");
+            this.clearFilter();
+            this.scrollToActive(0);
+        }
+    }
+
+    private scrollToActive(amount?: number) {
+        if(amount) {
+            $(".sidetoc").scrollTop(amount);
+        } else {
+            let top = 0;
+            $($("#toc a.active").
+                parents("li").get().reverse()).
+                each((i, e) => {
                     $(e).addClass(this.expanded);
-                }
-                top += $(e).position().top;
-            });
-        return top;
+                    top += $(e).position().top;
+                });
+            top = top - 50;
+            $(".sidetoc").scrollTop(top);
+        }
     }
-    private getActiveAnchorID(element: JQuery<HTMLAnchorElement>): string {
 
-        let id = "";
-        const parentListItems = element.parents("li").get();
-        $(parentListItems.reverse())
-            .each(function (i, e) {
-                const listItemTopicName = $($(e).find("a > span.topic-name")[0]).text().trim();
-                id += i === parentListItems.length - 1 ? listItemTopicName : listItemTopicName + "~"
-            });
-        return id;
+    private getActiveAnchor(element: JQuery<HTMLElement>): JQuery<HTMLAnchorElement> {
+        if (this.isAnchor(element)) {
+            return element! as JQuery<HTMLAnchorElement>;
+        }
+
+        let activeAnchor = <JQuery<HTMLAnchorElement>>element.parent()!;
+        return activeAnchor!;
+    }
+
+    private clearFilter() {
+        $("#toc li")
+            .removeClass(this.filtered)
+            .removeClass(this.hide)
+            .removeClass(this.expanded);
+
+        $("#toc li > a.active")
+            .parents("li")
+            .addClass(this.expanded);
     }
 
     private registerTocEvents() {
@@ -125,15 +152,16 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         });
 
         $<HTMLAnchorElement>(".toc .nav > li > a").on('click', (e) => {
-            const offsetTop = this.getActiveAnchorTopOffset($(e.target));
-            const id = this.getActiveAnchorID($(e.target));
-            const activeElement: IActiveTocElement = { id: id, top: offsetTop };
+            e.preventDefault();
+            let $a = this.getActiveAnchor($(e.target));
 
-            sessionStorage.setItem('active-element', JSON.stringify(activeElement));
-        });
+            if ($a.is(":not([href])")) {
+                $a.parent().toggleClass(this.expanded);
+                return;
+            } else if ($a.is(".active")) return;
 
-        $<HTMLAnchorElement>(".toc .nav > li > .expand-stub + a:not([href])").on('click', (e) => {
-            $(e.target).closest('li').toggleClass(this.expanded)
+            this.setActive($a, false);
+            this.router.navigateTo($a.attr("href")!, {stateAction: "push", adjustTocScrollPosition: false})
         });
 
         $("#toc_filter_input").on("input", (e: any) => {
@@ -141,15 +169,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             let val = e.target?.value! as string;
             if (val === "") {
                 // Clear 'filtered' class
-                $("#toc li")
-                    .removeClass(this.filtered)
-                    .removeClass(this.hide)
-                    .removeClass(this.expanded);
-
-                $("#toc li > a.active")
-                    .parents("li")
-                    .addClass(this.expanded);
-
+                this.clearFilter();
                 return;
             }
 
@@ -276,29 +296,29 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         if (!tocPath) {
             return;
         }
-        tocPath = tocPath.replace(/\\/g, "/");
+        tocPath = util.toAbsoluteURL(tocPath.replace(/\\/g, "/"));
         $("#sidetoc").load(tocPath + " #sidetoggle > div", () => {
             let index = tocPath.lastIndexOf("/");
             let tocrel = "";
             if (index > -1) {
                 tocrel = tocPath.substr(0, index + 1);
             }
-            let currentHref = util.getAbsolutePath(window.location.pathname);
+            let currentHref = util.toAbsoluteURL(window.location.pathname);
             $("#sidetoc")
                 .find<HTMLAnchorElement>("a[href]")
                 .each((i, e) => {
                     let href = $(e)?.attr("href")!;
 
-                    if (currentHref.indexOf('.html') === -1) {
+                    if (util.removeHTMLExtensionFromUrl) {
                         href = href.replace('.html', '')
                     }
 
                     if (util.isRelativePath(href)) {
-                        href = tocrel + href;
+                        href = util.getAbsolutePath(tocrel + href);
                         $(e).attr("href", href);
                     }
 
-                    if (util.getAbsolutePath(e.href) === currentHref) {
+                    if (util.toAbsoluteURL(e.href) === currentHref) {
                         $(e).addClass(this.active);
                     }
 
@@ -307,5 +327,9 @@ export class TocRenderingService extends RenderingService implements ResizableOb
 
             this.renderSidebar();
         });
+    }
+
+    private isAnchor($element: JQuery<HTMLElement>): $element is JQuery<HTMLAnchorElement> {
+        return $element.is("[href]")
     }
 }

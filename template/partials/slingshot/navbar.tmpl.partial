@@ -1,0 +1,65 @@
+{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for
+full license information.}}
+
+<nav id="autocollapse" class="navbar ss-navbar navbar-fixed-top navbar-inverse ng-scope" role="navigation">
+    <div class="container-fluid ss-container">
+
+        <div class="navbar-header navbar-wrapper">
+            {{>partials/slingshot/logo}}
+            <button id="hamburger2" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <form class="ss-search hidden-xs" role="search" id="search">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <svg>
+                        <title>Icon</title>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.8" stroke-linecap="round" stroke-linejoin="round">
+                            <g id="Documents-Elements" transform="translate(-500.000000, -33.000000)" stroke="#000000">
+                                <g id="nav" transform="translate(0.000000, -8.000000)">
+                                    <g id="Forms/Text-Input/Search/Rest-Copy" transform="translate(486.000000, 27.000000)">
+                                        <g id="Icon" transform="translate(10.000000, 10.000000)">
+                                            <path d="M16.5983496,15.9874369 C19.2245761,13.3612103 19.2245761,9.10325578 16.5983496,6.47702923 C13.972123,3.85080267 9.71416848,3.85080267 7.08794193,6.47702923 C4.46171538,9.10325578 4.46171538,13.3612103 7.08794193,15.9874369 C9.71416848,18.6136634 13.972123,18.6136634 16.5983496,15.9874369 Z" id="Oval"></path>
+                                            <path d="M15.8990549,16.9664494 L19.3955283,20.4629228 L15.8990549,16.9664494 Z" id="Line"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </span>
+                <input type="text" class="form-control" id="search-query" placeholder="Search in topics" autocomplete="off">
+            </div>
+        </form>
+
+        <div class="collapse navbar-collapse ss-collapse navbar-flex" id="navbar">
+            <form  class="ss-search visible-xs" role="search" id="search">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <svg>
+                            <title>Icon</title>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.8" stroke-linecap="round" stroke-linejoin="round">
+                                <g id="Documents-Elements" transform="translate(-500.000000, -33.000000)" stroke="#000000">
+                                    <g id="nav" transform="translate(0.000000, -8.000000)">
+                                        <g id="Forms/Text-Input/Search/Rest-Copy" transform="translate(486.000000, 27.000000)">
+                                            <g id="Icon" transform="translate(10.000000, 10.000000)">
+                                                <path d="M16.5983496,15.9874369 C19.2245761,13.3612103 19.2245761,9.10325578 16.5983496,6.47702923 C13.972123,3.85080267 9.71416848,3.85080267 7.08794193,6.47702923 C4.46171538,9.10325578 4.46171538,13.3612103 7.08794193,15.9874369 C9.71416848,18.6136634 13.972123,18.6136634 16.5983496,15.9874369 Z" id="Oval"></path>
+                                                <path d="M15.8990549,16.9664494 L19.3955283,20.4629228 L15.8990549,16.9664494 Z" id="Line"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control" id="search-query" placeholder="Search in topics" autocomplete="off">
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>

@@ -12,17 +12,24 @@ class UtilityService {
         ));
     public isIE = !((window as any).ActiveXObject) && "ActiveXObject" in window;
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
-    private offset: number;
+    public baseDir: string;
+    public offset: number;
+    public removeHTMLExtensionFromUrl: boolean;
+
     constructor() {
         this.offset = $('.navbar').first().height()!;
         $("body").data("offset", this.offset + 50);
+        this.refreshHash();
+        let baseRel = $("meta[name=data-docfx-rel]").attr("content")!;
+        this.baseDir=this.getAbsolutePath(baseRel);
+        this.removeHTMLExtensionFromUrl = !this.isLocalhost && $("meta[name=isRedirected]")[0] != null;
     }
 
     public getAbsolutePath(href: string) {
         // Use anchor to normalize href
         let anchor: HTMLAnchorElement = $<HTMLAnchorElement>(`<a href="${href}"></a>`)[0];
         // Ignore protocal, remove search and query
-        return anchor.host + anchor.pathname;
+        return anchor.pathname;
     }
 
     public isRelativePath(href: string) {
@@ -122,15 +129,20 @@ class UtilityService {
         return str.replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&");
     }
 
-    public updateUrl(target: string) {
-        history.pushState({}, "", window.location.href.split("#")[0] + target);
+    public scroll(hashLocation?: string, animation = true, delay = 500) {
+
+        let scrollPos = hashLocation != null ? this.getAnchorWithHashlocationScrollPos(hashLocation) : 0;
+        if(animation) {
+            $("body, html").animate({scrollTop: scrollPos}, delay);
+        } else {
+            $("body, html").scrollTop(scrollPos);
+        }
     }
 
-    public scrollAnimation<T extends HTMLElement>(event: JQuery.ClickEvent<T>) {
-        let hashLocation = $(event?.target)?.attr("href")!;
-        let scrollPos = $("body").find(hashLocation).offset()!.top - this.offset;
-        $("body, html").animate({scrollTop: scrollPos}, 500, () => this.updateUrl(hashLocation));
-        return false;
+    public getAnchorWithHashlocationScrollPos(hash:string): number {
+        let offset = $("body").find(hash).offset();
+        if(!offset) return 0;
+        return offset!.top - this.offset;
     }
 
     public copyCode(buttonSelector: string, postCopyText?: string) {
@@ -149,6 +161,56 @@ class UtilityService {
           }, 1000);
         });
     }
+
+    public hasLocationHash(): boolean {
+        return "hash" in window.location && window.location.hash.length > 0;
+    }
+
+    private refreshHash() {
+        //D.P. this actually works better than changing the hash back and forth, no extra history entries.
+        if (this.hasLocationHash()) {
+            window.location.assign(window.location.href);
+        }
+    }
+
+    public toAbsoluteURL(relative: string): string {
+        let a = window.document.createElement('a');
+        a.href = relative;
+        return a.href;
+    }
+
+    public isDvPage(): boolean {
+        let parts = window.location.pathname.trim().split("/");
+        var pageName = parts[parts.length - 1];
+        return pageName.includes("chart") ||
+            pageName.includes("excel_library") ||
+            pageName.includes("spreadsheet") ||
+            pageName.includes("bullet-graph") ||
+            pageName.includes("gauge") ||
+            pageName.includes("exporter") ||
+            pageName.includes("map") ||
+            pageName.includes("sparkline")||
+            pageName.includes("zoomslider") ;
+    }
+
+    public isOnIndexPage(route?: string): boolean{
+        if(route) 
+            return this.getAbsolutePath(route) === this.baseDir;
+        return window.location.pathname === this.baseDir;
+    }
+
+    public highlightKeywords(query: string) {
+        let q = query;
+        if (q != null) {
+          let keywords = q.split("%20");
+          keywords.forEach((keyword) => {
+            if (keyword !== "") {
+              $(".data-searchable *").mark(keyword, {className: 'markedjs-item'});
+              $("article *").mark(keyword, {className: 'markedjs-item'});
+            }
+          });
+        }
+      }
 }
 
 const util: UtilityService = new UtilityService();

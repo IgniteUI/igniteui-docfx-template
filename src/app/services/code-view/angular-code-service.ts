@@ -1,7 +1,8 @@
 import { CodeService } from "./base-code-service";
 import util from '../utils';
-import { ICodeViewFilesData, ISampleData } from "../../types";
+import { ExplicitEditor, ICodeViewFilesData, ISampleData } from "../../types";
 import { compressToBase64 } from 'lz-string';
+import { XHRService } from "../jqXHR-tasks";
 
 export class AngularCodeService extends CodeService {
 
@@ -12,10 +13,16 @@ export class AngularCodeService extends CodeService {
     private sharedFileName = "shared.json";
     private assetsFolder = "/assets/";
     private demoFilesFolderUrlPath = this.assetsFolder + "samples/";
-    private assetsRegex = new RegExp("\/?assets\/", "g");
+    private demoDVFilesFolderUrlPath = this.assetsFolder + "code-viewer/";
+    private assetsRegex = new RegExp(/([\.]{0,2}\/)*assets\//g);
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
+    private dvSamplesPaths = ['gauges/', 'maps/', 'excel/', 'charts/'];
+
+    constructor(private xhrService: XHRService) {
+        super();
+    }
 
     public init(): void {
         let $codeViewElements = $("code-view");
@@ -49,6 +56,9 @@ export class AngularCodeService extends CodeService {
                 $standaloneliveEditingButtons.css("display", "none");
             }
         }
+
+        this.demosUrls.clear();
+        this.sharedFileContent = {};
     }
 
     private renderFooters(codeViewsData: ISampleData[]) {
@@ -62,23 +72,26 @@ export class AngularCodeService extends CodeService {
         let metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
-        $.get(metaFileUrl).done((response) => {
+        let metaFileFetch = $.get(metaFileUrl).done((response) => {
             this.demosTimeStamp = response.generationTimeStamp;
             this.getAngularFiles(samplesBaseUrl, data, this.demosTimeStamp);
         });
+        this.xhrService.pushTask(metaFileFetch);
     }
 
     //Fetch angular samples files
     private getAngularFiles(samplesBaseUrl: string, data: ISampleData[], timeStamp: number) {
         let sharedFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + this.sharedFileName;
         sharedFileUrl = this.addTimeStamp(sharedFileUrl, timeStamp);
-        $.get(sharedFileUrl, this.angularSharedFilePostProcess(samplesBaseUrl, () => {
+        let sharedFileFetch = $.get(sharedFileUrl, this.angularSharedFilePostProcess(samplesBaseUrl, () => {
             for (const sampleData of data) {
                 let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
                 let $codeView = sampleData.codeView;
-                $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView))
+                let sampleMetadataFetch = $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView));
+                this.xhrService.pushTask(sampleMetadataFetch)
             }
-        }));
+        }))
+        this.xhrService.pushTask(sharedFileFetch);
     }
 
     private getAngularGitHubSampleUrl(editor: string, sampleUrl: string, branch: string) {
@@ -140,25 +153,34 @@ export class AngularCodeService extends CodeService {
         let metaFileUrl = samplesBaseUrl + this.demoFilesFolderUrlPath + "meta.json";
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
-        $.get(metaFileUrl)
-            .done((response: any) => {
-                this.demosTimeStamp = response.generationTimeStamp;
-                for (const sampleData of data) {
-                    let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
-                    let $codeView = sampleData.codeView;
-                    $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView))
-                }
-            })
-            .fail(() => {
-                err();
-                throw new Error('Error on fetching sample files!');
-            });
+        let metaFileFetch = $.get(metaFileUrl)
+        .done((response: any) => {
+            this.demosTimeStamp = response.generationTimeStamp;
+            for (const sampleData of data) {
+                let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
+                let $codeView = sampleData.codeView;
+                let sampleMetadataFetch = $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView));
+                this.xhrService.pushTask(sampleMetadataFetch);
+            }
+        })
+        .fail(() => {
+            err();
+            throw new Error('Error on fetching sample files!');
+        })
+        this.xhrService.pushTask(metaFileFetch);
     }
 
     private angularSampleFilePostProcess(demosBaseUrl: string, cb: (url: string) => string, $codeView: JQuery<HTMLElement>) {
         const codeService = this;
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             let codeViewFiles: ICodeViewFilesData[], url: string;
+            
+            /**
+             * Selects the explicit editor for the code view and supports "csb" and "stackblitz" as values.
+             * <code-view explicit-editor="csb"</code-view>
+             */
+            const expliciteditor: ExplicitEditor = $codeView.attr('explicit-editor') as ExplicitEditor;
+
             const files: ICodeViewFilesData[] = data.sampleFiles;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
             url = this.url;
@@ -169,7 +191,7 @@ export class AngularCodeService extends CodeService {
                                     return codeService.samplesOrder.indexOf(a.fileHeader) - codeService.samplesOrder.indexOf(b.fileHeader);
                                  });
             $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
-            $codeView.codeView("renderFooter", codeService.codeViewLiveEditingButtonClickHandler);
+            $codeView.codeView("renderFooter", codeService.codeViewLiveEditingButtonClickHandler, expliciteditor);
         }
     }
 
@@ -178,7 +200,8 @@ export class AngularCodeService extends CodeService {
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             const files = data.files;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
-            codeService.sharedFileContent = data;
+            codeService.sharedFileContent[demosBaseUrl] = data;
+            
 
             if (cb) {
                 cb();
@@ -195,8 +218,18 @@ export class AngularCodeService extends CodeService {
 
     private getAngularSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string) {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "");
-        demoFileMetadataName = demoFileMetadataName.replace("/", "--");
-        let demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
+
+        const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
+
+        let demoFileMetadataPath = '';
+        if (dvSamplePath) {
+            demoFileMetadataName = demoFileMetadataName.replace(dvSamplePath, "");
+            demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
+        } else {
+            demoFileMetadataName = demoFileMetadataName.replace("/", "--");
+            demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
+        }
+
         return demoFileMetadataPath;
     }
 
@@ -213,11 +246,14 @@ export class AngularCodeService extends CodeService {
             if(sampleContent.addTsConfig) {
                 codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
             }
+
+            const key= $codeView.attr(this.demosBaseUrlAttrName)!;
             let formData = {
-                dependencies: sampleContent.sampleDependencies,
-                files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
-                devDependencies: codeService.sharedFileContent.devDependencies
+                    dependencies: sampleContent.sampleDependencies,
+                    files: codeService.sharedFileContent[key].files.concat(sampleContent.sampleFiles),
+                    devDependencies: codeService.sharedFileContent.devDependencies
             }
+
             let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
                 codeService.createCodesandboxForm(formData);
             form.appendTo($("body"));
@@ -348,4 +384,5 @@ export class AngularCodeService extends CodeService {
         fileInput.appendTo(form)
         return form;
     }
+
 }
