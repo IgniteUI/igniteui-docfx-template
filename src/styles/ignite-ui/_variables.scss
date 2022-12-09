@@ -128,9 +128,12 @@ $pre-color: $text-light;
 $pre-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.80);
 
 $alert-radius: 0;
-$icon-container-width: 72px;
-$alert-padding: 16px 16px 16px (16px + $icon-container-width);
-$alert-margin: 48px 0;
+$icon-container-width: 60px;
+$alert-padding: 10px 10px 10px (30px + $icon-container-width);
+$alert-margin: 25px 0;
+$alert-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26),
+0 1px 1px 0 rgba(0, 0, 0, 0.12),
+0 2px 1px -1px rgba(0, 0, 0, 0.08);
 
 $link-alpha: .6;
 
