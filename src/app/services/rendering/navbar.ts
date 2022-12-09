@@ -1,5 +1,6 @@
-import util from "../utils";;
-import { RenderingService } from "../../types";;
+import util from "../utils";
+import { RenderingService } from "../../types";
+import localization from '../localization';
 
 export class NavbarRenderingService extends RenderingService {
 
@@ -20,6 +21,12 @@ export class NavbarRenderingService extends RenderingService {
             $("#navbar ul a.active")
                 .parents("li")
                 .addClass(this.active);
+        }
+
+        let hellobar = $("#dynamic-hello-bar")[0];
+        if (typeof hellobar !== "undefined") {
+            this.changeHelloBarContent(location.pathname);
+            this.attachHelloBarCloseBtnEvent();
         }
     }
 
@@ -74,6 +81,68 @@ export class NavbarRenderingService extends RenderingService {
                 }
             });
             this.renderNavbar();
+        });
+    }
+
+
+    public changeHelloBarContent(currentRoute: string) {
+        let text = $('.ui-hello-bar__text');
+        let button = $('#hello-bar_cta');
+
+        let $platformMeta = $("meta[property='docfx:platform']");
+        let platform = $platformMeta.attr("content")!;
+
+        let barText = localization.localize('angularGrids', 'barText');
+        let barButtonText = localization.localize('angularGrids', 'barButtonText');
+        let buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-angular/download';
+        let buttonXdGaLabelValue = localization.localize('angularGrids', 'buttonXdGaLabelValue');
+        let buttonGaLabelValue = localization.localize('angularGrids', 'buttonGaLabelValue');
+
+        if (platform === 'appbuilder') {
+            barText = localization.localize('appbuilder', 'barText');
+            barButtonText = localization.localize('appbuilder', 'barButtonText');
+            buttonHrefValue = 'https://appbuilder.indigo.design/';
+            buttonXdGaLabelValue = localization.localize('appbuilder', 'buttonXdGaLabelValue');
+            buttonGaLabelValue = localization.localize('appbuilder', 'buttonGaLabelValue');
+        } else if (platform === 'blazor') {
+            if (currentRoute.includes('charts')) {
+                barText = localization.localize('blazorCharts', 'barText');
+                barButtonText = localization.localize('blazorCharts', 'barButtonText');
+                buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download';
+                buttonXdGaLabelValue = localization.localize('blazorCharts', 'buttonXdGaLabelValue');
+                buttonGaLabelValue = localization.localize('blazorCharts', 'buttonGaLabelValue');
+            } else {
+                barText = localization.localize('blazorGrids', 'barText');
+                barButtonText = localization.localize('blazorGrids', 'barButtonText');
+                buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download';
+                buttonXdGaLabelValue = localization.localize('blazorGrids', 'buttonXdGaLabelValue');
+                buttonGaLabelValue = localization.localize('blazorGrids', 'buttonGaLabelValue');
+            }
+        } else if (platform === 'angular') {
+            if (currentRoute.includes('charts')) {
+                barText = localization.localize('angularCharts', 'barText');
+                barButtonText = localization.localize('angularCharts', 'barButtonText');
+                buttonXdGaLabelValue = localization.localize('angularCharts', 'buttonXdGaLabelValue');
+                buttonGaLabelValue = localization.localize('angularCharts', 'buttonGaLabelValue');
+            }
+        }
+
+        text.text(barText);
+        button.text(barButtonText);
+        button.attr('href', buttonHrefValue);
+        button.attr('data-ga-label', buttonGaLabelValue);
+        button.attr('data-xd-ga-label', buttonXdGaLabelValue);
+    }
+
+    private attachHelloBarCloseBtnEvent() {
+        let anchor = $('#hello-bar-dismiss');
+        let main = $('#main');
+        main.css('padding-top', '180px')
+
+        let parent = $(anchor).parent() as unknown as JQuery<HTMLLIElement>;
+        anchor.on('click', (e) => {
+            parent.css('display','none');
+            main.css('padding-top', '124px');
         });
     }
 

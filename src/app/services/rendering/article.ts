@@ -4,7 +4,20 @@ import anchors from 'anchor-js';
 import hljs from "highlight.js";
 import type { IgniteUIPlatform} from '../../types';
 import { onSampleIframeContentLoaded, onXPlatSampleIframeContentLoaded } from "../../handlers";
-import { Router } from "../router";;
+import { Router } from "../router";
+
+const IGNITE_UI_TEMPLATE_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-PlatformPath/ignite-ui-Platform-you-get-ad.gif';
+const REACT_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-React/ignite-ui-react-you-get.gif';
+const WEB_COPONENTS_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-Web-Components/ignite-ui-web-components.gif';
+const APP_BUILDER_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/App-Builder/app-builder-wysiwyg.gif';
+const INDIGO_DESIGN_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/IndigoDesign/indigo-design-transofrm-sketch-xd.gif';
+
+const JP_IGNITE_UI_TEMPLATE_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/ignite-ui-Platform-202211.gif';
+const JP_REACT_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/ignite-ui-react-01.gif';
+const JP_WEB_COPONENTS_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/ignite-ui-webcomponents-202211.gif';
+const JP_APP_BUILDER_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/app-builder-wysiwyg-01.gif';
+const JP_INDIGO_DESIGN_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/indigo-design-transofrm-sketch-xd-01.gif'
+
 export class ArticleRenderingService extends RenderingService {
 
     private navigationOptions: INavigationOptions = {
@@ -248,35 +261,51 @@ export class ArticleRenderingService extends RenderingService {
           $(currentView).codeView({iframeId : i});
         }
       }
-    
+
     private addCtaBanners() {
+        const languageVersion: string = $('html')[0].lang;
         let productLink = $("meta[property='docfx:link']").attr("content")!,
             relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
             platform = $("meta[property='docfx:platform']").attr("content") || '',
             productTitle = $("meta[property='docfx:title']")!.attr("content")!;
         let imagePath = '';
         productTitle = productTitle + " | CTA Banner"
-        const action = 'Download';
+        let action = 'Download';
 
         if(productLink.toLocaleLowerCase().includes("slingshot")) return;
-    
+
         if (productLink.includes("indigo")) {
-            productLink = "https://cloud.indigo.design";
-            imagePath = relPpath + "images/marketing/indigo-design-cta-banner-2.png";
+            action = 'Learn More';
+            productLink = "https://www.infragistics.com/products/indigo-design";
+            imagePath = languageVersion === 'en' ? INDIGO_DESIGN_CTA_BANNER : JP_INDIGO_DESIGN_CTA_BANNER;
+        } else if (productLink.includes("appbuilder")) {
+            action = 'Learn More';
+            productLink = "https://www.infragistics.com/products/appbuilder";
+            imagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
+        } else if (productLink.includes("web-components")) {
+            imagePath = languageVersion === 'en' ? WEB_COPONENTS_CTA_BANNER : JP_WEB_COPONENTS_CTA_BANNER;
+            productLink = this.setBannerLink(productLink);
+        } else if (productLink.includes("react")) {
+            imagePath = languageVersion === 'en' ? REACT_CTA_BANNER : JP_REACT_CTA_BANNER;
+            productLink = this.setBannerLink(productLink);
         } else {
-            imagePath = relPpath + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png";
-            productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+            const defaultLanguageUIBanner = languageVersion === 'en' ? IGNITE_UI_TEMPLATE_BANNER : JP_IGNITE_UI_TEMPLATE_BANNER;
+            imagePath = defaultLanguageUIBanner.replace('PlatformPath', platform.charAt(0).toUpperCase() + platform.slice(1)).replace('Platform', platform);
+            productLink = this.setBannerLink(productLink);
         }
 
         if (productLink.includes("angular") && $(".article-container h2")[2]){
-            const builderImagePath = relPpath + "images/marketing/indigo-design-app-builder-docfx.png";
-            const indigoLink = 'https://cloud.indigo.design/';
-            this.appendBanner(2, indigoLink, builderImagePath, 'Sign Up', 'Indigo.Design App Builder | CTA Banner');
+            this.appendBanner(2, productLink, imagePath, action, productTitle);
 
             if ($(".article-container h2")[4]){
-                this.appendBanner(4, productLink, imagePath, action, productTitle);
+                const builderImagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
+                const аppbuilderLink = 'https://www.infragistics.com/products/appbuilder';
+                action = 'Learn More';
+                this.appendBanner(4, аppbuilderLink, builderImagePath, action, 'App Builder | CTA Banner');
             }
-        }else if($(".article-container h2")[2]){
+        } else if(productLink.includes("blazor") || productLink.includes("react")){
+            this.appendBanner($(".article-container h2").length - 1, productLink, imagePath, action, productTitle);
+        } else if($(".article-container h2")[2]){
             this.appendBanner(2, productLink, imagePath, action, productTitle);
         }
     }
@@ -286,6 +315,7 @@ export class ArticleRenderingService extends RenderingService {
         divTag.addClass('dfx-seo-banner');
         const imgTag = $('<img>').css('width', '100%');
         $(imgTag).attr("src", imagePath)
+        $(imgTag).attr("loading", "lazy")
         const link = this.appendLinkAttributes(action, label, productLink);
         link.append(imgTag);
         $(divTag).append(link);
@@ -328,5 +358,13 @@ export class ArticleRenderingService extends RenderingService {
                 }
             });
         }
+    }
+
+    private setBannerLink(productLink: string) {
+        const languageVersion: string = $('html')[0].lang;
+        if (languageVersion === 'en') {
+            productLink += productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+        }
+        return productLink;
     }
 }
