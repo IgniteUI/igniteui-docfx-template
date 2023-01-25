@@ -38,7 +38,12 @@ full license information.}}
         <div class="collapse navbar-collapse navbar-flex" id="navbar">
             {{#_isIgnite}}
             <div class="navbar-frameworks">
-                {{>partials/frameworks}}
+                {{#_isLangEn}}
+                    {{>partials/frameworks}}
+                {{/_isLangEn}}
+                {{#_isLangJa}}
+                    {{>partials/frameworks.ja}}
+                {{/_isLangJa}}
             </div>
             <div class="dropdown show">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -46,7 +51,12 @@ full license information.}}
                     <span class="glyphicon glyphicon-chevron-down" style="font-size: 0.7rem; top: 1.5px;"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    {{>partials/frameworks}}
+                    {{#_isLangEn}}
+                        {{>partials/frameworks}}
+                    {{/_isLangEn}}
+                    {{#_isLangJa}}
+                        {{>partials/frameworks.ja}}
+                    {{/_isLangJa}}
                 </div>
             </div>
             {{/_isIgnite}}
