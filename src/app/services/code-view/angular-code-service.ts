@@ -20,6 +20,7 @@ export class AngularCodeService extends CodeService {
     private assetsFolder = "/assets/";
     private demoFilesFolderUrlPath = this.assetsFolder + "samples/";
     private demoDVFilesFolderUrlPath = this.assetsFolder + "code-viewer/";
+    private crmFileMetadataName = "grid-crm";
     private assetsRegex = new RegExp(/([\.]{0,2}\/)*assets\//g);
     private sampleFilesContentByUrl: { [url: string]: any } = {};
     private demosTimeStamp: number;
@@ -254,11 +255,12 @@ export class AngularCodeService extends CodeService {
                                             .replace(/\?[\w\W]+/, '');
 
         const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
-
         let demoFileMetadataPath = '';
         if (dvSamplePath) {
             demoFileMetadataName = demoFileMetadataName.replace(dvSamplePath, "");
             demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
+        } else if (demosBaseUrl === sampleUrl) {
+            demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${this.crmFileMetadataName}.json`;
         } else {
             demoFileMetadataName = demoFileMetadataName.replace("/", "--");
             demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${demoFileMetadataName}.json`;
