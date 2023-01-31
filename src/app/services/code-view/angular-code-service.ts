@@ -259,7 +259,7 @@ export class AngularCodeService extends CodeService {
         if (dvSamplePath) {
             demoFileMetadataName = demoFileMetadataName.replace(dvSamplePath, "");
             demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
-        } else if (demosBaseUrl === sampleUrl) {
+        } else if (demosBaseUrl + "/" === sampleUrl) {
             demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${this.crmFileMetadataName}.json`;
         } else {
             demoFileMetadataName = demoFileMetadataName.replace("/", "--");
