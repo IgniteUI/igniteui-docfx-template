@@ -57,6 +57,11 @@ export class NavbarRenderingService extends RenderingService {
             // set active item
             $("#navbar").find<HTMLAnchorElement>("a[href]").each((i, e) => {
                 let href = $(e).attr("href")!;
+                if (href.includes("$ProductSpinal$")){
+                    const platform = $("meta[property='docfx:platform']").attr("content")!;
+                    href = href.replace("$ProductSpinal$", `ignite-ui-${platform}`);
+                    $(e).attr("href", href);
+                }
                 if (util.isRelativePath(href)) {
                     href = navrel + href;
                     $(e).attr("href", href);
