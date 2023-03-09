@@ -170,9 +170,33 @@ export class ArticleRenderingService extends RenderingService {
     }
 
     private renderAlerts() {
+        this.renderBlockquoteAlerts();
         $(".NOTE, .TIP").addClass("alert alert-info");
         $(".WARNING").addClass("alert alert-warning");
         $(".IMPORTANT, .CAUTION").addClass("alert alert-danger");
+    }
+
+    private renderBlockquoteAlerts() {
+        $("blockquote").each((i, e)=> {
+            const alertRegex = /\[!\S+]/g;
+            const content = e.innerText;
+            if (content.match(alertRegex)) {
+                const result = /!(.*?)\]/.exec(content);
+                if (result) {
+                    const alertType = result[1];
+                    const alertText = content.replace(alertRegex, "");
+                    const divContainer = $("<div>").addClass(alertType.toUpperCase());
+                    const headerContainer = $("<p>");
+                    const alertContainer = $("<p>").text(alertText);
+                    divContainer.append(headerContainer);
+                    divContainer.append(alertContainer);
+                    if (e.previousSibling) {
+                        $(e.previousSibling).after(divContainer);
+                    }
+                    e.remove();
+                }
+            }
+        });
     }
 
     private breakText() {
