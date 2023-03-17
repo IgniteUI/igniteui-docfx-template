@@ -19,12 +19,13 @@ export class TocRenderingService extends RenderingService implements ResizableOb
     constructor(private resizingService: ResizingService, private router: Router) {
         super();
     }
-
+    
     public reset() {
         this.initialDimension = document.body.clientHeight - (util.offset + 36);
     }
 
     public handleChange(changeType: DimensionChangeType, newValue: number) {
+        this.reset();
         changeType === 'decrease' ? this.$element[this.dimensionToObserve](this.initialDimension - newValue) :
             this.$element[this.dimensionToObserve](this.initialDimension + newValue);
     }
