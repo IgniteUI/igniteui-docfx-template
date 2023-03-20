@@ -1,3 +1,4 @@
-.responsive-img {
-	max-width: 100%
+.responsive-img, 
+article img:not(.raw) { 
+    max-width: 100%;
 }
