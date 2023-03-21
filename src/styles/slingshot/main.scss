@@ -36,8 +36,7 @@
 	display: none !important;
 }
 
-.responsive-img, 
-article img:not(.raw) { 
+article img { 
     max-width: 100%;
 	box-shadow: none !important;
 	border-radius: $global-radius;
