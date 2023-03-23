@@ -36,9 +36,7 @@
 	display: none !important;
 }
 
-.responsive-img,
-.article-container > img {
-	box-shadow: none !important;
+article img { 
 	border-radius: $global-radius;
 	margin-bottom: 16px;
 }
