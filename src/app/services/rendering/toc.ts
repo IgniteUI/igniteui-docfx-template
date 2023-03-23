@@ -1,4 +1,4 @@
-import util from "../utils";;
+import util from "../utils";
 import {
     RenderingService,
     ResizableObservable,
@@ -25,7 +25,6 @@ export class TocRenderingService extends RenderingService implements ResizableOb
     }
 
     public handleChange(changeType: DimensionChangeType, newValue: number) {
-        this.reset();
         changeType === 'decrease' ? this.$element[this.dimensionToObserve](this.initialDimension - newValue) :
             this.$element[this.dimensionToObserve](this.initialDimension + newValue);
     }
@@ -144,6 +143,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             $(e.target)
                 .parent()
                 .toggleClass(this.expanded);
+                this.resizingService.resetObservables();
         });
 
         $<HTMLAnchorElement>(".toc .nav > li > a").on('click', (e) => {
