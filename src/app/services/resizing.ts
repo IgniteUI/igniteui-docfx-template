@@ -39,7 +39,7 @@ export class ResizingService {
 
     private setInitial(dimension: DimensionType) {
         this.resizables.forEach(r => {
-            r.$element[0].className === 'sidetoc' ? r.$element.css(`${dimension}`, (document.body.clientHeight - (util.offset + 36))) : r.$element.css(`${dimension}`, '');
+            r.$element[0].className === 'sidetoc' ? r.$element.css(`${dimension}`, (document.body.clientHeight - (util.offset + util.getFilterHeight()))) : r.$element.css(`${dimension}`, '');
         });
     }
 

@@ -21,7 +21,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
     }
     
     public reset() {
-        this.initialDimension = document.body.clientHeight - (util.offset + 36);
+        this.initialDimension = document.body.clientHeight - (util.offset + util.getFilterHeight());
     }
 
     public handleChange(changeType: DimensionChangeType, newValue: number) {
