@@ -41,6 +41,8 @@ export class AffixRenderingService extends RenderingService implements Resizable
         if($(evt?.target)?.attr("href")! !== location.hash) 
           history.pushState({scrollPosition: $(window).scrollTop()}, "", $(evt?.target)?.attr("href")!);
       });
+    } else {
+      $("#affix").empty();
     }
   }
 
