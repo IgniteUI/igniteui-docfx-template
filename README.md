@@ -41,3 +41,42 @@ npm link igniteui-docfx-template
 ```
 
 After these steps are done, you can run your project and it will automatically use the template.
+
+## Collapsible code snippets
+
+To generate and display collapsible code snippets on documentation websites, follow these steps:
+
+1. Create a \<div> section with the class "fancy-details".
+
+2. Add a \<summary> element to the created \<div> section.
+
+3. Add the summary text representing the code snippet header to the \<summary> element.
+
+4.  Add a \<code> element to the created \<div> section.
+
+5. Add the code snippet to the \<code> element.
+
+6. Example:
+```
+<div class="fancy-details">
+    <summary>Example of a successful response body: </summary>
+    <code>
+        {
+            "id": "{123456}_repo",
+            "modified": "2023-02-03T14:07:34.0000000",
+            "created": "2023-02-03T14:07:34.0000000",
+            "name": "Marketing",
+            "user": {
+                "id": "{123456}_u ",
+                "name": "Teddy Mitkova"
+            },
+            "dashboardSections": [
+                {
+                    "id": "{123456}_f",
+                    "name": "May"
+                }
+            ]
+        }
+    </code>
+</div>
+```

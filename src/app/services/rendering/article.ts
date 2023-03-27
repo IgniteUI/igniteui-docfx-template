@@ -37,6 +37,7 @@ export class ArticleRenderingService extends RenderingService {
         this.addExternalLinkIcons();
         this.configureInternalNavigation();
         this.addGtmButtons();
+        this.configureCollapsableCodeBlocks();
         this.highlight();
         this.renderTables();
         this.appednAnchorjs();
@@ -132,6 +133,21 @@ export class ArticleRenderingService extends RenderingService {
             class: "no-external-icon mchNoDecorate trackCTA"
         });
         return link;
+    }
+
+    private configureCollapsableCodeBlocks() {
+        $("div.fancy-details").each((i, e)=> {
+            const summary = $(e).find('summary');
+            const codeBlock = $(e).find('code');
+            if (summary.length === 1 && codeBlock.length === 1) {
+                $(e).empty();
+                const detailsElement = $('<details>');
+                const preElement = $('<pre>');
+                preElement.append(codeBlock);
+                detailsElement.append([summary, preElement]);
+                $(e).append(detailsElement);
+            }
+        });
     }
 
     // Enable highlight.js
