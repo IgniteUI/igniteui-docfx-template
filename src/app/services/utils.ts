@@ -14,6 +14,7 @@ class UtilityService {
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
     public baseDir: string;
     public offset: number;
+    public initialFilterHeight: number = 36;
     public removeHTMLExtensionFromUrl: boolean;
 
     constructor() {
@@ -34,6 +35,10 @@ class UtilityService {
 
     public isRelativePath(href: string) {
         return !this.isAbsolutePath(href);
+    }
+
+    public getFilterHeight() {
+        return $('.sidefilter').height() || this.initialFilterHeight;
     }
 
     public isAbsolutePath(href: string) {
