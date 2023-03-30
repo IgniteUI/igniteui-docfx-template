@@ -5,7 +5,7 @@
 
 .alert-info,
 .alert-warning,
-.alert-danger, {
+.alert-danger {
 	&::before {
 		content: '';
 		background-repeat: no-repeat;
