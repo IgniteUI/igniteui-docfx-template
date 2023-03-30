@@ -14,6 +14,7 @@ let navigationOptions: INavigationOptions = {
   navigationPostProcess: () => {
     $("#search-query").val("");
     flipContents("show");
+    $(".search-clear-icon").hide();
     $(".sidenav").css("visibility", "visible");
     util.highlightKeywords(query);
   }
@@ -30,9 +31,18 @@ export function enableSearch() {
     }
 
     addSearchEvent();
+    addClearSearchEvent();
   } catch (e) {
     console.error(e);
   }
+}
+
+function addClearSearchEvent() {
+  $(".search-clear-icon").on("click", () => {
+    $("#search-query").val("")
+    flipContents("show");
+    $(".search-clear-icon").hide();
+  })
 }
 
 function addSearchEvent() {
@@ -45,18 +55,28 @@ function addSearchEvent() {
     $searchInput.on("keypress", e => e.key !== "Enter");
 
     $keyUp.pipe(
+      tap(()=> $(".search-clear-icon").show()),
       debounceTime(100),
       map<JQuery.TriggeredEvent, string>(e => $(e.target).val()! as string),
       tap(searchText => query = searchText)
     ).subscribe(searchText => {
       if (searchText.length < 3) {
+        if (searchText.length === 0){
+          $(".search-clear-icon").hide();
+        }
         flipContents("show");
       } else {
         flipContents("hide");
         $("body").trigger("queryReady");
-        $("#search-results>.search-list").text(
-          'Search Results for "' + query + '"'
-        );
+        if ($('html')[0].lang === "ja"){
+          $("#search-results>.search-list").text(
+            '"' + query + '" の検索結果'
+          );
+        }else {
+          $("#search-results>.search-list").text(
+            'Search Results for "' + query + '"'
+          );
+        }
       }
     });
   });
@@ -99,7 +119,11 @@ function handleSearchResults(hits: ISearchItem[]) {
     $paginator.removeData("twbs-pagination");
 
   if (hits.length === 0) {
-    $hitBloks.html("<p>No results found</p>");
+    if ($('html')[0].lang === "ja") {
+      $hitBloks.html("<p>結果が見つかりませんでした</p>");
+    }else {
+      $hitBloks.html("<p>No results found</p>");
+    }
   } else {
     $("#pagination").twbsPagination({
       totalPages: Math.ceil(hits.length / numPerPage),

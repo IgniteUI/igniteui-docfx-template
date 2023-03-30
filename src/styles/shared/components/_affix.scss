@@ -171,3 +171,7 @@
 .affix ul > li > a:hover:before {
 	display: block; // white-space: nowrap;
 }
+
+.nav-link {
+	text-decoration: none !important;
+}

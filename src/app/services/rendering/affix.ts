@@ -13,7 +13,7 @@ export class AffixRenderingService extends RenderingService implements Resizable
     }
 
     public reset() {
-        this.initialDimension = document.body.clientHeight - (util.offset + 36);
+        this.initialDimension = document.body.clientHeight - (util.offset + util.getFilterHeight());
     }
 
     public handleChange(changeType: DimensionChangeType, newValue: number) {
@@ -41,6 +41,8 @@ export class AffixRenderingService extends RenderingService implements Resizable
         if($(evt?.target)?.attr("href")! !== location.hash) 
           history.pushState({scrollPosition: $(window).scrollTop()}, "", $(evt?.target)?.attr("href")!);
       });
+    } else {
+      $("#affix").empty();
     }
   }
 

@@ -45,5 +45,33 @@ exports.transform = function (model) {
     }
   }
 
+  model._isIgnite = false;
+  model._isAngular = false;
+  model._isAppBuilder = false;
+  model._isBlazor = false;
+  model._isReact = false;
+  model._isWC = false;
+  model._showHelloBar = false;
+  if (model._platform) {
+    if (model._platform === "angular") {
+      model._isAngular = true;
+      model._isIgnite = true;
+      model._showHelloBar = true;
+    } else if (model._platform === "appbuilder") {
+      model._isAppBuilder = true;
+      model._isIgnite = true;
+      model._showHelloBar = true;
+    } else if (model._platform === "blazor") {
+      model._isBlazor = true;
+      model._isIgnite = true;
+      model._showHelloBar = true;
+    } else if (model._platform === "react") {
+      model._isReact = true;
+      model._isIgnite = true;
+    } else if (model._platform === "web-components") {
+      model._isWC = true;
+      model._isIgnite = true;
+    }
+  }
   return model;
 }

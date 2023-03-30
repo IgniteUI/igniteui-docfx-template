@@ -14,6 +14,7 @@ class UtilityService {
     public isEdge = navigator.userAgent.indexOf('Edge') !== -1;
     public baseDir: string;
     public offset: number;
+    public initialFilterHeight: number = 36;
     public removeHTMLExtensionFromUrl: boolean;
 
     constructor() {
@@ -34,6 +35,10 @@ class UtilityService {
 
     public isRelativePath(href: string) {
         return !this.isAbsolutePath(href);
+    }
+
+    public getFilterHeight() {
+        return $('.sidefilter').height() || this.initialFilterHeight;
     }
 
     public isAbsolutePath(href: string) {
@@ -180,6 +185,12 @@ class UtilityService {
     }
 
     public isDvPage(): boolean {
+        // The use of platform metadata is allowing proper products differentiation and based on the result to use handlers appropriately.
+        let $platformMeta = $("meta[property='docfx:platform']");
+        let platform = $platformMeta.attr("content")!;
+        if (platform !== 'angular'){
+            return true;
+        }
         let parts = window.location.pathname.trim().split("/");
         var pageName = parts[parts.length - 1];
         return pageName.includes("chart") ||

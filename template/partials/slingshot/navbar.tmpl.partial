@@ -33,7 +33,12 @@ full license information.}}
                         </g>
                     </svg>
                 </span>
-                <input type="text" class="form-control" id="search-query" placeholder="Search in topics" autocomplete="off">
+                {{#_isLangEn}}
+                    <input type="text" class="form-control" id="search-query" placeholder="Search in topics" autocomplete="off">
+                {{/_isLangEn}}
+                {{#_isLangJa}}
+                    <input type="text" class="form-control" id="search-query" placeholder="トピックで検索" autocomplete="off">
+                {{/_isLangJa}}
             </div>
         </form>
 
@@ -57,7 +62,12 @@ full license information.}}
                             </g>
                         </svg>
                     </span>
-                    <input type="text" class="form-control" id="search-query" placeholder="Search in topics" autocomplete="off">
+                    {{#_isLangEn}}
+                        <input type="text" class="form-control" id="search-query" placeholder="Search in topics" autocomplete="off">
+                    {{/_isLangEn}}
+                    {{#_isLangJa}}
+                        <input type="text" class="form-control" id="search-query" placeholder="トピックで検索" autocomplete="off">
+                    {{/_isLangJa}}
                 </div>
             </form>
         </div>

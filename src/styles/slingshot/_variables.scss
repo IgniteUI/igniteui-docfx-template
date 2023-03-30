@@ -1,18 +1,23 @@
+@import '../shared/variables';
+
 // Palette
 $primary-color: #20226f;
 $info-color: #6988FF;
 $warning-color: #F69E41;
 $error-color: #DE8080;
 $success-color: #00AE88;
-$note-color: #dcdcaa;
 $secondary-1-color: #4AC55F;
 $secondary-2-color: #3f4b89;
 $accent-color: #ED4A99;
+// Palette END
+
+$note-color: #dcdcaa;
 
 // Font
 $global-font-family: 'Roboto', sans-serif;
-$generic-font-weight: 400;
+$global-font-weight: 400;
 $global-radius: 8px;
+$global-line-height: 24px;
 
 // Grays
 $darkgray: #333;
@@ -23,7 +28,8 @@ $lightgray: #e9ebf3;
 $text-base: #585858;
 $text-light: #fff;
 $text-dim-light: #ddd;
-$text-dark: #000;
+$black: #000;
+$text-dark: $black;
 $title-color: $text-dark;
 
 // Surface colors
@@ -36,6 +42,7 @@ $surface-disabled: #eee;
 $link-color: #6988FF;
 $link-hover-color: #4562cd;
 $button-hover: $link-hover-color;
+$link-decoration: none;
 
 // Header
 $header-bg: $primary-color;
@@ -98,6 +105,7 @@ $footer-bg: #f8f8f8;
 $main-padding: 85px;
 $filter-height: 36px;
 $side-nav-push: $main-padding + $filter-height;
+$filter-icon-color: $link-color;
 
 $navbar-height: 85px;
 
@@ -106,6 +114,8 @@ $toc-active-color: $text-dark;
 $toc-hover-color: $link-color;
 $toc-color: $text-base;
 $toc-bg-color: #ffffff;
+$toc-font-size: rem(13px);
+$toc-expand-stub-color: $link-color;
 
 // badge component
 $new-badge-color: $text-light;
@@ -119,41 +129,52 @@ $badge-font-weight: 500;
 
 $byzantium: #731963;
 
+// Block Quote
+$blockquotes-border-color: $link-color;
+$blockquotes-font-style: italic;
+
+// Ul colors
+$ul-bullet-color: $darkgray;
+
+// External Link
 $external-link-icon: 'open_in_new';
 $external-link-icon-padding: 18px;
 $external-font-weight: 700;
 
+// Pre
 $pre-bg: $surface-dark;
 $pre-color: $text-light;
 $pre-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.20);
 
+// Alert
 $alert-radius: $global-radius;
 $icon-container-width: 72px;
 $alert-padding: 21px 17px 21px (17px + $icon-container-width);
 $alert-margin: 20px 0;
-
-// Headings anchor link icon
-$link-alpha: 0;
-
-$affix-font-weight: 400;
-
 $alert-shadow:
 	0 1px 3px 0 rgba(0, 0, 0, 0.26),
 	0 1px 1px 0 rgba(0, 0, 0, 0.12),
 	0 2px 1px -1px rgba(0, 0, 0, 0.08);
 
+// Headings anchor link icon
+$link-alpha: 0;
+
+$affix-font-weight: 400;
 $hljs-copy-btn-radius: 0 0 0 $global-radius;
 
 // Table
 $table-first-col-weight: 500;
 $table-header-font-size: 18px;
-$table-row-bg: #F9F9F9;
 $table-text-color: $text-base;
 $table-border-color: $border-color;
+$table-row-border-color: $border-color;
 $table-text-transform: uppercase;
 $table-th-border: 1px solid $table-border-color;
 $table-th-padding: 1rem;
 $table-td-padding: 1.2rem;
+$table-header-background: $surface-light;
+$table-even-bg: #F9F9F9;
+$table-odd-bg: $surface-light;
 
 // Typography //
 
@@ -202,4 +223,3 @@ $h6-m-bottom: 1.5rem;
 // Paragraph
 $p-l-height: 1.5rem;
 $p-m-bottom: 1rem;
-$p-m-top: 0;

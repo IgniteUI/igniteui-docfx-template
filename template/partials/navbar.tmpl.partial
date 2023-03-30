@@ -36,13 +36,43 @@ full license information.}}
             </button>
         </div>
         <div class="collapse navbar-collapse navbar-flex" id="navbar">
-                {{#_enableSearch}}
-                    <form class="navbar-form navbar-right" role="search" id="search">
-                        <div class="form-group">
+            {{#_isIgnite}}
+            <div class="navbar-frameworks">
+                {{#_isLangEn}}
+                    {{>partials/frameworks}}
+                {{/_isLangEn}}
+                {{#_isLangJa}}
+                    {{>partials/frameworks.ja}}
+                {{/_isLangJa}}
+            </div>
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Framework
+                    <span class="glyphicon glyphicon-chevron-down" style="font-size: 0.7rem; top: 1.5px;"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {{#_isLangEn}}
+                        {{>partials/frameworks}}
+                    {{/_isLangEn}}
+                    {{#_isLangJa}}
+                        {{>partials/frameworks.ja}}
+                    {{/_isLangJa}}
+                </div>
+            </div>
+            {{/_isIgnite}}
+            {{#_enableSearch}}
+                <form class="navbar-form navbar-right" role="search" id="search">
+                    <div class="form-group">
+                        {{#_isLangEn}}
                             <input type="text" class="form-control" id="search-query" placeholder="Search in topics" autocomplete="off">
-                        </div>
-                    </form>
-                {{/_enableSearch}}
+                        {{/_isLangEn}}
+                        {{#_isLangJa}}
+                            <input type="text" class="form-control" id="search-query" placeholder="トピックで検索" autocomplete="off">
+                        {{/_isLangJa}}
+                        <span class="glyphicon glyphicon-remove-circle search-clear-icon" title="Clear search"></span>
+                    </div>
+                </form>
+            {{/_enableSearch}}
         </div>
 
     </div>

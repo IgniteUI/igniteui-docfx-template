@@ -1,5 +1,6 @@
 import ResizeObserver from "resize-observer-polyfill";
 import { ResizableObservable, DimensionType } from "../types";;
+import util from "../services/utils";
 
 export class ResizingService {
 
@@ -38,7 +39,7 @@ export class ResizingService {
 
     private setInitial(dimension: DimensionType) {
         this.resizables.forEach(r => {
-            r.$element.css(`${dimension}`, '');
+            r.$element[0].className === 'sidetoc' ? r.$element.css(`${dimension}`, (document.body.clientHeight - (util.offset + util.getFilterHeight()))) : r.$element.css(`${dimension}`, '');
         });
     }
 

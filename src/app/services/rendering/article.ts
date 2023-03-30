@@ -4,7 +4,20 @@ import anchors from 'anchor-js';
 import hljs from "highlight.js";
 import type { IgniteUIPlatform} from '../../types';
 import { onSampleIframeContentLoaded, onXPlatSampleIframeContentLoaded } from "../../handlers";
-import { Router } from "../router";;
+import { Router } from "../router";
+
+const IGNITE_UI_TEMPLATE_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-PlatformPath/ignite-ui-Platform-you-get-ad.gif';
+const REACT_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-React/ignite-ui-react-you-get.gif';
+const WEB_COPONENTS_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-Web-Components/ignite-ui-web-components.gif';
+const APP_BUILDER_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/App-Builder/app-builder-wysiwyg.gif';
+const INDIGO_DESIGN_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/IndigoDesign/indigo-design-transofrm-sketch-xd.gif';
+
+const JP_IGNITE_UI_TEMPLATE_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/ignite-ui-Platform-202211.gif';
+const JP_REACT_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/ignite-ui-react-01.gif';
+const JP_WEB_COPONENTS_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/ignite-ui-webcomponents-202211.gif';
+const JP_APP_BUILDER_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/app-builder-wysiwyg-01.gif';
+const JP_INDIGO_DESIGN_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/indigo-design-transofrm-sketch-xd-01.gif'
+
 export class ArticleRenderingService extends RenderingService {
 
     private navigationOptions: INavigationOptions = {
@@ -24,6 +37,7 @@ export class ArticleRenderingService extends RenderingService {
         this.addExternalLinkIcons();
         this.configureInternalNavigation();
         this.addGtmButtons();
+        this.configureCollapsableCodeBlocks();
         this.highlight();
         this.renderTables();
         this.appednAnchorjs();
@@ -94,13 +108,14 @@ export class ArticleRenderingService extends RenderingService {
 
             const codeView = $("code-view").first();
             let paragraph: JQuery<HTMLParagraphElement>;
+            const action = 'Download'
             if (languageVersion === 'ja') {
                 paragraph = $<HTMLParagraphElement>('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text(`このサンプルが気に入りましたか? 完全な ${productTitle}ツールキットにアクセスして、すばやく独自のアプリの作成を開始します。`);
-                const link = this.appendLinkAttributes(productTitle, productLink);
+                const link = this.appendLinkAttributes(action, productTitle, productLink);
                 link.text("無料でダウンロードできます。").appendTo(paragraph);
             } else {
                 paragraph = $<HTMLParagraphElement>('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text(`Like this sample? Get access to our complete ${productTitle} toolkit and start building your own apps in minutes.`);
-                const link = this.appendLinkAttributes(productTitle, productLink);
+                const link = this.appendLinkAttributes(action, productTitle, productLink);
                 link.text(" Download it for free.").appendTo(paragraph);
             }
 
@@ -108,9 +123,9 @@ export class ArticleRenderingService extends RenderingService {
         }
     }
 
-    private appendLinkAttributes(productTitle: string, productLink: string) {
+    private appendLinkAttributes(action: string, productTitle: string, productLink: string) {
         let link = $('<a>');
-        link.attr('data-xd-ga-action', 'Download');
+        link.attr('data-xd-ga-action', action);
         link.attr('data-xd-ga-label', productTitle);
         link.attr({
             target: "_blank",
@@ -118,6 +133,21 @@ export class ArticleRenderingService extends RenderingService {
             class: "no-external-icon mchNoDecorate trackCTA"
         });
         return link;
+    }
+
+    private configureCollapsableCodeBlocks() {
+        $("div.fancy-details").each((i, e)=> {
+            const summary = $(e).find('summary');
+            const codeBlock = $(e).find('code');
+            if (summary.length === 1 && codeBlock.length === 1) {
+                $(e).empty();
+                const detailsElement = $('<details>');
+                const preElement = $('<pre>');
+                preElement.append(codeBlock);
+                detailsElement.append([summary, preElement]);
+                $(e).append(detailsElement);
+            }
+        });
     }
 
     // Enable highlight.js
@@ -156,9 +186,33 @@ export class ArticleRenderingService extends RenderingService {
     }
 
     private renderAlerts() {
+        this.renderBlockquoteAlerts();
         $(".NOTE, .TIP").addClass("alert alert-info");
         $(".WARNING").addClass("alert alert-warning");
         $(".IMPORTANT, .CAUTION").addClass("alert alert-danger");
+    }
+
+    private renderBlockquoteAlerts() {
+        $("blockquote").each((i, e)=> {
+            const alertRegex = /\[!\S+]/g;
+            const content = e.innerText;
+            if (content.match(alertRegex)) {
+                const result = /!(.*?)\]/.exec(content);
+                if (result) {
+                    const alertType = result[1];
+                    const alertText = content.replace(alertRegex, "");
+                    const divContainer = $("<div>").addClass(alertType.toUpperCase());
+                    const headerContainer = $("<p>");
+                    const alertContainer = $("<p>").text(alertText);
+                    divContainer.append(headerContainer);
+                    divContainer.append(alertContainer);
+                    if (e.previousSibling) {
+                        $(e.previousSibling).after(divContainer);
+                    }
+                    e.remove();
+                }
+            }
+        });
     }
 
     private breakText() {
@@ -247,30 +301,64 @@ export class ArticleRenderingService extends RenderingService {
           $(currentView).codeView({iframeId : i});
         }
       }
-    
+
     private addCtaBanners() {
+        const languageVersion: string = $('html')[0].lang;
         let productLink = $("meta[property='docfx:link']").attr("content")!,
-            relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
             platform = $("meta[property='docfx:platform']").attr("content") || '',
-            imgTag = $('<img>');
-        
+            productTitle = $("meta[property='docfx:title']")!.attr("content")!;
+        let imagePath = '';
+        productTitle = productTitle + " | CTA Banner"
+        let action = 'Download';
+
         if(productLink.toLocaleLowerCase().includes("slingshot")) return;
-    
+
         if (productLink.includes("indigo")) {
-          productLink = "https://cloud.indigo.design";
-          $(imgTag).attr("src", relPpath + "images/marketing/indigo-design-cta-banner-2.png");
+            action = 'Learn More';
+            productLink = "https://www.infragistics.com/products/indigo-design";
+            imagePath = languageVersion === 'en' ? INDIGO_DESIGN_CTA_BANNER : JP_INDIGO_DESIGN_CTA_BANNER;
+        } else if (productLink.includes("appbuilder")) {
+            action = 'Learn More';
+            productLink = "https://www.infragistics.com/products/appbuilder";
+            imagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
+        } else if (productLink.includes("web-components")) {
+            imagePath = languageVersion === 'en' ? WEB_COPONENTS_CTA_BANNER : JP_WEB_COPONENTS_CTA_BANNER;
+            productLink = this.setBannerLink(productLink);
+        } else if (productLink.includes("react")) {
+            imagePath = languageVersion === 'en' ? REACT_CTA_BANNER : JP_REACT_CTA_BANNER;
+            productLink = this.setBannerLink(productLink);
         } else {
-          $(imgTag).attr("src", relPpath + "images/marketing/" + "ignite-ui-" + platform + "-cta-banner-2.png");
-          productLink+= productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+            const defaultLanguageUIBanner = languageVersion === 'en' ? IGNITE_UI_TEMPLATE_BANNER : JP_IGNITE_UI_TEMPLATE_BANNER;
+            imagePath = defaultLanguageUIBanner.replace('PlatformPath', platform.charAt(0).toUpperCase() + platform.slice(1)).replace('Platform', platform);
+            productLink = this.setBannerLink(productLink);
         }
-    
-        if ($(".article-container h2")[2]) {
-          let thirdHeader = $(".article-container h2")[2], divTag = $('<div>');
-          divTag.addClass('dfx-seo-banner')
-          $(imgTag).on('click', () => window.location.href = productLink);
-          $(divTag).append(imgTag);
-          $(thirdHeader).before(divTag);
+
+        if (productLink.includes("angular") && $(".article-container h2")[2]){
+            this.appendBanner(2, productLink, imagePath, action, productTitle);
+
+            if ($(".article-container h2")[4]){
+                const builderImagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
+                const аppbuilderLink = 'https://www.infragistics.com/products/appbuilder';
+                action = 'Learn More';
+                this.appendBanner(4, аppbuilderLink, builderImagePath, action, 'App Builder | CTA Banner');
+            }
+        } else if(productLink.includes("blazor") || productLink.includes("react")){
+            this.appendBanner($(".article-container h2").length - 1, productLink, imagePath, action, productTitle);
+        } else if($(".article-container h2")[2]){
+            this.appendBanner(2, productLink, imagePath, action, productTitle);
         }
+    }
+
+    private appendBanner(headerIndex: number, productLink: string, imagePath: string, action: string, label: string){
+        const header = $(".article-container h2")[headerIndex], divTag = $('<div>');
+        divTag.addClass('dfx-seo-banner');
+        const imgTag = $('<img>').css('width', '100%');
+        $(imgTag).attr("src", imagePath)
+        $(imgTag).attr("loading", "lazy")
+        const link = this.appendLinkAttributes(action, label, productLink);
+        link.append(imgTag);
+        $(divTag).append(link);
+        $(header).before(divTag);
     }
 
     private anchorJs() {
@@ -309,5 +397,13 @@ export class ArticleRenderingService extends RenderingService {
                 }
             });
         }
+    }
+
+    private setBannerLink(productLink: string) {
+        const languageVersion: string = $('html')[0].lang;
+        if (languageVersion === 'en') {
+            productLink += productLink.charAt(productLink.length - 1) === '/' ? "download" : "/download";
+        }
+        return productLink;
     }
 }

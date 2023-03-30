@@ -1,0 +1,35 @@
+{{#_isAngular}}
+    <a href="https://jp.infragistics.com/products/appbuilder/help/getting-started" title="AppBuilder Documentation">AppBuilder</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Ignite UI for Blazor Documentation">Blazor</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="Ignite UI for WebComponents Documentation">WC</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="Ignite UI for React Documentation">React</a>
+    <a href="https://jp.igniteui.com/grid/overview" title="Ignite UI for jQuery/.NET Documentation">jQuery/.NET</a>
+{{/_isAngular}}
+{{#_isAppBuilder}}
+    <a href="https://jp.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Ignite UI for Angular Documentation">Angular</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Ignite UI for Blazor Documentation">Blazor</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="Ignite UI for WebComponents Documentation">WC</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="Ignite UI for React Documentation">React</a>
+    <a href="https://jp.igniteui.com/grid/overview" title="Ignite UI for jQuery/.NET Documentation">jQuery/.NET</a>
+{{/_isAppBuilder}}
+{{#_isBlazor}}
+    <a href="https://jp.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Ignite UI for Angular Documentation">Angular</a>
+    <a href="https://jp.infragistics.com/products/appbuilder/help/getting-started" title="AppBuilder Documentation">AppBuilder</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="Ignite UI for WebComponents Documentation">WC</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="Ignite UI for React Documentation">React</a>
+    <a href="https://jp.igniteui.com/grid/overview" title="Ignite UI for jQuery/.NET Documentation">jQuery/.NET</a>
+{{/_isBlazor}}
+{{#_isReact}}
+    <a href="https://jp.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Ignite UI for Angular Documentation">Angular</a>
+    <a href="https://jp.infragistics.com/products/appbuilder/help/getting-started" title="AppBuilder Documentation">AppBuilder</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Ignite UI for Blazor Documentation">Blazor</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started" title="Ignite UI for WebComponents Documentation">WC</a>
+    <a href="https://jp.igniteui.com/grid/overview" title="Ignite UI for jQuery/.NET Documentation">jQuery/.NET</a>
+{{/_isReact}}
+{{#_isWC}}
+    <a href="https://jp.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started" title="Ignite UI for Angular Documentation">Angular</a>
+    <a href="https://jp.infragistics.com/products/appbuilder/help/getting-started" title="AppBuilder Documentation">AppBuilder</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-blazor/blazor/components/general-getting-started" title="Ignite UI for Blazor Documentation">Blazor</a>
+    <a href="https://jp.infragistics.com/products/ignite-ui-react/react/components/general-getting-started" title="Ignite UI for React Documentation">React</a>
+    <a href="https://jp.igniteui.com/grid/overview" title="Ignite UI for jQuery/.NET Documentation">jQuery/.NET</a>
+{{/_isWC}}

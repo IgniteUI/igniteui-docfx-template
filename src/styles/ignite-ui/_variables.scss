@@ -1,18 +1,23 @@
+@import '../shared/variables';
+
 // Palette
 $primary-color: #222;
-$info-color: #0375be;
-$warning-color: #fbb13c;
-$error-color: #f44336;
-$success-color: #00ae88;
+$info-color: #4051B5;
+$warning-color: #FCB13C;
+$error-color: #F54336;
+$success-color: #00AE88;
+$secondary-1-color: #0099FF;
+$secondary-2-color: #6A11AD;
+$accent-color: #30C146;
+// Palette END
+
 $note-color: #dcdcaa;
-$secondary-1-color: #09f;
-$secondary-2-color: #6a0dad;
-$accent-color: #ff134a;
 
 // Font
 $global-font-family: 'aktiv-grotesk', sans-serif;
-$generic-font-weight: 300;
+$global-font-weight: 400;
 $global-radius: 0;
+$global-line-height: 24px;
 
 // Grays
 $darkgray: #333;
@@ -20,10 +25,11 @@ $midgray: #666;
 $lightgray: #f1f1f1;
 
 // Text
-$text-base: #585858;
+$text-base: #333;
 $text-light: #fff;
 $text-dim-light: #ddd;
-$text-dark: #000;
+$black: #000;
+$text-dark: #222;
 $title-color: $text-base;
 
 // Surface colors
@@ -36,6 +42,7 @@ $surface-disabled: #eee;
 $link-color: $secondary-1-color;
 $link-hover-color: #23527c;
 $button-hover: $link-hover-color;
+$link-decoration: underline;
 
 // Header
 $header-bg: #222;
@@ -62,7 +69,7 @@ $breadcrumb-font-weight: 400;
 $breadcrumb-margin: 0;
 
 // Text highlight
-$text-highlight-color: $text-dark;
+$text-highlight-color: $black;
 $text-highlight: $secondary-1-color;
 
 // Borders
@@ -98,107 +105,121 @@ $footer-bg: #f8f8f8;
 $main-padding: 124px;
 $filter-height: 36px;
 $side-nav-push: $main-padding + $filter-height;
+$filter-icon-color: $link-color;
 
 $navbar-height: auto;
 
 // Toc
-$toc-active-color: $text-dark;
-$toc-hover-color: $link-color;
+$toc-active-color: $info-color;
+$toc-hover-color: $info-color;
 $toc-color: $text-base;
-$toc-bg-color: #eff1f2;
+$toc-bg-color: #fff;
+$toc-font-size: rem(13px);
+$toc-expand-stub-color: $info-color;
 
 // badge component
 $new-badge-color: $text-light;
 $new-badge-bg: $accent-color;
 $updated-badge-color: $text-light;
-$updated-badge-bg: $secondary-2-color;
+$updated-badge-bg: $info-color;
 $badge-radius: 0;
-$badge-font-size: 9px;
-$badge-padding: 2px;
-$badge-font-weight: 400;
+$badge-font-size: 10px;
+$badge-padding: 4px;
+$badge-font-weight: bold;
 
 $byzantium: #731963;
 
+// Block Quote
+$blockquotes-border-color: $link-color;
+$blockquotes-font-style: italic;
+
+// Ul colors
+$ul-bullet-color: $link-color;
+
+// External Link
 $external-link-icon: 'open_in_new';
 $external-link-icon-padding: 18px;
 $external-font-weight: inherit;
 
+// Pre tag
 $pre-bg: $surface-dark;
 $pre-color: $text-light;
 $pre-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.80);
 
+// Alert
 $alert-radius: 0;
-$icon-container-width: 72px;
-$alert-padding: 16px 16px 16px (16px + $icon-container-width);
-$alert-margin: 48px 0;
-
-$link-alpha: .6;
-
-$affix-font-weight: 300;
-
+$icon-container-width: 60px;
+$alert-padding: 10px 10px 10px (30px + $icon-container-width);
+$alert-margin: 25px 0;
 $alert-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26),
 0 1px 1px 0 rgba(0, 0, 0, 0.12),
 0 2px 1px -1px rgba(0, 0, 0, 0.08);
 
+// Headings anchor link icon
+$link-alpha: .6;
+
+$affix-font-weight: 300;
 $hljs-copy-btn-radius: 0;
 
 // Table
 $table-header-font-size: 16px;
 $table-first-col-weight: 400;
 $table-header-font-size: 18px;
-$table-row-bg: #fff;
 $table-text-color: $text-base;
 $table-border-color: $border-color;
+$table-row-border-color: transparent;
 $table-text-transform: initial;
 $table-th-border: none;
 $table-th-padding: .7rem 1rem;
 $table-td-padding: .7rem 1rem;
+$table-header-background: rgba(0,0,0, .20);
+$table-even-bg: rgba(0,0,0, .05);
+$table-odd-bg: $surface-light;
 
 // Typography //
 
 // h1
-$h1-f-size: 2.625rem;
-$h1-f-weight: 300;
-$h1-l-height: 3rem;
-$h1-m-top: 1.5rem;
-$h1-m-bottom: 1.5rem;
+$h1-f-size: 36px;
+$h1-f-weight: bold;
+$h1-l-height: 48px;
+$h1-m-top: 36px;
+$h1-m-bottom: 30px;
 
 // h2
-$h2-f-size: 2rem;
-$h2-f-weight: 300;
-$h2-l-height: 3rem;
-$h2-m-top: 2rem;
-$h2-m-bottom: 0;
+$h2-f-size: 32px;
+$h2-f-weight: bold;
+$h2-l-height: 36px;
+$h2-m-top: 36px;
+$h2-m-bottom: 16px;
 
 // h3
-$h3-f-size: 1rem;
-$h3-f-weight: initial;
-$h3-l-height: 1.5rem;
-$h3-m-top: 1.5rem;
-$h3-m-bottom: 0;
+$h3-f-size: 24px;
+$h3-f-weight: bold;
+$h3-l-height: 32px;
+$h3-m-top: 36px;
+$h3-m-bottom: 16px;
 
 // h4
-$h4-f-size: 1rem;
-$h4-f-weight: initial;
-$h4-l-height: 1.5rem;
-$h4-m-top: 1.5rem;
-$h4-m-bottom: 0;
+$h4-f-size: 18px;
+$h4-f-weight: bold;
+$h4-l-height: 24px;
+$h4-m-top: 36px;
+$h4-m-bottom: 8px;
 
 // h5
-$h5-f-size: 1rem;
-$h5-f-weight: initial;
-$h5-l-height: 1.5rem;
-$h5-m-top: 1.5rem;
-$h5-m-bottom: 0;
+$h5-f-size: 16px;
+$h5-f-weight: bold;
+$h5-l-height: 20px;
+$h5-m-top: 36px;
+$h5-m-bottom: 8px;
 
 // h6
-$h6-f-size: 1rem;
-$h6-f-weight: 400;
-$h6-l-height: 1.5rem;
-$h6-m-top: 0rem;
-$h6-m-bottom: .5rem;
+$h6-f-size: 14px;
+$h6-f-weight: bold;
+$h6-l-height: 16px;
+$h6-m-top: 36px;
+$h6-m-bottom: 8px;
 
 // Paragraph
-$p-l-height: 2rem;
+$p-l-height: rem(32px);
 $p-m-bottom: 1.5rem;
-$p-m-top: 0;

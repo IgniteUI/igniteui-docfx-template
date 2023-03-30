@@ -1,4 +1,4 @@
-import util from "../utils";;
+import util from "../utils";
 import {
     RenderingService,
     ResizableObservable,
@@ -19,9 +19,9 @@ export class TocRenderingService extends RenderingService implements ResizableOb
     constructor(private resizingService: ResizingService, private router: Router) {
         super();
     }
-
+    
     public reset() {
-        this.initialDimension = document.body.clientHeight - (util.offset + 36);
+        this.initialDimension = document.body.clientHeight - (util.offset + util.getFilterHeight());
     }
 
     public handleChange(changeType: DimensionChangeType, newValue: number) {
@@ -100,12 +100,6 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             this.scrollToActive();
         }
 
-
-        if ($("#toc_filter_input").val()) {
-            $("#toc_filter_input").val("");
-            this.clearFilter();
-            this.scrollToActive(0);
-        }
     }
 
     private scrollToActive(amount?: number) {
@@ -149,6 +143,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             $(e.target)
                 .parent()
                 .toggleClass(this.expanded);
+                this.resizingService.resetObservables();
         });
 
         $<HTMLAnchorElement>(".toc .nav > li > a").on('click', (e) => {
@@ -164,14 +159,23 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             this.router.navigateTo($a.attr("href")!, {stateAction: "push", adjustTocScrollPosition: false})
         });
 
+        $(".clear-icon").on("click", (e: any) => {
+            $("#toc_filter_input").val("");
+            $(".clear-icon").hide();
+            this.clearFilter();
+            this.scrollToActive();
+        })
+
         $("#toc_filter_input").on("input", (e: any) => {
 
             let val = e.target?.value! as string;
             if (val === "") {
+                $(".clear-icon").hide();
                 // Clear 'filtered' class
                 this.clearFilter();
                 return;
             }
+            $(".clear-icon").show();
 
             // Get leaf nodes
             $<HTMLAnchorElement>("#toc li>a")

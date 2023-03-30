@@ -1,0 +1,46 @@
+.fancy-details {
+	details {
+		margin-bottom: rem(4px);
+		border-radius: $global-radius;
+		position: relative;
+
+		> * {
+			margin-bottom: 4px;
+		}
+
+		summary {
+			padding: rem(4px) rem(8px) rem(4px) rem(20px);
+			border-radius: $global-radius;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+
+			&::before {
+				content: '+';
+				color: $link-color;
+				position: absolute;
+				left: 0;
+				font-size: rem(20px);
+				display: flex;
+				align-items: center;
+			}
+
+			&:focus {
+				outline-color: transparent;
+			}
+
+			&:focus,
+			&:hover {
+				color: $link-color;
+			}
+		}
+
+		&[open] {
+			summary {
+				&::before {
+					content: '- ';
+				}
+			}
+		}
+	}
+}

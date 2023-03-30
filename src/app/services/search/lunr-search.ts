@@ -1,11 +1,17 @@
 //@ts-ignore
 import lunr from 'lunr';
-import type {ILunr, ISearchData, ISearchItem} from './types'
+import type {ILunr, JPlunr, ISearchData, ISearchItem} from './types'
 
 const ctx: Worker = self as any;
 const lunrInstance: ILunr = {index: undefined, data: {}};
+const jpLurn: JPlunr = require('lunr');
 let stopWords: string[];
 let base: string;
+require('lunr-languages/lunr.stemmer.support.js')(jpLurn);
+require('lunr-languages/tinyseg.js')(jpLurn);
+require('lunr-languages/lunr.ja.js')(jpLurn);
+require('lunr-languages/lunr.multi.js')(jpLurn);
+
 
 ctx.onmessage = (oEvent) => {
 
@@ -62,6 +68,7 @@ function buildIndex() {
   if (stopWords !== null && !isEmpty(lunrInstance.data)) {
     lunrInstance.index = lunr(function () {
       this.pipeline.remove(lunr.stopWordFilter);
+      this.use(jpLurn.multiLanguage('en', 'ja'));
       this.ref('href');
       this.field('title', { boost: 20 });
       this.field('keywords', { boost: 50 });
