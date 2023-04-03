@@ -206,7 +206,6 @@ export class AngularCodeService extends CodeService {
         const codeService = this;
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             let codeViewFiles: ICodeViewFilesData[], url: string;
-
             /**
              * Selects the explicit editor for the code view and supports "csb" and "stackblitz" as values.
              * <code-view explicit-editor="csb"</code-view>
@@ -235,7 +234,8 @@ export class AngularCodeService extends CodeService {
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             const files = data.files;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
-            codeService.sharedFileContent = data;
+            codeService.sharedFileContent[demosBaseUrl] = data;
+            
 
             if (cb) {
                 cb();
@@ -494,4 +494,5 @@ export class AngularCodeService extends CodeService {
         fileInput.appendTo(form)
         return form;
     }
+
 }

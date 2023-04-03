@@ -305,7 +305,6 @@ export class ArticleRenderingService extends RenderingService {
     private addCtaBanners() {
         const languageVersion: string = $('html')[0].lang;
         let productLink = $("meta[property='docfx:link']").attr("content")!,
-            relPpath = $("meta[name=data-docfx-rel]").attr("content")!,
             platform = $("meta[property='docfx:platform']").attr("content") || '',
             productTitle = $("meta[property='docfx:title']")!.attr("content")!;
         let imagePath = '';
