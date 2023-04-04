@@ -134,7 +134,9 @@ exports.transform = function (model) {
       item.labelType = item.labelText !== null ? label.toLowerCase() : '';
       item.withBadge =  item.labelType !== '';
     } else {
-      item.withBadge = null;
+      item.labelText = null;
+      item.labelType = '';
+      item.withBadge = '';
       item.newType = '';
     }
   }
@@ -152,6 +154,9 @@ exports.transform = function (model) {
 
   function getLabelFromDirectChildren(items, parent) {
     const childLabels = [];
+    if (!parent.name) {
+      return;
+    }
     var labelToReturn;
      for (let index = 0; index < items.length; index++) {
        const item = items[index];
@@ -179,6 +184,5 @@ exports.transform = function (model) {
         parent.new = true;
         labelToReturn = labels.NEW
      }
-
      return labelToReturn;
   }
