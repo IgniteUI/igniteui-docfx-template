@@ -2,6 +2,9 @@ import { ExplicitEditor, ICodeViewCSS, ICodeViewElements, ICodeViewEvents, ICode
 import hljs from "highlight.js";
 import localization from '../localization';
 import util from '../utils';
+const hljsRazor = require('highlightjs-cshtml-razor');
+hljs.registerLanguage("cshtml-razor", hljsRazor);
+
 
 export class CodeView implements ICodeViewEvents, ICodeViewMembers {
    
@@ -115,7 +118,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
             language = 'javascript';
             break;
           case "razor":
-            language = 'csharp';
+            language = 'cshtml-razor';
             break;
           default:
             language = f.fileExtension;
@@ -147,7 +150,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
         hljs.highlightBlock($code[0]);
         $codeWrapper.append($code);
 
-        let hljsLangName = $<HTMLElement>(`<span class="hljs-lang-name">${f.fileExtension}</span>`)
+        let hljsLangName = $<HTMLElement>(`<span class="hljs-lang-name">${f.fileExtension}</span>`);
         let copyCodeButton = $<HTMLButtonElement>(`<button class="cv-hljs-code-copy hidden">${localization.localize('hljs', 'copyCode')}</button>`)
         //Add copy code button
         $codeWrapper
