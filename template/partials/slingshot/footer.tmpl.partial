@@ -9,4 +9,5 @@
     {{#_isLangJa}}
         {{>partials/slingshot/slingshotfoot.ja}}
     {{/_isLangJa}}
+    {{/_appFooter}}
 </div>
