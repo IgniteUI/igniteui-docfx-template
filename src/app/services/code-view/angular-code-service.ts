@@ -26,6 +26,7 @@ export class AngularCodeService extends CodeService {
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
     private dvSamplesPaths = ['gauges/', 'maps/', 'excel/', 'charts/'];
+    private baseUrl: string;
 
     constructor(private xhrService: XHRService) {
         super();
@@ -51,6 +52,7 @@ export class AngularCodeService extends CodeService {
         if ($codeViewElements.length > 0) {
             this.getDemosBaseUrls($codeViewElements);
             for (const baseUrl of this.demosUrls.keys()) {
+                this.baseUrl = baseUrl;
                 let codeViewsData = this.demosUrls.get(baseUrl)!;
                 this.generateLiveEditingAngularApp(baseUrl, codeViewsData);
 
@@ -316,7 +318,7 @@ export class AngularCodeService extends CodeService {
         const files: FileDictionary = {};
         let codesandboxSharedFiles = [];
         if (!$button.hasClass(codeService.stkbButtonClass)) {
-            codesandboxSharedFiles = this.removeCodesandboxRedundantFiles(codeService.sharedFileContent.files)
+            codesandboxSharedFiles = this.removeCodesandboxRedundantFiles(codeService.sharedFileContent[this.baseUrl].files)
         }
         let formData = {
             dependencies: sampleContent.sampleDependencies,
@@ -324,7 +326,7 @@ export class AngularCodeService extends CodeService {
             devDependencies: codeService.sharedFileContent.devDependencies
         }
 
-        const projectFiles = codeService.sharedFileContent.files.concat(sampleContent.sampleFiles);
+        const projectFiles = codeService.sharedFileContent[this.baseUrl].files.concat(sampleContent.sampleFiles);
         projectFiles.forEach((f: { path: string | number; content: any; }) => {
             files[f.path] = f.content;
         });
