@@ -52,7 +52,7 @@ exports.buildDocfx = (options = {
         applyWarnAsErr = `--warningsAsErrors`;
     }
 
-    return spawn("docfx", ["build", applyWarnAsErr, `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('exit', (err) => {
+    return spawn("dotnet", ["docfx", "build", applyWarnAsErr, `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('exit', (err) => {
         if (err === 4294967295) {
             console.log(`\x1b[31m`, `------------------------------------------------------------------------------------`);
             console.log(`--------------------------- Bookmark/Hyperlink Errors -----------------------------`);

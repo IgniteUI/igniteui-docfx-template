@@ -26,6 +26,7 @@ export class AngularCodeService extends CodeService {
     private demosTimeStamp: number;
     private sharedFileContent: { [url: string]: any } = {};
     private dvSamplesPaths = ['gauges/', 'maps/', 'excel/', 'charts/'];
+    private baseUrl: string;
 
     constructor(private xhrService: XHRService) {
         super();
@@ -51,6 +52,7 @@ export class AngularCodeService extends CodeService {
         if ($codeViewElements.length > 0) {
             this.getDemosBaseUrls($codeViewElements);
             for (const baseUrl of this.demosUrls.keys()) {
+                this.baseUrl = baseUrl;
                 let codeViewsData = this.demosUrls.get(baseUrl)!;
                 this.generateLiveEditingAngularApp(baseUrl, codeViewsData);
 
@@ -206,7 +208,6 @@ export class AngularCodeService extends CodeService {
         const codeService = this;
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             let codeViewFiles: ICodeViewFilesData[], url: string;
-
             /**
              * Selects the explicit editor for the code view and supports "csb" and "stackblitz" as values.
              * <code-view explicit-editor="csb"</code-view>
@@ -235,7 +236,8 @@ export class AngularCodeService extends CodeService {
         return function (this: JQuery.UrlAjaxSettings, data: any) {
             const files = data.files;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
-            codeService.sharedFileContent = data;
+            codeService.sharedFileContent[demosBaseUrl] = data;
+            
 
             if (cb) {
                 cb();
@@ -316,7 +318,7 @@ export class AngularCodeService extends CodeService {
         const files: FileDictionary = {};
         let codesandboxSharedFiles = [];
         if (!$button.hasClass(codeService.stkbButtonClass)) {
-            codesandboxSharedFiles = this.removeCodesandboxRedundantFiles(codeService.sharedFileContent.files)
+            codesandboxSharedFiles = this.removeCodesandboxRedundantFiles(codeService.sharedFileContent[this.baseUrl].files)
         }
         let formData = {
             dependencies: sampleContent.sampleDependencies,
@@ -324,7 +326,7 @@ export class AngularCodeService extends CodeService {
             devDependencies: codeService.sharedFileContent.devDependencies
         }
 
-        const projectFiles = codeService.sharedFileContent.files.concat(sampleContent.sampleFiles);
+        const projectFiles = codeService.sharedFileContent[this.baseUrl].files.concat(sampleContent.sampleFiles);
         projectFiles.forEach((f: { path: string | number; content: any; }) => {
             files[f.path] = f.content;
         });
@@ -494,4 +496,5 @@ export class AngularCodeService extends CodeService {
         fileInput.appendTo(form)
         return form;
     }
+
 }
