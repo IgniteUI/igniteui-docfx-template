@@ -227,12 +227,21 @@
 				margin-left: rem(30px);
 			}
 
+			a.preview:not(.sidenav__header) {
+				padding: rem(7px) rem(75px) rem(7px) 0;
+				margin-left: rem(30px);
+			}
+
+			a.beta:not(.sidenav__header) {
+				padding: rem(7px) rem(75px) rem(7px) 0;
+				margin-left: rem(30px);
+			}
+
 			> .new {
 				padding: 0;
 			}
-
-			.new__badge,
-			.updated__badge {
+			
+			.badge {
 				position: absolute;
 				top: 50%;
 				right: rem(5px);
@@ -255,7 +264,7 @@
 				}
 
 				&.new {
-					.new__badge, .updated__badge {
+					.badge {
 						right: rem(-11px);
 					}
 				}
