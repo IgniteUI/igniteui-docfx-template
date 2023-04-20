@@ -147,16 +147,20 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         });
 
         $<HTMLAnchorElement>(".toc .nav > li > a").on('click', (e) => {
-            e.preventDefault();
-            let $a = this.getActiveAnchor($(e.target));
-
-            if ($a.is(":not([href])")) {
-                $a.parent().toggleClass(this.expanded);
-                return;
-            } else if ($a.is(".active")) return;
-
-            this.setActive($a, false);
-            this.router.navigateTo($a.attr("href")!, {stateAction: "push", adjustTocScrollPosition: false})
+            if(e.ctrlKey || e.metaKey){
+                window.open($(e.currentTarget).attr('href'), '_blank');
+            } else {
+                e.preventDefault();
+                let $a = this.getActiveAnchor($(e.target));
+    
+                if ($a.is(":not([href])")) {
+                    $a.parent().toggleClass(this.expanded);
+                    return;
+                } else if ($a.is(".active")) return;
+    
+                this.setActive($a, false);
+                this.router.navigateTo($a.attr("href")!, {stateAction: "push", adjustTocScrollPosition: false})
+            }
         });
 
         $(".clear-icon").on("click", (e: any) => {
