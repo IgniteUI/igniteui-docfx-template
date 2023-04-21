@@ -147,7 +147,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
         });
 
         $<HTMLAnchorElement>(".toc .nav > li > a").on('click', (e) => {
-            if(e.ctrlKey || e.metaKey){
+            if (e.ctrlKey || e.metaKey){
                 window.open($(e.currentTarget).attr('href'), '_blank');
             } else {
                 e.preventDefault();
