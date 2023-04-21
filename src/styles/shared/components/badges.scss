@@ -10,27 +10,27 @@
 	font-weight: $badge-font-weight;
 }
 
-.new--badge {
+.badge--badge--new {
 	color: $new-badge-color;
 	background: $new-badge-bg;
 }
 
-.updated--badge {
+.badge--updated {
 	color: $updated-badge-color;
 	background: $updated-badge-bg;
 }
 
-.preview--badge {
+.badge--preview {
 	color: $preview-badge-color;
 	background: $preview-badge-bg;
 }
 
-.beta--badge {
+.badge--beta {
 	color: $beta-badge-color;
 	background: $beta-badge-bg;
 }
 
-.new--badge {
+.badge--new {
 	border-radius: $badge-radius;
 	color: $new-badge-color;
 	background: $new-badge-bg;
