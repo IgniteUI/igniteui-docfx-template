@@ -41,7 +41,7 @@ full license information.}}
                 <span class="topic-name">{{name}}</span>
                 {{#withBadge}}
                     {{^leaf}}
-                        <span class="{{labelType}}__badge">{{labelText}}</span>
+                        <span class="badge badge--{{labelType}}">{{labelText}}</span>
                     {{/leaf}}
                 {{/withBadge}}
             </a>
@@ -50,13 +50,13 @@ full license information.}}
             <a class="{{labelType}}">
             <span class="topic-name">{{name}}</span>
             {{#withBadge}}
-                    <span class="{{labelType}}__badge">{{labelText}}</span>
+                    <span class="badge badge--{{labelType}}">{{labelText}}</span>
             {{/withBadge}}
             </a>
         {{/topicHref}} 
         {{#withBadge}}
             {{#leaf}}
-                    <span class="{{labelType}}__badge">{{labelText}}</span>
+                    <span class="badge badge--{{labelType}}">{{labelText}}</span>
             {{/leaf}}
         {{/withBadge}}
         {{^leaf}}

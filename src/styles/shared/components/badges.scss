@@ -1,5 +1,4 @@
-.new__badge,
-.updated__badge {
+.badge {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -11,17 +10,27 @@
 	font-weight: $badge-font-weight;
 }
 
-.new__badge {
+.badge--new {
 	color: $new-badge-color;
 	background: $new-badge-bg;
 }
 
-.updated__badge {
+.badge--updated {
 	color: $updated-badge-color;
 	background: $updated-badge-bg;
 }
 
-.new__badge {
+.badge--preview {
+	color: $preview-badge-color;
+	background: $preview-badge-bg;
+}
+
+.badge--beta {
+	color: $beta-badge-color;
+	background: $beta-badge-bg;
+}
+
+.badge--new {
 	border-radius: $badge-radius;
 	color: $new-badge-color;
 	background: $new-badge-bg;

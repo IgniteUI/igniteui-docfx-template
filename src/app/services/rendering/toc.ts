@@ -184,7 +184,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
             // Get leaf nodes
             $<HTMLAnchorElement>("#toc li>a")
                 .filter((i: number, e: HTMLAnchorElement) => {
-                    return $(e).siblings().not('.new__badge').length === 0 || $(e).siblings().not('.updated__badge').length === 0;
+                    return $(e).siblings().not('.badge--new, .badge--updated, .badge--beta, .badge--preview').length === 0;
                 })
                 .each((i: number, anchor: HTMLAnchorElement) => {
                     let text = $(anchor).attr("title");
@@ -217,7 +217,7 @@ export class TocRenderingService extends RenderingService implements ResizableOb
 
             $($("#toc li>a")
                 .filter((i, e) => {
-                    return $(e).siblings().not('.new__badge').length > 0 && $(e).siblings().not('.updated__badge').length > 0;
+                    return $(e).siblings().not('.badge--new, .badge--updated, .badge--beta, .badge--preview').length > 0;
                 }).get().reverse())
                 .each((i, anchor) => {
                     let parent = $(anchor).parent();
