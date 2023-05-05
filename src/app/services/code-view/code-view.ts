@@ -34,6 +34,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
             $sampleContainer: JQuery<HTMLElement>,
             $exampleTab: JQuery<HTMLElement>,
             $fullscreenButton: JQuery<HTMLElement>;
+        let frameSrc = $(this.element).attr('iframe-src');
 
         //Init the main elements
         $iframe = $(this.element.find('iframe'));
@@ -61,7 +62,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
   
         //Create fullscreen button and add it to the code view navbar
         $fullscreenButton = $((util.isIE ? "<span class='fs-button-container' style='width: 35px'><i class='material-icons code-view-fullscreen'>open_in_full</i></span>" : "<span class='fs-button-container' title='Expand to fullscreen'></span>"));
-        $fullscreenButton.on('click', function () { window.open($iframe.attr("src") || $iframe.attr("data-src")) });
+        $fullscreenButton.on('click', function () { window.open($iframe.attr("src") || $iframe.attr("data-src") || frameSrc ) });
         $fullscreenButton.appendTo($navbar);
   
         //Render the code view widget
