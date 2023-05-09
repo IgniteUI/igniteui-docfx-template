@@ -283,7 +283,7 @@ export class ArticleRenderingService extends RenderingService {
             }).width("100%").height("100%");
 
             if (i === 0) {
-                if (imgSrc) {
+                if (imgSrc) { 
                     const img = $('<img>').attr({'src': imgSrc, "alt": alt!}).width("100%").height("100%");
                     sampleContainer.append(img);
                     sampleContainer.removeClass("loading");
@@ -305,6 +305,10 @@ export class ArticleRenderingService extends RenderingService {
                 }
 
                 iframe.attr("src", iframeSrc);
+
+                if (!imgSrc) {
+                    iframe.appendTo(sampleContainer);
+                }
             }else {
                 iframe.attr("class","lazyload");
                 iframe.attr("data-src", iframeSrc);
