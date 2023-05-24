@@ -387,7 +387,7 @@ export class ArticleRenderingService extends RenderingService {
         $(".anchorjs-link").on("click", (evt) => {
             evt.preventDefault();
             util.scroll($(evt?.target)?.attr("href")!);
-            if($(evt?.target)?.attr("href")! !== location.hash)
+            if ($(evt?.target)?.attr("href")! !== location.hash)
                 history.pushState({scrollPosition: $(window).scrollTop()}, "", $(evt?.target)?.attr("href")!);
         });
     }
