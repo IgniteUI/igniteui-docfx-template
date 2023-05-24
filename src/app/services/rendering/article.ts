@@ -78,7 +78,7 @@ export class ArticleRenderingService extends RenderingService {
                     e.preventDefault();
 
                     $("#toc a.active").closest("li").addClass("active");
-                    if($anchor.attr("href")?.startsWith("#")) {
+                    if ($anchor.attr("href")?.startsWith("#")) {
                         util.scroll($anchor.attr("href"));
                         if($anchor.attr("href") !== location.hash)
                             history.pushState({scrollPosition: $(window).scrollTop()}, "", $anchor.attr("href"));
