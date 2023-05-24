@@ -70,28 +70,28 @@ export class ArticleRenderingService extends RenderingService {
     // Removes the html extension of the anchors and adds event listeners for internal routing
     private configureInternalNavigation() {
         $('.article-container a:not([href^="http"])')
-        .each( (index, anchor) => {
-            let $anchor = $(anchor).is("a") ? $(anchor) : $(anchor).closest("a");
-            let anchorHref = $anchor.attr('href');
+            .each( (index, anchor) => {
+                let $anchor = $(anchor).is("a") ? $(anchor) : $(anchor).closest("a");
+                let anchorHref = $anchor.attr('href');
 
-            $anchor.on('click', (e) => {
-                e.preventDefault();
-        
-                $("#toc a.active").closest("li").addClass("active");
-                if($anchor.attr("href")?.startsWith("#")) {
-                    util.scroll($anchor.attr("href"));
-                    if($anchor.attr("href") !== location.hash) 
-                    history.pushState({scrollPosition: $(window).scrollTop()}, "", $anchor.attr("href"));
-                } else {
-                    this.router.navigateTo($anchor.attr("href")!, this.navigationOptions);
-                    
+                $anchor.on('click', (e) => {
+                    e.preventDefault();
+
+                    $("#toc a.active").closest("li").addClass("active");
+                    if ($anchor.attr("href")?.startsWith("#")) {
+                        util.scroll($anchor.attr("href"));
+                        if ($anchor.attr("href") !== location.hash)
+                            history.pushState({scrollPosition: $(window).scrollTop()}, "", $anchor.attr("href"));
+                    } else {
+                        this.router.navigateTo($anchor.attr("href")!, this.navigationOptions);
+
+                    }
+                });
+
+                if (util.removeHTMLExtensionFromUrl && anchorHref) {
+                    $anchor.attr('href', anchorHref.replace(".html", ""));
                 }
             });
-
-            if (util.removeHTMLExtensionFromUrl && anchorHref) {
-                $anchor.attr('href', anchorHref.replace(".html", ""));
-            }
-        });
     }
 
     private addGtmButtons() {
@@ -265,42 +265,63 @@ export class ArticleRenderingService extends RenderingService {
 
         let views = $("code-view");
         for (let i = 0; i < views.length; i++) {
-          const currentView = views[i];
-          const style = $(currentView).attr("style")!;
-          const iframeSrc = $(currentView).attr("iframe-src")!;
-          const alt = $(currentView).attr("alt");
-          const themable = $(currentView).is("[no-theming]") ? true : false;
+            const currentView = views[i];
+            const style = $(currentView).attr("style")!;
+            const iframeSrc = $(currentView).attr("iframe-src")!;
+            const alt = $(currentView).attr("alt");
+            const imgSrc = $(currentView).attr("img-src");
+            const themable = $(currentView).is("[no-theming]") ? true : false;
 
-          $(currentView).removeAttr("style");
+            $(currentView).removeAttr("style");
 
-          let sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content loading");
-          let iframe = $<HTMLIFrameElement>('<iframe>', {
-            id: 'sample-iframe-id-' +  i,
-            frameborder: 0,
-            seamless: ""
-          }).width("100%").height("100%");
+            let sampleContainer = $('<div>').attr("style",style).addClass("sample-container code-view-tab-content loading");
+            let iframe = $<HTMLIFrameElement>('<iframe>', {
+                id: 'sample-iframe-id-' + i,
+                frameborder: 0,
+                seamless: "",
+                title: alt
+            }).width("100%").height("100%");
 
-          if (i === 0){
-            if (platform === "angular" ){
-              iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => onSampleIframeContentLoaded(event.target));
+            if (i === 0) {
+                if (imgSrc) { 
+                    const img = $('<img>').attr({'src': imgSrc, "alt": alt!}).width("100%").height("100%");
+                    sampleContainer.append(img);
+                    sampleContainer.removeClass("loading");
+                    sampleContainer.attr("style", "")
+
+                    // Replace image with iframe on mouse enter
+                    img.on("mouseenter", function () {
+                        if (i === 0) {
+                            img.replaceWith(iframe);
+                            sampleContainer.attr("style", style)
+                            sampleContainer.addClass("loading");
+                        }
+                    });
+                }
+                if (platform === "angular") {
+                    iframe.on("load", (event: JQuery.Event & { target: HTMLIFrameElement }) => onSampleIframeContentLoaded(event.target));
+                } else {
+                    iframe.on("load", (event: JQuery.Event & { target: HTMLIFrameElement }) => onXPlatSampleIframeContentLoaded(event.target));
+                }
+
+                iframe.attr("src", iframeSrc);
+
+                if (!imgSrc) {
+                    iframe.appendTo(sampleContainer);
+                }
             }else {
-              iframe.on("load", (event: JQuery.Event & {target: HTMLIFrameElement}) => onXPlatSampleIframeContentLoaded(event.target));
+                iframe.attr("class","lazyload");
+                iframe.attr("data-src", iframeSrc);
+                iframe.appendTo(sampleContainer);
             }
 
-            iframe.attr("src", iframeSrc);
-          }else {
-            iframe.attr("class","lazyload");
-            iframe.attr("data-src", iframeSrc);
-          }
+            if (alt) iframe.attr("alt", alt);
+            if (themable) iframe.addClass("no-theming");
 
-          if (alt) iframe.attr("alt", alt);
-          if (themable) iframe.addClass("no-theming");
-
-          iframe.appendTo(sampleContainer);
-          sampleContainer.appendTo(currentView);
-          $(currentView).codeView({iframeId : i});
+            sampleContainer.appendTo(currentView);
+            $(currentView).codeView({iframeId : i});
         }
-      }
+    }
 
     private addCtaBanners() {
         const languageVersion: string = $('html')[0].lang;
@@ -353,8 +374,9 @@ export class ArticleRenderingService extends RenderingService {
         const header = $(".article-container h2")[headerIndex], divTag = $('<div>');
         divTag.addClass('dfx-seo-banner');
         const imgTag = $('<img>').css('width', '100%');
-        $(imgTag).attr("src", imagePath)
-        $(imgTag).attr("loading", "lazy")
+        $(imgTag).attr("src", imagePath);
+        $(imgTag).attr("alt", label);
+        $(imgTag).attr("loading", "lazy");
         const link = this.appendLinkAttributes(action, label, productLink);
         link.append(imgTag);
         $(divTag).append(link);
@@ -365,7 +387,7 @@ export class ArticleRenderingService extends RenderingService {
         $(".anchorjs-link").on("click", (evt) => {
             evt.preventDefault();
             util.scroll($(evt?.target)?.attr("href")!);
-            if($(evt?.target)?.attr("href")! !== location.hash) 
+            if ($(evt?.target)?.attr("href")! !== location.hash)
                 history.pushState({scrollPosition: $(window).scrollTop()}, "", $(evt?.target)?.attr("href")!);
         });
     }
@@ -384,9 +406,9 @@ export class ArticleRenderingService extends RenderingService {
             accContentd.on("click", (e: JQuery.Event & {target: HTMLElement}) => {
                 let el;
                 if(!$(e.target).is(".faqs-accordion-content")) {
-                  el =  $(e.target).closest(".faqs-accordion-content");
+                    el =  $(e.target).closest(".faqs-accordion-content");
                 } else {
-                  el = $(e.target);
+                    el = $(e.target);
                 }
                 el.toggleClass("active");
                 let panel = el.find(".faqs-accordion-panel")[0];
