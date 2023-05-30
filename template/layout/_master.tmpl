@@ -27,17 +27,17 @@
     </header>
 
     <div id="main" role="main" class="container-fluid">
-        <div class="row body-content docfx-content {{#_isReveal}} row-reveal {{/_isReveal}}">
+        <div class="body-content docfx-content {{#_isReveal}} row-reveal {{/_isReveal}}">
             {{#_enableSearch}}
-                <div class="container body-content">
+                <div class="body-content">
                     {{>partials/searchResults}}
                 </div>
             {{/_enableSearch}}
-            <div class="sidenav-container col-lg-2 col-md-2">
+            <div class="sidenav-container">
                 {{>partials/toc}}
             </div>
 
-            <div class="article-container null-opacity col-lg-8 col-md-9 col-sm-12 hide-when-search resizable-content" id="_article-content-wrapper">
+            <div class="article-container null-opacity resizable-content" id="_article-content-wrapper">
                 {{#slingshotTheme}}
                     {{^_disableBreadcrumb}} {{>partials/breadcrumb}} {{/_disableBreadcrumb}}
                 {{/slingshotTheme}}

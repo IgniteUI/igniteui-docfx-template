@@ -468,3 +468,37 @@ div.embeddedvideo {
 		display: none;
 	}
 }
+
+/* Grid Rows */
+.docfx-content {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-gap: 20px;
+}
+
+/* Sidebar Navigation */
+.sidenav-container {
+	grid-column: 1 / span 2;
+}
+
+/* Main Article Content */
+.article-container {
+	grid-column: 3 / span 8;
+	margin-right: 20px;
+}
+
+/* Affix (Sticky Sidebar) */
+.docfx-affix {
+	grid-column: 11 / span 2;
+}
+
+/* Footer */
+footer {
+	grid-column: 1 / span 12;
+}
+
+@media screen and (max-width: 991px) {
+	.docfx-content {
+		display: flex;
+	}
+}

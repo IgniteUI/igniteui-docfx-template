@@ -22,7 +22,6 @@
 
 .article-container {
 	position: relative;
-	left: 16.66666667%;
 	height: 100%;
 	padding: 24px;
 	margin-bottom: 10px;
@@ -30,6 +29,20 @@
 	@media screen and (max-width: 991px) {
 		left: 0;
 	}
+}
+
+@media (min-width: 1200px) and (max-width: 1570px) {
+	.article-container {
+		grid-column: 3/span 8;
+		left: 3.2rem;
+	} 
+}
+
+@media (min-width: 991px) and (max-width: 1199px) {
+	.article-container {
+		grid-column: 3/span 10;
+		left: 3.2rem;
+	} 
 }
 
 a[href^="#"] {
