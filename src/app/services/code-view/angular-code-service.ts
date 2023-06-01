@@ -259,7 +259,6 @@ export class AngularCodeService extends CodeService {
         const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
         let demoFileMetadataPath = '';
         if (dvSamplePath) {
-            demoFileMetadataName = demoFileMetadataName.replace(dvSamplePath, "");
             demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
         } else if (demosBaseUrl + "/" === sampleUrl) {
             demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${this.crmFileMetadataName}.json`;
