@@ -125,15 +125,32 @@ export class AngularCodeService extends CodeService {
     }
 
     private getAngularGitHubSampleUrl(editor: string, sampleUrl: string, branch: string) {
+        if (util.isLocalhost) {
+            branch = 'vNext';
+        }
         if (editor === "stackblitz") return `https://stackblitz.com/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}`;
-        return `https://codesandbox.io/s/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}?fontsize=14&hidenavigation=1&theme=dark&view=preview`
+        return `https://codesandbox.io/s/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}`
     }
 
     private getGitHubSampleUrl(demosBaseUrl: string, sampleUrl: string) {
         // Get sample application base path
         const projectPath = demosBaseUrl.substring(demosBaseUrl.lastIndexOf("/") + 1)
         let demoPath = sampleUrl.replace(demosBaseUrl + "/", projectPath + "/");
+        if (util.isLocalhost) {
+            demoPath = demoPath.replace(projectPath, 'angular-demos');
+        }
         return demoPath;
+    }
+
+    private openLiveEditingSample($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) {        
+        const codeService = this;
+        codeService.isButtonClickInProgress = true;
+        let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
+        let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!);
+        let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
+        let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
+        window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
+        codeService.isButtonClickInProgress = false;
     }
 
     private onAngularGithubProjectButtonClicked() {
@@ -146,13 +163,7 @@ export class AngularCodeService extends CodeService {
             if ($button.hasClass(codeService.stkbButtonClass)){
                 this.createPostApiFormFromCodeView()
             } else {
-                codeService.isButtonClickInProgress = true;
-                let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
-                let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!);
-                let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
-                let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-                window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
-                codeService.isButtonClickInProgress = false;
+                this.openLiveEditingSample($button, $codeView);
             }
         }
     }
@@ -290,9 +301,13 @@ export class AngularCodeService extends CodeService {
             if (codeService.isButtonClickInProgress) {
                 return;
             }
-            codeService.isButtonClickInProgress = true;
-            let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
-            this.createButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button);
+            if (!$button.hasClass(codeService.stkbButtonClass)) {
+                this.openLiveEditingSample($button, $codeView);
+            } else {
+                codeService.isButtonClickInProgress = true;
+                let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
+                this.createButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button);
+            }
         }
     }
 
@@ -401,13 +416,13 @@ export class AngularCodeService extends CodeService {
 
         // files
         for (let i = 0; i < data.files.length; i++) {
-            let fileInput = $("<input />", {
-                type: "hidden",
-                name: "project[files][" + data.files[i].path + "]",
-                value: data.files[i].content
-            });
-
-            fileInput.appendTo(form);
+                let fileInput = $("<input />", {
+                    type: "hidden",
+                    name: "project[files][" + data.files[i].path + "]",
+                    value: data.files[i].content
+                });
+    
+                fileInput.appendTo(form);
         }
 
         // tags
