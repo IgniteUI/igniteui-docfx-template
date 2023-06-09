@@ -111,9 +111,6 @@ export const sharedFiles = {
         }
       }
       `,
-    ".codesandbox/Dockerfile": `
-        FROM node:18
-    `,
     "environments/environment.ts": `
         export const environment = {
             production: true,
@@ -283,28 +280,6 @@ export const sharedFiles = {
      * Need to import at least one locale-data with intl.
      */
     // import 'intl/locale-data/jsonp/en';
-    `,
-    ".stackblitzrc": `
-        {"installDependencies":true,"startCommand":"turbo start","env":{"ENABLE_CJS_IMPORTS":true}}
-    `,
-    ".codesandbox/tasks.json": `
-    {
-        // These tasks will run in order when initializing your CodeSandbox project.
-        "setupTasks": [
-          {
-            "name": "Install Dependencies",
-            "command": "yarn install"
-          }
-        ],
-          // These tasks can be run from CodeSandbox. Running one will open a log in the app.
-          "tasks": {
-              "node node_modules/@angular/cli/bin/ng serve -o --disable-host-check": {
-                  "name": "Start Project",
-                  "command": "node node_modules/@angular/cli/bin/ng serve -o --disable-host-check",
-                  "runAtStart": true
-              }
-          }
-      }
     `,
     "tsconfig.app.json": `
         /* To learn more about this file see: https://angular.io/config/tsconfig. */
