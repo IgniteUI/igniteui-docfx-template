@@ -113,7 +113,7 @@ export const sharedFiles = {
       `,
     "environments/environment.ts": `
         export const environment = {
-            production: true,
+            production: false,
         };
     `,
     "environments/environment.prod.ts": `

@@ -271,9 +271,8 @@ export class AngularCodeService extends CodeService {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "")
             .replace(/\?[\w\W]+/, '');
 
-        const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
         let demoFileMetadataPath = '';
-        if (dvSamplePath) {
+        if (this.isDvSample(demosBaseUrl, sampleUrl)) {
             demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
         } else if (demosBaseUrl + "/" === sampleUrl) {
             demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${this.crmFileMetadataName}.json`;
@@ -305,18 +304,14 @@ export class AngularCodeService extends CodeService {
                 return;
             }
 
-            const dvSample = this.isDvSample($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
-            if (dvSample) {
-                codeService.isButtonClickInProgress = true;
-                this.createDvButtonForm(codeService.sampleFilesContentByUrl[dvSample], codeService, $button);
+            if (!$button.hasClass(codeService.stkbButtonClass)) {
+                this.openLiveEditingSample($button, $codeView);
             } else {
-                if (!$button.hasClass(codeService.stkbButtonClass)) {
-                    this.openLiveEditingSample($button, $codeView);
-                } else {
-                    codeService.isButtonClickInProgress = true;
-                    let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
+                codeService.isButtonClickInProgress = true;
+                let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
+                this.isDvSample($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!) ?
+                    this.createDvButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button) :
                     this.createButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button);
-                }
             }
         }
     }
@@ -343,18 +338,18 @@ export class AngularCodeService extends CodeService {
         if (sampleContent.addTsConfig) {
             codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig);
         }
-    
+
         const packageJsonContent = sampleContent.sampleFiles.find((e: any) => e.path === 'package.json');
         const filteredFiles: any[] = sampleContent.sampleFiles
-        .filter((sample: any) => sample.path !== "package.json" && sample.path.includes("src"))
-        .map((sample: any) => {
-          let filePath = sample.path.substring(sample.path.indexOf("src"));
-          if (!filePath.includes("/app/")) {
-            filePath = "src/app/" + filePath.split("src/")[1];
-          }
-          return { path: filePath, content: sample.content };
-        });
-    
+            .filter((sample: any) => sample.path !== "package.json" && sample.path.includes("src"))
+            .map((sample: any) => {
+                let filePath = sample.path.substring(sample.path.indexOf("src"));
+                if (!filePath.includes("/app/")) {
+                    filePath = "src/app/" + filePath.split("src/")[1];
+                }
+                return { path: filePath, content: sample.content };
+            });
+
         const packageJson = JSON.parse(packageJsonContent.content);
         const deps = JSON.stringify(packageJson.dependencies);
         const devDeps = JSON.stringify(packageJson.devDependencies);
@@ -362,7 +357,7 @@ export class AngularCodeService extends CodeService {
         const sampleFiles = [...filteredFiles];
         const baseUrlFiles = codeService.sharedFileContent[this.baseUrl].files.filter((e: any) => !filteredFiles.some((k: any) => k.path === e.path));
         sampleFiles.push(...baseUrlFiles);
-    
+
         const projectFileToAdd = Object.entries(sharedFiles)
             .filter(([key]) => !sampleFiles.some((e) => e.path === key))
             .map(([key, value]) => ({ path: key, content: value }));
@@ -405,11 +400,7 @@ export class AngularCodeService extends CodeService {
             .replace(/\?[\w\W]+/, '');
 
         const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
-        let demoFileMetadataPath = '';
-        if (dvSamplePath) {
-            demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
-        }
-        return demoFileMetadataPath;
+        return dvSamplePath ? true : false;
     }
 
     private replaceRelativeAssetsUrls(files: ICodeViewFilesData[], demosBaseUrl: string) {
