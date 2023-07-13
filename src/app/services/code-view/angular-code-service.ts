@@ -4,6 +4,7 @@ import { ExplicitEditor, ICodeViewFilesData, ISampleData } from "../../types";
 import { compressToBase64 } from 'lz-string';
 import { XHRService } from "../jqXHR-tasks";
 import stackblitz from '@stackblitz/sdk';
+import { sharedFiles } from './sharedFiles';
 
 type FileDictionary = {[path: string]: string};
 const PROJECT_TEMPLATE = 'node';
@@ -43,7 +44,7 @@ export class AngularCodeService extends CodeService {
                     let data = this.demosUrls.get(baseUrl)!;
                     this.generateLiveEditingAngularApp(baseUrl, data);
                 }
-            }else {
+            } else {
                 $standaloneliveEditingButtons.on('click', this.onAngularGithubProjectStandaloneButtonClicked());
             }
             this.clearLiveEditingData();
@@ -125,34 +126,45 @@ export class AngularCodeService extends CodeService {
     }
 
     private getAngularGitHubSampleUrl(editor: string, sampleUrl: string, branch: string) {
+        if (util.isLocalhost) {
+            branch = 'vNext';
+        }
         if (editor === "stackblitz") return `https://stackblitz.com/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}`;
-        return `https://codesandbox.io/s/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}?fontsize=14&hidenavigation=1&theme=dark&view=preview`
+        return `https://codesandbox.io/s/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}`
     }
 
     private getGitHubSampleUrl(demosBaseUrl: string, sampleUrl: string) {
         // Get sample application base path
         const projectPath = demosBaseUrl.substring(demosBaseUrl.lastIndexOf("/") + 1)
         let demoPath = sampleUrl.replace(demosBaseUrl + "/", projectPath + "/");
+        if (util.isLocalhost) {
+            demoPath = demoPath.replace(projectPath, 'angular-demos');
+        }
         return demoPath;
+    }
+
+    private openLiveEditingSample($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) {
+        const codeService = this;
+        codeService.isButtonClickInProgress = true;
+        let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
+        let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!);
+        let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
+        let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
+        window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
+        codeService.isButtonClickInProgress = false;
     }
 
     private onAngularGithubProjectButtonClicked() {
         const codeService = this;
 
-        return  ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => {
+        return ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => {
             if (codeService.isButtonClickInProgress) {
                 return;
             }
-            if ($button.hasClass(codeService.stkbButtonClass)){
+            if ($button.hasClass(codeService.stkbButtonClass)) {
                 this.createPostApiFormFromCodeView()
             } else {
-                codeService.isButtonClickInProgress = true;
-                let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
-                let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!);
-                let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
-                let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-                window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
-                codeService.isButtonClickInProgress = false;
+                this.openLiveEditingSample($button, $codeView);
             }
         }
     }
@@ -188,19 +200,19 @@ export class AngularCodeService extends CodeService {
         // prevent caching 
         metaFileUrl += "?t=" + new Date().getTime();
         let metaFileFetch = $.get(metaFileUrl)
-        .done((response: any) => {
-            this.demosTimeStamp = response.generationTimeStamp;
-            for (const sampleData of data) {
-                let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
-                let $codeView = sampleData.codeView;
-                let sampleMetadataFetch = $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView));
-                this.xhrService.pushTask(sampleMetadataFetch);
-            }
-        })
-        .fail(() => {
-            err();
-            throw new Error('Error on fetching sample files!');
-        })
+            .done((response: any) => {
+                this.demosTimeStamp = response.generationTimeStamp;
+                for (const sampleData of data) {
+                    let sampleFileMedata = this.getAngularSampleMetadataUrl(samplesBaseUrl, sampleData.url);
+                    let $codeView = sampleData.codeView;
+                    let sampleMetadataFetch = $.get(sampleFileMedata, this.angularSampleFilePostProcess(samplesBaseUrl, this.removeQueryString, $codeView));
+                    this.xhrService.pushTask(sampleMetadataFetch);
+                }
+            })
+            .fail(() => {
+                err();
+                throw new Error('Error on fetching sample files!');
+            })
         this.xhrService.pushTask(metaFileFetch);
     }
 
@@ -212,20 +224,23 @@ export class AngularCodeService extends CodeService {
              * Selects the explicit editor for the code view and supports "csb" and "stackblitz" as values.
              * <code-view explicit-editor="csb"</code-view>
              */
-            const explicitEditor: ExplicitEditor = $codeView.attr('explicit-editor') as ExplicitEditor;
+            let explicitEditor: ExplicitEditor = $codeView.attr('explicit-editor') as ExplicitEditor;
             const files: ICodeViewFilesData[] = data.sampleFiles;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
             url = this.url;
             url = cb(url);
             codeService.sampleFilesContentByUrl[url] = data;
             codeViewFiles = files.filter(f =>  f.isMain)
-                                 .sort((a: any, b: any) => {
-                                    return codeService.samplesOrder.indexOf(a.fileHeader) - codeService.samplesOrder.indexOf(b.fileHeader);
-                                 });
+                .sort((a: any, b: any) => {
+                    return codeService.samplesOrder.indexOf(a.fileHeader) - codeService.samplesOrder.indexOf(b.fileHeader);
+                });
             if ($codeView[0].nodeName === 'BUTTON') {
                 $codeView.on('click', codeService.standaloneButtonLiveEditingClickHandler);
             }else {
                 $codeView.codeView("createTabsWithCodeViews", codeViewFiles);
+                if (codeService.isDvSample($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!)) {
+                    explicitEditor = "csb";
+                }
                 $codeView.codeView("renderFooter", codeService.codeViewLiveEditingButtonClickHandler, explicitEditor);
             }
         }
@@ -237,7 +252,7 @@ export class AngularCodeService extends CodeService {
             const files = data.files;
             codeService.replaceRelativeAssetsUrls(files, demosBaseUrl);
             codeService.sharedFileContent[demosBaseUrl] = data;
-            
+
 
             if (cb) {
                 cb();
@@ -254,11 +269,10 @@ export class AngularCodeService extends CodeService {
 
     private getAngularSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string) {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "")
-                                            .replace(/\?[\w\W]+/, '');
+            .replace(/\?[\w\W]+/, '');
 
-        const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
         let demoFileMetadataPath = '';
-        if (dvSamplePath) {
+        if (this.isDvSample(demosBaseUrl, sampleUrl)) {
             demoFileMetadataPath = `${demosBaseUrl}${this.demoDVFilesFolderUrlPath}${demoFileMetadataName}.json`;
         } else if (demosBaseUrl + "/" === sampleUrl) {
             demoFileMetadataPath = `${demosBaseUrl}${this.demoFilesFolderUrlPath}${this.crmFileMetadataName}.json`;
@@ -282,16 +296,23 @@ export class AngularCodeService extends CodeService {
             codeService.createButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button)
         }
     }
-    
+
     private createPostApiFormFromCodeView() {
         const codeService = this;
         return ($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) => {
             if (codeService.isButtonClickInProgress) {
                 return;
             }
-            codeService.isButtonClickInProgress = true;
-            let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
-            this.createButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button);
+
+            if (!$button.hasClass(codeService.stkbButtonClass)) {
+                this.openLiveEditingSample($button, $codeView);
+            } else {
+                codeService.isButtonClickInProgress = true;
+                let sampleFileUrl = codeService.getAngularSampleMetadataUrl($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!);
+                this.isDvSample($codeView.attr(codeService.demosBaseUrlAttrName)!, $codeView.attr(codeService.sampleUrlAttrName)!) ?
+                    this.createDvButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button) :
+                    this.createButtonForm(codeService.sampleFilesContentByUrl[sampleFileUrl], codeService, $button);
+            }
         }
     }
 
@@ -299,22 +320,6 @@ export class AngularCodeService extends CodeService {
         if (sampleContent.addTsConfig) {
             codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig)
         }
-        // Live editing pre WebContainers version
-        // let formData = {
-        //     dependencies: sampleContent.sampleDependencies,
-        //     files: codeService.sharedFileContent.files.concat(sampleContent.sampleFiles),
-        //     devDependencies: codeService.sharedFileContent.devDependencies
-        // }
-
-        // let form = $button.hasClass(codeService.stkbButtonClass) ? codeService.createStackblitzForm(formData) :
-        //     codeService.createCodesandboxForm(formData);
-        // form.appendTo($("body"));
-        // form.submit();
-        // form.remove();
-        // codeService.isButtonClickInProgress = false;
-
-        // Live editing implementation with WebContainers
-        const files: FileDictionary = {};
         let codesandboxSharedFiles = [];
         if (!$button.hasClass(codeService.stkbButtonClass)) {
             codesandboxSharedFiles = this.removeCodesandboxRedundantFiles(codeService.sharedFileContent[this.baseUrl].files)
@@ -326,6 +331,49 @@ export class AngularCodeService extends CodeService {
         }
 
         const projectFiles = codeService.sharedFileContent[this.baseUrl].files.concat(sampleContent.sampleFiles);
+        this.handleFromData(projectFiles, formData, codeService, $button);
+    }
+
+    private createDvButtonForm(sampleContent: { [url: string]: any }, codeService: any, $button: JQuery<HTMLButtonElement>) {
+        if (sampleContent.addTsConfig) {
+            codeService.sharedFileContent.files.push(codeService.sharedFileContent.tsConfig);
+        }
+
+        const packageJsonContent = sampleContent.sampleFiles.find((e: any) => e.path === 'package.json');
+        const filteredFiles: any[] = sampleContent.sampleFiles
+            .filter((sample: any) => sample.path !== "package.json" && sample.path.includes("src"))
+            .map((sample: any) => {
+                let filePath = sample.path.substring(sample.path.indexOf("src"));
+                if (!filePath.includes("/app/")) {
+                    filePath = "src/app/" + filePath.split("src/")[1];
+                }
+                return { path: filePath, content: sample.content };
+            });
+
+        const packageJson = JSON.parse(packageJsonContent.content);
+        const deps = JSON.stringify(packageJson.dependencies);
+        const devDeps = JSON.stringify(packageJson.devDependencies);
+
+        const sampleFiles = [...filteredFiles];
+        const baseUrlFiles = codeService.sharedFileContent[this.baseUrl].files.filter((e: any) => !filteredFiles.some((k: any) => k.path === e.path));
+        sampleFiles.push(...baseUrlFiles);
+
+        const projectFileToAdd = Object.entries(sharedFiles)
+            .filter(([key]) => !sampleFiles.some((e) => e.path === key))
+            .map(([key, value]) => ({ path: key, content: value }));
+        const projectFiles = projectFileToAdd.concat(sampleFiles);
+
+        let formData = {
+            dependencies: deps,
+            files: projectFiles,
+            devDependencies: devDeps
+        };
+
+        this.handleFromData(projectFiles, formData, codeService, $button);
+    }
+
+    private handleFromData(projectFiles: any, formData: any, codeService: any, $button: JQuery<HTMLButtonElement>) {
+        const files: FileDictionary = {};
         projectFiles.forEach((f: { path: string | number; content: any; }) => {
             files[f.path] = f.content;
         });
@@ -336,16 +384,23 @@ export class AngularCodeService extends CodeService {
                 title: `Infragistics Angular Components`,
                 description: `Auto-generated from: https://www.infragistics.com/products/ignite-ui-angular/angular`,
                 openFile: exampleMainFile,
-              });
+            });
         } else {
-                let form = codeService.createCodesandboxForm(formData);
-                codeService.createCodesandboxForm(formData);
-                form.appendTo($("body"));
-                form.submit();
-                form.remove();
+            let form = codeService.createCodesandboxForm(formData);
+            form.appendTo($("body"));
+            form.submit();
+            form.remove();
         }
-        
+
         codeService.isButtonClickInProgress = false;
+    }
+
+    private isDvSample(demosBaseUrl: string, sampleUrl: string) {
+        let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "")
+            .replace(/\?[\w\W]+/, '');
+
+        const dvSamplePath = this.dvSamplesPaths.find(p => demoFileMetadataName.includes(p));
+        return dvSamplePath ? true : false;
     }
 
     private replaceRelativeAssetsUrls(files: ICodeViewFilesData[], demosBaseUrl: string) {
@@ -382,11 +437,11 @@ export class AngularCodeService extends CodeService {
 
     private _openStackBlitz({ title, description, openFile, files }: { title: string, description: string, openFile: string, files: FileDictionary }): void {
         stackblitz.openProject({
-          title,
-          files,
-          description,
-          template: PROJECT_TEMPLATE,
-          tags: PROJECT_TAGS,
+            title,
+            files,
+            description,
+            template: PROJECT_TEMPLATE,
+            tags: PROJECT_TAGS,
         }, { openFile });
     }
 
@@ -467,17 +522,22 @@ export class AngularCodeService extends CodeService {
                 "package.json": {
                     "content": {
                         "dependencies": JSON.parse(data.dependencies),
-                        "devDependencies": data.devDependencies
+                        "devDependencies": JSON.parse(data.devDependencies)
                     }
                 }
             }
         };
 
         data.files.forEach((f: any) => {
-            fileToSandbox.files[f["path"].replace("./", "")] = {
-                content: f["content"]
+            if (f.path !== 'package.json') {
+                fileToSandbox.files[f.path.replace("./", "")] = {
+                    content: f["content"]
+                }
             }
         });
+        fileToSandbox.files['src/styles.scss'] = {
+            content: ''
+        }
 
         let form = $("<form />", {
             method: "POST",

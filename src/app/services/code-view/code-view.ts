@@ -195,7 +195,7 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
           $stackblitzB.on("click", () => liveEditingButtonsClickHandler($stackblitzB, $(this.element)));
 
           //Disable live editing buttons
-          $csbB.prop("disabled", true );
+          //$csbB.prop("disabled", true );
           //$stackblitzB.prop("disabled", true );
         } else if (explicitEditor === "stackblitz" || explicitEditor === "csb") {
           let $liveEditingButton = $<HTMLButtonElement>("<button>", {class: this.css[explicitEditor]});
