@@ -1,7 +1,7 @@
 import util from "../utils";
 import { RenderingService, HTMLHighlightedCodeElement, INavigationOptions } from "../../types";;
 import anchors from 'anchor-js';
-import hljs from "highlight.js";
+import hljs from "../highlight-custom";
 import type { IgniteUIPlatform} from '../../types';
 import { onSampleIframeContentLoaded, onXPlatSampleIframeContentLoaded } from "../../handlers";
 import { Router } from "../router";
@@ -156,7 +156,8 @@ export class ArticleRenderingService extends RenderingService {
             hljs.highlightBlock(block);
             const highlightedBlock = <HTMLHighlightedCodeElement>block;
             block = (block as HTMLHighlightedCodeElement);
-            let $span: JQuery<HTMLSpanElement> = $(`<span class="hljs-lang-name">${highlightedBlock.result.language}</span>`);
+            const language = highlightedBlock.result && highlightedBlock.result.language ? highlightedBlock.result.language : block.className.split('-')[1];
+            let $span: JQuery<HTMLSpanElement> = $(`<span class="hljs-lang-name">${language}</span>`);
             let $button: JQuery<HTMLButtonElement> = $('<button data-localize="hljs.copyCode" class="hljs-code-copy hidden"></button>');
             let $codeContainer: JQuery<HTMLPreElement> = $(highlightedBlock).parent() as unknown as JQuery<HTMLPreElement>;
             $codeContainer.append([$span, $button]);
