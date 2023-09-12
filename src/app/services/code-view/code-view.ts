@@ -1,9 +1,7 @@
 import { ExplicitEditor, ICodeViewCSS, ICodeViewElements, ICodeViewEvents, ICodeViewFilesData, ICodeViewMembers, ICodeViewOptions } from '../../types';
-import hljs from "highlight.js";
 import localization from '../localization';
 import util from '../utils';
-const hljsRazor = require('highlightjs-cshtml-razor');
-hljs.registerLanguage("cshtml-razor", hljsRazor);
+import hljs from "../highlight-custom";
 
 
 export class CodeView implements ICodeViewEvents, ICodeViewMembers {
@@ -112,9 +110,6 @@ export class CodeView implements ICodeViewEvents, ICodeViewMembers {
         let language;
 
         switch (f.fileExtension) {
-          case "tsx":
-            language = 'ts';
-            break;
           case "js":
             language = 'javascript';
             break;
