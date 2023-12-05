@@ -125,20 +125,23 @@ export class AngularCodeService extends CodeService {
         this.xhrService.pushTask(sharedFileFetch);
     }
 
-    private getAngularGitHubSampleUrl(editor: string, sampleUrl: string, branch: string) {
+    private getAngularGitHubSampleUrl(editor: string, sampleUrl: string, branch: string, demosBaseUrl: string) {
+        const dvSample = this.isDvSample(demosBaseUrl, sampleUrl);
         if (util.isLocalhost) {
-            branch = 'vNext';
+            branch = dvSample ? 'vnext' : 'vNext';
         }
-        if (editor === "stackblitz") return `https://stackblitz.com/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}`;
-        return `https://codesandbox.io/s/github/IgniteUI/igniteui-live-editing-samples/tree/${branch}/${sampleUrl}`
+        const repositoryPath = dvSample ? 'igniteui-angular-examples/tree/' : 'igniteui-live-editing-samples/tree/';
+        if (editor === "stackblitz") return `https://stackblitz.com/github/IgniteUI/${repositoryPath}${branch}/${sampleUrl}`;
+        return `https://codesandbox.io/s/github/IgniteUI/${repositoryPath}${branch}/${sampleUrl}`;
     }
 
     private getGitHubSampleUrl(demosBaseUrl: string, sampleUrl: string) {
         // Get sample application base path
         const projectPath = demosBaseUrl.substring(demosBaseUrl.lastIndexOf("/") + 1)
         let demoPath = sampleUrl.replace(demosBaseUrl + "/", projectPath + "/");
+
         if (util.isLocalhost) {
-            demoPath = demoPath.replace(projectPath, 'angular-demos');
+            demoPath = this.isDvSample(demosBaseUrl, sampleUrl) ? demoPath.replace(projectPath, 'samples') : demoPath.replace(projectPath, 'angular-demos');
         }
         return demoPath;
     }
@@ -150,7 +153,7 @@ export class AngularCodeService extends CodeService {
         let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!);
         let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
         let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-        window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
+        window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl), '_blank');
         codeService.isButtonClickInProgress = false;
     }
 
@@ -181,7 +184,7 @@ export class AngularCodeService extends CodeService {
             let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $button.attr(codeService.buttonSampleSourceAttrName)!);
             let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
             let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-            window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch), '_blank');
+            window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl), '_blank');
             codeService.isButtonClickInProgress = false;
         }
     }
