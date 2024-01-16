@@ -14,6 +14,7 @@ export class AffixRenderingService extends RenderingService implements Resizable
 
     public reset() {
         this.initialDimension = document.body.clientHeight - (util.offset + util.getFilterHeight());
+        this.showHideAffix();
     }
 
     public handleChange(changeType: DimensionChangeType, newValue: number) {
@@ -22,13 +23,12 @@ export class AffixRenderingService extends RenderingService implements Resizable
     }
 
     public render() {
-        this.renderAffix();
+      this.renderAffix();
     }
 
       //Setup Affix
   private renderAffix() {
     let hierarchy = this.getHierarchy();
-
     if (hierarchy.length > 0) {
       let html = util.formList(hierarchy, "nav", "bs-docs-sidenav")!;
       $("#affix").empty().append(html);
@@ -44,6 +44,7 @@ export class AffixRenderingService extends RenderingService implements Resizable
     } else {
       $("#affix").empty();
     }
+    this.showHideAffix();
   }
 
   //Get the hierarchy of the article based on headers power
@@ -104,4 +105,7 @@ export class AffixRenderingService extends RenderingService implements Resizable
     return hierarchy;
   }
 
+  private showHideAffix() {
+    $(".docfx-affix").css('display', window.innerWidth <= 1200 ? 'none' : 'block');
+  }
 }
