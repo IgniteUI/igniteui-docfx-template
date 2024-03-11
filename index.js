@@ -25,7 +25,7 @@ exports.buildDocfx = (options = {
     }
 
     const globalPreconfigs = preconfigs;
-    let docfxJsonPath = path.normalize(path.join(getPath(options.projectDir), 'docfx.json'));
+    let docfxPath = path.normalize(path.join(getPath(options.projectDir), '/'));
     let docfxPreconfigPath = path.normalize(path.join(getPath(options.projectDir), 'environment.json'));
     let docfxGlobalConfigPath = path.normalize(path.join(getPath(options.projectDir), 'global.json'));
     let globalConfigs = getEnvironmentVariables(docfxGlobalConfigPath);
@@ -52,7 +52,7 @@ exports.buildDocfx = (options = {
         applyWarnAsErr = `--warningsAsErrors`;
     }
 
-    return spawn("dotnet", ["docfx", "build", applyWarnAsErr, `${path.normalize(getPath(docfxJsonPath))}`], { stdio: 'inherit' }).on('exit', (err) => {
+    return spawn("dotnet", ["docfx", "build", applyWarnAsErr], { stdio: 'inherit', cwd: docfxPath }).on('exit', (err) => {
         if (err === 4294967295) {
             console.log(`\x1b[31m`, `------------------------------------------------------------------------------------`);
             console.log(`--------------------------- Bookmark/Hyperlink Errors -----------------------------`);
