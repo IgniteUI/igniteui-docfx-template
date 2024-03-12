@@ -12,48 +12,54 @@
         					<noscript><img src="https://static.infragistics.com/marketing/slingshot/slingshot-icon.svg" alt="Slingshot Badge" role="presentation" width="60" height="60"></noscript>
         				</div>
         				<div class="col-xs-12 col-sm-6 col-md-2">
-        					<h5 class="footer__title mt-3 mt-lg-0">Products</h5>
+        					<h5 class="footer__title mt-3 mt-lg-0">製品</h5>
         					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
-<li><a href="/product-tour">Product Tour</a></li>
-        						<li><a href="/why-slingshot">Why Slingshot?</a></li>
-<li><a href="/security">Security</a></li>
-        						<li><a href="/working-with-google">Working with Google</a></li>
-        						<li><a href="/working-with-office">Working with Office</a></li>
-<li><a href="/pricing">Pricing</a></li>
+<li><a href="/ja/product-tour">製品ツアー</a></li>
+        						<li><a href="/why-slingshot">なぜ Slingshot なのか？</a></li>
+<li><a href="/ja/security">セキュリティ</a></li>
+        						<li><a href="/working-with-google">Google との連携</a></li>
+        						<li><a href="/working-with-office">Office との連携</a></li>
+<li><a href="/ja/pricing">価格</a></li>
         					</ul>
         				</div>
         				<div class="col-xs-12 col-sm-6 col-md-2">
-        					<h5 class="footer__title mt-3 mt-lg-0">Solutions</h5>
+        					<h5 class="footer__title mt-3 mt-lg-0">ソリューション</h5>
         					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
-        						<li><a href="/solutions/marketing">Marketing</a></li>
-<li><a href="/solutions/marketing/abm">ABM</a></li>
-<li><a href="/solutions/marketing/campaign-launch">Campaign Launch</a></li>
-<li><a href="/solutions/marketing/seo-management">SEO</a></li>
-<li><a href="/solutions/hr">Human Resources</a></li>
-<li><a href="/solutions/hr/employee-onboarding">Employee Onboarding</a></li>
+        						<li><a href="/ja/solutions/marketing">マーケティング</a></li>
+<li><a href="/ja/solutions/marketing/abm">ABM</a></li>
+<li><a href="/ja/solutions/marketing/campaign-launch">キャンペーンの開始</a></li>
+<li><a href="/ja/solutions/marketing/seo-management">SEO</a></li>
+<li><a href="/ja/solutions/hr">人事</a></li>
+<li><a href="/ja/solutions/hr/employee-onboarding">従業員のオンボーディング</a></li>
         					</ul>
         				</div>
         				<div class="col-sm-12 clearfix hidden-md hidden-lg"> </div>
         				<div class="col-xs-12 col-sm-6 col-md-2">
-        					<h5 class="footer__title mt-3 mt-lg-0">Resources</h5>
+        					<h5 class="footer__title mt-3 mt-lg-0">リソース</h5>
 
 <ul class="footer__link-list list--li-space-sm pt-1 pl-0">
-        						<li><a href="/learning-center">Learning Center</a></li>
-<li><a href="/blog">Blog</a></li>
-<li><a href="/whitepapers">Whitepapers</a></li>
-<li><a href="/webinars">Webinars</a></li>
+        						<li><a href="/learning-center">学習センター</a></li>
+<li><a href="/ja/blog">ブログ</a></li>
+<li><a href="/forums">フォーラム</a></li>
+<li><a href="/ja/whitepapers">ホワイトペーパー</a></li>
+<li><a href="/ja/webinars">ウェビナー</a></li>
+<li><a href="/ja/faq">よくある質問</a></li>
+<li><a href="/ja/#slingshot-support-request">サポート</a></li>
+<li><a href="https://slingshotacademy.workramp.io/trainings">Slingshot アカデミー</a></li>
+<li><a href="/ja/templates">テンプレート</a></li>
         					</ul>
         				</div>
         				<div class="col-xs-12 col-sm-6 col-md-2">
-        					<h5 class="footer__title mt-3 mt-lg-0">About Us</h5>
+        					<h5 class="footer__title mt-3 mt-lg-0">会社情報</h5>
         					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
-        						<li><a href="/about-us">About Us</a></li>
-        						<li><a href="/about-us#connect">Contact Us</a></li>
+        						<li><a href="/ja/about-us">会社情報</a></li>
+        						<li><a href="/ja/about-us#">お問い合わせ</a></li>
+        						<li><a href="/ja/in-the-news">プレス</a></li>
         					</ul>
 
 <h5 class="footer__title mt-3 mt-lg-4" style="
     margin-top: 2rem;
-">Downloads</h5>
+">ダウンロード</h5>
 <ul class="footer__link-list list--li-space-sm pt-1 pl-0">
         						<li><a href="https://my.slingshotapp.io">Web</a></li>
         						<li><a href="https://apps.apple.com/us/app/id1457353858">iOS</a></li>
@@ -71,10 +77,11 @@
 			<div class="row align-items-center">
 				<div class="footer__legal-links col-12 col-md-5 col-lg-5 mb-4 mb-lg-0 text-center text-lg-left">
 					<ul class="footer-utils__term-links">
-						<li><a href="/privacy-policy">Privacy Policy</a></li>
-						<li><a href="/cookie-policy">Cookies</a></li>
-						<li><a href="/terms-of-use">Terms of Use</a></li>
-                        <li><a href="/license-agreement">License Agreement</a></li>
+						<li><a href="/ja/privacy-policy">プライバシー ポリシー
+</a></li>
+						<li><a href="/ja/cookie-policy">クッキー ポリシー</a></li>
+						<li><a href="/ja/terms-of-use">利用条件</a></li>
+                        <li><a href="/ja/license-agreement">ライセンス契約</a></li>
 					</ul>
 				</div>
 				<div class="footer-utils__apps col-12 col-md-7 col-lg-7 text-center text-lg-right">
@@ -96,7 +103,7 @@
 	<div class="footer footer-copyright slingshot-footer">
 		<div class="container">
 			<div class="row">
-				<p id="copyright" class="m-0 mx-4 d-inline-block">© Copyright 2023 INFRAGISTICS. All Rights Reserved. Slingshot and the Slingshot logo are registered trademarks of Infragistics Inc.</p>
+				<p id="copyright" class="m-0 mx-4 d-inline-block">© Copyright 2024 INFRAGISTICS. All Rights Reserved. Slingshot and the Slingshot logo are registered trademarks of Infragistics Inc.</p>
 			</div>
 		</div>
 	</div>

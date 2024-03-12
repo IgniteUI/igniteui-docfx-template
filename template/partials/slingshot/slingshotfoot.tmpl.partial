@@ -40,8 +40,13 @@
 <ul class="footer__link-list list--li-space-sm pt-1 pl-0">
         						<li><a href="/learning-center">Learning Center</a></li>
 <li><a href="/blog">Blog</a></li>
+<li><a href="/forums">Forums</a></li>
 <li><a href="/whitepapers">Whitepapers</a></li>
 <li><a href="/webinars">Webinars</a></li>
+<li><a href="/faq">FAQs</a></li>
+<li><a href="/#slingshot-support-request">Support</a></li>
+<li><a href="https://slingshotacademy.workramp.io/trainings">Slingshot Academy</a></li>
+<li><a href="/templates">Templates</a></li>
         					</ul>
         				</div>
         				<div class="col-xs-12 col-sm-6 col-md-2">
@@ -49,6 +54,7 @@
         					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
         						<li><a href="/about-us">About Us</a></li>
         						<li><a href="/about-us#connect">Contact Us</a></li>
+        						<li><a href="/in-the-news">Press</a></li>
         					</ul>
 
 <h5 class="footer__title mt-3 mt-lg-4" style="
@@ -95,7 +101,7 @@
 	<div class="footer footer-copyright slingshot-footer">
 		<div class="container">
 			<div class="row">
-				<p id="copyright" class="m-0 mx-4 d-inline-block">© Copyright 2023 INFRAGISTICS. All Rights Reserved. Slingshot and the Slingshot logo are registered trademarks of Infragistics Inc.</p>
+				<p id="copyright" class="m-0 mx-4 d-inline-block">© Copyright 2024 INFRAGISTICS. All Rights Reserved. Slingshot and the Slingshot logo are registered trademarks of Infragistics Inc.</p>
 			</div>
 		</div>
 	</div>
