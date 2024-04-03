@@ -1,0 +1,882 @@
+<div class="navbar mega-sticky-wrapper" style="height: 107px; position: static">
+    <div
+        id="mega-menu-wrap-max_mega_menu_2"
+        class="mega-menu-wrap mega-stuck mega-sticky"
+        style="
+            margin-top: 0px;
+            margin-left: 0px;
+            left: 0px;
+        "
+    >
+        <div class="mega-menu-toggle">
+            <div class="mega-toggle-blocks-left">
+                <div
+                    class="mega-toggle-block mega-logo-block mega-toggle-block-1"
+                    id="mega-toggle-block-1"
+                >
+                    <a
+                        class="mega-menu-logo"
+                        href="https://staging.appbuilder.dev"
+                        target="_self"
+                        rel="noopener"
+                        ><img
+                            width="636"
+                            height="126"
+                            class="mega-menu-logo"
+                            src="https://staging.appbuilder.dev/wp-content/uploads/2024/02/app-builder-logo-use-against-light-with-TM.png"
+                    /></a>
+                </div>
+            </div>
+            <div class="mega-toggle-blocks-center"></div>
+            <div class="mega-toggle-blocks-right">
+                <div
+                    class="mega-toggle-block mega-menu-toggle-animated-block mega-toggle-block-2"
+                    id="mega-toggle-block-2"
+                >
+                    <button
+                        aria-label="Toggle Menu"
+                        class="mega-toggle-animated mega-toggle-animated-slider"
+                        type="button"
+                        aria-expanded="false"
+                    >
+                        <span class="mega-toggle-animated-box">
+                            <span class="mega-toggle-animated-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <ul
+            id="mega-menu-max_mega_menu_2"
+            class="mega-menu max-mega-menu mega-menu-horizontal"
+            data-event="hover_intent"
+            data-effect="fade_up"
+            data-effect-speed="200"
+            data-effect-mobile="disabled"
+            data-effect-speed-mobile="0"
+            data-panel-width="#content"
+            data-mobile-force-width="false"
+            data-second-click="go"
+            data-document-click="collapse"
+            data-vertical-behaviour="standard"
+            data-breakpoint="1280"
+            data-unbind="true"
+            data-mobile-state="collapse_all"
+            data-hover-intent-timeout="300"
+            data-hover-intent-interval="100"
+            data-sticky-enabled="true"
+            data-sticky-desktop="true"
+            data-sticky-mobile="false"
+            data-sticky-offset="0"
+            data-sticky-expand="false"
+            data-sticky-expand-mobile="false"
+            data-sticky-transition="true"
+            style=" margin-left: 0px"
+        >
+            <li
+                class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-hide-on-mobile mega-menu-item-8145"
+                id="mega-menu-item-8145"
+            >
+                <a
+                    class="mega-menu-link mega-menu-logo"
+                    href="https://staging.appbuilder.dev"
+                    ><img
+                        class="mega-menu-logo"
+                        width="181"
+                        height="36"
+                        src="https://staging.appbuilder.dev/wp-content/uploads/2024/02/app-builder-logo-use-against-light-with-TM-181x36.png"
+                        srcset="
+                            https://staging.appbuilder.dev/wp-content/uploads/2024/02/app-builder-logo-use-against-light-with-TM-362x72.png 2x
+                        "
+                /></a>
+            </li>
+            <li
+                class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-grid mega-menu-item-8114 border-bottom-m"
+                id="mega-menu-item-8114"
+            >
+                <a
+                    class="mega-menu-link"
+                    href="#"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    tabindex="0"
+                    >Platform<span
+                        class="mega-indicator"
+                        data-has-click-event="true"
+                    ></span
+                ></a>
+                <ul class="mega-sub-menu" style="left: 0px">
+                    <li
+                        class="mega-menu-row mega-nav-side-padding mega-bg-shadow nav-side-padding bg-shadow"
+                        id="mega-menu-8114-0"
+                    >
+                        <ul class="mega-sub-menu">
+                            <li
+                                class="mega-menu-column mega-menu-columns-3-of-12 mega-menu-clear"
+                                id="mega-menu-8114-0-0"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-6"
+                                        id="mega-menu-item-custom_html-6"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <h6
+                                                class="text-uppercase mb-1 nav-page-headings"
+                                            >
+                                                Product
+                                            </h6>
+                                            <hr
+                                                style="
+                                                    float: left;
+                                                    width: 4ch;
+                                                    margin-top: 5px;
+                                                    margin-bottom: 0px;
+                                                    border: 0;
+                                                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                                                "
+                                            />
+                                        </div>
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-9147"
+                                        id="mega-menu-item-9147"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/app-builder-product-page"
+                                            >App Builder</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li
+                                class="mega-menu-column mega-menu-columns-3-of-12"
+                                id="mega-menu-8114-0-1"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-7"
+                                        id="mega-menu-item-custom_html-7"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <h6
+                                                class="text-uppercase mb-1 nav-page-headings"
+                                            >
+                                                FRAMEWORKS
+                                            </h6>
+                                            <hr
+                                                style="
+                                                    float: left;
+                                                    width: 4ch;
+                                                    margin-top: 5px;
+                                                    margin-bottom: 0px;
+                                                    border: 0;
+                                                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                                                "
+                                            />
+                                        </div>
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-9078"
+                                        id="mega-menu-item-9078"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/app-builder-for-blazor"
+                                            >Blazor</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-8841"
+                                        id="mega-menu-item-8841"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/app-builder-for-angular"
+                                            >Angular&nbsp;</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-8886"
+                                        id="mega-menu-item-8886"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/app-builder-for-web-components"
+                                            >Web Components</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8122"
+                                        id="mega-menu-item-8122"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >React</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li
+                                class="mega-menu-column mega-menu-columns-3-of-12 mega-menu-clear"
+                                id="mega-menu-8114-0-2"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-8"
+                                        id="mega-menu-item-custom_html-8"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <h6
+                                                class="text-uppercase mb-1 nav-page-headings"
+                                            >
+                                                PLUGINS
+                                            </h6>
+                                            <hr
+                                                style="
+                                                    float: left;
+                                                    width: 4ch;
+                                                    margin-top: 5px;
+                                                    margin-bottom: 0px;
+                                                    border: 0;
+                                                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                                                "
+                                            />
+                                        </div>
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8123"
+                                        id="mega-menu-item-8123"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >Figma</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8124"
+                                        id="mega-menu-item-8124"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >Sketch</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li
+                                class="mega-menu-column mega-menu-columns-3-of-12"
+                                id="mega-menu-8114-0-3"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-9"
+                                        id="mega-menu-item-custom_html-9"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <h6
+                                                class="text-uppercase mb-1 nav-page-headings"
+                                            >
+                                                FEATURES
+                                            </h6>
+                                            <hr
+                                                style="
+                                                    float: left;
+                                                    width: 4ch;
+                                                    margin-top: 5px;
+                                                    margin-bottom: 0px;
+                                                    border: 0;
+                                                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                                                "
+                                            />
+                                        </div>
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-9077"
+                                        id="mega-menu-item-9077"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/app-builder-components-feature"
+                                            >Components</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-9150"
+                                        id="mega-menu-item-9150"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/app-builder-themes"
+                                            >Themes</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8127"
+                                        id="mega-menu-item-8127"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >Views</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-8842"
+                                        id="mega-menu-item-8842"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/app-builder-data-sources"
+                                            >Data Sources</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mega-menu-row" id="mega-menu-8114-1">
+                        <ul class="mega-sub-menu">
+                            <li
+                                class="mega-menu-column mega-menu-columns-12-of-12 mega-hide-on-mobile"
+                                id="mega-menu-8114-1-0"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-16"
+                                        id="mega-menu-item-custom_html-16"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <div
+                                                class="d-flex text-contact-row"
+                                            >
+                                                <a
+                                                    href="#"
+                                                    class="p-2 mt-1 mega-menu-title text-black"
+                                                    >Contact Us</a
+                                                >
+                                                <p class="p-2 mb-0">|</p>
+                                                <a
+                                                    href="#"
+                                                    class="mt-1 p-2 mega-menu-title text-black ig-show-modal"
+                                                    data-targetid="requestDemo"
+                                                    >Request a Demo</a
+                                                >
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li
+                class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-grid mega-menu-item-8115 border-bottom-m"
+                id="mega-menu-item-8115"
+            >
+                <a
+                    class="mega-menu-link"
+                    href="#"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    tabindex="0"
+                    >Solutions<span
+                        class="mega-indicator"
+                        data-has-click-event="true"
+                    ></span
+                ></a>
+                <ul class="mega-sub-menu" style="left: 0px">
+                    <li
+                        class="mega-menu-row mega-nav-side-padding mega-bg-shadow nav-side-padding bg-shadow"
+                        id="mega-menu-8115-0"
+                    >
+                        <ul class="mega-sub-menu">
+                            <li
+                                class="mega-menu-column mega-menu-columns-4-of-12 mega-menu-clear"
+                                id="mega-menu-8115-0-0"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-10"
+                                        id="mega-menu-item-custom_html-10"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <h6
+                                                class="text-uppercase mb-1 nav-page-headings"
+                                            >
+                                                Use Cases
+                                            </h6>
+                                            <hr
+                                                style="
+                                                    float: left;
+                                                    width: 4ch;
+                                                    margin-top: 5px;
+                                                    margin-bottom: 0px;
+                                                    border: 0;
+                                                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                                                "
+                                            />
+                                        </div>
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-9080"
+                                        id="mega-menu-item-9080"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/cto"
+                                            >CTO</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-9079"
+                                        id="mega-menu-item-9079"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/dev-team-leader"
+                                            >Dev Team Leader</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-solutions mega-menu-item-8832"
+                                        id="mega-menu-item-8832"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/solutions/app-builder-for-enterprise-architects"
+                                            >Enterprise Architect</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-solutions mega-menu-item-8833"
+                                        id="mega-menu-item-8833"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="https://staging.appbuilder.dev/solutions/app-builder-for-developers"
+                                            >Developer</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mega-menu-row" id="mega-menu-8115-1">
+                        <ul class="mega-sub-menu">
+                            <li
+                                class="mega-menu-column mega-menu-columns-12-of-12 mega-hide-on-mobile"
+                                id="mega-menu-8115-1-0"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-14"
+                                        id="mega-menu-item-custom_html-14"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <div
+                                                class="d-flex text-contact-row"
+                                            >
+                                                <a
+                                                    href="#"
+                                                    class="p-2 mt-1 mega-menu-title text-black"
+                                                    >Contact Us</a
+                                                >
+                                                <p class="p-2 mb-0">|</p>
+                                                <a
+                                                    href="#"
+                                                    class="mt-1 p-2 mega-menu-title text-black ig-show-modal"
+                                                    data-targetid="requestDemo"
+                                                    >Request a Demo</a
+                                                >
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li
+                class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-grid mega-menu-item-8116 border-bottom-m"
+                id="mega-menu-item-8116"
+            >
+                <a
+                    class="mega-menu-link"
+                    href="#"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    tabindex="0"
+                    >Resources<span
+                        class="mega-indicator"
+                        data-has-click-event="true"
+                    ></span
+                ></a>
+                <ul class="mega-sub-menu" style="wleft: 0px">
+                    <li
+                        class="mega-menu-row mega-nav-side-padding mega-bg-shadow nav-side-padding bg-shadow"
+                        id="mega-menu-8116-0"
+                    >
+                        <ul class="mega-sub-menu">
+                            <li
+                                class="mega-menu-column mega-menu-columns-3-of-12 mega-menu-clear"
+                                id="mega-menu-8116-0-0"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-11"
+                                        id="mega-menu-item-custom_html-11"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <h6
+                                                class="text-uppercase mb-1 nav-page-headings"
+                                            >
+                                                Learn
+                                            </h6>
+                                            <hr
+                                                style="
+                                                    float: left;
+                                                    width: 4ch;
+                                                    margin-top: 5px;
+                                                    margin-bottom: 0px;
+                                                    border: 0;
+                                                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                                                "
+                                            />
+                                        </div>
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8133"
+                                        id="mega-menu-item-8133"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >Videos</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8134"
+                                        id="mega-menu-item-8134"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="/whitepapers"
+                                            >Whitepapers</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8135"
+                                        id="mega-menu-item-8135"
+                                    >
+                                        <a
+                                            class="mega-menu-link"
+                                            href="/webinars"
+                                            >Webinars</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li
+                                class="mega-menu-column mega-menu-columns-3-of-12"
+                                id="mega-menu-8116-0-1"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-12"
+                                        id="mega-menu-item-custom_html-12"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <h6
+                                                class="text-uppercase mb-1 nav-page-headings"
+                                            >
+                                                Explore
+                                            </h6>
+                                            <hr
+                                                style="
+                                                    float: left;
+                                                    width: 4ch;
+                                                    margin-top: 5px;
+                                                    margin-bottom: 0px;
+                                                    border: 0;
+                                                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                                                "
+                                            />
+                                        </div>
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8136"
+                                        id="mega-menu-item-8136"
+                                    >
+                                        <a class="mega-menu-link" href="/blog"
+                                            >Blog</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8137"
+                                        id="mega-menu-item-8137"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >Sample Apps</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8138"
+                                        id="mega-menu-item-8138"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >Documentation</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li
+                                class="mega-menu-column mega-menu-columns-3-of-12 mega-menu-clear"
+                                id="mega-menu-8116-0-2"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-13"
+                                        id="mega-menu-item-custom_html-13"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <h6
+                                                class="text-uppercase mb-1 nav-page-headings"
+                                            >
+                                                Community
+                                            </h6>
+                                            <hr
+                                                style="
+                                                    float: left;
+                                                    width: 4ch;
+                                                    margin-top: 5px;
+                                                    margin-bottom: 0px;
+                                                    border: 0;
+                                                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                                                "
+                                            />
+                                        </div>
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8139"
+                                        id="mega-menu-item-8139"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >Discord</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8140"
+                                        id="mega-menu-item-8140"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >Twitter</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8141"
+                                        id="mega-menu-item-8141"
+                                    >
+                                        <a class="mega-menu-link" href="#"
+                                            >YouTube</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mega-menu-row" id="mega-menu-8116-1">
+                        <ul class="mega-sub-menu">
+                            <li
+                                class="mega-menu-column mega-menu-columns-12-of-12 mega-hide-on-mobile"
+                                id="mega-menu-8116-1-0"
+                            >
+                                <ul class="mega-sub-menu">
+                                    <li
+                                        class="mega-menu-item mega-menu-item-type-widget widget_custom_html mega-menu-item-custom_html-15"
+                                        id="mega-menu-item-custom_html-15"
+                                    >
+                                        <div
+                                            class="textwidget custom-html-widget"
+                                        >
+                                            <div
+                                                class="d-flex text-contact-row"
+                                            >
+                                                <a
+                                                    href="#"
+                                                    class="p-2 mt-1 mega-menu-title text-black"
+                                                    >Contact Us</a
+                                                >
+                                                <p class="p-2 mb-0">|</p>
+                                                <a
+                                                    href="#"
+                                                    class="mt-1 p-2 mega-menu-title text-black ig-show-modal"
+                                                    data-targetid="requestDemo"
+                                                    >Request a Demo</a
+                                                >
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li
+                class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-align-bottom-left mega-menu-flyout mega-menu-item-8117"
+                id="mega-menu-item-8117"
+            >
+                <a
+                    class="mega-menu-link"
+                    href="https://staging.appbuilder.dev/pricing"
+                    tabindex="0"
+                    >Pricing</a
+                >
+            </li>
+            <li
+                class="mega-float-right mega-text-center mega-trackCTA mega-mt-lg-3 mega-ig-show-modal mega-w-m-100 mega-my-2 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-8143 float-right text-center trackCTA mt-lg-3 ig-show-modal w-m-100 my-2"
+                id="mega-menu-item-8143"
+            >
+                <a
+                    href="#"
+                    class="btn btn-primary w-m-100 trackCTA ig-show-modal px-3"
+                    style="font-size: larger"
+                    data-targetid="requestDemo"
+                    >Book a Demo</a
+                >
+            </li>
+            <li
+                class="mega-float-right mega-my-2 mega-mt-lg-3 mega-w-m-100 mega-btn mega-btn-primary mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-8144 float-right my-2 mt-lg-3 w-m-100 btn btn-primary"
+                id="mega-menu-item-8144"
+            >
+                <a
+                    href="#"
+                    class="btn btn-secondary px-3 w-m-100 trackCTA ig-show-modal ml-0"
+                    style="font-size: larger"
+                    >Try App Builder for Free</a
+                >
+            </li>
+            <li
+                class="mega-float-right mega-my-2 mega-my-lg-0 mega-w-m-100 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-align-bottom-left mega-menu-flyout mega-has-icon mega-icon-left mega-hide-text mega-menu-item-8147 float-right my-2 my-lg-0 w-m-100"
+                id="mega-menu-item-8147"
+            >
+                <a
+                    class="mega-custom-icon mega-menu-link"
+                    href="#"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    tabindex="0"
+                    aria-label="LangBar"
+                    ><span
+                        class="mega-indicator"
+                        data-has-click-event="true"
+                    ></span
+                ></a>
+                <ul class="mega-sub-menu">
+                    <li
+                        class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8148 col-6"
+                        id="mega-menu-item-8148"
+                    >
+                        <a class="mega-menu-link" href="#">English (USA)</a>
+                    </li>
+                    <li
+                        class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8149 col-6"
+                        id="mega-menu-item-8149"
+                    >
+                        <a class="mega-menu-link" href="#">English (UK)</a>
+                    </li>
+                    <li
+                        class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8150 col-6"
+                        id="mega-menu-item-8150"
+                    >
+                        <a class="mega-menu-link" href="#">Spanish</a>
+                    </li>
+                    <li
+                        class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8151 col-6"
+                        id="mega-menu-item-8151"
+                    >
+                        <a class="mega-menu-link" href="#">Japanese</a>
+                    </li>
+                    <li
+                        class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8152 col-6"
+                        id="mega-menu-item-8152"
+                    >
+                        <a class="mega-menu-link" href="#">Korean</a>
+                    </li>
+                </ul>
+            </li>
+            <li
+                class="mega-float-right mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-has-icon mega-icon-left mega-hide-text mega-hide-on-mobile mega-menu-item-8142 float-right"
+                id="mega-menu-item-8142"
+            >
+                <div class="mega-search-wrap">
+                    <form
+                        class="mega-search expand-to-left mega-search-closed"
+                        role="search"
+                        action="https://staging.appbuilder.dev/"
+                    >
+                        <input
+                            type="text"
+                            tabindex="-1"
+                            role="searchbox"
+                            id="mega-search-8142"
+                            aria-label="Search..."
+                            data-placeholder="Search..."
+                            name="s"
+                            placeholder=""
+                        /><span
+                            tabindex="0"
+                            role="button"
+                            class="search-icon"
+                            aria-controls="mega-search-8142"
+                            aria-label="Search"
+                            aria-expanded="false"
+                            aria-haspopup="true"
+                        ></span
+                        ><input type="submit" value="Search" />
+                    </form>
+                </div>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-hide-on-desktop mega-menu-item-8554" id="mega-menu-item-8554">
+                <div class="d-flex justify-content-evenly text-black" style="background:#e9e9f5 !important; font-weight: bold;">
+                        <a href="#" class="p-2 mega-menu-title text-black">Contact Us</a>
+                        <p class="p-2 mb-0">|</p>
+                        <a href="#" class="p-2 mega-menu-title text-black">Request a Demo</a>
+                </div>
+            </li>
+            <li
+                class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-hide-on-mobile mega-menu-item-8864"
+                id="mega-menu-item-8864"
+            >
+                <div class="d-flex justify-content-evenly text-black">
+                    <a
+                        href="#"
+                        class="p-2 pt-lg-3 mega-menu-title font-weight-normal text-black"
+                        >Contact Us</a
+                    ><a
+                        href="#"
+                        class="p-2 pt-lg-3 font-weight-normal mega-menu-title text-black"
+                        >Sign In</a
+                    >
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div id="footer-container">
+    {{{_appFooter}}}
+    {{^_appFooter}}
+    
+    {{#_isLangEn}} 
+        {{>partials/appbuilder/appbuilderfoot}}
+    {{/_isLangEn}} 
+    
+    {{#_isLangJa}}
+        {{>partials/appbuilder/appbuilderfoot.ja}}
+    {{/_isLangJa}}
+    {{/_appFooter}}
+</div>

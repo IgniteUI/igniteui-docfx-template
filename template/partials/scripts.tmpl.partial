@@ -14,4 +14,14 @@ full license information.}}
 <script type="text/javascript" src="https://infragistics.com/assets/modern/scripts/plugins.nav.js"></script>
 <script type="text/javascript" src="https://infragistics.com/assets/modern/scripts/navigation.js"></script>
 <script src="https://use.typekit.net/zhy2hpz.js"></script>
+
+{{#_isAppBuilder}}
+<script type="text/javascript" src="https://staging.appbuilder.dev/wp-includes/js/hoverIntent.min.js?ver=1.10.2"></script>
+<script id="megamenu-js-extra">
+var megamenu = {"timeout":"300","interval":"100"};
+</script>
+<script src="https://staging.appbuilder.dev/wp-content/plugins/megamenu/js/maxmegamenu.js?ver=3.3.1" id="megamenu-js"></script>
+<script src="https://staging.appbuilder.dev/wp-content/plugins/megamenu-pro/assets/public.js?ver=2.3.1.1" id="megamenu-pro-js"></script>
+<script src="https://staging.appbuilder.dev/wp-content/themes/slingshot/js/sf.common.js?ver=1" id="script-sf-validation-js"></script>
+{{/_isAppBuilder}}
 <script>try { Typekit.load({ async: true }); } catch (e) { }</script>

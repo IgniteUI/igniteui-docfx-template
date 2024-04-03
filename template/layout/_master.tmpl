@@ -21,6 +21,10 @@
             {{^_disableNavbar}} {{>partials/slingshot/navbar}} {{/_disableNavbar}}
         {{/slingshotTheme}}
 
+        {{#appbuilderTheme}}
+            {{^_disableNavbar}} {{>partials/appbuilder/navbar}} {{/_disableNavbar}}
+        {{/appbuilderTheme}}
+
         {{#igniteuiTheme}}
             {{^_disableNavbar}} {{>partials/navbar}} {{/_disableNavbar}}
         {{/igniteuiTheme}}
@@ -62,6 +66,10 @@
     {{#slingshotTheme}}
         {{^_disableFooter}} {{>partials/slingshot/footer}} {{/_disableFooter}}
     {{/slingshotTheme}}
+
+    {{#appbuilderTheme}}
+        {{^_disableFooter}} {{>partials/appbuilder/footer}} {{/_disableFooter}}
+    {{/appbuilderTheme}}
 
     {{#igniteuiTheme}}
         {{^_disableFooter}} {{>partials/footer}} {{/_disableFooter}}

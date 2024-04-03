@@ -8,7 +8,8 @@ module.exports = {
   entry: {
     main: './src/app/docfx.ts',
     igniteui: './src/styles/ignite-ui/main.scss',
-    slingshot: './src/styles/slingshot/main.scss'
+    slingshot: './src/styles/slingshot/main.scss',
+    appbuilder: './src/styles/appbuilder/main.scss'
   },
   externals: {
     jquery: 'jQuery'

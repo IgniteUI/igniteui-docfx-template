@@ -60,7 +60,7 @@ exports.transform = function (model) {
     } else if (model._platform === "appbuilder") {
       model._isAppBuilder = true;
       model._isIgnite = true;
-      model._showHelloBar = true;
+      model._showHelloBar = false;
     } else if (model._platform === "blazor") {
       model._isBlazor = true;
       model._isIgnite = true;

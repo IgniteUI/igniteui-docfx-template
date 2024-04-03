@@ -78,7 +78,7 @@
 	display: none !important;
 }
 
-.btn-secondary {
+.btn-secondary:not(.px-3) {
 	padding: 0px 8px 0px 0px !important;
 	color: #9d9d9d; 
 	font-size: 0.825rem;
