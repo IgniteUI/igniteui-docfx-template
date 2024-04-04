@@ -1,0 +1,96 @@
+@import '~highlight.js/scss/vs2015.scss';
+@import '../shared/mixins';
+@import './variables';
+@import '../shared/global';
+
+@media (max-width: 991px) {
+  .sidenav-container {
+    max-width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .article-container {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1281px) {
+    .mega-sticky-wrapper{
+      height: 120px !important;
+    }
+    #mega-menu-wrap-max_mega_menu_2{
+        height: 120px !important;
+    }
+}
+
+@media only screen and (max-width: 1281px) {
+  .mega-sticky-wrapper{
+    height: unset !important;
+  }
+  #mega-menu-wrap-max_mega_menu_2{
+      height: unset !important;
+  }
+}
+
+@media only screen and (max-width: 1281px) {
+  #main{
+      padding-top: rem(16px);
+  }
+}
+
+#mega-menu-wrap-max_mega_menu_2 {
+  background: white;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav-page-headings {
+  margin-top: unset;
+}
+
+@media only screen and (max-width: 1281px) {
+  .w-m-100 {
+    width: 100% !important;
+    padding-left: rem(16px) !important;
+    padding-right: rem(16px) !important;
+  }
+}
+
+.anchorjs-link {
+  font-size: rem(26px);
+}
+
+.affix ul > li > a {
+	font-size: rem(14px) !important;
+}
+
+.sidenav__header {
+  font-size: rem(14px) !important;
+}
+
+#LblacceptGDPRFormSubmission_2 > p {
+  display: block;
+  text-align: left;
+  padding: 0px;
+  white-space: normal;
+}
+.footer {
+  background: #282561 !important;
+  padding: 0;
+}
+
+.footer.footer-utils {
+  background: #19193d !important;
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+.footer.footer-copyright {
+  background: #19193d !important;
+  color: #999 !important;
+  padding: 0 0 1rem !important;
+  text-align: center !important;
+}
+
+p {
+  font-size: rem(20px); 
+}

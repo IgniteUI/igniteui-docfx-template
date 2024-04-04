@@ -1,0 +1,53 @@
+@import '../ignite-ui/variables';
+
+$link-decoration: none;
+
+// Font
+$global-font-family: 'Nunito-Sans', sans-serif;
+$global-font-weight: 400;
+$global-radius: 0;
+$global-line-height: 24px;
+
+// Text
+$text-base: #0a0a0a;
+$text-light: #fff;
+$text-dim-light: #ddd;
+$black: #000;
+$text-dark: #222;
+$title-color: $text-base;
+  
+// Toc
+$toc-font-size: rem(14px);
+
+// h1
+$h1-f-family: "Figtree", sans-serif;
+$h1-f-size: 56px;
+$h1-f-weight: bold;
+$h1-l-height: 56px;
+$h1-m-top: 36px;
+$h1-m-bottom: 30px;
+
+// h2
+$h2-f-family: "Figtree", sans-serif;
+$h2-f-size: 48px;
+$h2-f-weight: bold;
+$h2-l-height: 55px;
+$h2-m-top: 36px;
+$h2-m-bottom: 16px;
+
+// h3
+$h3-f-family: "Figtree", sans-serif;
+
+// h4
+$h4-f-family: "Figtree", sans-serif;
+
+// h5
+$h5-f-family: "Figtree", sans-serif;
+
+// h6
+$h6-f-family: "Figtree", sans-serif;
+$h6-f-weight: normal;
+
+// Paragraph
+$p-l-height: 30px;
+$p-m-bottom: 1.5rem;

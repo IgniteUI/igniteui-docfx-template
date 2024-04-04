@@ -43,6 +43,153 @@ full license information.}}
     <link rel="stylesheet" href="https://infragistics.com/css/navigation.css">
     <link rel="stylesheet" href="https://infragistics.com/css/footer.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    {{#_isAppBuilder}}
+        <!-- Menu styles -->
+        <link rel='stylesheet' id='megamenu-css' href='https://staging.appbuilder.dev/wp-content/uploads/maxmegamenu/style.css?ver=631e5d' media='all' />
+        <link rel='stylesheet' id='dashicons-css' href='https://staging.appbuilder.dev/wp-includes/css/dashicons.min.css' media='all' />
+        <link rel='stylesheet' id='megamenu-genericons-css' href='https://staging.appbuilder.dev/wp-content/plugins/megamenu-pro/icons/genericons/genericons/genericons.css' media='all' />
+        <link rel='stylesheet' id='megamenu-fontawesome6-css' href='https://staging.appbuilder.dev/wp-content/plugins/megamenu-pro/icons/fontawesome6/css/all.min.css' media='all' />
+
+        <!-- General site and bootstrap styles -->
+        <link rel='stylesheet' id='bootstrap-reboot-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_reboot.css' media='all' />
+        <link rel='stylesheet' id='bootstrap-reboot-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_type.css' media='all' />
+        <link rel='stylesheet' id='bootstrap-grid-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_grid.css' media='all' />
+        <link rel='stylesheet' id='bootstrap-buttons-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_buttons.css' media='all' />
+        <link rel='stylesheet' id='bootstrap-forms-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_forms.css' media='all' />
+        <link rel='stylesheet' id='bootstrap-input-group-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_input-group.css' media='all' />
+        <link rel='stylesheet' id='bootstrap-custom-forms-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_custom-forms.css' media='all' />
+        <link rel='stylesheet' id='bootstrap-utilities-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_utilities.css' media='all' />
+        <link rel='stylesheet' id='ig-modal-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/ig-modal.css' media='all' />
+        <link rel='stylesheet' id='main-styles-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/styles.css' media='all' />
+        <link href="https://fonts.googleapis.com/css?family=Figtree:300,400,700&amp;display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+        <script>
+            var includeContent = (function() {
+            'use strict';
+
+            var domain = window.location.origin.includes('staging') || window.location.origin.includes('localhost') ? 'https://staging.appbuilder.dev' : 'https://www.appbuilder.dev';
+            var sourcesURL = `${domain}/header-footer-export`;
+
+            function _getContent(){
+                var request = new XMLHttpRequest();
+                request.open('GET', sourcesURL, true);
+                request.onload = function() {
+                if (request.status >= 200 && request.status < 400) {
+                    var resp = request.responseText;  
+                    var parser = new DOMParser();
+                    var htmlDoc = parser.parseFromString(resp, 'text/html');
+
+                    _includeHeader(htmlDoc).then(
+                    function(){
+                        //Mega menu init
+                        jQuery('.max-mega-menu').maxmegamenu();
+                    }
+                    ).then(
+                    function(){
+                        //Search form toggle
+                        document.querySelector('.mega-search .search-icon').onclick = function(){_siteSearchToggle()};
+                        document.querySelector('.mega-search input[type=text]').onblur = function(){_siteSearchToggle()};
+                    }
+                    );
+                    _includeFooter(htmlDoc).then(
+                    //Contact sales form (in modal) init
+                    function(){
+                            var settings = {
+                                macro: "LeadTracker",
+                                lang: "en",
+                                leadFormID: "lead-form_2",
+                                reaptchaKey: "6Lc-MFAaAAAAAIWi7UOrSUfUZnVmDUSsXjzS4BgY",
+                                redirectUrl: "",
+                                thankYouMessage: "1",
+                                formContainerId: "modal-contact-sales-pricing",
+                                productCode: "B7",
+                                leadProductCode: "",
+                                packageName: "",
+                                productResourceType: "",
+                                osSupport: "",
+                                installerType: "",
+                                eventTypeParam: "contact sales",
+                                eventDetailParam: "form submitted",
+                                prohibitFreeMail: true,
+                                showRequestDemo: false,
+                                googleEventType: "Form Submit",
+                                googleEventLabel: "Slingshot - Contact Sales Pricing",
+                                googleEventTypeDownload: "",
+                                googleEventLabelDownload: "",
+                                zoomWebinarId: ""
+                            };
+                            leadTracker.execute(settings);
+                    }
+                    ).then(
+                    //Modal plugin init
+                    customModal.init()
+                    )
+                } else {}
+                };
+                request.onerror = function() {};
+                request.send();
+            }
+
+            async function _includeHeader(html){
+
+                //Header
+                //Removing "Demo request" modal (if exists)
+                if (typeof(html.getElementById('requestDemo')) != 'undefined' && html.getElementById('requestDemo') != null) {
+                html.getElementById('requestDemo').remove(); 
+                }
+
+                //Set header
+                document.querySelector('header').parentNode.replaceChild(html.querySelector('header'), document.querySelector('header'));
+            }
+
+            async function _includeFooter(html){
+                //Contact sales modal
+                document.body.append(html.getElementById('contactSales'));
+
+                //Footer
+                document.querySelector('footer').parentNode.replaceChild(html.querySelector('footer'), document.querySelector('footer'));
+            }
+
+            function _siteSearchToggle(e){
+
+                var form = document.querySelector('.mega-search'),
+                    formInput = document.querySelector('.mega-search input[type=text]'),
+                    searchIcon = document.querySelector('.mega-search .search-icon');
+
+                if ( form.classList.contains('mega-search-open') ) {
+                form.classList.remove('mega-search-open');
+                form.classList.add('mega-search-closed');
+                formInput.setAttribute('placeholder', '');
+                formInput.value = '';
+                formInput.setAttribute('tabindex', 0);
+                
+                } else {
+                form.classList.remove('mega-search-closed');
+                form.classList.add('mega-search-open');
+                formInput.setAttribute('placeholder', 'Search...');
+                formInput.focus();
+                formInput.setAttribute('tabindex', -1);
+                }
+            }
+
+            function includeSources(){
+                _getContent();
+            }
+
+            return {
+                processInclude:includeSources
+            };
+            })();
+
+            window.addEventListener('load', function(){
+            includeContent.processInclude();
+            });
+
+            </script>
+    {{/_isAppBuilder}}
+
     <link rel="stylesheet" href="{{_rel}}bundles/{{_globalStyle}}">
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

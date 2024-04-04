@@ -46,7 +46,9 @@ const generateBundlingGlobalMetadata = (done, dev=false) => {
                             {name:"lunr-search", ext: "js"},
                             {name:"runtime", ext: "js"},
                             {name:"igniteui", ext: "css"},
-                            {name:"slingshot", ext: "css"}] 
+                            {name:"slingshot", ext: "css"},
+                            {name:"appbuilder", ext: "css"},
+                        ] 
     if(!dev) {
         outputBuildFiles = fs.readdirSync(path.join(__dirname, WEBPACK_BUILD_DIST));
     }
