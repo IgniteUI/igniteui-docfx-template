@@ -48,11 +48,12 @@ full license information.}}
         <!-- Menu styles -->
         <link rel='stylesheet' id='megamenu-css' href='https://staging.appbuilder.dev/wp-content/uploads/maxmegamenu/style.css?ver=631e5d' media='all' />
         <link rel='stylesheet' id='dashicons-css' href='https://staging.appbuilder.dev/wp-includes/css/dashicons.min.css' media='all' />
-        <link rel='stylesheet' id='megamenu-google-fonts-css' href='//fonts.googleapis.com/css?family=Nunito+Sans%3A400%2C700&#038;ver=0907b9ceb69b8b12a2b174202382a57d' media='all' />
-        <link rel='stylesheet' id='megamenu-genericons-css' href='/wp-content/plugins/megamenu-pro/icons/genericons/genericons/genericons.css' media='all' />
-        <link rel='stylesheet' id='megamenu-fontawesome6-css' href='/wp-content/plugins/megamenu-pro/icons/fontawesome6/css/all.min.css' media='all' />
+        <link rel='stylesheet' id='megamenu-genericons-css' href='https://staging.appbuilder.dev/wp-content/plugins/megamenu-pro/icons/genericons/genericons/genericons.css' media='all' />
+        <link rel='stylesheet' id='megamenu-fontawesome6-css' href='https://staging.appbuilder.dev/wp-content/plugins/megamenu-pro/icons/fontawesome6/css/all.min.css' media='all' />
 
         <!-- General site and bootstrap styles -->
+        <link rel='stylesheet' id='bootstrap-reboot-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_reboot.css' media='all' />
+        <link rel='stylesheet' id='bootstrap-reboot-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_type.css' media='all' />
         <link rel='stylesheet' id='bootstrap-grid-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_grid.css' media='all' />
         <link rel='stylesheet' id='bootstrap-buttons-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_buttons.css' media='all' />
         <link rel='stylesheet' id='bootstrap-forms-css' href='https://staging.appbuilder.dev/wp-content/themes/slingshot/css/bootstrap.v4.4/_forms.css' media='all' />
@@ -64,27 +65,6 @@ full license information.}}
         <link href="https://fonts.googleapis.com/css?family=Figtree:300,400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
         
-        <!-- jquery -->
-        <script src="/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
-        <script src="/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
-
-        <!-- site JS -->
-        <script src="/wp-content/themes/slingshot/js/plugins.js?ver=1" id="script-plugins-js"></script>
-        <script src="/wp-content/themes/slingshot/js/script.js?ver=1" id="script-main-js"></script>
-
-        <!-- menu js -->
-        <script src="/wp-includes/js/hoverIntent.min.js?ver=1.10.2" id="hoverIntent-js"></script>
-        <script id="megamenu-js-extra">
-        var megamenu = {"timeout":"300","interval":"100"};
-        </script>
-        <script src="/wp-content/plugins/megamenu-pro/assets/public.js?ver=2.3.1.1" id="megamenu-pro-js"></script>
-        <script src="/wp-content/plugins/megamenu/js/maxmegamenu.js?ver=3.3.1" id="megamenu-js"></script>
-        <script src="/wp-content/plugins/megamenu-pro/assets/public.js?ver=2.3.1.1" id="megamenu-pro-js"></script>
-
-        <!-- contact form js -->
-        <script src="/wp-content/themes/slingshot/js/sf.common.js?ver=1" id="script-sf-validation-js"></script>
-        <script src="https://www.google.com/recaptcha/api.js?render=6Lc-MFAaAAAAAIWi7UOrSUfUZnVmDUSsXjzS4BgY&amp;ver=1" id="script-recaptcha-js"></script>
-        <script src="/wp-content/themes/slingshot/js/leadTracker.js?ver=1" id="script-sf-lead-tracker-js"></script>
     {{/_isAppBuilder}}
 
     <link rel="stylesheet" href="{{_rel}}bundles/{{_globalStyle}}">

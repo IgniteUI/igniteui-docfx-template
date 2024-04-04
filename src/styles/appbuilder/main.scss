@@ -43,6 +43,30 @@
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
+.nav-page-headings {
+  margin-top: unset;
+}
+
+@media only screen and (max-width: 1281px) {
+  .w-m-100 {
+    width: 100% !important;
+    padding-left: rem(16px) !important;
+    padding-right: rem(16px) !important;
+  }
+}
+
+.anchorjs-link {
+  font-size: rem(26px);
+}
+
+.affix ul > li > a {
+	font-size: rem(14px) !important;
+}
+
+.sidenav__header {
+  font-size: rem(14px) !important;
+}
+
 .footer {
   background: #282561 !important;
   padding: 0;
@@ -59,4 +83,8 @@
   color: #999 !important;
   padding: 0 0 1rem !important;
   text-align: center !important;
+}
+
+p {
+  font-size: rem(20px); 
 }
