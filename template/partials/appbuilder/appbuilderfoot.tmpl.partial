@@ -21,7 +21,7 @@
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
           <h4 class="footer__title mt-3 mt-lg-0">Resources</h4>
           <ul class="footer__link-list list--li-space-sm pt-1 pl-0">						
-            <li><a href="#">Documentation</a></li>
+            <li><a href=/help/getting-started">Documentation</a></li>
             <li><a target="_blank" href="https://discord.gg/YCv7HvUVv8" rel="noopener">Discord</a></li>
             <li><a href="/webinars">Webinars</a></li>
             <li><a href="/blog">Blogs</a></li>

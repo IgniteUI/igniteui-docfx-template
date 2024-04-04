@@ -146,7 +146,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/app-builder-product-page"
+                                            href="/platform"
                                             >App Builder</a
                                         >
                                     </li>
@@ -187,7 +187,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/app-builder-for-blazor"
+                                            href="/blazor-app-builder"
                                             >Blazor</a
                                         >
                                     </li>
@@ -197,7 +197,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/app-builder-for-angular"
+                                            href="/angular-app-builder"
                                             >Angular&nbsp;</a
                                         >
                                     </li>
@@ -207,16 +207,8 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/app-builder-for-web-components"
+                                            href="/web-components-app-builder"
                                             >Web Components</a
-                                        >
-                                    </li>
-                                    <li
-                                        class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8122"
-                                        id="mega-menu-item-8122"
-                                    >
-                                        <a class="mega-menu-link" href="#"
-                                            >React</a
                                         >
                                     </li>
                                 </ul>
@@ -254,7 +246,7 @@
                                         class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8123"
                                         id="mega-menu-item-8123"
                                     >
-                                        <a class="mega-menu-link" href="#"
+                                        <a class="mega-menu-link" href="/figma-to-code"
                                             >Figma</a
                                         >
                                     </li>
@@ -262,7 +254,7 @@
                                         class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8124"
                                         id="mega-menu-item-8124"
                                     >
-                                        <a class="mega-menu-link" href="#"
+                                        <a class="mega-menu-link" href="/sketch-to-code"
                                             >Sketch</a
                                         >
                                     </li>
@@ -303,7 +295,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/app-builder-components-feature"
+                                            href="/components"
                                             >Components</a
                                         >
                                     </li>
@@ -313,7 +305,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/app-builder-themes"
+                                            href="/themes"
                                             >Themes</a
                                         >
                                     </li>
@@ -321,7 +313,7 @@
                                         class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8127"
                                         id="mega-menu-item-8127"
                                     >
-                                        <a class="mega-menu-link" href="#"
+                                        <a class="mega-menu-link" href="/views"
                                             >Views</a
                                         >
                                     </li>
@@ -331,7 +323,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/app-builder-data-sources"
+                                            href="/data-sources"
                                             >Data Sources</a
                                         >
                                     </li>
@@ -363,7 +355,7 @@
                                                 >
                                                 <p class="p-2 mb-0">|</p>
                                                 <a
-                                                    href="#"
+                                                    href="/request-a-demo"
                                                     class="mt-1 p-2 mega-menu-title text-black ig-show-modal"
                                                     data-targetid="requestDemo"
                                                     >Request a Demo</a
@@ -433,7 +425,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/cto"
+                                            href="/cto"
                                             >CTO</a
                                         >
                                     </li>
@@ -443,7 +435,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/dev-team-leader"
+                                            href="/dev-team-leader"
                                             >Dev Team Leader</a
                                         >
                                     </li>
@@ -453,7 +445,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/solutions/app-builder-for-enterprise-architects"
+                                            href="/enterprise-architect"
                                             >Enterprise Architect</a
                                         >
                                     </li>
@@ -463,7 +455,7 @@
                                     >
                                         <a
                                             class="mega-menu-link"
-                                            href="https://staging.appbuilder.dev/solutions/app-builder-for-developers"
+                                            href="/developer"
                                             >Developer</a
                                         >
                                     </li>
@@ -495,7 +487,7 @@
                                                 >
                                                 <p class="p-2 mb-0">|</p>
                                                 <a
-                                                    href="#"
+                                                    href="/request-a-demo"
                                                     class="mt-1 p-2 mega-menu-title text-black ig-show-modal"
                                                     data-targetid="requestDemo"
                                                     >Request a Demo</a
@@ -563,7 +555,7 @@
                                         class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8133"
                                         id="mega-menu-item-8133"
                                     >
-                                        <a class="mega-menu-link" href="#"
+                                        <a class="mega-menu-link" href="https://www.youtube.com/playlist?list=PLOGR0CfDif28Q5UUvGXIh-bIfKCH19XJ7"
                                             >Videos</a
                                         >
                                     </li>
@@ -630,7 +622,7 @@
                                         class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8137"
                                         id="mega-menu-item-8137"
                                     >
-                                        <a class="mega-menu-link" href="#"
+                                        <a class="mega-menu-link" href="/samples"
                                             >Sample Apps</a
                                         >
                                     </li>
@@ -638,7 +630,7 @@
                                         class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8138"
                                         id="mega-menu-item-8138"
                                     >
-                                        <a class="mega-menu-link" href="#"
+                                        <a class="mega-menu-link" href="/help/getting-started"
                                             >Documentation</a
                                         >
                                     </li>
@@ -677,7 +669,7 @@
                                         class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8139"
                                         id="mega-menu-item-8139"
                                     >
-                                        <a class="mega-menu-link" href="#"
+                                        <a class="mega-menu-link" href="https://discord.com/YCv7HvUVv8"
                                             >Discord</a
                                         >
                                     </li>
@@ -685,7 +677,7 @@
                                         class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8140"
                                         id="mega-menu-item-8140"
                                     >
-                                        <a class="mega-menu-link" href="#"
+                                        <a class="mega-menu-link" href="https://twitter.com/appbuilder_dev"
                                             >Twitter</a
                                         >
                                     </li>
@@ -693,7 +685,7 @@
                                         class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8141"
                                         id="mega-menu-item-8141"
                                     >
-                                        <a class="mega-menu-link" href="#"
+                                        <a class="mega-menu-link" href="https://www.youtube.com/channel/UC8cj8_eJROxAXsOjhbvduLw"
                                             >YouTube</a
                                         >
                                     </li>
@@ -725,7 +717,7 @@
                                                 >
                                                 <p class="p-2 mb-0">|</p>
                                                 <a
-                                                    href="#"
+                                                    href="/request-a-demo"
                                                     class="mt-1 p-2 mega-menu-title text-black ig-show-modal"
                                                     data-targetid="requestDemo"
                                                     >Request a Demo</a
@@ -745,7 +737,7 @@
             >
                 <a
                     class="mega-menu-link"
-                    href="https://staging.appbuilder.dev/pricing"
+                    href="/pricing"
                     tabindex="0"
                     >Pricing</a
                 >
@@ -755,7 +747,7 @@
                 id="mega-menu-item-8143"
             >
                 <a
-                    href="#"
+                    href="/request-a-demo"
                     class="btn btn-primary w-m-100 trackCTA ig-show-modal px-3"
                     style="font-size: larger"
                     data-targetid="requestDemo"
@@ -767,7 +759,7 @@
                 id="mega-menu-item-8144"
             >
                 <a
-                    href="#"
+                    href="https://my.appbuilder.dev/"
                     class="btn btn-secondary px-3 w-m-100 trackCTA ig-show-modal ml-0"
                     style="font-size: larger"
                     >Try App Builder for Free</a
@@ -794,31 +786,25 @@
                         class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8148 col-6"
                         id="mega-menu-item-8148"
                     >
-                        <a class="mega-menu-link" href="#">English (USA)</a>
-                    </li>
-                    <li
-                        class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8149 col-6"
-                        id="mega-menu-item-8149"
-                    >
-                        <a class="mega-menu-link" href="#">English (UK)</a>
+                        <a class="mega-menu-link" href="#">English</a>
                     </li>
                     <li
                         class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8150 col-6"
                         id="mega-menu-item-8150"
                     >
-                        <a class="mega-menu-link" href="#">Spanish</a>
+                        <a class="mega-menu-link" href="/es">Spanish</a>
                     </li>
                     <li
                         class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8151 col-6"
                         id="mega-menu-item-8151"
                     >
-                        <a class="mega-menu-link" href="#">Japanese</a>
+                        <a class="mega-menu-link" href="/ja">Japanese</a>
                     </li>
                     <li
                         class="mega-col-6 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8152 col-6"
                         id="mega-menu-item-8152"
                     >
-                        <a class="mega-menu-link" href="#">Korean</a>
+                        <a class="mega-menu-link" href="/ko">Korean</a>
                     </li>
                 </ul>
             </li>
@@ -858,7 +844,7 @@
                 <div class="d-flex justify-content-evenly text-black" style="background:#e9e9f5 !important; font-weight: bold;">
                         <a href="#" class="p-2 mega-menu-title text-black">Contact Us</a>
                         <p class="p-2 mb-0">|</p>
-                        <a href="#" class="p-2 mega-menu-title text-black">Request a Demo</a>
+                        <a href="/request-a-demo" class="p-2 mega-menu-title text-black">Request a Demo</a>
                 </div>
             </li>
             <li
@@ -871,7 +857,7 @@
                         class="p-2 pt-lg-3 mega-menu-title font-weight-normal text-black"
                         >Contact Us</a
                     ><a
-                        href="#"
+                        href="https://my.appbuilder.dev/"
                         class="p-2 pt-lg-3 font-weight-normal mega-menu-title text-black"
                         >Sign In</a
                     >
