@@ -15,10 +15,10 @@
         					<h5 class="footer__title mt-3 mt-lg-0">製品</h5>
         					<ul class="footer__link-list list--li-space-sm pt-1 pl-0">
 <li><a href="/ja/product-tour">製品ツアー</a></li>
-        						<li><a href="/why-slingshot">なぜ Slingshot なのか？</a></li>
+        						<li><a href="/ja/why-slingshot">なぜ Slingshot なのか？</a></li>
 <li><a href="/ja/security">セキュリティ</a></li>
-        						<li><a href="/working-with-google">Google との連携</a></li>
-        						<li><a href="/working-with-office">Office との連携</a></li>
+        						<li><a href="/ja/working-with-google">Google との連携</a></li>
+        						<li><a href="/ja/working-with-office">Office との連携</a></li>
 <li><a href="/ja/pricing">価格</a></li>
         					</ul>
         				</div>
@@ -38,7 +38,7 @@
         					<h5 class="footer__title mt-3 mt-lg-0">リソース</h5>
 
 <ul class="footer__link-list list--li-space-sm pt-1 pl-0">
-        						<li><a href="/learning-center">学習センター</a></li>
+        						<li><a href="/ja/learning-center">学習センター</a></li>
 <li><a href="/ja/blog">ブログ</a></li>
 <li><a href="/forums">フォーラム</a></li>
 <li><a href="/ja/whitepapers">ホワイトペーパー</a></li>
