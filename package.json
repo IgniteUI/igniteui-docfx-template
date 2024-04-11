@@ -42,7 +42,7 @@
     "lunr-languages": "^1.8.0",
     "lz-string": "^1.4.4",
     "mark.js": "^8.11.1",
-    "npm": "^9.6.2",
+    "npm": "^10.5.2",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.6.7",
     "slash": "^3.0.0",
