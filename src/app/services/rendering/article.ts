@@ -341,7 +341,7 @@ export class ArticleRenderingService extends RenderingService {
             imagePath = languageVersion === 'en' ? INDIGO_DESIGN_CTA_BANNER : JP_INDIGO_DESIGN_CTA_BANNER;
         } else if (productLink.includes("appbuilder")) {
             action = 'Learn More';
-            productLink = "https://www.infragistics.com/products/appbuilder";
+            productLink = "https://www.appbuilder.dev/help";
             imagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
         } else if (productLink.includes("web-components")) {
             imagePath = languageVersion === 'en' ? WEB_COPONENTS_CTA_BANNER : JP_WEB_COPONENTS_CTA_BANNER;
@@ -360,7 +360,7 @@ export class ArticleRenderingService extends RenderingService {
 
             if ($(".article-container h2")[4]){
                 const builderImagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
-                const аppbuilderLink = 'https://www.infragistics.com/products/appbuilder';
+                const аppbuilderLink = 'https://www.appbuilder.dev/help';
                 action = 'Learn More';
                 this.appendBanner(4, аppbuilderLink, builderImagePath, action, 'App Builder | CTA Banner');
             }
