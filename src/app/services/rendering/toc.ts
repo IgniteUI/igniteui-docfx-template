@@ -190,7 +190,6 @@ export class TocRenderingService extends RenderingService implements ResizableOb
                     let text = $(anchor).attr("title");
                     let parent = $(anchor).parent() as unknown as JQuery<HTMLLIElement>;
                     let parentNodes: JQuery<HTMLLIElement>[] = parent.parents<HTMLLIElement>("ul>li") as unknown as JQuery<HTMLLIElement>[];
-                    let latest = parentNodes.length > 0 ? parentNodes[parentNodes.length - 1] : parent;
                     for (let i = 0; i < parentNodes.length; i++) {
                         let parentText;
                         let parentNode = $(parentNodes[i]);
