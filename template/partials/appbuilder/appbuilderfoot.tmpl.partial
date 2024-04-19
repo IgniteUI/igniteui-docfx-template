@@ -1,0 +1,92 @@
+<footer id="footer" class="footer pt-5">
+  <div class="container">
+    <div class="row text-center text-xs-center text-sm-left text-md-left pt-4 m-auto justify-content-between">
+      <!-- Footer links -->
+      <div class="col-12 col-md text-center text-lg-left mb-5 mb-lg-0">
+        <a href="/">
+          <img src="https://static.infragistics.com/marketing/app-builder/shared/app-builder-logo-use-against-dark-with-TM.svg" alt="App Builder logo" role="presentation" width="200" height="40">
+        </a>
+      </div>
+      <div class="row justify-content-end col-xs-12 col-sm-12 col-md-12 col-lg-9">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+          <h4 class="footer__title mt-3 mt-lg-0">Solutions</h4>
+          <ul class="footer__link-list list--li-space-sm pt-1 pl-0">
+            <li><a href="/cto">CTO</a></li>
+            <li><a href="/dev-team-leader">Dev Team Leader</a></li>
+            <li><a href="/enterprise-architect">Enterprise Architect</a></li>
+            <li><a href="/developer">Developer</a></li>
+            <li><a href="/samples">Samples</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+          <h4 class="footer__title mt-3 mt-lg-0">Resources</h4>
+          <ul class="footer__link-list list--li-space-sm pt-1 pl-0">						
+            <li><a href=/help/getting-started">Documentation</a></li>
+            <li><a target="_blank" href="https://discord.gg/YCv7HvUVv8" rel="noopener">Discord</a></li>
+            <li><a href="/webinars">Webinars</a></li>
+            <li><a href="/blog">Blogs</a></li>
+            <li><a href="/whitepapers">Whitepapers</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-auto">
+          <h4 class="footer__title mt-3 mt-lg-0">About Us</h4>
+          <ul class="footer__link-list list--li-space-sm pt-1 pl-0">
+            <li><a href="/about-us">About Us</a></li>
+            <li><a class="ig-show-modal" data-targetid="contactSales" href="#">Contact Us</a></li>
+            <li class="d-none"><a title="App Builder in the press" href="/in-the-news">Press</a></li>
+            <li class="d-none"><a href="#">Global Offices</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="footer footer-utils">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0 text-center text-lg-left">
+        <ul class="footer-utils__term-links">
+          <li>
+            <a href="/privacy-policy">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="/cookie-policy">Cookies</a>
+          </li>
+          <li>
+            <a href="/terms-of-use">Terms of Use</a>
+          </li>
+          <li>
+            <a href="/license-agreement">License Agreement</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6 text-center text-lg-right">
+        <div class="footer-utils__app-links">
+            <a class="btn p-1 link--opacity-highlight d-none" rel="noopener" href="https://www.facebook.com/slingshotapp.io" target="_blank">
+              <img class="b-lazy loading smush-detected-img smush-image-29" src="https://static.infragistics.com/marketing/reveal/facebook-icon.svg" alt="Facebook" width="20" height="20" data-was-processed="true">
+            </a>
+            <a class="btn p-1 link--opacity-highlight" rel="noopener" href="https://discord.gg/YCv7HvUVv8" target="_blank">
+              <img class="b-lazy loading smush-detected-img smush-image-30" src="https://static.infragistics.com/marketing/reveal/discord-icon.svg" alt="Instagram" width="20" height="20" data-was-processed="true">
+            </a>
+            <a class="btn p-1 link--opacity-highlight" rel="noopener" href="https://twitter.com/appbuilder_dev" target="_blank">
+              <img class="b-lazy loading smush-detected-img smush-image-31" src="https://static.infragistics.com/marketing/slingshot/shared/x-logo.svg" alt="Twitter" width="20" height="20" data-was-processed="true">
+            </a>
+            <a class="btn p-1 link--opacity-highlight" rel="noopener" href="https://www.linkedin.com/showcase/appbuilder-dev/" target="_blank">
+              <img class="b-lazy loading smush-detected-img smush-image-32" src="https://static.infragistics.com/marketing/reveal/linkedin-icon.svg" alt="Linkedin" width="20" height="20" data-was-processed="true">
+            </a>
+            <a class="btn p-1 link--opacity-highlight" rel="noopener" href="https://www.youtube.com/channel/UC8cj8_eJROxAXsOjhbvduLw" target="_blank">
+              <img class="b-lazy loading smush-detected-img smush-image-33" src="https://static.infragistics.com/marketing/reveal/youtube-icon.svg" alt="Youtube" width="20" height="20" data-was-processed="true">
+            </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer footer-copyright">
+         <div class="container">
+             <div class="row">
+	        <p id="copyright" class="m-0 mx-4 d-inline-block">© Copyright 2024 INFRAGISTICS. All Rights Reserved. App Builder and the App Builder logo are registered trademarks of Infragistics Inc.</p>
+             </div>
+         </div>    
+</div>

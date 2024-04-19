@@ -1,0 +1,6 @@
+<div id="footer-container">
+    {{{_appFooter}}}
+    {{^_appFooter}}
+        {{>partials/appbuilder/appbuilderfoot}}
+    {{/_appFooter}}
+</div>
