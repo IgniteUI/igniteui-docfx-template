@@ -2,9 +2,21 @@ import util from "../utils";
 import { RenderingService, HTMLHighlightedCodeElement, INavigationOptions } from "../../types";;
 import anchors from 'anchor-js';
 import hljs from "../highlight-custom";
-import type { IgniteUIPlatform} from '../../types';
+import type { IgniteUIPlatform } from '../../types';
 import { onSampleIframeContentLoaded, onXPlatSampleIframeContentLoaded } from "../../handlers";
 import { Router } from "../router";
+
+const LOGO_PATH = 'https://static.infragistics.com/marketing/Website/products/ignite-ui/shared/ignite-ui-logo-light-background-horizontal.svg';
+const SIGN_UP = 'Sign Up For A Trial';
+const TRY_NOW = 'Try Now For Free';
+
+const ANGULAR_GENERIC_COPY = 'Ignite UI for Angular contains over 60+ components, flexible API, powerful theming and branding capabilities, and a rich feature set that will let you build Angular apps with the speed and functionalities you require.'
+const ANGULAR_GRID_COPY = 'Ignite UI for Angular Data Grid is the fastest and feature-rich component, offering paging, sorting, filtering, grouping, exporting to PDF and Excel, and more. It`s everything you need for the ultimate app building experience and data manipulation.'
+const ANGULAR_CHARTS_COPY = 'Render millions of data points and build your visualizations with 60+ real-time Angular charts by Ignite UI for Angular. This is the most extensive chart library, fitting any application scenario.'
+
+const BLAZOR_GENERIC_COPY = 'Build modern web experiences with Ignite UI for Blazor - the most comprehensive UI library on the market today. Packing a full set of ready-to-use features, 60+ reusable components, including the fastest Data Grid, high-performance Charts, and others.'
+const BLAZOR_GRID_COPY = 'Ignite UI for Blazor Data Grid delivers a full set of ready-to-use features, covering everything from paging, sorting, filtering, editing, grouping to virtualization on rows and columns, and beyond, without limiting .NET developers.'
+const BLAZOR_CHARTS_COPY = 'Transform raw data into stunning visualizations with Ignite UI for Blazor Charts and ensure the best user experience. The Component includes 60+ high-performance charts and graphs optimized for Blazor WebAssembly and Blazor Server.'
 
 const IGNITE_UI_TEMPLATE_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-PlatformPath/ignite-ui-Platform-you-get-ad.gif';
 const REACT_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-React/ignite-ui-react-you-get.gif';
@@ -341,7 +353,7 @@ export class ArticleRenderingService extends RenderingService {
             imagePath = languageVersion === 'en' ? INDIGO_DESIGN_CTA_BANNER : JP_INDIGO_DESIGN_CTA_BANNER;
         } else if (productLink.includes("appbuilder")) {
             action = 'Learn More';
-            productLink = "https://www.appbuilder.dev/help";
+            productLink = "https://www.appbuilder.dev";
             imagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
         } else if (productLink.includes("web-components")) {
             imagePath = languageVersion === 'en' ? WEB_COPONENTS_CTA_BANNER : JP_WEB_COPONENTS_CTA_BANNER;
@@ -356,22 +368,21 @@ export class ArticleRenderingService extends RenderingService {
         }
 
         if (productLink.includes("angular") && $(".article-container h2")[2]){
-            this.appendBanner(2, productLink, imagePath, action, productTitle);
-
+            this.createCtaBanner(0, TRY_NOW, productLink, true);
             if ($(".article-container h2")[4]){
                 const builderImagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
-                const аppbuilderLink = 'https://www.appbuilder.dev/help';
+                const appbuilderLink = 'https://www.appbuilder.dev';
                 action = 'Learn More';
-                this.appendBanner(4, аppbuilderLink, builderImagePath, action, 'App Builder | CTA Banner');
+                this.createCtaImageBanner(4, appbuilderLink, builderImagePath, action, 'App Builder | CTA Banner');
             }
-        } else if(productLink.includes("blazor") || productLink.includes("react")){
-            this.appendBanner($(".article-container h2").length - 1, productLink, imagePath, action, productTitle);
+        } else if(productLink.includes("blazor")){
+            this.createCtaBanner(0, TRY_NOW, productLink);
         } else if($(".article-container h2")[2]){
-            this.appendBanner(2, productLink, imagePath, action, productTitle);
+            this.createCtaImageBanner(2, productLink, imagePath, action, productTitle);
         }
     }
 
-    private appendBanner(headerIndex: number, productLink: string, imagePath: string, action: string, label: string){
+    private createCtaImageBanner(headerIndex: number, productLink: string, imagePath: string, action: string, label: string){
         const header = $(".article-container h2")[headerIndex], divTag = $('<div>');
         divTag.addClass('dfx-seo-banner');
         const imgTag = $('<img>').css('width', '100%');
@@ -381,6 +392,50 @@ export class ArticleRenderingService extends RenderingService {
         const link = this.appendLinkAttributes(action, label, productLink);
         link.append(imgTag);
         $(divTag).append(link);
+        $(header).before(divTag);
+    }
+
+    private createCtaBanner(headerIndex: number, actionText: string, productLink: string, isAngular: boolean = false) {
+        const currentHref = window.location.href;
+        let content = '';
+
+        if (currentHref.includes("grid")) {
+            isAngular ? content = ANGULAR_GRID_COPY : content = BLAZOR_GRID_COPY;
+        } else if (currentHref.includes("chart")) {
+            isAngular ? content = ANGULAR_CHARTS_COPY : content = BLAZOR_CHARTS_COPY;
+        } else {
+            isAngular ? content = ANGULAR_GENERIC_COPY : content = BLAZOR_GENERIC_COPY;
+            headerIndex = 1;
+        }
+        const header = $(".article-container h2")[headerIndex], divTag = $('<div>');
+        divTag.addClass('row banner-wrapper');
+
+        divTag.append(
+            $('<div>').addClass('col-md-2').append(
+                $('<div>').addClass('cta-image').append(
+                    $('<img>').attr({
+                        'loading': 'lazy',
+                        'src': LOGO_PATH,
+                        'alt': 'IgniteUI'
+                    }).addClass('logo')
+                )
+            ),
+            $('<div>').addClass('col-md-7').append(
+                $('<div>').addClass('cta-title-desc text-center text-md-left').append(
+                    $('<div>').addClass('cta-desc').append(
+                        $('<p>').addClass('text-margin').text(content)
+                    )
+                )
+            ),
+            $('<div>').addClass('col-md-3').append(
+                $('<div>').addClass('cta-button-wrapper').append(
+                    $('<a>').addClass('cta-button')
+                            .attr('href', productLink)
+                            .text(actionText)
+                )
+            )
+        );
+
         $(header).before(divTag);
     }
 
