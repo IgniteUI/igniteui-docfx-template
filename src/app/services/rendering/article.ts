@@ -5,18 +5,9 @@ import hljs from "../highlight-custom";
 import type { IgniteUIPlatform } from '../../types';
 import { onSampleIframeContentLoaded, onXPlatSampleIframeContentLoaded } from "../../handlers";
 import { Router } from "../router";
+import localization from '../localization';
 
 const LOGO_PATH = 'https://static.infragistics.com/marketing/Website/products/ignite-ui/shared/ignite-ui-logo-light-background-horizontal.svg';
-const SIGN_UP = 'Sign Up For A Trial';
-const TRY_NOW = 'Try Now For Free';
-
-const ANGULAR_GENERIC_COPY = 'Ignite UI for Angular contains over 60+ components, flexible API, powerful theming and branding capabilities, and a rich feature set that will let you build Angular apps with the speed and functionalities you require.'
-const ANGULAR_GRID_COPY = 'Ignite UI for Angular Data Grid is the fastest and feature-rich component, offering paging, sorting, filtering, grouping, exporting to PDF and Excel, and more. It`s everything you need for the ultimate app building experience and data manipulation.'
-const ANGULAR_CHARTS_COPY = 'Render millions of data points and build your visualizations with 60+ real-time Angular charts by Ignite UI for Angular. This is the most extensive chart library, fitting any application scenario.'
-
-const BLAZOR_GENERIC_COPY = 'Build modern web experiences with Ignite UI for Blazor - the most comprehensive UI library on the market today. Packing a full set of ready-to-use features, 60+ reusable components, including the fastest Data Grid, high-performance Charts, and others.'
-const BLAZOR_GRID_COPY = 'Ignite UI for Blazor Data Grid delivers a full set of ready-to-use features, covering everything from paging, sorting, filtering, editing, grouping to virtualization on rows and columns, and beyond, without limiting .NET developers.'
-const BLAZOR_CHARTS_COPY = 'Transform raw data into stunning visualizations with Ignite UI for Blazor Charts and ensure the best user experience. The Component includes 60+ high-performance charts and graphs optimized for Blazor WebAssembly and Blazor Server.'
 
 const IGNITE_UI_TEMPLATE_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-PlatformPath/ignite-ui-Platform-you-get-ad.gif';
 const REACT_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/Ignite-UI-React/ignite-ui-react-you-get.gif';
@@ -368,7 +359,7 @@ export class ArticleRenderingService extends RenderingService {
         }
 
         if (productLink.includes("angular") && $(".article-container h2")[2]){
-            this.createCtaBanner(0, TRY_NOW, productLink, true);
+            this.createCtaBanner(0, localization.localize('sideaffix', 'tryNow'), productLink, true);
             if ($(".article-container h2")[4]){
                 const builderImagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
                 const appbuilderLink = 'https://www.appbuilder.dev';
@@ -376,7 +367,7 @@ export class ArticleRenderingService extends RenderingService {
                 this.createCtaImageBanner(4, appbuilderLink, builderImagePath, action, 'App Builder | CTA Banner');
             }
         } else if(productLink.includes("blazor")){
-            this.createCtaBanner(0, TRY_NOW, productLink);
+            this.createCtaBanner(0, localization.localize('sideaffix', 'tryNow'), productLink);
         } else if($(".article-container h2")[2]){
             this.createCtaImageBanner(2, productLink, imagePath, action, productTitle);
         }
@@ -398,15 +389,23 @@ export class ArticleRenderingService extends RenderingService {
     private createCtaBanner(headerIndex: number, actionText: string, productLink: string, isAngular: boolean = false) {
         const currentHref = window.location.href;
         let content = '';
+        let contentActionText = '';
 
         if (currentHref.includes("grid")) {
-            isAngular ? content = ANGULAR_GRID_COPY : content = BLAZOR_GRID_COPY;
+            isAngular ? contentActionText = localization.localize('angular', 'ctaGridActionText') : contentActionText = localization.localize('blazor', 'ctaGridActionText');
+            isAngular ? content = localization.localize('angular', 'ctaGridText') : content = localization.localize('blazor', 'ctaGridText');
         } else if (currentHref.includes("chart")) {
-            isAngular ? content = ANGULAR_CHARTS_COPY : content = BLAZOR_CHARTS_COPY;
+            isAngular ? contentActionText = localization.localize('angular', 'ctaChartActionText') : contentActionText = localization.localize('blazor', 'ctaChartActionText');
+            isAngular ? content = localization.localize('angular', 'ctaChartText') : content = localization.localize('blazor', 'ctaChartText');
         } else {
-            isAngular ? content = ANGULAR_GENERIC_COPY : content = BLAZOR_GENERIC_COPY;
+            isAngular ? contentActionText = localization.localize('angular', 'ctaGenericActionText') : contentActionText = localization.localize('blazor', 'ctaGenericActionText');
+            isAngular ? content = localization.localize('angular', 'ctaGenericText') : content = localization.localize('blazor', 'ctaGenericText');
             headerIndex = 1;
         }
+
+        const ctaActionText = $('<a>').addClass('cta-action-text').attr('href', productLink).text(contentActionText);
+        const actionTextHTML = ctaActionText.prop('outerHTML');
+        content = content.replace('{{actionText}}', actionTextHTML);
         const header = $(".article-container h2")[headerIndex], divTag = $('<div>');
         divTag.addClass('row banner-wrapper');
 
@@ -423,7 +422,7 @@ export class ArticleRenderingService extends RenderingService {
             $('<div>').addClass('col-md-7').append(
                 $('<div>').addClass('cta-title-desc text-center text-md-left').append(
                     $('<div>').addClass('cta-desc').append(
-                        $('<p>').addClass('text-margin').text(content)
+                        $('<p>').addClass('cta-banner-text').html(content)
                     )
                 )
             ),
