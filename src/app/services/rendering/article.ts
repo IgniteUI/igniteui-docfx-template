@@ -294,18 +294,50 @@ export class ArticleRenderingService extends RenderingService {
                 seamless: "",
                 title: alt
             }).width("100%").height("100%");
-
             if (i === 0) {
-                if (imgSrc) { 
-                    const img = $('<img>').attr({'src': imgSrc, "alt": alt!}).width("100%").height("100%");
-                    sampleContainer.append(img);
+                if (imgSrc) {
+                    var pictureElement = $('<picture></picture>');
+                    var sources = [
+                    {
+                        media: "(max-width: 805px)",
+                        srcset: `${imgSrc}-805x700.png`
+                    },
+                    {
+                        media: "(max-width: 959px)",
+                        srcset: `${imgSrc}-862x700.png`
+                    },
+                    {
+                        media: "(max-width: 1280px)",
+                        srcset: `${imgSrc}-976x700.png`
+                    },
+                    {
+                        media: "(min-width: 1281px)",
+                        srcset: `${imgSrc}-1230x700.png`
+                    },
+                    {
+                        media: "(min-width: 1781px)",
+                        srcset: `${imgSrc}-1900.png`
+                        //srcset: "https://static.infragistics.com/marketing/Website/products/ignite-ui/samples/ignite-ui-angular-marathon-grid-sample-1900.jpg"
+                    }
+                    ];
+
+                    sources.forEach(function(source) {
+                    var sourceElement = $('<source>').attr('media', source.media).attr('srcset', source.srcset);
+                    pictureElement.append(sourceElement);
+                    });
+
+                    var imgElement = $('<img>')
+                    .attr('src', `${imgSrc}-1230x700.png`)
+                    .attr('alt', alt!);
+
+                    pictureElement.append(imgElement);
+                    sampleContainer.append(pictureElement);
                     sampleContainer.removeClass("loading");
                     sampleContainer.attr("style", "")
 
-                    // Replace image with iframe on mouse enter
-                    img.on("mouseenter", function () {
+                    pictureElement.on("mouseenter", function () {
                         if (i === 0) {
-                            img.replaceWith(iframe);
+                            pictureElement.replaceWith(iframe);
                             sampleContainer.attr("style", style)
                             sampleContainer.addClass("loading");
                         }
