@@ -73,12 +73,12 @@ class LocalizationService {
                 "chartsBarButtonText": '無償トライアル版の開始',
                 "chartsButtonXdGaLabelValue": 'Help_AngularCharts_Trial',
                 "chartsButtonGaLabelValue": 'Hello bar – Help_AngularCharts_Trial',
-                "ctaGenericText": "60+ components, flexible API, powerful theming and branding capabilities, and a {{actionText}} with the speed and functionalities you require.",
-                "ctaGenericActionText": "rich feature set for building Angular apps",
-                "ctaGridText": "The {{actionText}}, offering paging, sorting, filtering, grouping, exporting to PDF and Excel, and more. Everything you need for the ultimate app building experience and data manipulation.",
-                "ctaGridActionText": "fastest, feature-rich Angular Data Grid",
-                "ctaChartText": "Render millions of data points and build your visualizations with {{actionText}}. This is the most extensive chart library for any application scenario.",
-                "ctaChartActionText": "60+ real-time Angular charts",
+                "ctaGenericText": "60 以上のコンポーネント、柔軟な API、強力なテーマ設定およびブランディング機能、必要な速度と機能を備えた {{actionText}}。",
+                "ctaGenericActionText": "Angular アプリケーションを構築するための豊富な機能セット",
+                "ctaGridText": "{{actionText}} は、ページング、ソート、フィルタリング、グループ化、PDF および Excel へのエクスポートなどの機能を提供します。究極のアプリ構築エクスペリエンスとデータ操作に必要なすべてが揃っています。",
+                "ctaGridActionText": "最速で機能豊富な Angular Data Grid",
+                "ctaChartText": "{{actionText}} を使用して、何百万ものデータ ポイントを描画し、視覚化を構築します。これは、あらゆるアプリケーション シナリオに対応する最も広範なチャート ライブラリです。",
+                "ctaChartActionText": "60 以上のリアルタイム Angular チャート",
             },
             "appbuilder": {
                 "barText": 'App Builder™ には、Angular と Blazor 用の 60 以上の UI コントロールとコード生成を備えた完全なデザイン システムが含まれています!',
@@ -95,12 +95,12 @@ class LocalizationService {
                 "chartsBarButtonText": '無料で試してみる',
                 "chartsButtonXdGaLabelValue": 'Help_BlazorCharts_Trial',
                 "chartsButtonGaLabelValue": 'Hello bar – Help_BlazorCharts_Trial',
-                "ctaGenericText": "Build modern web experiences with {{actionText}}, including the fastest Data Grid, high-performance Charts, a full set of ready-to-use features, and more.",
-                "ctaGenericActionText": "60+ reusable components",
-                "ctaGridText": "A {{actionText}}, covering everything from paging, sorting, filtering, editing, grouping to virtualization on rows and columns, and beyond. No limits for .NET developers.",
-                "ctaGridActionText": "full set of ready-to-use features",
-                "ctaChartText": "Transform raw data into stunning visualizations and ensure the best UX, using {{actionText}} and graphs optimized for Blazor WebAssembly and Blazor Server.",
-                "ctaChartActionText": "using 60+ high-performance charts",
+                "ctaGenericText": "最速のデータ グリッド、高性能なチャート、すぐに使用できる機能のフルセットなどを含む {{actionText}} を使用して、最新の Web エクスペリエンスを構築します。",
+                "ctaGenericActionText": "60 以上の再利用可能なコンポーネント",
+                "ctaGridText": "{{actionText}} は、ページング、ソート、フィルタリング、編集、グループ化から行と列の仮想化まで、あらゆる機能をカバーします。.NET 開発者には制限はありません。",
+                "ctaGridActionText": "すぐに使用できる機能のフルセット",
+                "ctaChartText": "Blazor WebAssembly および Blazor Server 向けに最適化された {{actionText}} とグラフを使用して、生データを魅力的な視覚化に変換し、最高の UX を実現します。",
+                "ctaChartActionText": "60 以上の高性能チャートを使用",
             },
             "hljs": {
                 "copyCode": "コピー",
@@ -108,7 +108,7 @@ class LocalizationService {
             },
             "sideaffix": {
                 "title": "トピック コンテンツ:",
-                "tryNow": "Try Now For Free"
+                "tryNow": "無料で試してみる"
             },
             "noteBlocks": {
                 "note": "注",
