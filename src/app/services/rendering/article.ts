@@ -30,6 +30,10 @@ const JP_WEB_COPONENTS_CTA_BANNER = 'https://static.infragistics.com/marketing/B
 const JP_APP_BUILDER_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/app-builder-wysiwyg-01.gif';
 const JP_INDIGO_DESIGN_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/indigo-design-transofrm-sketch-xd-01.gif'
 
+interface ImageMappings {
+    [key: string]: { media: string; srcSuffix: string }[];
+}
+
 export class ArticleRenderingService extends RenderingService {
 
     private navigationOptions: INavigationOptions = {
@@ -284,6 +288,28 @@ export class ArticleRenderingService extends RenderingService {
             const alt = $(currentView).attr("alt");
             const imgSrc = $(currentView).attr("img-src");
             const themable = $(currentView).is("[no-theming]") ? true : false;
+            const imageMappings: ImageMappings = {
+                'ignite-ui-angular-marathon-app': [
+                    { media: "(max-width: 805px)", srcSuffix: "-805x700.png" },
+                    { media: "(max-width: 959px)", srcSuffix: "-862x700.png" },
+                    { media: "(max-width: 1280px)", srcSuffix: "-976x700.png" },
+                    { media: "(min-width: 1281px)", srcSuffix: "-1230x700.png" },
+                    { media: "(min-width: 1781px)", srcSuffix: "-1900x692.png" }
+                ],
+                'ignite-ui-blazor-client-grid': [
+                    { media: "(max-width: 805px)", srcSuffix: "-805x700.png" },
+                    { media: "(max-width: 859px)", srcSuffix: "-859x680.png" },
+                    { media: "(max-width: 973px)", srcSuffix: "-973x681.png" },
+                    { media: "(max-width: 1229px)", srcSuffix: "-1229x681.png" }
+                ],
+                'ignite-ui-angular-bar-chart': [
+                    { media: "(max-width: 786px)", srcSuffix: "-786x498.png" },
+                    { media: "(max-width: 843px)", srcSuffix: "-843x498.png" },
+                    { media: "(max-width: 957px)", srcSuffix: "-957x498.png" },
+                    { media: "(max-width: 1213px)", srcSuffix: "-1213x498.png" },
+                    { media: "(min-width: 1920px)", srcSuffix: "-1920x922.png" }
+                ]
+            };
 
             $(currentView).removeAttr("style");
 
@@ -297,41 +323,30 @@ export class ArticleRenderingService extends RenderingService {
             if (i === 0) {
                 if (imgSrc) {
                     var pictureElement = $('<picture></picture>');
-                    var sources = [
-                    {
-                        media: "(max-width: 805px)",
-                        srcset: `${imgSrc}-805x700.png`
-                    },
-                    {
-                        media: "(max-width: 959px)",
-                        srcset: `${imgSrc}-862x700.png`
-                    },
-                    {
-                        media: "(max-width: 1280px)",
-                        srcset: `${imgSrc}-976x700.png`
-                    },
-                    {
-                        media: "(min-width: 1281px)",
-                        srcset: `${imgSrc}-1230x700.png`
-                    },
-                    {
-                        media: "(min-width: 1781px)",
-                        srcset: `${imgSrc}-1900.png`
-                        //srcset: "https://static.infragistics.com/marketing/Website/products/ignite-ui/samples/ignite-ui-angular-marathon-grid-sample-1900.jpg"
+                    const urlParts = imgSrc.split('/');
+                    if (urlParts.length > 0) {
+                        const sampleNameWithSuffix = urlParts.pop();
+                        if (sampleNameWithSuffix && imageMappings[sampleNameWithSuffix]) {
+                            var pictureElement = $('<picture></picture>');
+                            let sources = imageMappings[sampleNameWithSuffix].map(source => {
+                                return {
+                                    media: source.media,
+                                    srcset: `${imgSrc}${source.srcSuffix}`
+                                };
+                            });
+
+                            sources.forEach(src => {
+                                $('<source>').attr({
+                                    media: src.media,
+                                    srcset: src.srcset
+                                }).appendTo(pictureElement);
+                            });
+
+                            $('<img>').attr('src', `${imgSrc}${imageMappings[sampleNameWithSuffix][3].srcSuffix}`).attr('alt', alt!).appendTo(pictureElement);
+                            $(sampleContainer).append(pictureElement);
+                        }
                     }
-                    ];
 
-                    sources.forEach(function(source) {
-                    var sourceElement = $('<source>').attr('media', source.media).attr('srcset', source.srcset);
-                    pictureElement.append(sourceElement);
-                    });
-
-                    var imgElement = $('<img>')
-                    .attr('src', `${imgSrc}-1230x700.png`)
-                    .attr('alt', alt!);
-
-                    pictureElement.append(imgElement);
-                    sampleContainer.append(pictureElement);
                     sampleContainer.removeClass("loading");
                     sampleContainer.attr("style", "")
 
