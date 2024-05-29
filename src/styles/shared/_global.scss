@@ -199,7 +199,14 @@ $sg-items-gap: rem(8px);
     white-space: nowrap;
 }
 
-.text-margin {
+.cta-action-text {
+	color: #0099FF;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.cta-banner-text {
+	font-size: rem(18px);
 	margin-left: 2rem;
 	margin-top: rem(24px);
 }

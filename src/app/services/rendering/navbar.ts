@@ -97,11 +97,11 @@ export class NavbarRenderingService extends RenderingService {
         let $platformMeta = $("meta[property='docfx:platform']");
         let platform = $platformMeta.attr("content")!;
 
-        let barText = localization.localize('angularGrids', 'barText');
-        let barButtonText = localization.localize('angularGrids', 'barButtonText');
+        let barText = localization.localize('angular', 'gridsBarText');
+        let barButtonText = localization.localize('angular', 'gridsBarButtonText');
         let buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-angular/download';
-        let buttonXdGaLabelValue = localization.localize('angularGrids', 'buttonXdGaLabelValue');
-        let buttonGaLabelValue = localization.localize('angularGrids', 'buttonGaLabelValue');
+        let buttonXdGaLabelValue = localization.localize('angular', 'gridsButtonXdGaLabelValue');
+        let buttonGaLabelValue = localization.localize('angular', 'gridsButtonGaLabelValue');
 
         if (platform === 'appbuilder') {
             barText = localization.localize('appbuilder', 'barText');
@@ -111,24 +111,24 @@ export class NavbarRenderingService extends RenderingService {
             buttonGaLabelValue = localization.localize('appbuilder', 'buttonGaLabelValue');
         } else if (platform === 'blazor') {
             if (currentRoute.includes('charts')) {
-                barText = localization.localize('blazorCharts', 'barText');
-                barButtonText = localization.localize('blazorCharts', 'barButtonText');
+                barText = localization.localize('blazor', 'chartsBarText');
+                barButtonText = localization.localize('blazor', 'chartsBarButtonText');
                 buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download';
-                buttonXdGaLabelValue = localization.localize('blazorCharts', 'buttonXdGaLabelValue');
-                buttonGaLabelValue = localization.localize('blazorCharts', 'buttonGaLabelValue');
+                buttonXdGaLabelValue = localization.localize('blazor', 'chartsButtonXdGaLabelValue');
+                buttonGaLabelValue = localization.localize('blazor', 'chartsButtonGaLabelValue');
             } else {
-                barText = localization.localize('blazorGrids', 'barText');
-                barButtonText = localization.localize('blazorGrids', 'barButtonText');
+                barText = localization.localize('blazor', 'gridsBarText');
+                barButtonText = localization.localize('blazor', 'gridsBarButtonText');
                 buttonHrefValue = 'https://www.infragistics.com/products/ignite-ui-blazor/download';
-                buttonXdGaLabelValue = localization.localize('blazorGrids', 'buttonXdGaLabelValue');
-                buttonGaLabelValue = localization.localize('blazorGrids', 'buttonGaLabelValue');
+                buttonXdGaLabelValue = localization.localize('blazor', 'gridsButtonXdGaLabelValue');
+                buttonGaLabelValue = localization.localize('blazor', 'gridsButtonGaLabelValue');
             }
         } else if (platform === 'angular') {
             if (currentRoute.includes('charts')) {
-                barText = localization.localize('angularCharts', 'barText');
-                barButtonText = localization.localize('angularCharts', 'barButtonText');
-                buttonXdGaLabelValue = localization.localize('angularCharts', 'buttonXdGaLabelValue');
-                buttonGaLabelValue = localization.localize('angularCharts', 'buttonGaLabelValue');
+                barText = localization.localize('angular', 'chartsBarText');
+                barButtonText = localization.localize('angular', 'chartsBarButtonText');
+                buttonXdGaLabelValue = localization.localize('angular', 'chartsButtonXdGaLabelValue');
+                buttonGaLabelValue = localization.localize('angular', 'chartsButtonGaLabelValue');
             }
         }
 
