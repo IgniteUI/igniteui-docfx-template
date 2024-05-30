@@ -21,6 +21,10 @@ const JP_WEB_COPONENTS_CTA_BANNER = 'https://static.infragistics.com/marketing/B
 const JP_APP_BUILDER_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/app-builder-wysiwyg-01.gif';
 const JP_INDIGO_DESIGN_CTA_BANNER = 'https://static.infragistics.com/marketing/Blog-in-content-ads/jp/indigo-design-transofrm-sketch-xd-01.gif'
 
+interface ImageMappings {
+    [key: string]: { media: string; srcSuffix: string }[];
+}
+
 export class ArticleRenderingService extends RenderingService {
 
     private navigationOptions: INavigationOptions = {
@@ -275,6 +279,28 @@ export class ArticleRenderingService extends RenderingService {
             const alt = $(currentView).attr("alt");
             const imgSrc = $(currentView).attr("img-src");
             const themable = $(currentView).is("[no-theming]") ? true : false;
+            const imageMappings: ImageMappings = {
+                'ignite-ui-angular-marathon-app': [
+                    { media: "(max-width: 805px)", srcSuffix: "-805x700.png" },
+                    { media: "(max-width: 959px)", srcSuffix: "-862x700.png" },
+                    { media: "(max-width: 1280px)", srcSuffix: "-976x700.png" },
+                    { media: "(min-width: 1281px)", srcSuffix: "-1230x700.png" },
+                    { media: "(min-width: 1781px)", srcSuffix: "-1900x692.png" }
+                ],
+                'ignite-ui-blazor-client-grid': [
+                    { media: "(max-width: 805px)", srcSuffix: "-805x700.png" },
+                    { media: "(max-width: 859px)", srcSuffix: "-859x680.png" },
+                    { media: "(max-width: 973px)", srcSuffix: "-973x681.png" },
+                    { media: "(max-width: 1229px)", srcSuffix: "-1229x681.png" }
+                ],
+                'ignite-ui-angular-bar-chart': [
+                    { media: "(max-width: 786px)", srcSuffix: "-786x498.png" },
+                    { media: "(max-width: 843px)", srcSuffix: "-843x498.png" },
+                    { media: "(max-width: 957px)", srcSuffix: "-957x498.png" },
+                    { media: "(max-width: 1213px)", srcSuffix: "-1213x498.png" },
+                    { media: "(min-width: 1920px)", srcSuffix: "-1920x922.png" }
+                ]
+            };
 
             $(currentView).removeAttr("style");
 
@@ -285,18 +311,39 @@ export class ArticleRenderingService extends RenderingService {
                 seamless: "",
                 title: alt
             }).width("100%").height("100%");
-
             if (i === 0) {
-                if (imgSrc) { 
-                    const img = $('<img>').attr({'src': imgSrc, "alt": alt!}).width("100%").height("100%");
-                    sampleContainer.append(img);
+                if (imgSrc) {
+                    var pictureElement = $('<picture></picture>');
+                    const urlParts = imgSrc.split('/');
+                    if (urlParts.length > 0) {
+                        const sampleNameWithSuffix = urlParts.pop();
+                        if (sampleNameWithSuffix && imageMappings[sampleNameWithSuffix]) {
+                            var pictureElement = $('<picture></picture>');
+                            let sources = imageMappings[sampleNameWithSuffix].map(source => {
+                                return {
+                                    media: source.media,
+                                    srcset: `${imgSrc}${source.srcSuffix}`
+                                };
+                            });
+
+                            sources.forEach(src => {
+                                $('<source>').attr({
+                                    media: src.media,
+                                    srcset: src.srcset
+                                }).appendTo(pictureElement);
+                            });
+
+                            $('<img>').attr('src', `${imgSrc}${imageMappings[sampleNameWithSuffix][3].srcSuffix}`).attr('alt', alt!).appendTo(pictureElement);
+                            $(sampleContainer).append(pictureElement);
+                        }
+                    }
+
                     sampleContainer.removeClass("loading");
                     sampleContainer.attr("style", "")
 
-                    // Replace image with iframe on mouse enter
-                    img.on("mouseenter", function () {
+                    pictureElement.on("mouseenter", function () {
                         if (i === 0) {
-                            img.replaceWith(iframe);
+                            pictureElement.replaceWith(iframe);
                             sampleContainer.attr("style", style)
                             sampleContainer.addClass("loading");
                         }
