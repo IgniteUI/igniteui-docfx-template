@@ -6,6 +6,7 @@ export abstract class CodeService {
     protected buttonSampleSourceAttrName = "data-sample-src";
     protected demosBaseUrlAttrName = "data-demos-base-url";
     protected sampleUrlAttrName = "iframe-src";
+    protected githubSrc = "github-src";
     protected isButtonClickInProgress = false;
     protected demosUrls: Map<string, ISampleData[]> = new Map();
 

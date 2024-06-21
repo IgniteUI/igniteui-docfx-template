@@ -44,7 +44,7 @@ class LocalizationService {
                 "ctaGenericActionText": "60+ reusable components",
                 "ctaGridText": "A {{actionText}}, covering everything from paging, sorting, filtering, editing, grouping to virtualization on rows and columns, and beyond. No limits for .NET developers.",
                 "ctaGridActionText": "full set of ready-to-use features",
-                "ctaChartText": "Transform raw data into stunning visualizations and ensure the best UX, using {{actionText}} and graphs optimized for Blazor WebAssembly and Blazor Server.",
+                "ctaChartText": "Transform raw data into stunning visualizations and ensure the best UX, {{actionText}} and graphs optimized for Blazor WebAssembly and Blazor Server.",
                 "ctaChartActionText": "using 60+ high-performance charts",
             },
             "hljs": {
