@@ -146,14 +146,28 @@ export class AngularCodeService extends CodeService {
     private openLiveEditingSample($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) {
         const codeService = this;
         codeService.isButtonClickInProgress = true;
+
         const demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
         const sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!, $codeView.attr(codeService.githubSrc)!);
         const editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
         const dvSample = this.isDvSample(demosBaseUrl, sampleFileUrl);
-        const stagingBranch = dvSample ? 'vnext' : 'vNext';
-        const url = new URL(demosBaseUrl);
-        const branch = url.hostname.includes("staging.infragistics.com") ? stagingBranch : "master";
-        window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl), '_blank');
+    
+        let branch: string;
+        try {
+            let urlObj = new URL(demosBaseUrl);
+            if (urlObj.hostname === "staging.infragistics.com") {
+                branch = dvSample ? 'vnext' : 'vNext';
+            } else {
+                branch = "master";
+            }
+        } catch (e) {
+            console.error("Invalid URL:", demosBaseUrl);
+            codeService.isButtonClickInProgress = false;
+            return;
+        }
+        let url = codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl);
+
+        window.open(url, '_blank');
         codeService.isButtonClickInProgress = false;
     }
 
