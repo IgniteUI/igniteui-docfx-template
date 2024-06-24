@@ -135,13 +135,13 @@ export class AngularCodeService extends CodeService {
         return `https://codesandbox.io/s/github/IgniteUI/${repositoryPath}${branch}/${sampleUrl}`;
     }
 
-    private getGitHubSampleUrl(demosBaseUrl: string, sampleUrl: string) {
+    private getGitHubSampleUrl(demosBaseUrl: string, sampleUrl: string, gitSrc?: string) {
         // Get sample application base path
         const projectPath = demosBaseUrl.substring(demosBaseUrl.lastIndexOf("/") + 1)
         let demoPath = sampleUrl.replace(demosBaseUrl + "/", projectPath + "/");
 
-        if (util.isLocalhost) {
-            demoPath = this.isDvSample(demosBaseUrl, sampleUrl) ? demoPath.replace(projectPath, 'samples') : demoPath.replace(projectPath, 'angular-demos');
+        if (this.isDvSample(demosBaseUrl, sampleUrl) && gitSrc) {
+            demoPath = 'samples/' + gitSrc;
         }
         return demoPath;
     }
@@ -150,7 +150,7 @@ export class AngularCodeService extends CodeService {
         const codeService = this;
         codeService.isButtonClickInProgress = true;
         let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
-        let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!);
+        let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!, $codeView.attr(codeService.githubSrc)!);
         let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
         let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
         window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl), '_blank');
