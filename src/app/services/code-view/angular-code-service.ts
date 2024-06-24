@@ -127,9 +127,6 @@ export class AngularCodeService extends CodeService {
 
     private getAngularGitHubSampleUrl(editor: string, sampleUrl: string, branch: string, demosBaseUrl: string) {
         const dvSample = this.isDvSample(demosBaseUrl, sampleUrl);
-        if (util.isLocalhost) {
-            branch = dvSample ? 'vnext' : 'vNext';
-        }
         const repositoryPath = dvSample ? 'igniteui-angular-examples/tree/' : 'igniteui-live-editing-samples/tree/';
         if (editor === "stackblitz") return `https://stackblitz.com/github/IgniteUI/${repositoryPath}${branch}/${sampleUrl}`;
         return `https://codesandbox.io/s/github/IgniteUI/${repositoryPath}${branch}/${sampleUrl}`;
@@ -149,11 +146,28 @@ export class AngularCodeService extends CodeService {
     private openLiveEditingSample($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) {
         const codeService = this;
         codeService.isButtonClickInProgress = true;
-        let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
-        let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!, $codeView.attr(codeService.githubSrc)!);
-        let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
-        let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-        window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl), '_blank');
+
+        const demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
+        const sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!, $codeView.attr(codeService.githubSrc)!);
+        const editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
+        const dvSample = this.isDvSample(demosBaseUrl, sampleFileUrl);
+    
+        let branch: string;
+        try {
+            let urlObj = new URL(demosBaseUrl);
+            if (urlObj.hostname === "staging.infragistics.com") {
+                branch = dvSample ? 'vnext' : 'vNext';
+            } else {
+                branch = "master";
+            }
+        } catch (e) {
+            console.error("Invalid URL:", demosBaseUrl);
+            codeService.isButtonClickInProgress = false;
+            return;
+        }
+        let url = codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl);
+
+        window.open(url, '_blank');
         codeService.isButtonClickInProgress = false;
     }
 
