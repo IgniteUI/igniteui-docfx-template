@@ -147,14 +147,8 @@ export class AngularCodeService extends CodeService {
     }
 
     private openLiveEditingSample($button: JQuery<HTMLButtonElement>, $codeView: JQuery<HTMLElement>) {
-        const codeService = this;
-        codeService.isButtonClickInProgress = true;
-        let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
-        let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!, $codeView.attr(codeService.githubSrc)!);
-        let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
-        let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-        window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl), '_blank');
-        codeService.isButtonClickInProgress = false;
+        const demosBaseUrl = $codeView.attr(this.demosBaseUrlAttrName)!;
+        this.handleSampleButtonClick(demosBaseUrl, this.sampleUrlAttrName, this.githubSrc, $codeView);
     }
 
     private onAngularGithubProjectButtonClicked() {
@@ -175,18 +169,37 @@ export class AngularCodeService extends CodeService {
     private onAngularGithubProjectStandaloneButtonClicked() {
         const codeService = this;
         return function (this: HTMLButtonElement) {
-            if (codeService.isButtonClickInProgress) {
-                return;
-            }
-            codeService.isButtonClickInProgress = true;
-            let $button = $(this);
-            let demosBaseUrl = $button.attr(codeService.demosBaseUrlAttrName)!;
-            let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $button.attr(codeService.buttonSampleSourceAttrName)!);
-            let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
-            let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
-            window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl), '_blank');
-            codeService.isButtonClickInProgress = false;
-        }
+            const $button = $(this);
+            const demosBaseUrl = $button.attr(codeService.demosBaseUrlAttrName)!;
+            codeService.handleSampleButtonClick(
+                demosBaseUrl, 
+                codeService.buttonSampleSourceAttrName, 
+                codeService.githubSrc, 
+                $button
+            );
+        };
+    }
+
+    private handleSampleButtonClick(
+        demosBaseUrl: string, 
+        sampleUrlAttrName: string, 
+        githubSrcAttrName: string, 
+        $element: JQuery<HTMLElement>
+    ) {
+        const codeService = this;
+        if (codeService.isButtonClickInProgress) return;
+        codeService.isButtonClickInProgress = true;
+    
+        const sampleFileUrl = codeService.getGitHubSampleUrl(
+            demosBaseUrl, 
+            $element.attr(sampleUrlAttrName)!, 
+            $element.attr(githubSrcAttrName)!
+        );
+        const editor = $element.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
+        const branch = new URL(demosBaseUrl).host === "staging.infragistics.com" ? "vNext" : "master";
+    
+        window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl), '_blank');
+        codeService.isButtonClickInProgress = false;
     }
 
     private addTimeStamp(url: string, demosTimeStamp?: number): string {
