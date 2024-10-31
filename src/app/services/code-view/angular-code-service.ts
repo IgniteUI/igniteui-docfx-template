@@ -152,7 +152,8 @@ export class AngularCodeService extends CodeService {
         let demosBaseUrl = $codeView.attr(codeService.demosBaseUrlAttrName)!;
         let sampleFileUrl = codeService.getGitHubSampleUrl(demosBaseUrl, $codeView.attr(codeService.sampleUrlAttrName)!, $codeView.attr(codeService.githubSrc)!);
         let editor = $button.hasClass(codeService.stkbButtonClass) ? "stackblitz" : "codesandbox";
-        let branch = demosBaseUrl.indexOf("staging.infragistics.com") !== -1 ? "vNext" : "master";
+        let url = new URL(demosBaseUrl);
+        let branch = url.host === "staging.infragistics.com" ? "vNext" : "master";
         window.open(codeService.getAngularGitHubSampleUrl(editor, sampleFileUrl, branch, demosBaseUrl), '_blank');
         codeService.isButtonClickInProgress = false;
     }
