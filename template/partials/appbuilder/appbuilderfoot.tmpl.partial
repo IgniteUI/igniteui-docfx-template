@@ -86,7 +86,7 @@
 <div class="footer footer-copyright">
          <div class="container">
              <div class="row">
-	              <p id="copyright" class="m-0 mx-4 d-inline-block">© Copyright 2025 INFRAGISTICS. All Rights Reserved. App Builder and the App Builder logo are registered trademarks of Infragistics Inc.</p>
+	              <p id="copyright" class="m-0 mx-4 d-inline-block">© Copyright {{_currentYear}} INFRAGISTICS. All Rights Reserved. App Builder and the App Builder logo are registered trademarks of Infragistics Inc.</p>
              </div>
          </div>    
 </div>
