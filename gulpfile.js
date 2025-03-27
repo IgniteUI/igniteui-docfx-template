@@ -78,7 +78,7 @@ const webpackBuild = (dev = false) => {
         spawn(
             path.normalize(`./node_modules/.bin/webpack${/^win/.test(os.platform()) ? '.cmd' : ''}`),
             ['--config'].concat(commandArgs),
-            { stdio: 'inherit' }
+            { stdio: 'inherit', shell: true  }
         );
 }
 

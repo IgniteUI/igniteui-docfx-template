@@ -116,6 +116,6 @@
 </footer>
 <footer id="footer">
 	<div id="footer-wrap" class="be-wrap clearfix">
-		<div id="copyright">© Copyright 2019 INFRAGISTICS. All Rights Reserved</div>
+		<div id="copyright">© Copyright {{_currentYear}} INFRAGISTICS. All Rights Reserved</div>
 	</div>
 </footer>

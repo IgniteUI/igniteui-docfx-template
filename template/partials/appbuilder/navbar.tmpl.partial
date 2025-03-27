@@ -1,4 +1,4 @@
-<div class="navbar mega-sticky-wrapper" style="height: 107px; position: static">
+<div class="navbar mega-sticky-wrapper" style="height: 107px; position: static" id="navbar">
     <div
         id="mega-menu-wrap-max_mega_menu_2"
         class="mega-menu-wrap mega-stuck mega-sticky"

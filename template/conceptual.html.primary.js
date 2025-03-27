@@ -27,6 +27,7 @@ exports.transform = function (model) {
   }
   model[theme + "Theme"] = true;
   model._globalStyle = model["_" + theme];
+  model._currentYear = new Date().getFullYear();
 
   model._isLangEn = true;
   model._isLangJa = false;
