@@ -120,13 +120,8 @@ export class ArticleRenderingService extends RenderingService {
                 paragraph = $<HTMLParagraphElement>('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text(`このサンプルが気に入りましたか? 完全な ${productTitle}ツールキットにアクセスして、すばやく独自のアプリの作成を開始します。`);
                 const link = this.appendLinkAttributes(action, productTitle, productLink);
                 link.text("無料でダウンロードできます。").appendTo(paragraph);
-            } else {
-                paragraph = $<HTMLParagraphElement>('<p>').attr('style', 'margin: 0;padding-top: 0.5rem').text(`Like this sample? Get access to our complete ${productTitle} toolkit and start building your own apps in minutes.`);
-                const link = this.appendLinkAttributes(action, productTitle, productLink);
-                link.text(" Download it for free.").appendTo(paragraph);
+                codeView.after(paragraph);
             }
-
-            codeView.after(paragraph);
         }
     }
 
@@ -376,6 +371,9 @@ export class ArticleRenderingService extends RenderingService {
 
     private addCtaBanners() {
         const languageVersion: string = $('html')[0].lang;
+
+        if (languageVersion !== 'ja') return;
+
         let productLink = $("meta[property='docfx:link']").attr("content")!,
             platform = $("meta[property='docfx:platform']").attr("content") || '',
             productTitle = $("meta[property='docfx:title']")!.attr("content")!;
@@ -388,34 +386,34 @@ export class ArticleRenderingService extends RenderingService {
         if (productLink.includes("indigo")) {
             action = 'Learn More';
             productLink = "https://www.infragistics.com/products/indigo-design";
-            imagePath = languageVersion === 'en' ? INDIGO_DESIGN_CTA_BANNER : JP_INDIGO_DESIGN_CTA_BANNER;
+            imagePath = JP_INDIGO_DESIGN_CTA_BANNER;
         } else if (productLink.includes("appbuilder")) {
             action = 'Learn More';
             productLink = "https://www.appbuilder.dev";
-            imagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
+            imagePath = JP_APP_BUILDER_CTA_BANNER;
         } else if (productLink.includes("web-components")) {
-            imagePath = languageVersion === 'en' ? WEB_COPONENTS_CTA_BANNER : JP_WEB_COPONENTS_CTA_BANNER;
+            imagePath = JP_WEB_COPONENTS_CTA_BANNER;
             productLink = this.setBannerLink(productLink);
         } else if (productLink.includes("react")) {
-            imagePath = languageVersion === 'en' ? REACT_CTA_BANNER : JP_REACT_CTA_BANNER;
+            imagePath = JP_REACT_CTA_BANNER;
             productLink = this.setBannerLink(productLink);
         } else {
-            const defaultLanguageUIBanner = languageVersion === 'en' ? IGNITE_UI_TEMPLATE_BANNER : JP_IGNITE_UI_TEMPLATE_BANNER;
+            const defaultLanguageUIBanner = JP_IGNITE_UI_TEMPLATE_BANNER;
             imagePath = defaultLanguageUIBanner.replace('PlatformPath', platform.charAt(0).toUpperCase() + platform.slice(1)).replace('Platform', platform);
             productLink = this.setBannerLink(productLink);
         }
 
         if (productLink.includes("angular") && $(".article-container h2")[2]){
             this.createCtaBanner(0, localization.localize('sideaffix', 'tryNow'), productLink, true);
-            if ($(".article-container h2")[4]){
-                const builderImagePath = languageVersion === 'en' ? APP_BUILDER_CTA_BANNER : JP_APP_BUILDER_CTA_BANNER;
+            if ($(".article-container h2")[4]) {
+                const builderImagePath = JP_APP_BUILDER_CTA_BANNER;
                 const appbuilderLink = 'https://www.appbuilder.dev';
                 action = 'Learn More';
                 this.createCtaImageBanner(4, appbuilderLink, builderImagePath, action, 'App Builder | CTA Banner');
             }
-        } else if(productLink.includes("blazor")){
+        } else if (productLink.includes("blazor")) {
             this.createCtaBanner(0, localization.localize('sideaffix', 'tryNow'), productLink);
-        } else if($(".article-container h2")[2]){
+        } else if ($(".article-container h2")[2]) {
             this.createCtaImageBanner(2, productLink, imagePath, action, productTitle);
         }
     }
