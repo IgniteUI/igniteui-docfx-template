@@ -163,10 +163,10 @@ full license information.}}
                 document.querySelector('footer').parentNode.replaceChild(html.querySelector('footer'), document.querySelector('footer'));
 
                 //Foooter utils
-                document.body.append(html.querySelector('.footer.footer-utils'));
+                document.querySelector('.footer.footer-utils').parentNode.replaceChild(html.querySelector('.footer.footer-utils'), document.querySelector('.footer.footer-utils'));
 
                 //Footer copyright
-                document.body.append(html.querySelector('.footer.footer-copyright'));
+                document.querySelector('.footer.footer-copyright').parentNode.replaceChild(html.querySelector('.footer.footer-copyright'), document.querySelector('.footer.footer-copyright'));
             }
 
             function _siteSearchToggle(e){
