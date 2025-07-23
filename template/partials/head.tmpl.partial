@@ -145,8 +145,8 @@ full license information.}}
                     var langBarHtml = `<a class="mega-custom-icon mega-menu-link" href="#" aria-expanded="false" tabindex="0" aria-label="LangBar"><span class="mega-indicator" aria-hidden="true"></span></a>
                     <ul class="mega-sub-menu">
                     <li class="mega-col-6 mega-py-2 mega-px-lg-2 mega-pt-lg-2 mega-pb-lg-1 mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-8148 col-6 py-2 px-lg-2 pt-lg-2 pb-lg-1" id="mega-menu-item-8148"><div class="wovn-languages">
-                    <a href="${window.location.href.replace('/ja/help/', '/help/')}" style="display:block;padding-left: 10px;color: gray;font-weight: 300;">English 2</a>
-                    <a href="${window.location.href.replace('/help/', '/ja/help/')}" style="display:block;padding-left: 10px;color: gray;font-weight: 300;">日本語 2</a>
+                    <a href="${window.location.href.replace('/ja/help/', '/help/')}" style="display:block;padding-left: 10px;color: gray;font-weight: 300;">English</a>
+                    <a href="${window.location.href.replace('/help/', '/ja/help/')}" style="display:block;padding-left: 10px;color: gray;font-weight: 300;">日本語</a>
                     </div></li></ul>`;
                     html.querySelector('.mega-lang-bar').innerHTML = langBarHtml;
                 }
