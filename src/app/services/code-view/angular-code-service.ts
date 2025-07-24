@@ -273,7 +273,8 @@ export class AngularCodeService extends CodeService {
 
     private getAngularSampleMetadataUrl(demosBaseUrl: string, sampleUrl: string) {
         let demoFileMetadataName = sampleUrl.replace(demosBaseUrl + "/", "")
-            .replace(/\?[\w\W]+/, '');
+            .replace(/\?[\w\W]+/, '').replace(/\/$/, '');
+            // Replace the trailing slash coming from angular SSR in case there is so that the request for codesandbox and stackblitz works
 
         let demoFileMetadataPath = '';
         if (this.isDvSample(demosBaseUrl, sampleUrl)) {
