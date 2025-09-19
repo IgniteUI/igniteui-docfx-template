@@ -253,3 +253,53 @@ $sg-items-gap: rem(8px);
 	border-radius: $header-search-radius;
 }
 
+//Collapsible table styles
+.collapsible-table {
+    border-collapse: collapse;
+    width: 100%;
+
+	th,
+	td {
+		border: 1px solid #ddd;
+    	padding: 8px;
+	}
+
+	summary::-webkit-details-marker { display: none; }
+
+	details summary {
+		cursor: pointer;
+		list-style: none;
+		padding-left: 1rem;
+		display: inline-block;
+
+		strong {
+			margin-inline-start: 0.5rem;
+		}
+	}
+
+	summary::before {
+		content: "▶";
+		display: inline-block;
+		width: 1em;
+		margin-left: -1rem;
+		transition: transform .18s ease;
+	}
+
+	details[open] > summary::before {
+		transform: rotate(90deg);
+	}
+  }
+
+  /* hide dependent rows */
+  .collapsible-table tbody.group tr.dependent {
+    height: 0;
+    opacity: 0;
+    visibility: collapse; /* keeps table layout stable */
+  }
+
+  /* expand them when details is open */
+  .collapsible-table tbody.group:has(tr.primary details[open]) tr.dependent {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+  }
