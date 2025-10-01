@@ -255,16 +255,18 @@ $sg-items-gap: rem(8px);
 
 //Collapsible table styles
 .collapsible-table {
-    border-collapse: collapse;
-    width: 100%;
+	border-collapse: collapse;
+	width: 100%;
 
 	th,
 	td {
 		border: 1px solid #ddd;
-    	padding: 0.5rem;
+		padding: 8px;
 	}
 
-	summary::-webkit-details-marker { display: none; }
+	summary::-webkit-details-marker {
+		display: none;
+	}
 
 	details summary {
 		cursor: pointer;
@@ -285,21 +287,71 @@ $sg-items-gap: rem(8px);
 		transition: transform .18s ease;
 	}
 
-	details[open] > summary::before {
+	details[open]>summary::before {
 		transform: rotate(90deg);
 	}
-  }
+}
 
-  /* hide dependent rows */
-  .collapsible-table tbody.group tr.dependent {
-    height: 0;
-    opacity: 0;
-    visibility: collapse; /* keeps table layout stable */
-  }
+/* hide dependent rows */
+.collapsible-table tbody.group tr.dependent {
+	height: 0;
+	opacity: 0;
+	visibility: collapse;
+	/* keeps table layout stable */
+}
 
-  /* expand them when details is open */
-  .collapsible-table tbody.group:has(tr.primary details[open]) tr.dependent {
-    height: auto;
-    opacity: 1;
-    visibility: visible;
-  }
+/* expand them when details is open */
+.collapsible-table tbody.group:has(tr.primary details[open]) tr.dependent {
+	height: auto;
+	opacity: 1;
+	visibility: visible;
+}
+
+/* hide native radios but keep them accessible */
+.theme-switcher-wrapper input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* simple label style for the switcher */
+.theme-switcher-wrapper .switch-label {
+	display: inline-block;
+	padding: 6px 10px;
+	margin-right: 6px;
+	border-radius: 6px;
+	cursor: pointer;
+	user-select: none;
+	border: 1px solid transparent;
+}
+
+/* highlight currently selected label */
+#material:checked+label[for="material"],
+#fluent:checked+label[for="fluent"],
+#bootstrap:checked+label[for="bootstrap"],
+#indigo:checked+label[for="indigo"] {
+	background: rgba(0, 0, 0, 0.06);
+	border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* hide all tables initially */
+.theme-table {
+	display: none;
+}
+
+/* show the table that corresponds to the checked radio (inputs are siblings of .tables) */
+#material:checked~.tables .material,
+#fluent:checked~.tables .fluent,
+#bootstrap:checked~.tables .bootstrap,
+#indigo:checked~.tables .indigo {
+	display: block;
+}
+
+.theme-switcher-wrapper {
+	margin-bottom: 12px;
+}
+
+.tables {
+	margin-top: 12px;
+}
