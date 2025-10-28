@@ -11,8 +11,8 @@ full license information.}}
 <script src="{{_rel}}bundles/{{_runtime}}"></script>
 <script src="{{_rel}}bundles/{{_vendor}}"></script>
 <script src="{{_rel}}bundles/{{_main}}"></script>
-<script type="text/javascript" src="https://infragistics.com/assets/modern/scripts/plugins.nav.js"></script>
-<script type="text/javascript" src="https://infragistics.com/assets/modern/scripts/navigation.js"></script>
+<script type="text/javascript" src="https://www.infragistics.com/assets/modern/scripts/plugins.nav.js"></script>
+<script type="text/javascript" src="https://www.infragistics.com/assets/modern/scripts/navigation.js"></script>
 <script src="https://use.typekit.net/zhy2hpz.js"></script>
 
 {{#_isAppBuilder}}
