@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.
-var extension = require('./toc.extension.js')
+var extension = require("./toc.extension.js");
 
 const labels = {
-  NEW: 'NEW',
-  UPDATED: 'UPDATED',
-  PREVIEW: 'PREVIEW',
-  BETA: 'BETA',
-  DEPRECATED: 'DEPRECATED label text example' // for the purposes of this example, if one day we decide to add a new label type 
-}
+  NEW: "NEW",
+  UPDATED: "UPDATED",
+  PREVIEW: "PREVIEW",
+  BETA: "BETA",
+  DEPRECATED: "DEPRECATED label text example", // for the purposes of this example, if one day we decide to add a new label type
+};
 
 exports.transform = function (model) {
 
@@ -15,7 +15,7 @@ exports.transform = function (model) {
     model = extension.preTransform(model);
   }
 
-  transformItem(model, 1);
+  transformItem(model, 1, null);
   if (model.items && model.items.length > 0) model.leaf = false;
   model.title = "Table of Content";
 
@@ -24,7 +24,7 @@ exports.transform = function (model) {
   }
 
   var sortableHeaders = model.items.filter(function (item) {
-    return item && item.header && item.sortable
+    return item && item.header && item.sortable;
   });
 
   if (sortableHeaders.length > 0) {
@@ -32,7 +32,7 @@ exports.transform = function (model) {
   }
 
   return model;
-}
+};
 
 function alphabeticalSort(items) {
   var globalCollection = [];
@@ -43,7 +43,11 @@ function alphabeticalSort(items) {
     if (items[i].header) {
       if (items[i].sortable && !currentChain) {
         if (collection.length > 0 && topicHeader) {
-          globalCollection = appendToGlobalCollection(globalCollection, collection, topicHeader)
+          globalCollection = appendToGlobalCollection(
+            globalCollection,
+            collection,
+            topicHeader
+          );
           collection = [];
         }
         currentChain = true;
@@ -52,9 +56,13 @@ function alphabeticalSort(items) {
         if (collection.length > 1) {
           collection.sort(function (a, b) {
             return a.name.localeCompare(b.name);
-          })
+          });
         }
-        globalCollection = appendToGlobalCollection(globalCollection, collection, topicHeader)
+        globalCollection = appendToGlobalCollection(
+          globalCollection,
+          collection,
+          topicHeader
+        );
         currentChain = true;
         topicHeader = items[i];
         collection = [];
@@ -62,15 +70,23 @@ function alphabeticalSort(items) {
         if (collection.length > 1) {
           collection.sort(function (a, b) {
             return a.name.localeCompare(b.name);
-          })
+          });
         }
-        globalCollection = appendToGlobalCollection(globalCollection, collection, topicHeader)
+        globalCollection = appendToGlobalCollection(
+          globalCollection,
+          collection,
+          topicHeader
+        );
         currentChain = false;
         topicHeader = items[i];
         collection = [];
       } else if (!items[i].sortable && !currentChain) {
         if (topicHeader) {
-          globalCollection = appendToGlobalCollection(globalCollection, collection, topicHeader)
+          globalCollection = appendToGlobalCollection(
+            globalCollection,
+            collection,
+            topicHeader
+          );
           currentChain = false;
           topicHeader = items[i];
           collection = [];
@@ -83,7 +99,7 @@ function alphabeticalSort(items) {
     } else {
       if (items[i].items.length > 1 && currentChain) {
         if (items[i].sortable) {
-          sortItems(items[i])
+          sortItems(items[i]);
         }
       }
       collection.push(items[i]);
@@ -93,37 +109,46 @@ function alphabeticalSort(items) {
   if (collection.length > 0 && currentChain) {
     collection.sort(function (a, b) {
       return a.name.localeCompare(b.name);
-    })
+    });
   }
-  globalCollection = appendToGlobalCollection(globalCollection, collection, topicHeader)
+  globalCollection = appendToGlobalCollection(
+    globalCollection,
+    collection,
+    topicHeader
+  );
   return globalCollection;
 }
 
 function appendToGlobalCollection(global, current, header) {
-  current.unshift(header)
+  current.unshift(header);
   global = global.concat(current);
   return global;
 }
 
-function transformItem(item, level) {
+function transformItem(item, level, parent) {
   // set to null incase mustache looks up
   item.topicHref = item.topicHref || null;
   item.tocHref = item.tocHref || null;
   item.name = item.name || null;
+  item.free = item.free || false;
+
+  if (parent && item.free) {
+    parent.free = true;
+  }
 
   item.level = level;
   if (item.items && item.items.length > 0) {
     var length = item.items.length;
     for (var i = 0; i < length; i++) {
-      transformItem(item.items[i], level + 1);
-    };
+      transformItem(item.items[i], level + 1, item);
+    }
   } else {
     item.items = [];
     item.leaf = true;
   }
 
   if (item.sortable) {
-    sortItems(item)
+    sortItems(item);
   }
 
   if (item.new || item.updated || item.preview || item.beta) {
@@ -149,13 +174,13 @@ function transformItem(item, level) {
   } else if (item.items && item.items.length > 0) {
     const label = getLabelFromDirectChildren(item.items, item);
     item.labelText = typeof label !== "undefined" ? label : null;
-    item.labelType = item.labelText !== null ? label.toLowerCase() : '';
-    item.withBadge = item.labelType !== '';
+    item.labelType = item.labelText !== null ? label.toLowerCase() : "";
+    item.withBadge = item.labelType !== "";
   } else {
     item.labelText = null;
-    item.labelType = '';
-    item.withBadge = '';
-    item.newType = '';
+    item.labelType = "";
+    item.withBadge = "";
+    item.newType = "";
   }
 }
 
@@ -163,9 +188,9 @@ function sortItems(item) {
   if (item.items && item.items.length > 1) {
     item.items.sort(function (a, b) {
       return a.name.localeCompare(b.name);
-    })
+    });
     for (var i in item.items) {
-      sortItems(item.items[i])
+      sortItems(item.items[i]);
     }
   }
 }

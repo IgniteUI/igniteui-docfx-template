@@ -39,6 +39,9 @@ full license information.}}
         {{#topicHref}}
             <a class="{{labelType}}" href="{{topicHref}}" name="{{tocHref}}" title="{{name}}">
                 <span class="topic-name">{{name}}</span>
+                {{#free}}
+                    <span class="">FREE</span>
+                {{/free}}
                 {{#withBadge}}
                     {{^leaf}}
                         <span class="badge badge--{{labelType}}">{{labelText}}</span>
@@ -49,6 +52,9 @@ full license information.}}
         {{^topicHref}}
             <a class="{{labelType}}">
             <span class="topic-name">{{name}}</span>
+            {{#free}}
+                <span class="">FREE</span>
+            {{/free}}
             {{#withBadge}}
                     <span class="badge badge--{{labelType}}">{{labelText}}</span>
             {{/withBadge}}
