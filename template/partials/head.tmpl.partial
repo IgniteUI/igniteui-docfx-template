@@ -17,6 +17,7 @@ full license information.}}
     {{#_keywords}} <meta name="keywords" content="{{_keywords}}">{{/_keywords}}
     <meta property="docfx:navrel" content="{{_rel}}toc.html">
     {{#_platform}}<meta property="docfx:platform" content="{{_platform}}">{{/_platform}}
+    {{#_license}}<meta property="docfx:license" content="{{_license}}">{{/_license}}
     <meta property="docfx:title" content="{{_navBarTitle}}">
     <meta property="docfx:link" content="{{_navBarTitleHref}}">
     <meta property="docfx:tocrel" content="{{_rel}}{{_toc-dir}}/toc.html"> 
