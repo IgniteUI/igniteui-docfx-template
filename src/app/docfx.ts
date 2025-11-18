@@ -18,7 +18,8 @@ import {
 import {
         attachLazyLoadHandler,
         attachThemingHandler,
-        showHideThemingWidget
+        showHideThemingWidget,
+        attachLicenseIndicatorHandler
 } from './handlers';
 import { ResizingService } from './services/resizing';
 import { initNavigation } from './services/navigation';
@@ -49,6 +50,7 @@ $(() => {
                         }
                         tocService.renderBreadcrumb();
                         resizingService.resetObservables();
+                        attachLicenseIndicatorHandler();
                         resolve(scrollPosition);
 
                 }).then((scrollPosition) => {
@@ -81,6 +83,7 @@ $(() => {
         showHideThemingWidget($("iframe").length);
         attachLazyLoadHandler();
         attachThemingHandler();
+        attachLicenseIndicatorHandler();
         initNavigation();
 });
 

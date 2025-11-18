@@ -61,6 +61,10 @@ class LocalizationService {
                 "tip": "TIP",
                 "important": "IMPORTANT",
                 "caution": "CAUTION"
+            },
+            "license": {
+                "opensource": "Open Source",
+                "premium": "Premium"
             }
         },
         "Japanese": {
@@ -116,13 +120,18 @@ class LocalizationService {
                 "tip": "ヒント",
                 "important": "重要な情報",
                 "caution": "注意"
+            },
+            "license": {
+                "opensource": "オープンソース",
+                "premium": "プレミアム"
             }
         }
     };
 
     public localize(type: string, key: string) {
         let langKey = "English";
-        if ($('html')[0].lang !== 'en') {
+        const htmlLang = $('html')[0].lang;
+        if (htmlLang === 'ja') {
             langKey = "Japanese";
         }
         return this.data[langKey][type][key];
