@@ -1,3 +1,7 @@
+.content.wrap:has(.license-indicator + h1) h1 {
+  margin-block-start: 0.25rem;
+}
+
 header[class^="license"] {
   position: relative;
   display: inline-flex;
