@@ -63,8 +63,8 @@ class LocalizationService {
                 "caution": "CAUTION"
             },
             "license": {
-                "opensource": "Package: Open Source",
-                "premium": "Package: Premium"
+                "opensource": "Open Source",
+                "premium": "Premium"
             }
         },
         "Japanese": {
@@ -122,8 +122,8 @@ class LocalizationService {
                 "caution": "注意"
             },
             "license": {
-                "opensource": "パッケージ: オープンソース",
-                "premium": "パッケージ: プレミアム"
+                "opensource": "オープンソース",
+                "premium": "プレミアム"
             }
         }
     };
