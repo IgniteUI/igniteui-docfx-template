@@ -182,8 +182,15 @@
 				//white-space: nowrap;
 			}
 
+			.premium-icon {
+				background-image: url("../../assets/static/premium-icon.svg");
+				background-size: cover;
+				width: rem(16px);
+			}
+
 			a {
 				display: flex;
+				gap: 0.5rem;
 				color: $text-base;
 				font-weight: normal;
 			}
@@ -241,12 +248,6 @@
 				padding: 0;
 			}
 			
-			.badge {
-				position: absolute;
-				top: 50%;
-				right: rem(5px);
-				transform: translateY(-50%);
-			}
 		}
 
 		.nav {
@@ -288,6 +289,7 @@
 
 .sidenav-container {
 	position: fixed;
+	min-width: rem(290px);
 }
 
 .toc-toggle {
