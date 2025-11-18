@@ -130,10 +130,10 @@ function transformItem(item, level, parent) {
   item.topicHref = item.topicHref || null;
   item.tocHref = item.tocHref || null;
   item.name = item.name || null;
-  item.free = item.free || false;
+  item.premium = item.premium || false;
 
-  if (parent && item.free) {
-    parent.free = true;
+  if (parent && item.premium) {
+    parent.premium = true;
   }
 
   item.level = level;

@@ -22,7 +22,7 @@
 
 .article-container {
 	position: relative;
-	left: 16.66666667%;
+	left: max(rem(290px), 16.66666667%);
 	height: 100%;
 	padding: 24px;
 	margin-bottom: 10px;
