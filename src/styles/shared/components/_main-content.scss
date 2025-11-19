@@ -30,6 +30,9 @@
 	@media screen and (max-width: 991px) {
 		left: 0;
 	}
+	@media (min-width: 1475px) {
+		width: 66.66%;
+	}
 }
 
 a[href^="#"] {
