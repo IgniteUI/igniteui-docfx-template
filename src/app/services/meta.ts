@@ -21,6 +21,12 @@ class MetadataService {
                 valueSelector: 'content'
             }
         });
+         this.optionalHeadElements.push({
+            tag: 'meta',
+            attributeSelector: 'property',
+            attributeSelectorValue: 'docfx:license',
+            valueSelector: 'content'
+        });
     }
 
     public configureMetadata(dom: JQuery<HTMLElement>) {
@@ -45,7 +51,7 @@ class MetadataService {
 
     private checkOptionals(dom: JQuery<HTMLElement>) {
         this.optionalHeadElements.forEach(hEl => {
-            let selector = `${hEl.tag}[${hEl.attributeSelector}=${hEl.attributeSelectorValue}]`;
+            let selector = `${hEl.tag}[${hEl.attributeSelector}="${hEl.attributeSelectorValue}"]`;
             if (dom.has(selector).length) {
                 $("head").has(selector).length ? $(`head ${selector}`).attr(hEl.valueSelector, dom.find(selector).attr(hEl.valueSelector)!) :
                     dom.find(selector).insertBefore(`head ${hEl.tag}[${hEl.attributeSelector}]:first`)
