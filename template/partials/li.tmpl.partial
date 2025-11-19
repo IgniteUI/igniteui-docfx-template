@@ -39,23 +39,27 @@ full license information.}}
         {{#topicHref}}
             <a class="{{labelType}}" href="{{topicHref}}" name="{{tocHref}}" title="{{name}}">
                 <span class="topic-name">{{name}}</span>
-                    {{#premium}}
-                    <div class="premium-icon" title="Premium"/>
-                    {{/premium}}
-                    {{#withBadge}}
-                            <span class="badge badge--{{labelType}}">{{labelText}}</span>
-                    {{/withBadge}}
+                    <div class="information-container">
+                        {{#withBadge}}
+                                <span class="badge badge--{{labelType}}">{{labelText}}</span>
+                        {{/withBadge}}
+                        {{#premium}}
+                        <div class="premium-icon" title="Premium"/>
+                        {{/premium}}
+                    </div>
             </a>
         {{/topicHref}} 
         {{^topicHref}}
             <a class="{{labelType}}">
-            <span class="topic-name">{{name}}</span>
-            {{#premium}}
-                <div class="premium-icon" title="Premium"/>
-            {{/premium}}
-            {{#withBadge}}
-                    <span class="badge badge--{{labelType}}">{{labelText}}</span>
-            {{/withBadge}}
+                <span class="topic-name">{{name}}</span>
+                <div class="information-container">
+                    {{#withBadge}}
+                            <span class="badge badge--{{labelType}}">{{labelText}}</span>
+                    {{/withBadge}}
+                    {{#premium}}
+                        <div class="premium-icon" title="Premium"/>
+                    {{/premium}}
+                </div>
             </a>
         {{/topicHref}} 
         {{^leaf}}
