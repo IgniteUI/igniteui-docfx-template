@@ -50,13 +50,13 @@ $(() => {
                         }
                         tocService.renderBreadcrumb();
                         resizingService.resetObservables();
+                        attachLicenseIndicatorHandler();
                         resolve(scrollPosition);
 
                 }).then((scrollPosition) => {
                         if (scrollPosition != null) {
                                 $(window).scrollTop(scrollPosition)
                         }
-                        attachLicenseIndicatorHandler();
                         showHideThemingWidget($("iframe").length);
                 });
         });
