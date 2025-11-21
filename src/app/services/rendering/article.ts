@@ -71,6 +71,12 @@ export class ArticleRenderingService extends RenderingService {
                 } else {
                     $(anchor).addClass('external-link');
                 }
+                if ($(anchor).hasClass('new-tab')) {
+                    anchor.onclick = function (e) {
+                        window.open($(anchor).attr("href"), "_blank", "noopener,noreferrer");
+                        return false;
+                    }
+                }
             })
     }
 
@@ -90,6 +96,10 @@ export class ArticleRenderingService extends RenderingService {
                         if ($anchor.attr("href") !== location.hash)
                             history.pushState({scrollPosition: $(window).scrollTop()}, "", $anchor.attr("href"));
                     } else {
+                        if ($anchor.hasClass('new-tab')) {
+                            window.open($anchor.attr("href"), "_blank", "noopener,noreferrer");
+                            return;
+                        }
                         this.router.navigateTo($anchor.attr("href")!, this.navigationOptions);
 
                     }
