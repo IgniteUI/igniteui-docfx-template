@@ -9,7 +9,6 @@ import { ILunr, ISearchItem } from './types';
 const router = Router.getInstance();
 let worker: SearchWorker;
 let query: string;
-let searchInitialized = false;
 let navigationOptions: INavigationOptions = {
   stateAction: "push",
   navigationPostProcess: () => {
@@ -48,18 +47,12 @@ function addClearSearchEvent() {
 
 function addSearchEvent() {
 
-  const setupSearchInput = () => {
+  $("body").on("searchEvent", () => {
     const $searchInput = $("#search-query");
     
     if ($searchInput.length === 0) {
       return;
     }
-
-    if (searchInitialized) {
-      return;
-    }
-
-    searchInitialized = true;
 
     const $keyUp = fromEvent<JQuery.TriggeredEvent>($searchInput, "keyup");
     $searchInput.off("keydown");
@@ -90,12 +83,6 @@ function addSearchEvent() {
         }
       }
     });
-  };
-
-  setupSearchInput();
-
-  $("body").on("searchEvent", () => {
-    setupSearchInput();
   });
 }
 
