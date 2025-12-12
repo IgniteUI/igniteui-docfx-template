@@ -47,10 +47,14 @@ function addClearSearchEvent() {
 
 function addSearchEvent() {
 
-  $("body").on("searchEvent", () => {
+  const setupSearchInput = () => {
+    const $searchInput = $("#search-query");
+    
+    if ($searchInput.length === 0) {
+      return;
+    }
 
-    const $searchInput = $("#search-query"),
-      $keyUp = fromEvent<JQuery.TriggeredEvent>($searchInput, "keyup");
+    const $keyUp = fromEvent<JQuery.TriggeredEvent>($searchInput, "keyup");
     $searchInput.off("keydown");
     $searchInput.on("keypress", e => e.key !== "Enter");
 
@@ -79,6 +83,12 @@ function addSearchEvent() {
         }
       }
     });
+  };
+
+  setupSearchInput();
+
+  $("body").on("searchEvent", () => {
+    setupSearchInput();
   });
 }
 
