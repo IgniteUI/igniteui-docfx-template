@@ -9,6 +9,7 @@ import { ILunr, ISearchItem } from './types';
 const router = Router.getInstance();
 let worker: SearchWorker;
 let query: string;
+let searchInitialized = false;
 let navigationOptions: INavigationOptions = {
   stateAction: "push",
   navigationPostProcess: () => {
@@ -53,6 +54,12 @@ function addSearchEvent() {
     if ($searchInput.length === 0) {
       return;
     }
+
+    if (searchInitialized) {
+      return;
+    }
+
+    searchInitialized = true;
 
     const $keyUp = fromEvent<JQuery.TriggeredEvent>($searchInput, "keyup");
     $searchInput.off("keydown");
