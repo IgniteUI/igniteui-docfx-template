@@ -9,6 +9,7 @@ import { ILunr, ISearchItem } from './types';
 const router = Router.getInstance();
 let worker: SearchWorker;
 let query: string;
+let searchInitialized = false;
 let navigationOptions: INavigationOptions = {
   stateAction: "push",
   navigationPostProcess: () => {
@@ -46,13 +47,20 @@ function addClearSearchEvent() {
 }
 
 function addSearchEvent() {
-
-  $("body").on("searchEvent", () => {
-    const $searchInput = $("#search-query");
+  let retryCount = 0;
+  const maxRetries = 20;
+  
+  const setupSearchInput = () => {
+    if (searchInitialized) {
+      return;
+    }
     
+    const $searchInput = $("#search-query");
     if ($searchInput.length === 0) {
       return;
     }
+    
+    searchInitialized = true;
 
     const $keyUp = fromEvent<JQuery.TriggeredEvent>($searchInput, "keyup");
     $searchInput.off("keydown");
@@ -83,7 +91,27 @@ function addSearchEvent() {
         }
       }
     });
+  };
+  
+  setupSearchInput();
+  
+  $("body").on("searchEvent", () => {
+    setupSearchInput();
   });
+  
+  const intervalId = setInterval(() => {
+    if (searchInitialized) {
+      clearInterval(intervalId);
+      return;
+    }
+    
+    setupSearchInput();
+    
+    retryCount++;
+    if (retryCount >= maxRetries) {
+      clearInterval(intervalId);
+    }
+  }, 500);
 }
 
 function flipContents(action: string, specificSelector = "") {

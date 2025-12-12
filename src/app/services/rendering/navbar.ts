@@ -21,11 +21,6 @@ export class NavbarRenderingService extends RenderingService {
             $("#navbar ul a.active")
                 .parents("li")
                 .addClass(this.active);
-            
-            if ($("#search-results").length !== 0) {
-                $("#search").show();
-                $("body").trigger("searchEvent");
-            }
         }
 
         let hellobar = $("#dynamic-hello-bar")[0];
