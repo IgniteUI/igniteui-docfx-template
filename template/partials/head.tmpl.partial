@@ -250,6 +250,7 @@ full license information.}}
 
       var techArticle = {
         "@type": "TechArticle",
+        "@id": url,
         "headline": headline,
         "url": url,
         "inLanguage": language,
@@ -284,13 +285,13 @@ full license information.}}
                 "@type": "ListItem",
                 "position": 1,
                 "name": breadcrumbRootName,
-                "item": breadcrumbRootItem
+               "item": { "@type": "WebPage", "@id": breadcrumbRootItem }
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": breadcrumbPageName,
-                "item": breadcrumbPageItem
+               "item": { "@type": "WebPage", "@id": breadcrumbPageItem }
               }
             ]
           }
