@@ -223,4 +223,85 @@ full license information.}}
     });
     </script>
 	<!-- End Google Tag Manager -->
+    <!-- JSON-LD structured data -->
+    <meta name="ldjson-headline" content="{{#title}}{{title}}{{/title}}{{^title}}{{>partials/title}}{{/title}}">
+    {{#_description}}<meta name="ldjson-description" content="{{_description}}">{{/_description}}
+    <meta name="ldjson-url" content="{{#_canonicalLink}}{{_currentBaseUrl}}components/{{_canonicalLink}}{{/_canonicalLink}}{{^_canonicalLink}}{{_currentBaseUrl}}{{_path}}{{/_canonicalLink}}">
+    <meta name="ldjson-language" content="{{_appLang}}">
+    <meta name="ldjson-breadcrumb-root-name" content="{{_navBarTitle}}">
+    <meta name="ldjson-breadcrumb-root-item" content="{{_currentBaseUrl}}">
+    <meta name="ldjson-breadcrumb-page-name" content="{{#title}}{{title}}{{/title}}{{^title}}{{>partials/title}}{{/title}}">
+    <meta name="ldjson-breadcrumb-page-item" content="{{#_canonicalLink}}{{_currentBaseUrl}}components/{{_canonicalLink}}{{/_canonicalLink}}{{^_canonicalLink}}{{_currentBaseUrl}}{{_path}}{{/_canonicalLink}}">
+    <script>
+    (function () {
+      function getMetaContent(name) {
+        var element = document.head.querySelector('meta[name="' + name + '"]');
+        return element ? element.getAttribute('content') : '';
+      }
+
+      var headline = getMetaContent('ldjson-headline');
+      var description = getMetaContent('ldjson-description');
+      var url = getMetaContent('ldjson-url');
+      var language = getMetaContent('ldjson-language');
+      var breadcrumbRootName = getMetaContent('ldjson-breadcrumb-root-name');
+      var breadcrumbRootItem = getMetaContent('ldjson-breadcrumb-root-item');
+      var breadcrumbPageName = getMetaContent('ldjson-breadcrumb-page-name');
+      var breadcrumbPageItem = getMetaContent('ldjson-breadcrumb-page-item');
+
+      var techArticle = {
+        "@type": "TechArticle",
+        "@id": url,
+        "headline": headline,
+        "url": url,
+        "inLanguage": language,
+        "author": {
+          "@type": "Organization",
+          "name": "Infragistics",
+          "url": "https://www.infragistics.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Infragistics",
+          "url": "https://www.infragistics.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.infragistics.com/assets/favicon/favicon.ico"
+          }
+        }
+      };
+
+      if (description) {
+        techArticle.description = description;
+      }
+
+      var structuredData = {
+        "@context": "https://schema.org",
+        "@graph": [
+          techArticle,
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": breadcrumbRootName,
+               "item": { "@type": "WebPage", "@id": breadcrumbRootItem }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": breadcrumbPageName,
+               "item": { "@type": "WebPage", "@id": breadcrumbPageItem }
+              }
+            ]
+          }
+        ]
+      };
+
+      var script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.text = JSON.stringify(structuredData);
+      document.head.appendChild(script);
+    }());
+    </script>
 </head>
